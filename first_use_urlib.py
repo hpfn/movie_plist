@@ -1,8 +1,14 @@
 import re
 import urllib
 from bs4 import BeautifulSoup
+import pyscan
 
-url = 'http://www.imdb.com/title/tt3691740' # input('Enter - ')
+obtain_url = pyscan.dir_to_scan()
+for url in obtain_url:
+    print(url)
+
+quit(0)
+url = 'http://www.imdb.com/title/tt3691740'  # input('Enter - ')
 html = urllib.request.urlopen(url).read()
 soup = BeautifulSoup(html, "lxml")
 
@@ -12,7 +18,7 @@ print("rate: {}" .format(rate_value.contents[0]))
 rate_count = soup.find(itemprop="ratingCount")
 print("votes: {}" .format(rate_count.contents[0]))
 
-## people
+# people
 
 # director
 director = soup.find(itemprop="director")
@@ -37,7 +43,7 @@ for i in actors:
     result = re_actors.search(str(i))
     print(result.group(1), end="  ")
 print("|  and others")
-## end people
+# end people
 
 # movie description
 description = soup.find(itemprop="description")
@@ -59,5 +65,5 @@ print()
 poster = soup.find(itemprop="image")
 re_poster = re.compile("http.*\.jpg")
 result = re_poster.search(str(poster))
-print("link para baixar poster: ")
+print("link to get poster: ")
 print(result.group(0))
