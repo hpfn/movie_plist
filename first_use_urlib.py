@@ -2,13 +2,24 @@ import re
 import urllib
 from bs4 import BeautifulSoup
 import pyscan
+import pimdbdata
+
 
 obtain_url = pyscan.dir_to_scan()
 for url in obtain_url:
-    print(url)
+    html = urllib.request.urlopen(url).read()
+    movie = pimdbdata.ParseImdbData(html)
+    movie.title()
+    movie.rate_value_and_votes()
+    movie.director()
+    movie.creator_writers()
+    movie.actors()
+    movie.synopsis()
+    print("\n----------------\n")
+
 
 quit(0)
-url = 'http://www.imdb.com/title/tt3691740'  # input('Enter - ')
+url = 'http://www.imdb.com/title/tt3691740'
 html = urllib.request.urlopen(url).read()
 soup = BeautifulSoup(html, "lxml")
 
