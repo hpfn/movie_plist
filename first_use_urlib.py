@@ -10,14 +10,24 @@ htmltags.top_header()
 for url in obtain_url:
     html = urllib.request.urlopen(url).read()
     movie = pimdbdata.ParseImdbData(html)
+    print("<tr valign=\"top\">")
+
+    print("<td>")
+    movie.movie_poster()
+    print("</td>")
+
+    print("<td>")
+    print("<p>")
     movie.title()
     movie.rate_value_and_votes()
     movie.director()
     movie.creator_writers()
     movie.actors()
     movie.synopsis()
-    movie.movie_poster()
-    print("\n----------------\n")
+    print("</p>")
+    print("</td>")
+
+    print("</tr>")
 
 htmltags.bottom_tags()
 quit(0)
