@@ -3,9 +3,10 @@ import urllib
 from bs4 import BeautifulSoup
 import pyscan
 import pimdbdata
-
+import htmltags
 
 obtain_url = pyscan.dir_to_scan()
+htmltags.top_header()
 for url in obtain_url:
     html = urllib.request.urlopen(url).read()
     movie = pimdbdata.ParseImdbData(html)
@@ -15,9 +16,10 @@ for url in obtain_url:
     movie.creator_writers()
     movie.actors()
     movie.synopsis()
+    movie.movie_poster()
     print("\n----------------\n")
 
-
+htmltags.bottom_tags()
 quit(0)
 url = 'http://www.imdb.com/title/tt3691740'
 html = urllib.request.urlopen(url).read()
