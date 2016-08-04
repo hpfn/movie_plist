@@ -14,7 +14,6 @@ def dir_to_scan():
                 file_to_search = root + '/' + wanted_file
                 with open(file_to_search, 'r') as check_content:
                     url = check_content.readlines()
-                    if url:
-                        urls_movies.append(url[-2].strip()[4:])
+                    urls_movies.append(url[-2].strip()[4:])
 
     return urls_movies
