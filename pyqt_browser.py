@@ -16,7 +16,7 @@ def main():
     #grid = QGridLayout()
     browser = QTextBrowser()
 
-    browser.setFixedSize(200,100)
+    browser.setFixedSize(700,500)
     browser.setSource(QUrl("teste.html"))
     browser.setWindowTitle("QTextBrowser HTML File Input")
     browser.show()
