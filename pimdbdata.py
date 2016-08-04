@@ -5,7 +5,12 @@ import re
 
 class ParseImdbData:
     def __init__(self, html):
+        """ html is the url to be parsed """
         self.soup = BeautifulSoup(html, "lxml")
+
+    def title(self):
+        name = self.soup.find(itemprop="name")
+        print("title: {}" .format(name.contents[0]))
 
     def rate_value_and_votes(self):
         rate_value = self.soup.find(itemprop="ratingValue")
