@@ -20,7 +20,7 @@ for url, path in obtain_url:
     writers_list = movie.creator_writers()
     actors_list = movie.actors()
     snps_txt =movie.synopsis()
-    path = 'file://' + path
+    # path = 'file://' + path
 
     for i in [title_year, rate_votes, director, writers_list, actors_list, snps_txt]:
         m_data.append(i)
