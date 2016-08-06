@@ -10,7 +10,11 @@ class ParseImdbData:
 
     def title(self):
         name = self.soup.find(itemprop="name")
-        print("title: {}" .format(name.contents[0]))
+        print("title: {}" .format(name.contents[0]), end=' ')
+        year = self.soup.find(id="titleYear")
+        re_year = re.compile("([0-9]+)")
+        year = re_year.search(str(name.contents[1]))
+        print(year.group())
 
     def rate_value_and_votes(self):
         rate_value = self.soup.find(itemprop="ratingValue")
