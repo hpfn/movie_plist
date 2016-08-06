@@ -1,8 +1,7 @@
-# class HtmlParts:
-#    def __init__(self):
-#        self.name = "py movie info"
+""" only inside_table receive args """
 
 def top_header():
+    """ from <html> tag until <table> tag """
     name = "py movie info"
     print("<html>")
     print("<header>")
@@ -12,7 +11,7 @@ def top_header():
     print("<body>")
     print("<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">")
 
-def inside_tabel(poster_jpg, movie_data, link):
+def inside_table(poster_jpg, movie_data):
     """
        poster_jpg: jpg file
        movie_data: list() with title, titleYear, director, writers, actors, synopsis
@@ -21,18 +20,21 @@ def inside_tabel(poster_jpg, movie_data, link):
     print("<tr valign=\"top\">")
 
     print("<td>")
-    poster_jpg
+    print(poster_jpg)
     print("</td>")
 
     print("<td>")
     print("<p>")
-    movie.title()
-    movie.rate_value_and_votes()
-    movie.director()
-    movie.creator_writers()
-    movie.actors()
-    movie.synopsis()
-    link
+    #movie.title_year()
+    for i in movie_data:
+        print(i)
+    print("----------")
+    #movie.rate_value_and_votes()
+    #movie.director()
+    #movie.creator_writers()
+    #movie.actors()
+    #movie.synopsis()
+    # link # last arg
     print("</p>")
     print("</td>")
 
@@ -40,6 +42,7 @@ def inside_tabel(poster_jpg, movie_data, link):
 
 
 def bottom_tags():
+    """ from </table> to </html> """
     print("</table>")
     print("</body>")
     print("</html>")
