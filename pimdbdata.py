@@ -18,7 +18,7 @@ class ParseImdbData:
         re_year = re.compile("([0-9]+)")
         year = re_year.search(str(name.contents[1]))
         # print(year.group())
-        return [name.contents[0], year.group()]
+        return [name.contents[0].strip(), year.group()]
 
     def rate_value_and_votes(self):
         """
