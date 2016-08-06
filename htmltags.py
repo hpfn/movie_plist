@@ -20,15 +20,14 @@ def inside_table(poster_jpg, movie_data):
     print("<tr valign=\"top\">")
 
     print("<td>")
-    print(poster_jpg)
+    print("{}<br>" .format(poster_jpg))
     print("</td>")
 
     print("<td>")
     print("<p>")
     #movie.title_year()
     for i in movie_data:
-        print(i)
-    print("----------")
+        print("{}<br>" .format(i))
     #movie.rate_value_and_votes()
     #movie.director()
     #movie.creator_writers()
@@ -38,6 +37,11 @@ def inside_table(poster_jpg, movie_data):
     print("</p>")
     print("</td>")
 
+    print("</tr>")
+    print("<tr valign=\"top\">")
+    print("<td>")
+    print("----------------<br>")
+    print("</td>")
     print("</tr>")
 
 
