@@ -39,6 +39,9 @@ class ParseImdbData:
         return result.group(1)
 
     def creator_writers(self):
+        """
+        :rtype: list()
+        """
         writer_cia = self.soup.find_all(itemprop="creator", itemtype="http://schema.org/Person")
         re_writer_cia = re.compile("([A-Z].*[a-z])</span></a>.*")
         # print("Writers: ", end=' ')
@@ -53,6 +56,9 @@ class ParseImdbData:
         return writers
 
     def actors(self):
+        """
+        :rtype: list()
+        """
         actors_cia = self.soup.find_all(itemprop="actors", itemtype="http://schema.org/Person")
         re_actors = re.compile("([A-Z].*[a-z])</span></a>.*")
         # print("Actors: ", end=' ')
