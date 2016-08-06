@@ -1,4 +1,9 @@
-""" only inside_table receive args """
+"""
+   only inside_table receive args and job is done
+
+   TODO: put everything in a .html file
+
+"""
 
 def top_header():
     """ from <html> tag until <table> tag """
@@ -11,7 +16,7 @@ def top_header():
     print("<body>")
     print("<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">")
 
-def inside_table(poster_jpg, movie_data):
+def inside_table(poster_jpg, movie_data, link):
     """
        poster_jpg: jpg file
        movie_data: list() with title, titleYear, director, writers, actors, synopsis
@@ -33,7 +38,7 @@ def inside_table(poster_jpg, movie_data):
     #movie.creator_writers()
     #movie.actors()
     #movie.synopsis()
-    # link # last arg
+    print("<a href=\"{}\">{}</a>" .format(link, link)) # last arg
     print("</p>")
     print("</td>")
 
