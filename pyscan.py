@@ -4,7 +4,10 @@ import os
 
 
 def dir_to_scan():
-    """ return urls from .desktop files """
+    """
+       return urls from .desktop files and
+       path to dir with movie
+    """
     scan_dir = "/home/zaza/Vídeos/"
     urls_movies = list()
 
@@ -14,6 +17,6 @@ def dir_to_scan():
                 file_to_search = root + '/' + wanted_file
                 with open(file_to_search, 'r') as check_content:
                     url = check_content.readlines()
-                    urls_movies.append(url[-2].strip()[4:])
+                    urls_movies.append([url[-2].strip()[4:], root])
 
     return urls_movies
