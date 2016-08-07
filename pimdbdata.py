@@ -10,15 +10,19 @@ class ParseImdbData:
 
     def title_year(self):
         """
-        :rtype: list() - two items
+        :rtype: list() - two items # not anymore. simplicity is better :)
+
         """
-        name = self.soup.find(itemprop="name")
+        return self.soup.title.string[:-7]
+        # title_year = self.soup.find(property="og:title")
+        # print("propert: {}" .format(self.soup.title.string[:-6]))
+        # name = self.soup.find(itemprop="name")
         # print("title: {}" .format(name.contents[0]), end=' ')
-        year = self.soup.find(id="titleYear")
-        re_year = re.compile("([0-9]+)")
-        year = re_year.search(str(name.contents[1]))
+        # year = self.soup.find(id="titleYear")
+        # re_year = re.compile("([0-9]+)")
+        # year = re_year.search(str(name.contents[1]))
         # print(year.group())
-        return [name.contents[0].strip(), year.group()]
+        #return [name.contents[0].strip(), year.group()]
 
     def rate_value_and_votes(self):
         """
