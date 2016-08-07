@@ -1,8 +1,5 @@
 """
    only inside_table receive args and job is done
-
-   TODO: put everything in a .html file
-
 """
 
 class HtmlTags:
@@ -12,14 +9,6 @@ class HtmlTags:
 
     def top_header(self):
         """ from <html> tag until <table> tag """
-        # name = "py movie info"
-        # print("<html>")
-        # print("<header>")
-        # print("<meta charset=\"UTF-8\">")
-        # print("<title>{}</title>" .format(name))
-        # print("</header>")
-        # print("<body>")
-        # print("<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">")
         head="""
         <html>
         <head>
@@ -40,8 +29,6 @@ class HtmlTags:
 
         print("<tr valign=\"top\">", file=self.open_file)
         print("<td>{}<br></td><td><p>" .format(poster_jpg), file=self.open_file)
-        #print("<td><p>")
-        #movie.title_year()
         for i in movie_data:
             print("{}<br>" .format(i), file=self.open_file)
         print("<a href=\"{}\">{}</a>" .format(link, link), file=self.open_file) # last arg
