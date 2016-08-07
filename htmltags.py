@@ -23,7 +23,7 @@ class HtmlTags:
         head="""
         <html>
         <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Py Movie Info</title>
         </head>
         <body>
