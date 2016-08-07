@@ -17,7 +17,7 @@ def main():
     browser = QTextBrowser()
 
     browser.setFixedSize(700,500)
-    browser.setSource(QUrl("teste.html"))
+    browser.setSource(QUrl("pymovieinfo.html"))
     browser.setWindowTitle("QTextBrowser HTML File Input")
     browser.show()
 
