@@ -5,55 +5,65 @@
 
 """
 
-def top_header():
-    """ from <html> tag until <table> tag """
-    name = "py movie info"
-    print("<html>")
-    print("<header>")
-    print("<meta charset=\"UTF-8\">")
-    print("<title>{}</title>" .format(name))
-    print("</header>")
-    print("<body>")
-    print("<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">")
+class HtmlTags:
+    def __init__(self):
+        self.file_name = 'pymovieinfo.html'
+        self.open_file = open(self.file_name, 'w+')
 
-def inside_table(poster_jpg, movie_data, link):
-    """
-       poster_jpg: jpg file
-       movie_data: list() with title, titleYear, director, writers, actors, synopsis
-       link: link to the directory where the movie is stored
-    """
-    print("<tr valign=\"top\">")
+    def top_header(self):
+        """ from <html> tag until <table> tag """
+        # name = "py movie info"
+        # print("<html>")
+        # print("<header>")
+        # print("<meta charset=\"UTF-8\">")
+        # print("<title>{}</title>" .format(name))
+        # print("</header>")
+        # print("<body>")
+        # print("<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">")
+        head="""
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        <title>Py Movie Info</title>
+        </head>
+        <body>
+        <table border="1" width="100%" cellpadding="4" cellspacing="0">
+        """
+        print(head, file=self.open_file)
 
-    print("<td>")
-    print("{}<br>" .format(poster_jpg))
-    print("</td>")
+    def inside_table(self, poster_jpg, movie_data, link):
+        """
+        poster_jpg: jpg file
+        movie_data: list() with title, titleYear, director, writers, actors, synopsis
+        link: link to the directory where the movie is stored
+        """
 
-    print("<td>")
-    print("<p>")
-    #movie.title_year()
-    for i in movie_data:
-        print("{}<br>" .format(i))
-    #movie.rate_value_and_votes()
-    #movie.director()
-    #movie.creator_writers()
-    #movie.actors()
-    #movie.synopsis()
-    print("<a href=\"{}\">{}</a>" .format(link, link)) # last arg
-    print("</p>")
-    print("</td>")
+        print("<tr valign=\"top\">", file=self.open_file)
+        print("<td>{}<br></td><td><p>" .format(poster_jpg), file=self.open_file)
+        #print("<td><p>")
+        #movie.title_year()
+        for i in movie_data:
+            print("{}<br>" .format(i), file=self.open_file)
+        print("<a href=\"{}\">{}</a>" .format(link, link), file=self.open_file) # last arg
+        # last lines
+        last_lines="""
+        </p>
+        </td>
+        </tr>
+        <tr valign="top">
+        <td>
+        ----------------<br>
+        </td>
+        </tr>
+        """
+        print(last_lines, file=self.open_file)
 
-    print("</tr>")
-    print("<tr valign=\"top\">")
-    print("<td>")
-    print("----------------<br>")
-    print("</td>")
-    print("</tr>")
-
-
-def bottom_tags():
-    """ from </table> to </html> """
-    print("</table>")
-    print("</body>")
-    print("</html>")
-
-
+    def bottom_tags(self):
+        """ from </table> to </html> """
+        bottom="""
+        </table>
+        </body>
+        </html>
+        """
+        print(bottom, file=self.open_file)
+        self.open_file.close()

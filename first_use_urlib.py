@@ -3,10 +3,11 @@ import urllib
 from bs4 import BeautifulSoup
 import pyscan
 import pimdbdata
-import htmltags
+from htmltags import HtmlTags
 
 obtain_url = pyscan.dir_to_scan()
-htmltags.top_header()
+html_page = HtmlTags()
+html_page.top_header()
 for url, path in obtain_url:
     m_data = list()
     html = urllib.request.urlopen(url).read()
@@ -24,6 +25,6 @@ for url, path in obtain_url:
 
     for i in [title_year, rate_votes, director, writers_list, actors_list, snps_txt]:
         m_data.append(i)
-    htmltags.inside_table(m_poster, m_data, path)
+    html_page.inside_table(m_poster, m_data, path)
 
-htmltags.bottom_tags()
+html_page.bottom_tags()
