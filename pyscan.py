@@ -3,12 +3,13 @@
 import os
 
 
-def dir_to_scan():
+def dir_to_scan(scan_dir):
     """
        return urls from .desktop files and
        path to dir with movie
+       movie file: avi, mp4, mkv
     """
-    scan_dir = "/home/zaza/Vídeos/"
+    # scan_dir = "/path/to/dir/"
     urls_movies = list()
 
     for root, dir_name, filename in os.walk(scan_dir):

@@ -1,11 +1,12 @@
-import re
+from subprocess import call
 import urllib
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import pyscan
 import pimdbdata
 from htmltags import HtmlTags
 
-obtain_url = pyscan.dir_to_scan()
+d_scan = "/home/zaza/Vídeos/"
+obtain_url = pyscan.dir_to_scan(d_scan)
 html_page = HtmlTags()
 html_page.top_header()
 for url, path, moviefile in obtain_url:
@@ -20,7 +21,7 @@ for url, path, moviefile in obtain_url:
     director = movie.director()
     writers_list = movie.creator_writers()
     actors_list = movie.actors()
-    snps_txt =movie.synopsis()
+    snps_txt = movie.synopsis()
     # path = 'file://' + path
 
     for i in [title_year, rate_votes, director, writers_list, actors_list, snps_txt]:
@@ -28,3 +29,9 @@ for url, path, moviefile in obtain_url:
     html_page.inside_table(m_poster, m_data, path, moviefile)
 
 html_page.bottom_tags()
+
+decide_how = input("show html file (Firefox|QWebView): ")
+if decide_how in 'QWebView':
+    call('./pyqt_browser.py')
+else:
+    call(['firefox', 'pymovieinfo.html'])
