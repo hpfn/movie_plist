@@ -26,11 +26,11 @@ class HtmlTags:
         movie_data: list() with title, titleYear, director, writers, actors, synopsis
         link: link to the directory where the movie is stored
         """
-
+        fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
         print("<tr valign=\"top\">", file=self.open_file)
-        print("<td>{}<br></td><td><p>" .format(poster_jpg), file=self.open_file)
-        for i in movie_data:
-            print("{}<br>" .format(i), file=self.open_file)
+        print("<td><img src=\"{}\" widht=\"426\" height=\"336\"><br></td><td><p>" .format(poster_jpg), file=self.open_file)
+        for f, m_d in zip(fields, movie_data):
+            print("{} {}<br>" .format(f, m_d), file=self.open_file)
         print("<a href=\"{}\">{}</a>" .format(link + '/' + file, file), file=self.open_file) # last arg
         # last lines
         last_lines="""
@@ -38,9 +38,9 @@ class HtmlTags:
         </td>
         </tr>
         <tr valign="top">
-        <td>
-        ----------------<br>
-        </td>
+        <th>
+        ----------------------<br>
+        </th>
         </tr>
         """
         print(last_lines, file=self.open_file)
