@@ -18,15 +18,19 @@ def main():
     # grid = QGridLayout()
     browser = QWebView()  # QTextBrowser()
 
-    browser.setFixedSize(700, 600)
+    # browser.setFixedSize(700, 600)
     # browser.setContent(mimeType='text/html')
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
-    # browser.page
-    # browser.setSource(QUrl("pymovieinfo.html"))
-    browser.setUrl(QUrl.fromLocalFile('/home/zaza/Documentos/Programacao/python/ret_movie_info/pymovieinfo.html'))
-    browser.setWindowTitle('QTextBrowser HTML File Input')
-    browser.show()
 
+    browser.settings().setAttribute(QWebSettings.PluginsEnabled, True)
+
+    # browser.page
+    # browser.setSource(QUrl("pymovieinfo.html")
+    url = "file:///home/zaza/Documentos/Programacao/python/ret_movie_info/pymovieinfo.html"
+    # browser.setUrl(QUrl.fromLocalFile(url))
+    browser.setUrl(QUrl(url))
+    browser.setWindowTitle('QWebView HTML File Input')
+    browser.show()
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
