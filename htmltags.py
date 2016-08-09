@@ -31,7 +31,7 @@ class HtmlTags:
         print("<td>{}<br></td><td><p>" .format(poster_jpg), file=self.open_file)
         for i in movie_data:
             print("{}<br>" .format(i), file=self.open_file)
-        print("<a href=\"{}\">{}</a>" .format(link + '/' + file, link), file=self.open_file) # last arg
+        print("<a href=\"{}\">{}</a>" .format(link + '/' + file, file), file=self.open_file) # last arg
         # last lines
         last_lines="""
         </p>
