@@ -31,5 +31,5 @@ def dir_to_scan():
             if urls_movies_stuff:
                 urls_movies.append(urls_movies_stuff)
 
-    print(urls_movies)
+    # print(urls_movies)
     return urls_movies
