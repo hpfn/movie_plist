@@ -15,6 +15,7 @@ def dir_to_scan():
         for wanted_file in filename:
             if wanted_file.endswith('.desktop'):
                 file_to_search = root + '/' + wanted_file
+                movie_file = ''
                 if wanted_file.endswith( ('.avi', 'mp4', '.mkv')):
                     movie_file = wanted_file
                 with open(file_to_search, 'r') as check_content:
