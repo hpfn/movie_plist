@@ -101,4 +101,4 @@ class ParseImdbData:
         # print("link to get poster: ")
         # print(result.group(0))
         just_txt = 'link to get poster'
-        return just_txt
+        return result.group(0)  # just_txt
