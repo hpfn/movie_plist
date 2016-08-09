@@ -20,7 +20,7 @@ class HtmlTags:
         """
         print(head, file=self.open_file)
 
-    def inside_table(self, poster_jpg, movie_data, link):
+    def inside_table(self, poster_jpg, movie_data, link, file=None):
         """
         poster_jpg: jpg file
         movie_data: list() with title, titleYear, director, writers, actors, synopsis
@@ -31,7 +31,7 @@ class HtmlTags:
         print("<td>{}<br></td><td><p>" .format(poster_jpg), file=self.open_file)
         for i in movie_data:
             print("{}<br>" .format(i), file=self.open_file)
-        print("<a href=\"{}\">{}</a>" .format(link, link), file=self.open_file) # last arg
+        print("<a href=\"{}\">{}</a>" .format(link + '/' + file, link), file=self.open_file) # last arg
         # last lines
         last_lines="""
         </p>
