@@ -11,7 +11,7 @@ from PyQt5.QtWebKit import *
 from PyQt5.QtWebKitWidgets import *
 
 
-def main():
+def qt_browser():
     app = QApplication(sys.argv)
     # scene = QGraphicsScene()
     # view = QGraphicsView()
@@ -33,5 +33,5 @@ def main():
     browser.show()
     sys.exit(app.exec_())
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()

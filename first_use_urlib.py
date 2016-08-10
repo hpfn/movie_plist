@@ -4,6 +4,8 @@ import urllib
 import pyscan
 import pimdbdata
 from htmltags import HtmlTags
+import pyqt_browser
+
 
 d_scan = "/home/zaza/Vídeos/"
 obtain_url = pyscan.dir_to_scan(d_scan)
@@ -32,6 +34,6 @@ html_page.bottom_tags()
 
 decide_how = input("show html file (Firefox|QWebView): ")
 if decide_how in 'QWebView':
-    call('./pyqt_browser.py')
+    pyqt_browser.qt_browser()  # call('./pyqt_browser.py')
 else:
     call(['firefox', 'pymovieinfo.html'])
