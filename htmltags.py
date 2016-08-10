@@ -37,10 +37,10 @@ class HtmlTags:
         </p>
         </td>
         </tr>
-        <tr valign="top">
-        <th>
-        ----------------------<br>
-        </th>
+        <tr>
+        <td colspan="2" style="border-top: none; border-bottom: none; border-left: none; border-right: none; padding-top: 0.5cm; padding-bottom: 0.5cm; padding-left: 0.1cm; padding-right: 0.1cm" valign="top" width="100%">
+          <center>-------------------------------------------------------</center>
+        </td>
         </tr>
         """
         print(last_lines, file=self.open_file)
