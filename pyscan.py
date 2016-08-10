@@ -19,7 +19,7 @@ def dir_to_scan(scan_dir):
                 file_to_search = root + '/' + wanted_file
                 with open(file_to_search, 'r') as check_content:
                     url = check_content.readlines()
-                    urls_movies_stuff.append(url[-2].strip()[4:])
+                    urls_movies_stuff.append(url[-2][4:-1])
                     urls_movies_stuff.append(root)
                     for file_n in filename:  # path, dir_n, file_n in os.walk(root):
                         #for i in file_n:
@@ -34,3 +34,5 @@ def dir_to_scan(scan_dir):
 
     # print(urls_movies)
     return urls_movies
+
+# dir_to_scan("/home/zaza/Vídeos")
