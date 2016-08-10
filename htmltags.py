@@ -2,6 +2,7 @@
    only inside_table receive args and job is done
 """
 
+
 class HtmlTags:
     def __init__(self):
         self.file_name = 'pymovieinfo.html'
@@ -9,7 +10,7 @@ class HtmlTags:
 
     def top_header(self):
         """ from <html> tag until <table> tag """
-        head="""
+        head = """
         <html>
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -28,12 +29,13 @@ class HtmlTags:
         """
         fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
         print("<tr valign=\"top\">", file=self.open_file)
-        print("<td><img src=\"{}\" widht=\"426\" height=\"336\"><br></td><td><p>" .format(poster_jpg), file=self.open_file)
+        print("<td><img src=\"{}\" width=\"226\" height=\"300\"><br></td><td><p>".format(poster_jpg),
+              file=self.open_file)
         for f, m_d in zip(fields, movie_data):
-            print("{} {}<br>" .format(f, m_d), file=self.open_file)
-        print("<a href=\"{}\">{}</a>" .format(link + '/' + file, file), file=self.open_file) # last arg
+            print("{} {}<br>".format(f, m_d), file=self.open_file)
+        print("<a href=\"{}\">{}</a>".format(link + '/' + file, file), file=self.open_file)  # last arg
         # last lines
-        last_lines="""
+        last_lines = """
         </p>
         </td>
         </tr>
@@ -47,7 +49,7 @@ class HtmlTags:
 
     def bottom_tags(self):
         """ from </table> to </html> """
-        bottom="""
+        bottom = """
         </table>
         </body>
         </html>

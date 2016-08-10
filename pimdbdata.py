@@ -1,4 +1,3 @@
-
 from bs4 import BeautifulSoup
 import re
 
@@ -22,7 +21,7 @@ class ParseImdbData:
         # re_year = re.compile("([0-9]+)")
         # year = re_year.search(str(name.contents[1]))
         # print(year.group())
-        #return [name.contents[0].strip(), year.group()]
+        # return [name.contents[0].strip(), year.group()]
 
     def rate_value_and_votes(self):
         """
@@ -56,7 +55,7 @@ class ParseImdbData:
             # print(result.group(1), end="  ")
             writers.append(result.group(1))
 
-        #print()
+        # print()
         return writers
 
     def actors(self):
@@ -72,7 +71,7 @@ class ParseImdbData:
             # print(result.group(1), end="  ")
             actors.append(result.group(1))
 
-        #print("|  and others")
+        # print("|  and others")
         actors.append("| and others")
         return actors
 
@@ -100,5 +99,5 @@ class ParseImdbData:
         result = re_poster.search(str(poster))
         # print("link to get poster: ")
         # print(result.group(0))
-        just_txt = 'link to get poster'
+        # just_txt = 'link to get poster'
         return result.group(0)  # just_txt

@@ -22,7 +22,7 @@ def dir_to_scan(scan_dir):
                     urls_movies_stuff.append(url[-2][4:-1])
                     urls_movies_stuff.append(root)
                     for file_n in filename:  # path, dir_n, file_n in os.walk(root):
-                        #for i in file_n:
+                        # for i in file_n:
                         name = file_n.lower().startswith('sample')
                         if file_n.endswith(('.avi', '.mp4', '.mkv')) and not name:
                             urls_movies_stuff.append(file_n)

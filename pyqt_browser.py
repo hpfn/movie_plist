@@ -26,12 +26,12 @@ def qt_browser():
 
     # browser.page
     # browser.setSource(QUrl("pymovieinfo.html")
-    url = "file:///home/zaza/Documentos/Programacao/python/ret_movie_info/pymovieinfo.html"
+    url = "file:///home/zaza/Documentos/Programacao/python/movie_plist/pymovieinfo.html"
     # browser.setUrl(QUrl.fromLocalFile(url))
     browser.setUrl(QUrl(url))
     browser.setWindowTitle('QWebView HTML File Input')
     browser.show()
     sys.exit(app.exec_())
 
-#if __name__ == '__main__':
+# if __name__ == '__main__':
 #    main()
