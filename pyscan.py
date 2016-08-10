@@ -7,7 +7,7 @@ def dir_to_scan(scan_dir):
     """
        return urls from .desktop files and
        path to dir with movie
-       movie file: avi, mp4, mkv
+       movie file ( lower case ): avi, mp4, mkv
     """
     # scan_dir = "/path/to/dir/"
     urls_movies = list()
@@ -21,11 +21,11 @@ def dir_to_scan(scan_dir):
                     url = check_content.readlines()
                     urls_movies_stuff.append(url[-2].strip()[4:])
                     urls_movies_stuff.append(root)
-                    for path, dir_n, file_n in os.walk(root):
-                        for i in file_n:
-                            name = i.startswith('sample')
-                            if i.endswith(('.avi', '.mp4', '.mkv')) and not name:
-                                urls_movies_stuff.append(i)
+                    for file_n in filename:  # path, dir_n, file_n in os.walk(root):
+                        #for i in file_n:
+                        name = file_n.lower().startswith('sample')
+                        if file_n.endswith(('.avi', '.mp4', '.mkv')) and not name:
+                            urls_movies_stuff.append(file_n)
             # with open(file_to_search, 'r') as check_content:
             # url = check_content.readlines()
             # urls_movies.append([url[-2].strip()[4:], root, movie_file])
