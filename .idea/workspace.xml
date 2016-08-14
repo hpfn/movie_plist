@@ -5,8 +5,10 @@
     <option name="CUSTOM_SCOPE_NAME" value="Current File" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0dbaa27d-8bff-4ccd-ba87-01f2dbf0c022" name="Default" comment="">
-      <change type="MOVED" beforePath="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/.idea/ret_movie_info.iml" afterPath="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/.idea/movie_plist.iml" />
+    <list default="true" id="0dbaa27d-8bff-4ccd-ba87-01f2dbf0c022" name="Default" comment="project's license">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pymovieinfo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/x-hiperfparse-pdf.pdf" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ret_movie_info.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,45 +28,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="first_use_urlib.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/first_use_urlib.py">
+      <file leaf-file-name="movie_plist.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/movie_plist.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+            <state relative-caret-position="330">
+              <caret line="42" column="52" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
               <folding>
-                <element signature="e#0#27#0" expanded="true" />
+                <element signature="e#20#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pymovieinfo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pymovieinfo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-              <folding>
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="htmltags.py" pinned="false" current-in-tab="true">
-        <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/htmltags.py">
+      <file leaf-file-name="htmltags.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/htmltags.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+              <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="pimdbdata.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pimdbdata.py">
+        <entry file="file://$PROJECT_DIR$/pimdbdata.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
+            <state relative-caret-position="1800">
               <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
@@ -74,10 +63,10 @@
         </entry>
       </file>
       <file leaf-file-name="pyqt_browser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py">
+        <entry file="file://$PROJECT_DIR$/pyqt_browser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
+            <state relative-caret-position="432">
+              <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
               <folding>
                 <element signature="e#78#104#0" expanded="true" />
               </folding>
@@ -86,9 +75,9 @@
         </entry>
       </file>
       <file leaf-file-name="pyscan.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyscan.py">
+        <entry file="file://$PROJECT_DIR$/pyscan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
+            <state relative-caret-position="684">
               <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
@@ -105,29 +94,33 @@
         <option value="Herbert Parentes Fortes Neto" />
       </list>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <push-targets>
+      <push-target-info repo="$PROJECT_DIR$" source="master" target-remote="origin" target-branch="experimental" />
+    </push-targets>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/gui_ref_ movie_info.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/xml_gen.xml" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/generate_xml.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/parse_imdb_data.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/html_tags.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/tabela.html" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/teste.html" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/pimdbdata.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/pyqt_browser.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/first_use_urlib.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/pyscan.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/pymovieinfo.html" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/htmltags.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pimdbdata.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pyscan.py" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pymovieinfo.html" />
-        <option value="$USER_HOME$/Documentos/Programacao/python/movie_plist/htmltags.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/gui_ref_ movie_info.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/xml_gen.xml" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/generate_xml.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/parse_imdb_data.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/html_tags.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/tabela.html" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/teste.html" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/pimdbdata.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/pyqt_browser.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/first_use_urlib.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/pyscan.py" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/pymovieinfo.html" />
+        <option value="$PROJECT_DIR$/../ret_movie_info/htmltags.py" />
+        <option value="$PROJECT_DIR$/pimdbdata.py" />
+        <option value="$PROJECT_DIR$/pyscan.py" />
+        <option value="$PROJECT_DIR$/pymovieinfo.html" />
+        <option value="$PROJECT_DIR$/htmltags.py" />
+        <option value="$PROJECT_DIR$/pyqt_browser.py" />
+        <option value="$PROJECT_DIR$/movie_plist.py" />
       </list>
     </option>
   </component>
@@ -161,10 +154,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="movie_plist" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="movie_plist" />
@@ -177,12 +175,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -191,7 +190,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.first_use_urlib">
+  <component name="RunManager" selected="Python.movie_plist">
     <configuration default="false" name="generate_xml" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -199,12 +198,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../ret_movie_info" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ret_movie_info" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Documentos/Programacao/python/ret_movie_info/generate_xml.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../ret_movie_info/generate_xml.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -216,12 +215,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documentos/Programacao/python/movie_plist" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="movie_plist" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pyscan.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyscan.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -233,29 +232,29 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documentos/Programacao/python/movie_plist" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="movie_plist" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyqt_browser.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="first_use_urlib" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="movie_plist" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documentos/Programacao/python/movie_plist" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="movie_plist" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Documentos/Programacao/python/movie_plist/first_use_urlib.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/movie_plist.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -267,12 +266,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documentos/Programacao/python/movie_plist" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="movie_plist" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyqt_browser.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -418,12 +417,12 @@
       <item index="0" class="java.lang.String" itemvalue="Python.generate_xml" />
       <item index="1" class="java.lang.String" itemvalue="Python.pyscan" />
       <item index="2" class="java.lang.String" itemvalue="Python.pyqt_browser" />
-      <item index="3" class="java.lang.String" itemvalue="Python.first_use_urlib" />
+      <item index="3" class="java.lang.String" itemvalue="Python.movie_plist" />
       <item index="4" class="java.lang.String" itemvalue="Python.pyqt_browser (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.first_use_urlib" />
+        <item index="0" class="java.lang.String" itemvalue="Python.movie_plist" />
         <item index="1" class="java.lang.String" itemvalue="Python.pyqt_browser (1)" />
         <item index="2" class="java.lang.String" itemvalue="Python.pyscan" />
         <item index="3" class="java.lang.String" itemvalue="Python.pyqt_browser" />
@@ -444,27 +443,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1469974702089</updated>
-    </task>
-    <task id="LOCAL-00004" summary="module pyscan: only scan a default directory">
-      <created>1470332113135</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1470332113135</updated>
-    </task>
-    <task id="LOCAL-00005" summary="simple xml with ElementMaker - lxml.builder">
-      <created>1470332180927</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1470332180927</updated>
-    </task>
-    <task id="LOCAL-00006" summary="the module seems to be complete">
-      <created>1470333016110</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1470333016110</updated>
     </task>
     <task id="LOCAL-00007" summary="using parse imdb data module">
       <created>1470335364242</created>
@@ -788,18 +766,37 @@
       <option name="project" value="LOCAL" />
       <updated>1470834493413</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="movie_plist receives /path/to/scan_dir">
+      <created>1471195544134</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1471195544135</updated>
+    </task>
+    <task id="LOCAL-00054" summary="small fix about number of argv">
+      <created>1471195944127</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1471195944128</updated>
+    </task>
+    <task id="LOCAL-00055" summary="project's license">
+      <created>1471197379747</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1471197379747</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277311" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33109245" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -812,6 +809,8 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277311" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -845,9 +844,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="docstrings added" />
-    <MESSAGE value="'----' line after movie" />
-    <MESSAGE value="return a link to the directory with the movie" />
     <MESSAGE value="append a link to the directory with the movie" />
     <MESSAGE value="link to movie directory fixedh" />
     <MESSAGE value="with link to movie directory" />
@@ -870,35 +866,143 @@
     <MESSAGE value="sample lower case. os.walk only once" />
     <MESSAGE value="ajust url var to use slice." />
     <MESSAGE value=" ''------' line between movies. trying a good look." />
-    <option name="LAST_COMMIT_MESSAGE" value=" ''------' line between movies. trying a good look." />
+    <MESSAGE value="movie_plist receives /path/to/scan_dir" />
+    <MESSAGE value="small fix about number of argv" />
+    <MESSAGE value="project's license" />
+    <option name="LAST_COMMIT_MESSAGE" value="project's license" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/first_use_urlib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pymovieinfo.html">
+    <entry file="file://$PROJECT_DIR$/movie_plist.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#20#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/htmltags.py">
+    <entry file="file://$PROJECT_DIR$/pymovieinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htmltags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pimdbdata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyqt_browser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
+          <folding>
+            <element signature="e#78#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyscan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie_plist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding>
+            <element signature="e#20#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pymovieinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htmltags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pimdbdata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyqt_browser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
+          <folding>
+            <element signature="e#78#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyscan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie_plist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+          <folding>
+            <element signature="e#20#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pymovieinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htmltags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
           <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
@@ -906,7 +1010,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pimdbdata.py">
+    <entry file="file://$PROJECT_DIR$/pimdbdata.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
           <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
@@ -916,7 +1020,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py">
+    <entry file="file://$PROJECT_DIR$/pyqt_browser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
@@ -926,7 +1030,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyscan.py">
+    <entry file="file://$PROJECT_DIR$/pyscan.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
@@ -934,26 +1038,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/first_use_urlib.py">
+    <entry file="file://$PROJECT_DIR$/movie_plist.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#20#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/ret_movie_info/teste.html" />
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/ret_movie_info/tabela.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/htmltags.py">
+    <entry file="file://$PROJECT_DIR$/../ret_movie_info/teste.html" />
+    <entry file="file://$PROJECT_DIR$/../ret_movie_info/tabela.html" />
+    <entry file="file://$PROJECT_DIR$/htmltags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
@@ -961,7 +1058,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pimdbdata.py">
+    <entry file="file://$PROJECT_DIR$/pimdbdata.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
@@ -971,7 +1068,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py">
+    <entry file="file://$PROJECT_DIR$/pyqt_browser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -981,7 +1078,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyscan.py">
+    <entry file="file://$PROJECT_DIR$/pyscan.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
@@ -989,15 +1086,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/Freedcamp/calculadora_PyQT/zetcode_calculator.py">
+    <entry file="file://$PROJECT_DIR$/../Freedcamp/calculadora_PyQT/zetcode_calculator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="185" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/ret_movie_info/xml_gen.xml" />
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/gen_xml.xml">
+    <entry file="file://$PROJECT_DIR$/../ret_movie_info/xml_gen.xml" />
+    <entry file="file://$PROJECT_DIR$/gen_xml.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1005,54 +1102,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/generate_xml.py">
+    <entry file="file://$PROJECT_DIR$/generate_xml.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/ret_movie_info/tabela.html">
+    <entry file="file://$PROJECT_DIR$/../ret_movie_info/tabela.html" />
+    <entry file="file://$PROJECT_DIR$/../ret_movie_info/teste.html" />
+    <entry file="file://$PROJECT_DIR$/../ret_movie_info/gui_ref_ movie_info.py" />
+    <entry file="file://$PROJECT_DIR$/curl3.py" />
+    <entry file="file://$PROJECT_DIR$/movie_plist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/ret_movie_info/teste.html" />
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/ret_movie_info/gui_ref_ movie_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="74" column="9" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pymovieinfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+        <state relative-caret-position="330">
+          <caret line="42" column="52" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
           <folding>
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#20#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/first_use_urlib.py">
+    <entry file="file://$PROJECT_DIR$/pymovieinfo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="252">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pimdbdata.py">
+    <entry file="file://$PROJECT_DIR$/htmltags.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="126">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pimdbdata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
           <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
@@ -1060,36 +1149,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyqt_browser.py">
+    <entry file="file://$PROJECT_DIR$/pyqt_browser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
+        <state relative-caret-position="432">
+          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
           <folding>
             <element signature="e#78#104#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/curl3.py">
+    <entry file="file://$PROJECT_DIR$/pyscan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/pyscan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
+        <state relative-caret-position="684">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documentos/Programacao/python/movie_plist/htmltags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
           <folding />
         </state>
       </provider>
