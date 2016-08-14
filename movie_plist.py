@@ -48,6 +48,6 @@ if __name__ == '__main__':
     if len(sys.argv) is 2:
         path_dir_scan = sys.argv[1]
     else:
-        path_dir_scan = input("Which directory to scan ?")
+        path_dir_scan = input(" Do the scan which directory ?")
 
     main(path_dir_scan)
