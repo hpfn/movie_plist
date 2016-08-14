@@ -11,7 +11,7 @@ from PyQt5.QtWebKit import *
 from PyQt5.QtWebKitWidgets import *
 
 
-def qt_browser():
+def qt_browser(path_to_file):
     app = QApplication(sys.argv)
     # scene = QGraphicsScene()
     # view = QGraphicsView()
@@ -26,7 +26,7 @@ def qt_browser():
 
     # browser.page
     # browser.setSource(QUrl("pymovieinfo.html")
-    url = "file:///home/zaza/Documentos/Programacao/python/movie_plist/pymovieinfo.html"
+    url = "file://" + path_to_file + "/pymovieinfo.html"
     # browser.setUrl(QUrl.fromLocalFile(url))
     browser.setUrl(QUrl(url))
     browser.setWindowTitle('QWebView HTML File Input')

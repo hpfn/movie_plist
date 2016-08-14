@@ -4,9 +4,9 @@
 
 
 class HtmlTags:
-    def __init__(self):
-        self.file_name = 'pymovieinfo.html'
-        self.open_file = open(self.file_name, 'w+')
+    def __init__(self, path):
+        self.file_name = path + '/pymovieinfo.html'
+        self.open_file = open(self.file_name, 'w')
 
     def top_header(self):
         """ from <html> tag until <table> tag """
