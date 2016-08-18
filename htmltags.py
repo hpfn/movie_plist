@@ -24,7 +24,7 @@ class HtmlTags:
     def inside_table(self, poster_jpg, movie_data, link, file=None):
         """
         poster_jpg: jpg file
-        movie_data: list() with title, titleYear, director, writers, actors, synopsis
+        movie_data: list() with title titleYear, director, writers, actors, synopsis
         link: link to the directory where the movie is stored
         """
         fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
