@@ -8,31 +8,58 @@ import pyscan
 import pimdbdata
 from htmltags import HtmlTags
 import pyqt_browser
-
+from movie_plist_sqlite3 import DataStorage
 
 def main(d_scan):
     # d_scan = "/home/zaza/Vídeos/"
     obtain_url = pyscan.dir_to_scan(d_scan)
     html_page = HtmlTags(d_scan)
     html_page.top_header()
+    storaged_data = DataStorage()
+    movies_storaged = storaged_data.check_movie()
+    print(movies_storaged)
+    #/homequit(0)
 
     for url, path, moviefile in obtain_url:
-        m_data = list()
+        # m_data = list()
         html = urllib.request.urlopen(url).read()
-        movie = pimdbdata.ParseImdbData(html)
+        if url in movies_storaged:
+            continue
+        else:
+            movie = pimdbdata.ParseImdbData(html)
 
-        m_poster = movie.movie_poster()
-        title_year = movie.title_year()
-        rate_votes = movie.rate_value_and_votes()
-        director = movie.director()
-        writers_list = movie.creator_writers()
-        actors_list = movie.actors()
-        snps_txt = movie.synopsis()
+            # m_poster is not going to database !!!
+            m_poster = movie.movie_poster()
+            title_year = movie.title_year()
+            # rate_votes does not go to database !!!
+            rate_votes = movie.rate_value_and_votes()
+            director = movie.director()
+            writers_list = movie.creator_writers()
+            actors_list = movie.actors()
+            snps_txt = movie.synopsis()
 
-        for i in [title_year, rate_votes, director, writers_list, actors_list, snps_txt]:
-            m_data.append(i)
+            # for i in [title_year, rate_votes, director, writers_list, actors_list, snps_txt]:
+            #    m_data.append(i)
+            m_data = [url, title_year, director]
+            wrt_str = ""
+            for w in writers_list:
+                wrt_str = wrt_str + w + " "
+            m_data.append(wrt_str)
+            actr_str = ""
+            for a in actors_list:
+                actr_str = actr_str + a + " "
+            m_data.append(actr_str)
+            m_data.append(snps_txt)
+            m_data.append(0)
+            # print(m_data)
+            storaged_data.insert_data(m_data)
 
-    html_page.inside_table(m_poster, m_data, path, moviefile)
+    storaged_data.show_data()
+    storaged_data.exit_from_db()
+
+    quit(0)
+
+    # html_page.inside_table(m_poster, m_data, path, moviefile)
 
     html_page.bottom_tags()
 
