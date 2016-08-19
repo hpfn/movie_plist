@@ -9,14 +9,20 @@ Basic feature untill now - 2016-08-16.
 
 Using sqlite3.
 If a directory has only a .desktop file there is no problem.
-A .desktop file look like this:
+A .desktop file look like this: # no blank lines
 
 [Desktop Entry]
+
 Encoding=UTF-8
+
 Name=Link para Money Monster (2016) - IMDb
+
 Type=Link
+
 URL=http://www.imdb.com/title/tt2241351/?ref_=fn_al_tt_1
+
 Icon=text-html
+
 
 Stored data in a sqlite3 - 2016-08-19
 
