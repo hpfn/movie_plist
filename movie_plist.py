@@ -15,23 +15,23 @@ def main(d_scan):
     obtain_url = pyscan.dir_to_scan(d_scan)
     html_page = HtmlTags(d_scan)
     html_page.top_header()
-    storaged_data = DataStorage()
-    movies_storaged = storaged_data.check_movie()
+    stored_data = DataStorage()
+    movies_stored = stored_data.check_movie()
 
     # check if the movie is in th db
     # if not, put it in there
     for url, path, moviefile in obtain_url:
         html = urllib.request.urlopen(url).read()
         movie = pimdbdata.ParseImdbData(html)
-        if url in movies_storaged:
+        if url in movies_stored:
             print("in db already!")
             continue
         else:
-            storaged_data.populate_db(url, path, moviefile, movie)
+            stored_data.populate_db(url, path, moviefile, movie)
 
     # get data from db and close the db
-    m_data = storaged_data.show_data()
-    storaged_data.exit_from_db()
+    m_data = stored_data.show_data()
+    stored_data.exit_from_db()
 
     # put data in .html file
     for db_info in m_data:
