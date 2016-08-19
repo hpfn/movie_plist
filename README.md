@@ -6,3 +6,9 @@ Tell a directory to do the scan - like /home/user/Videos.
 A html file will be generated and choose QWebView or Firefox to see it.
 
 Basic feature untill now - 2016-08-16.
+
+Using sqlite3.
+If a directory has only a .desktop file there is no problem.
+
+Stored data in a sqlite3 - 2016-08-19
+
