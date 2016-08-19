@@ -30,6 +30,8 @@ def dir_to_scan(scan_dir):
             # url = check_content.readlines()
             # urls_movies.append([url[-2].strip()[4:], root, movie_file])
             if urls_movies_stuff:
+                if len(urls_movies_stuff) < 3:
+                    urls_movies_stuff.append("No_movie_file_yet")
                 urls_movies.append(urls_movies_stuff)
 
     # print(urls_movies)
