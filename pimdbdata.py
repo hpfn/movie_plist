@@ -72,7 +72,7 @@ class ParseImdbData:
             actors.append(result.group(1))
 
         # print("|  and others")
-        actors.append("| and others")
+        actors.append(" and others")
         return actors
 
     def synopsis(self):
