@@ -20,28 +20,6 @@ class DataStorage:
         self.c.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?)', data_s)
         self.conn.commit()
 
-    def populate_db(self, url, path, moviefile, movie):
-        # m_poster is not going to database !!!
-        # m_poster = movie.movie_poster()
-        title_year = movie.title_year()
-        # rate_votes does not go to database !!!
-        # rate_votes = movie.rate_value_and_votes()
-        director = movie.director()
-        writers_list = movie.creator_writers()
-        actors_list = movie.actors()
-        snps_txt = movie.synopsis()
-
-        wrt_str = ""
-        for w in writers_list:
-            wrt_str = wrt_str + w + " "
-
-        actr_str = ""
-        for a in actors_list:
-            actr_str = actr_str + a + " "
-
-        m_data = [url, title_year, director, wrt_str, actr_str, snps_txt, path, moviefile, 0]
-        self.insert_data(m_data)
-
     def show_data(self):
         self.c.execute('select * from movie_plist')
         return list(self.c.fetchall())

@@ -11,6 +11,14 @@ import pyqt_browser
 from movie_plist_sqlite3 import DataStorage
 
 
+def list_to_str(people):
+    p_str = ""
+    for p in people:
+        p_str = p_str + p + " "
+
+    return p_str
+
+
 def main(d_scan):
     obtain_url = pyscan.dir_to_scan(d_scan)
     html_page = HtmlTags(d_scan)
@@ -23,11 +31,10 @@ def main(d_scan):
     for url, path, moviefile in obtain_url:
         html = urllib.request.urlopen(url).read()
         movie = pimdbdata.ParseImdbData(html)
-        if url in movies_stored:
-            print("in db already!")
-            continue
-        else:
-            stored_data.populate_db(url, path, moviefile, movie)
+        if url not in movies_stored:
+            m_data = [url, movie.title_year(), movie.director(), list_to_str(movie.creator_writers()),
+                      list_to_str(movie.actors()), movie.synopsis(), path, moviefile, 0]
+            stored_data.insert_data(m_data)
 
     # get data from db and close the db
     m_data = stored_data.show_data()
