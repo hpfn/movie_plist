@@ -24,4 +24,4 @@ class DataStorage:
         return str(self.c.fetchall())
 
     def exit_from_db(self):
-        self.c.close()
+        self.conn.close()
