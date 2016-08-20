@@ -1,5 +1,5 @@
 import sqlite3
-import os
+# import os
 
 
 class DataStorage:
@@ -7,13 +7,12 @@ class DataStorage:
         self.conn = sqlite3.connect('movie_plist_sqlite3.db')
         self.c = self.conn.cursor()
 
-        if os.path.getsize('movie_plist_sqlite3.db') is 0:
-            print("zero size. building a .db file")
-            self.c.execute('''create table movie_plist (url UNIQUE,
-                           title_year TEXT, director,
-                           writers_list, actors_list,
-                           snps_txt TEXT, path, moviefile, watch INTEGER)''')
-            self.conn.commit()
+        # if os.path.getsize('movie_plist_sqlite3.db') is 0:
+        #    print("zero size. building a .db file")
+        self.c.execute('''create table if not exists movie_plist (url UNIQUE,
+                        title_year TEXT, director, writers_list, actors_list,
+                        snps_txt TEXT, path, moviefile, watch INTEGER)''')
+        self.conn.commit()
 
     def insert_data(self, data_s):
         """ data_s will have seven itens """
