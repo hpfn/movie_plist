@@ -21,9 +21,6 @@ class DataStorage:
             raise err
             sys.exit(1)
 
-        finally:
-            self.conn.close()
-
     def insert_data(self, data_s):
         """ data_s will have seven itens """
         try:
