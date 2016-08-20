@@ -1,14 +1,10 @@
 import sqlite3
-# import os
 
-
+# http://stackoverflow.com/questions/21360271/pythons-sqlite3-module-exceptions-where-is-the-documentation
 class DataStorage:
     def __init__(self):
         self.conn = sqlite3.connect('movie_plist_sqlite3.db')
         self.c = self.conn.cursor()
-
-        # if os.path.getsize('movie_plist_sqlite3.db') is 0:
-        #    print("zero size. building a .db file")
         self.c.execute('''create table if not exists movie_plist (url UNIQUE,
                         title_year TEXT, director, writers_list, actors_list,
                         snps_txt TEXT, path, moviefile, watch INTEGER)''')
