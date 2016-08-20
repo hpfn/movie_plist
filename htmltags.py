@@ -6,7 +6,12 @@
 class HtmlTags:
     def __init__(self, path):
         self.file_name = path + '/pymovieinfo.html'
-        self.open_file = open(self.file_name, 'w')
+        try:
+            self.open_file = open(self.file_name, 'w')
+        except IOError as ioerr:
+            print("Error when trying to open .html file: " + str(ioerr))
+            print("Correct path ?")
+            return (None)
 
     def top_header(self):
         """ from <html> tag until <table> tag """
