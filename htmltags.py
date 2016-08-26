@@ -1,7 +1,11 @@
 """
-   only inside_table receive args and job is done
+   only parse_data_to_inside_table
+   receive data from outside to deal
+   with it and put in the .html file
 """
 
+import pimdbdata
+import urllib
 
 class HtmlTags:
     def __init__(self, path):
@@ -61,3 +65,17 @@ class HtmlTags:
         """
         print(bottom, file=self.open_file)
         self.open_file.close()
+
+    def parse_data_to_inside_table(self, m_data):
+        """
+            all data is split and call inside_table
+            for each movie
+        """
+        for db_info in m_data:
+            db_info_list = list(db_info)
+            html = urllib.request.urlopen(db_info_list[0]).read()
+            movie = pimdbdata.ParseImdbData(html)
+            m_poster = movie.movie_poster()
+            rate_votes = movie.rate_value_and_votes()
+            db_info_list.insert(2, rate_votes)
+            self.inside_table(m_poster, db_info_list[1:-3], db_info_list[-3], db_info_list[-2])

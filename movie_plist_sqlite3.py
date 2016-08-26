@@ -1,6 +1,7 @@
 import sqlite3
 import sys
-
+import pimdbdata
+import urllib
 
 # http://stackoverflow.com/questions/21360271/pythons-sqlite3-module-exceptions-where-is-the-documentation
 # https://www.python.org/dev/peps/pep-0249/#exceptions
@@ -21,11 +22,15 @@ class DataStorage:
             raise err
             sys.exit(1)
 
-    def insert_data(self, data_s):
-        """ data_s will have seven itens """
+    def insert_data(self, url, path, moviefile):
+        """ data does not exist in database """
         try:
             with self.conn:
-                self.conn.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?)', data_s)
+                html = urllib.request.urlopen(url).read()
+                movie = pimdbdata.ParseImdbData(html)
+                m_data = [url, movie.title_year(), movie.director(), ' '.join(movie.creator_writers()),
+                          ' '.join(movie.actors()), movie.synopsis(), path, moviefile, 0]
+                self.conn.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?)', m_data)
                 self.conn.commit()
         except sqlite3.IntegrityError:
             if self.conn:
