@@ -1,7 +1,8 @@
 import sqlite3
-import sys
+# import sys
 import pimdbdata
-import urllib
+import urllib.request
+
 
 # http://stackoverflow.com/questions/21360271/pythons-sqlite3-module-exceptions-where-is-the-documentation
 # https://www.python.org/dev/peps/pep-0249/#exceptions
@@ -10,7 +11,7 @@ import urllib
 class DataStorage:
     def __init__(self):
         try:
-            self.conn = sqlite3.connect('movie_plist_sqlite3.db')
+            self.conn = sqlite3.connect('./info_in_db/movie_plist_sqlite3.db')
             self.c = self.conn.cursor()
             self.c.execute('''create table if not exists movie_plist (url UNIQUE,
                            title_year TEXT, director, writers_list, actors_list,
@@ -20,7 +21,6 @@ class DataStorage:
             if self.conn:
                 self.conn.rollback()
             raise err
-            sys.exit(1)
 
     def insert_data(self, url, path, moviefile):
         """ data does not exist in database """

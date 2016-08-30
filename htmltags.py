@@ -5,7 +5,8 @@
 """
 
 import pimdbdata
-import urllib
+import urllib.request
+
 
 class HtmlTags:
     def __init__(self, path):
@@ -15,7 +16,6 @@ class HtmlTags:
         except IOError as ioerr:
             print("Error when trying to open .html file: " + str(ioerr))
             print("Correct path ?")
-            return (None)
 
     def top_header(self):
         """ from <html> tag until <table> tag """
