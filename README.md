@@ -12,3 +12,8 @@ If a directory has only a .desktop file there is no problem.
 
 Stored data in a sqlite3 - 2016-08-19
 
+
+Call vlc by mouse event
+
+Vlc - 2016-09-07
+
