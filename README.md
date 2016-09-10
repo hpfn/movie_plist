@@ -17,3 +17,5 @@ Call vlc by mouse event
 
 Vlc - 2016-09-07
 
+No menu. One click to open the movie file.
+
