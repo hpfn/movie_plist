@@ -19,3 +19,5 @@ Vlc - 2016-09-07
 
 No menu. One click to open the movie file. 2016-09-10
 
+Message box about 'no_movie_file_yet'. 2016-09-13
+
