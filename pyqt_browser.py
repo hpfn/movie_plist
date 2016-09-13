@@ -4,17 +4,28 @@
    this will be the first gui.
    only a browser.
 """
+from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import sys
-# from PyQt5.QtWebKit import *
 from PyQt5.QtWebKitWidgets import *
 from subprocess import call
+import sys
+
+
 # from PyQt5 import QtCore
 
 
 def call_vlc(link):
-    call(['/usr/bin/vlc', link])
+    # print(link)
+    if 'No_movie_file_yet' not in link:
+        call(['/usr/bin/vlc', link])
+    else:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText('You do not have this movie file.')
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.show()
+        msg.exec_()
 
 
 def qt_browser(path_to_file):
@@ -27,16 +38,8 @@ def qt_browser(path_to_file):
     # browser.setFixedSize(700, 600)
     # browser.setContent(mimeType='text/html')
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
-    browser.page().linkClicked.connect(lambda link: call(['/usr/bin/vlc', link.toString()]))  # call_vlc(link.toString()))
-
-    # browser.settings().setAttribute(QWebSettings.PluginsEnabled, True)
-    # QT4 - QtCore.QObject.connect(browser, QtCore.SIGNAL("linkClicked (const QUrl&)"), call_vlc)
-
-    # browser.linkClicked(const QUrl &)
-    # quitAction = QAction("VLC", None)
-    # quitAction.triggered.connect(call_vlc)  # funcionando !!!
-    # funciona quitAction.triggered.connect(qApp.quit)
-    # browser.addAction(quitAction)
+    browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
+    # browser.page().linkClicked.connect(call_vlc(link.toString()))
 
     # browser.page
     # browser.setSource(QUrl("pymovieinfo.html")
