@@ -3,10 +3,10 @@
 import sys
 from subprocess import call
 
-import pyqt_browser
 import pyscan
 from htmltags import HtmlTags
 from info_in_db.movie_plist_sqlite3 import DataStorage
+from pyqt_gui import pyqt_browser
 
 
 def main(d_scan):
