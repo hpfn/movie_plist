@@ -2,6 +2,7 @@
 
 import os
 
+
 def find_movie_file(urls_m_stuff2, file_name):
     """ find the file to play """
     for file_n in file_name:  # path, dir_n, file_n in os.walk(root):
@@ -13,6 +14,7 @@ def find_movie_file(urls_m_stuff2, file_name):
     if len(urls_m_stuff2) < 3:
         urls_m_stuff2.append("No_movie_file_yet")
 
+
 def open_right_file(urls_m_stuff, root_path, right_file):
     """ open the right file and get the url"""
     # urls_movies_stuff = list()
@@ -21,6 +23,7 @@ def open_right_file(urls_m_stuff, root_path, right_file):
         url = check_content.readlines()
         urls_m_stuff.append(url[-2][4:-1])
         urls_m_stuff.append(root_path)
+
 
 def dir_to_scan(scan_dir):
     """
@@ -42,5 +45,3 @@ def dir_to_scan(scan_dir):
                 urls_movies.append(urls_movies_stuff)
 
     return urls_movies
-
-
