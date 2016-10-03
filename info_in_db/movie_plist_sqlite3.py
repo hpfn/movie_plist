@@ -8,7 +8,7 @@ import urllib.request
 # https://www.python.org/dev/peps/pep-0249/#exceptions
 # http://pythoncentral.io/introduction-to-sqlite-in-python/
 # http://zetcode.com/db/sqlitepythontutorial/
-class DataStorage:
+class DataStorage(object):
     def __init__(self):
         try:
             self.conn = sqlite3.connect('./info_in_db/movie_plist_sqlite3.db')
