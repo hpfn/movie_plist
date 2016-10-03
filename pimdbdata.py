@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import re
 
 
-class ParseImdbData:
+class ParseImdbData(object):
     def __init__(self, html):
         """ html is the url to be parsed """
         self.soup = BeautifulSoup(html, "lxml")
