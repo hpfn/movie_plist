@@ -35,13 +35,13 @@ def dir_to_scan(scan_dir):
 
     for root, dir_name, filename in os.walk(scan_dir):
         for wanted_file in filename:
-            urls_movies_stuff = list()
+            # urls_movies_stuff = list()
             if wanted_file.endswith('.desktop'):
-                # urls_movies_stuff = list()
+                urls_movies_stuff = list()
                 open_right_file(urls_movies_stuff, root, wanted_file)
                 find_movie_file(urls_movies_stuff, filename)
 
-            if urls_movies_stuff:
-                urls_movies.append(urls_movies_stuff)
+                if urls_movies_stuff:
+                    urls_movies.append(urls_movies_stuff)
 
     return urls_movies
