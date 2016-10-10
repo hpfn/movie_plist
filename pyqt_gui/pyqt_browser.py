@@ -4,15 +4,14 @@
    this will be the first gui.
    only a browser.
 """
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtWebKitWidgets import *
-from subprocess import call
 import sys
-
-
-# from PyQt5 import QtCore
+from subprocess import call
+# from PyQt5.QtGui import
+from PyQt5.QtCore import QUrl
+from PyQt5.QtWebKitWidgets import QWebView
+from PyQt5.QtWebKitWidgets import QWebPage
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QMessageBox
 
 
 def call_vlc(link):
@@ -34,7 +33,7 @@ def qt_browser(path_to_file):
     # view = QGraphicsView()
     # grid = QGridLayout()
     browser = QWebView()  # QTextBrowser()
-    browser.setContextMenuPolicy(Qt.ActionsContextMenu)  # quitAction
+    # browser.setContextMenuPolicy(Qt.ActionsContextMenu)  # quitAction
     # browser.setFixedSize(700, 600)
     # browser.setContent(mimeType='text/html')
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
