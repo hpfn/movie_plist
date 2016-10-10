@@ -37,9 +37,11 @@ class ParseImdbData(object):
     def director(self):
         director = self.soup.find(itemprop="director")
         re_director = re.compile("([A-Z].*[a-z])</span></a>.*")
-        result = re_director.search(str(director.contents[1]))
-        # print("director: {}" .format(result.group(1)))
-        return result.group(1)
+        if director:
+            result = re_director.search(str(director.contents[1]))
+            return result.group(1)
+        else:
+            return "TV Mini-Series"
 
     def creator_writers(self):
         """
