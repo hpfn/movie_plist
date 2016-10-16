@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
 import sys
-from subprocess import call
 
 import pyscan
 from htmltags import HtmlTags
 from info_in_db.movie_plist_sqlite3 import DataStorage
-from pyqt_gui import pyqt_browser
+from pyqt_gui.main_gui import Window
+
+from PyQt5.QtWidgets import QApplication
 
 
 def main(d_scan):
@@ -30,18 +31,21 @@ def main(d_scan):
     # final html tags
     html_page.bottom_tags()
 
-    decide_how = input("show html file (Firefox|QWebView): ")
-    if decide_how in 'QWebView':
-        pyqt_browser.qt_browser(d_scan)
-    else:
-        file_location = d_scan + '/pymovieinfo.html'
-        call(['firefox', file_location])
+    # decide_how = input("show html file (Firefox|PyQt): ")
+    # if decide_how in 'PyQt':
+    # pyqt_browser.qt_browser(d_scan)
+    app = QApplication(sys.argv)
+    ex = Window(d_scan)
+    sys.exit(app.exec_())
+    # else:
+    #    file_location = d_scan + '/pymovieinfo.html'
+    #    call(['firefox', file_location])
 
 
 if __name__ == '__main__':
     if len(sys.argv) is 2:
         path_dir_scan = sys.argv[1]
     else:
-        path_dir_scan = input(" Do the scan in which directory ?")
+        path_dir_scan = input(" Do the scan in which directory ? ")
 
     main(path_dir_scan)
