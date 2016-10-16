@@ -1,8 +1,9 @@
-from info_in_db.movie_plist_sqlite3 import DataStorage
+
 from pyqt_gui.pyqt_browser import qt_browser
+from pyqt_gui.combo_box import Combo
+
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QWidget, QRadioButton
-from PyQt5.QtWidgets import QComboBox
 
 
 class Window(QWidget):
@@ -19,23 +20,8 @@ class Window(QWidget):
         watch_0_button = QRadioButton(self.tr("&seen"))
         watch_1_button = QRadioButton(self.tr("&unseen"))
 
-        movie_update_cbox = QComboBox()
-        movie_update_cbox.addItem("insert movie file ")
-        stored_data = DataStorage()
-        movies_stored = stored_data.no_movie_yet()
-        for title_year in movies_stored:
-            title_l = list(title_year)
-            movie_update_cbox.addItem(title_l[0])
-
-        movie_remove_cbox = QComboBox()
-        movie_remove_cbox.addItem("remove movie from hd ")
-        # stored_data = DataStorage()
-        movies_stored = stored_data.movie_list_title()
-        for title_year in movies_stored:
-            title_l = list(title_year)
-            movie_remove_cbox.addItem(title_l[0])
-
-        stored_data.exit_from_db()
+        movie_update_cbox = Combo("update")
+        movie_remove_cbox = Combo("remove")
 
         browser = qt_browser(self.scanned_dir)
 
