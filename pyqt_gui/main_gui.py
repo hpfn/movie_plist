@@ -1,4 +1,4 @@
-
+from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.pyqt_browser import qt_browser
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QWidget, QRadioButton
@@ -21,9 +21,21 @@ class Window(QWidget):
 
         movie_update_cbox = QComboBox()
         movie_update_cbox.addItem("insert movie file ")
+        stored_data = DataStorage()
+        movies_stored = stored_data.no_movie_yet()
+        for title_year in movies_stored:
+            title_l = list(title_year)
+            movie_update_cbox.addItem(title_l[0])
 
-        movie_remove_c_box = QComboBox()
-        movie_remove_c_box.addItem("remove movie from hd ")
+        movie_remove_cbox = QComboBox()
+        movie_remove_cbox.addItem("remove movie from hd ")
+        # stored_data = DataStorage()
+        movies_stored = stored_data.movie_list_title()
+        for title_year in movies_stored:
+            title_l = list(title_year)
+            movie_remove_cbox.addItem(title_l[0])
+
+        stored_data.exit_from_db()
 
         browser = qt_browser(self.scanned_dir)
 
@@ -31,10 +43,10 @@ class Window(QWidget):
         # seen      insert
         # unseen    remove
         grid.addWidget(watch_0_button, 0, 0)
-        grid.addWidget(watch_1_button, 1 ,0)
+        grid.addWidget(watch_1_button, 1, 0)
 
         grid.addWidget(movie_update_cbox, 0, 2)
-        grid.addWidget(movie_remove_c_box, 1, 2)
+        grid.addWidget(movie_remove_cbox, 1, 2)
 
         grid.addWidget(browser, 2, 0, 7, 7)
 
