@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
 """
-   this will be the first gui.
-   only a browser.
+   It will be a class for web browser.
 """
 import sys
 from subprocess import call
@@ -13,6 +12,13 @@ from PyQt5.QtWebKitWidgets import QWebPage
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMessageBox
 
+
+#class Browser(object):
+#    def __init__(self):
+#        super().__init__()
+#        # self.scan_dir_final = scan_dir
+#
+#        #self.qt_browser()
 
 def call_vlc(link):
     # print(link)
@@ -26,28 +32,25 @@ def call_vlc(link):
         msg.show()
         msg.exec_()
 
-
-def qt_browser(path_to_file):
+def qt_browser(scan_dir):
     app = QApplication(sys.argv)
     # scene = QGraphicsScene()
     # view = QGraphicsView()
     # grid = QGridLayout()
+
     browser = QWebView()  # QTextBrowser()
     # browser.setContextMenuPolicy(Qt.ActionsContextMenu)  # quitAction
     # browser.setFixedSize(700, 600)
     # browser.setContent(mimeType='text/html')
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
-    browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
+    browser.page().linkClicked.connect(lambda link: self.call_vlc(link.toString()))
     # browser.page().linkClicked.connect(call_vlc(link.toString()))
 
-    # browser.page
     # browser.setSource(QUrl("pymovieinfo.html")
-    url = "file://" + path_to_file + "/pymovieinfo.html"
+    url = "file://" + scan_dir + "/pymovieinfo.html"
     # browser.setUrl(QUrl.fromLocalFile(url))
     browser.setUrl(QUrl(url))
-    browser.setWindowTitle('QWebView HTML File Input')
-    browser.show()
-    sys.exit(app.exec_())
+    # browser.setWindowTitle('QWebView HTML File Input')
+    #browser.show()
+    #sys.exit(app.exec_())
 
-# if __name__ == '__main__':
-#    main()
