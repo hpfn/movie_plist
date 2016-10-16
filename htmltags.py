@@ -4,6 +4,7 @@
    with it and put in the .html file
 """
 
+import sys
 import pimdbdata
 import urllib.request
 
@@ -16,6 +17,7 @@ class HtmlTags:
         except IOError as ioerr:
             print("Error when trying to open .html file: " + str(ioerr))
             print("Correct path ?")
+            sys.exit(1)
 
     def top_header(self):
         """ from <html> tag until <table> tag """
