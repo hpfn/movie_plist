@@ -2,23 +2,25 @@
 
 """
    It will be a class for web browser.
+   I do not know how to do it yet. So
+   I call QWebView by qt_browser function
+   and return the object
 """
-import sys
+
 from subprocess import call
-# from PyQt5.QtGui import
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWebKitWidgets import QWebView
 from PyQt5.QtWebKitWidgets import QWebPage
-from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMessageBox
 
 
-#class Browser(object):
-#    def __init__(self):
+# class Browser(QWebView):
+#    def __init__(self, scan_dir):
 #        super().__init__()
-#        # self.scan_dir_final = scan_dir
+#        self.browser = QWebView()
+#        self.scan_dir_final = scan_dir
 #
-#        #self.qt_browser()
+#        self.qt_browser()
 
 def call_vlc(link):
     # print(link)
@@ -32,25 +34,11 @@ def call_vlc(link):
         msg.show()
         msg.exec_()
 
-def qt_browser(scan_dir):
-    app = QApplication(sys.argv)
-    # scene = QGraphicsScene()
-    # view = QGraphicsView()
-    # grid = QGridLayout()
 
-    browser = QWebView()  # QTextBrowser()
-    # browser.setContextMenuPolicy(Qt.ActionsContextMenu)  # quitAction
-    # browser.setFixedSize(700, 600)
-    # browser.setContent(mimeType='text/html')
+def qt_browser(path):
+    browser = QWebView()
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
-    browser.page().linkClicked.connect(lambda link: self.call_vlc(link.toString()))
-    # browser.page().linkClicked.connect(call_vlc(link.toString()))
-
-    # browser.setSource(QUrl("pymovieinfo.html")
-    url = "file://" + scan_dir + "/pymovieinfo.html"
-    # browser.setUrl(QUrl.fromLocalFile(url))
+    browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
+    url = "file://" + path + "/pymovieinfo.html"
     browser.setUrl(QUrl(url))
-    # browser.setWindowTitle('QWebView HTML File Input')
-    #browser.show()
-    #sys.exit(app.exec_())
-
+    return browser
