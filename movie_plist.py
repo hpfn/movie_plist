@@ -4,7 +4,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-import pyscan
+from data import pyscan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.htmltags import HtmlTags
 from pyqt_gui.main_gui import Window

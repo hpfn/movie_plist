@@ -1,7 +1,7 @@
 import sqlite3
-# import sys
-import pimdbdata
 import urllib.request
+
+from data import pimdbdata
 
 
 # http://stackoverflow.com/questions/21360271/pythons-sqlite3-module-exceptions-where-is-the-documentation

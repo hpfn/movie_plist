@@ -5,8 +5,9 @@
 """
 
 import sys
-import pimdbdata
 import urllib.request
+
+from data import pimdbdata
 
 
 class HtmlTags:
