@@ -11,7 +11,7 @@ class Combo(QComboBox):
         self.movies_stored = ""
 
         self.first_item_combo()
-        self.update_combo()
+        self.combo_list()
 
     def first_item_combo(self):
         def update():
@@ -24,7 +24,7 @@ class Combo(QComboBox):
                   "remove": remove}
         option[self.to_do]()
 
-    def update_combo(self):
+    def combo_list(self):
         def update():
             self.movies_stored = self.stored_data.no_movie_yet()
 
