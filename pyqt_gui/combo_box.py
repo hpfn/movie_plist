@@ -43,3 +43,7 @@ class Combo(QComboBox):
 
     def add_to_cbox(self, item):
         self.addItem(item)
+
+    def get_item_selected(self):
+        self.activated.connect(lambda s_item: print(self.currentText()))
+

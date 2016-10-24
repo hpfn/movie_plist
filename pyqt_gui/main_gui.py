@@ -23,11 +23,15 @@ class Window(QWidget):
         movie_update_cbox = Combo("update")
         movie_remove_cbox = Combo("remove")
 
+        # print the selected movie
+        print(movie_update_cbox.get_item_selected())
+        print(movie_remove_cbox.get_item_selected())
+
         browser = qt_browser(self.scanned_dir)
 
         # formatted as
-        # seen      insert
-        # unseen    remove
+        # seen      insert (movie in db)
+        # unseen    remove (movie from db)
         grid.addWidget(watch_0_button, 0, 0)
         grid.addWidget(watch_1_button, 1, 0)
 
