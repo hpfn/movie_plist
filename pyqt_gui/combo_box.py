@@ -6,7 +6,6 @@ class Combo(QComboBox):
     def __init__(self, will_do):
         super().__init__()
         self.to_do = will_do
-        # self.cbox = QComboBox()
         self.stored_data = DataStorage()
         self.movies_stored = ""
 
@@ -35,9 +34,9 @@ class Combo(QComboBox):
                   "remove": remove}
 
         option[self.to_do]()
-        self.alter_cbox()
+        self.show_list()
 
-    def alter_cbox(self):
+    def show_list(self):
         for title_year in self.movies_stored:
             title_l = list(title_year)
             self.add_to_cbox(title_l[0])
