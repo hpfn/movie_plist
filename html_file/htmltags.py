@@ -21,11 +21,11 @@ class HtmlTags:
             sys.exit(1)
 
     def top_header(self):
-        """ from <html> tag until <table> tag """
+        """ from <html_file> tag until <table> tag """
         head = """
-        <html>
+        <html_file>
         <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html_file; charset=utf-8">
         <title>Py Movie Info</title>
         </head>
         <body>
@@ -52,7 +52,9 @@ class HtmlTags:
         </td>
         </tr>
         <tr>
-        <td colspan="2" style="border-top: none; border-bottom: none; border-left: none; border-right: none; padding-top: 0.5cm; padding-bottom: 0.5cm; padding-left: 0.1cm; padding-right: 0.1cm" valign="top" width="100%">
+        <td colspan="2" style="border-top: none; border-bottom: none; border-left: none; \
+        border-right: none; padding-top: 0.5cm; padding-bottom: 0.5cm; padding-left: 0.1cm; \
+        padding-right: 0.1cm" valign="top" width="100%">
           <center>-------------------------------------------------------</center>
         </td>
         </tr>
@@ -60,11 +62,11 @@ class HtmlTags:
         print(last_lines, file=self.open_file)
 
     def bottom_tags(self):
-        """ from </table> to </html> """
+        """ from </table> to </html_file> """
         bottom = """
         </table>
         </body>
-        </html>
+        </html_file>
         """
         print(bottom, file=self.open_file)
         self.open_file.close()
