@@ -4,7 +4,7 @@ import re
 
 class ParseImdbData(object):
     def __init__(self, html):
-        """ html is the url to be parsed """
+        """ html_file is the url to be parsed """
         self.soup = BeautifulSoup(html, "lxml")
 
     def title_year(self):
