@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QComboBox
+from PyQt5.QtWidgets import QMessageBox
 from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
@@ -45,5 +46,18 @@ class Combo(QComboBox):
         self.addItem(item)
 
     def get_item_selected(self):
-        self.activated.connect(lambda s_item: print(self.currentText()))
+        self.activated.connect(lambda s_item: self.confirm_option(self.currentText()))
 
+    def confirm_option(self, movie_selected):
+        movie_selected += " will be (insert in the db)/(removed from hd)"
+        msg = QMessageBox()
+        reply = msg.question(self, 'The selected movie', movie_selected,
+                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            msg.setText('to be implement!!!')
+        else:
+            msg.setText('Doing nothing.')
+
+        msg.show()
+        msg.exec_()
