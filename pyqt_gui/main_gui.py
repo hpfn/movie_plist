@@ -20,12 +20,13 @@ class Window(QWidget):
         watch_0_button = QRadioButton(self.tr("&seen"))
         watch_1_button = QRadioButton(self.tr("&unseen"))
 
+        # Combo inherit QComboBox
         movie_update_cbox = Combo("update")
         movie_remove_cbox = Combo("remove")
 
-        # print the selected movie
-        print(movie_update_cbox.get_item_selected())
-        print(movie_remove_cbox.get_item_selected())
+        # movie selected. remove/update info in the db
+        movie_update_cbox.get_item_selected()
+        movie_remove_cbox.get_item_selected()
 
         browser = qt_browser(self.scanned_dir)
 

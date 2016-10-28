@@ -49,14 +49,20 @@ class Combo(QComboBox):
         self.activated.connect(lambda s_item: self.confirm_option(self.currentText()))
 
     def confirm_option(self, movie_selected):
-        movie_selected += " will be (insert in the db)/(removed from hd)"
+        """ show msg about what to_do with the movie selected"""
+        print(self.to_do)
+        print('conf_op: {}' .format(movie_selected))
+        movie_selected += " will be " + self.to_do
         msg = QMessageBox()
         reply = msg.question(self, 'The selected movie', movie_selected,
                              QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
+            # call db
+            # rebuild .html file
             msg.setText('to be implement!!!')
         else:
+            # ignore this ???
             msg.setText('Doing nothing.')
 
         msg.show()
