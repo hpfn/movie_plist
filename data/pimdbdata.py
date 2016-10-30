@@ -4,7 +4,7 @@ import re
 
 class ParseImdbData(object):
     def __init__(self, html):
-        """ html_file is the url to be parsed """
+        """ html is the url to be parsed """
         self.soup = BeautifulSoup(html, "lxml")
 
     def title_year(self):
@@ -29,10 +29,18 @@ class ParseImdbData(object):
         :rtype: list() - two items
         """
         rate_value = self.soup.find(itemprop="ratingValue")
-        # print("rate: {}" .format(rate_value.contents[0]))
+        # print("rate: {}" .format(rate_value.contents))
         rate_count = self.soup.find(itemprop="ratingCount")
-        # print("votes: {}" .format(rate_count.contents[0]))
-        return [rate_value.contents[0], rate_count.contents[0]]
+        #print("votes: {}" .format(rate_count.contents))
+        if rate_value:
+            rate_value = rate_value.contents[0]
+        else:
+            rate_value = '?'
+        if rate_count:
+            rate_count = rate_count.contents[0]
+        else:
+            rate_count = '?'
+        return [rate_value, rate_count]
 
     def director(self):
         director = self.soup.find(itemprop="director")
