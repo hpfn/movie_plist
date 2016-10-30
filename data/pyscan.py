@@ -20,7 +20,7 @@ class PyScan(object):
         return urls_movies_stuff
 
     @staticmethod
-    def find_movie_file(file_name):
+    def find_movie_file(root, file_name):
         """
            find the file to play
            if not tell there is no file
@@ -28,7 +28,11 @@ class PyScan(object):
         for file_n in file_name:
             name = file_n.lower().startswith('sample')
             if file_n.endswith(('.avi', '.mp4', '.mkv')) and not name:
-                return file_n
+                # maybe just the size is enough to get the movie
+                file_location = root + '/' + file_n
+                # .getsize return bytes
+                if os.path.getsize(file_location) > 3000000:
+                    return file_n
 
         return "No_movie_file_yet"
 
@@ -52,7 +56,7 @@ class PyScan(object):
             for wanted_file in filename:
                 if wanted_file.endswith('.desktop'):
                     open_r_f = self.open_right_file(root, wanted_file)
-                    file_n = self.find_movie_file(filename)
+                    file_n = self.find_movie_file(root, filename)
 
                     urls_movies.append(self.gather_info(open_r_f, root, file_n))
 
