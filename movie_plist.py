@@ -10,12 +10,15 @@ from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_gui import Window
 
 def check_pushto_db(stored, url_got):
+    """ if movie info is not in db
+        put data in it
+    """
     movies_stored = stored.check_movie()
-    # check if the all movie info is in movie_plist_sqlite3.db
+    # check if the movie info is in movie_plist_sqlite3.db
     # if not, put it in there
     for url, path, movie_file in url_got:
         if url not in movies_stored:
-            stored_data.insert_data(url, path, movie_file)
+            stored.insert_data(url, path, movie_file)
 
 def main(d_scan):
     # scan the directory
@@ -28,17 +31,10 @@ def main(d_scan):
     stored_data = DataStorage()
 
     if movie_file_check.is_file():
-        html_file.create_page.generate_html(d_scan, stored_data)
+        # .html file exists. Do nothing.
+        pass
     else:
         check_pushto_db(stored_data, obtain_url)
-        #movies_stored = stored_data.check_movie()
-        #
-        ## check if the all movie info is in movie_plist_sqlite3.db
-        ## if not, put it in there
-        #for url, path, movie_file in obtain_url:
-        #    if url not in movies_stored:
-        #        stored_data.insert_data(url, path, movie_file)
-
         # create the page for QWebView
         html_file.create_page.generate_html(d_scan, stored_data)
 
