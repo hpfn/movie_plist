@@ -33,14 +33,10 @@ class ParseImdbData(object):
         rate_count = self.soup.find(itemprop="ratingCount")
         #print("votes: {}" .format(rate_count.contents))
         if rate_value:
-            rate_value = rate_value.contents[0]
-        else:
-            rate_value = '?'
-        if rate_count:
-            rate_count = rate_count.contents[0]
-        else:
-            rate_count = '?'
-        return [rate_value, rate_count]
+            if rate_count:
+                return [rate_value.contents[0], rate_count.contents[0]]
+
+        return ['?', '?']
 
     def director(self):
         director = self.soup.find(itemprop="director")
