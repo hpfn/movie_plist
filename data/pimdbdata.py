@@ -48,6 +48,7 @@ class ParseImdbData(object):
             for i in writer_cia:
                 result = re_writer_cia.search(str(i))
                 writers.append(result.group(1))
+            # can return an empty list
             return writers
         except AttributeError:
             print('{}: must improve search to find the writers' .format(self.soup.title.string[:-7]))
