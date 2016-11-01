@@ -52,14 +52,15 @@ class Combo(QComboBox):
         """ show msg about what to_do with the movie selected"""
         print(self.to_do)
         print('conf_op: {}' .format(movie_selected))
-        movie_selected += " will be " + self.to_do
+        txt_info = "You will " + self.to_do + " " + movie_selected
         msg = QMessageBox()
-        reply = msg.question(self, 'The selected movie', movie_selected,
+        reply = msg.question(self, 'The selected movie', txt_info,
                              QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             # call db
             # rebuild .html file
+            print(movie_selected)
             msg.setText('to be implement!!!')
         else:
             # ignore this ???
