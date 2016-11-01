@@ -5,64 +5,53 @@ import re
 class ParseImdbData(object):
     def __init__(self, html):
         """ html is the url to be parsed """
-        self.soup = BeautifulSoup(html, "lxml")
+        self.soup = BeautifulSoup(html, 'html.parser')
 
     def title_year(self):
         """
-        :rtype: list() - two items # not anymore. simplicity is better :)
+        :rtype:
 
         """
         return self.soup.title.string[:-7]
-        # title_year = self.soup.find(property="og:title")
-        # print("propert: {}" .format(self.soup.title.string[:-6]))
-        # name = self.soup.find(itemprop="name")
-        # print("title: {}" .format(name.contents[0]), end=' ')
-        # year = self.soup.find(id="titleYear")
-        # re_year = re.compile("([0-9]+)")
-        # year = re_year.search(str(name.contents[1]))
-        # print(year.group())
-        # return [name.contents[0].strip(), year.group()]
 
     def rate_value_and_votes(self):
         """
 
         :rtype: list() - two items
         """
-        rate_value = self.soup.find(itemprop="ratingValue")
-        # print("rate: {}" .format(rate_value.contents))
-        rate_count = self.soup.find(itemprop="ratingCount")
-        #print("votes: {}" .format(rate_count.contents))
-        if rate_value:
-            if rate_count:
-                return [rate_value.contents[0], rate_count.contents[0]]
-
-        return ['?', '?']
+        try:
+            rate_value = self.soup.find(itemprop="ratingValue")
+            rate_count = self.soup.find(itemprop="ratingCount")
+            return [rate_value.contents[0], rate_count.contents[0]]
+        except AttributeError:
+            print('{}: no contents for rate and votes' .format(self.soup.title.string[:-7]))
+            return ['?', '?']
 
     def director(self):
-        director = self.soup.find(itemprop="director")
-        re_director = re.compile("([A-Z].*[a-z])</span></a>.*")
-        if director:
+        try:
+            director = self.soup.find(itemprop="director")
+            re_director = re.compile("([A-Z].*[a-z])</span></a>.*")
             result = re_director.search(str(director.contents[1]))
             return result.group(1)
-        else:
-            return "TV Mini-Series"
+        except AttributeError:
+            print('{}: must improve search to find the director' .format(self.soup.title.string[:-7]))
+            return " ? "
 
     def creator_writers(self):
         """
         :rtype: list()
         """
-        writer_cia = self.soup.find_all(itemprop="creator", itemtype="http://schema.org/Person")
-        re_writer_cia = re.compile("([A-Z].*[a-z])</span></a>.*")
-        # print("Writers: ", end=' ')
-        writers = list()
-
-        for i in writer_cia:
-            result = re_writer_cia.search(str(i))
-            # print(result.group(1), end="  ")
-            writers.append(result.group(1))
-
-        # print()
-        return writers
+        try:
+            writer_cia = self.soup.find_all(itemprop="creator", itemtype="http://schema.org/Person")
+            re_writer_cia = re.compile("([A-Z].*[a-z])</span></a>.*")
+            writers = list()
+            for i in writer_cia:
+                result = re_writer_cia.search(str(i))
+                writers.append(result.group(1))
+            return writers
+        except AttributeError:
+            print('{}: must improve search to find the writers' .format(self.soup.title.string[:-7]))
+            return " ? "
 
     def actors(self):
         """
@@ -70,14 +59,12 @@ class ParseImdbData(object):
         """
         actors_cia = self.soup.find_all(itemprop="actors", itemtype="http://schema.org/Person")
         re_actors = re.compile("([A-Z].*[a-z])</span></a>.*")
-        # print("Actors: ", end=' ')
+
         actors = list()
         for i in actors_cia:
             result = re_actors.search(str(i))
-            # print(result.group(1), end="  ")
             actors.append(result.group(1))
 
-        # print("|  and others")
         actors.append(" and others")
         return actors
 
@@ -103,7 +90,4 @@ class ParseImdbData(object):
         poster = self.soup.find(itemprop="image")
         re_poster = re.compile("http.*\.jpg")
         result = re_poster.search(str(poster))
-        # print("link to get poster: ")
-        # print(result.group(0))
-        # just_txt = 'link to get poster'
-        return result.group(0)  # just_txt
+        return result.group(0)
