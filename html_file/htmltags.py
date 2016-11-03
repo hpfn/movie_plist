@@ -22,15 +22,11 @@ class HtmlTags:
 
     def top_header(self):
         """ from <html_file> tag until <table> tag """
-        head = """
-        <html_file>
-        <head>
-        <meta http-equiv="Content-Type" content="text/html_file; charset=utf-8">
-        <title>Py Movie Info</title>
-        </head>
-        <body>
-        <table border="1" width="100%" cellpadding="4" cellspacing="0">
-        """
+        head = ("<html>\n<head>\n"
+                "<meta http-equiv=\"Content-Type\" content=\"text/html_file; charset=utf-8\">\n"
+                "<title>Py Movie Info</title>\n"
+                "</head>\n<body>\n"
+                "<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">\n")
         print(head, file=self.open_file)
 
     def inside_table(self, poster_jpg, movie_data, link, file=None):
