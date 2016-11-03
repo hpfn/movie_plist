@@ -39,18 +39,21 @@ class DataStorage(object):
 
     def show_data(self):
         self.c.execute('select * from movie_plist')
-        return list(self.c.fetchall())
+        return self.c.fetchall()
+        #return list(self.c.fetchall())
 
     def movie_list_title(self):
         self.c.execute('select title_year from movie_plist')
-        return list(self.c.fetchall())
+        return self.c.fetchall()
+        # return list(self.c.fetchall())
 
     def no_movie_yet(self):
         self.c.execute('select title_year from movie_plist where moviefile="No_movie_file_yet"')
-        return list(self.c.fetchall())
+        return self.c.fetchall()
+        # return list(self.c.fetchall())
 
     def check_movie(self):
-        self.c.execute('select url from movie_plist')
+        self.c.execute("select url from movie_plist")  # where url=?", url)
         return str(self.c.fetchall())
 
     def exit_from_db(self):
