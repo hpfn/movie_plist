@@ -11,10 +11,10 @@ from data import pimdbdata
 
 
 class HtmlTags:
-    def __init__(self, path):
+    def __init__(self, path, mode):
         self.file_name = path + '/pymovieinfo.html'
         try:
-            self.open_file = open(self.file_name, 'w')
+            self.open_file = open(self.file_name, mode)
         except IOError as ioerr:
             print("Error when trying to open .html file: " + str(ioerr))
             print("Correct path ?")
