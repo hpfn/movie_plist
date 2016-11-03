@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import sys
+import time
 from PyQt5.QtWidgets import QApplication
 from pathlib import Path
 # movie_plist stuff
@@ -18,6 +19,7 @@ def check_pushto_db(stored, url_got):
     # if not, put it in there
     for url, path, movie_file in url_got:
         if url not in movies_stored:
+        #if not stored.check_movie(url):
             stored.insert_data(url, path, movie_file)
 
 def main(d_scan):
@@ -36,7 +38,11 @@ def main(d_scan):
     else:
         check_pushto_db(stored_data, obtain_url)
         # create the page for QWebView
+        # here is the performance problem
+        start = time.time()
         html_file.create_page.generate_html(d_scan, stored_data)
+        end = time.time()
+        print(end - start)
 
     # close connection with *sqlite3.db
     stored_data.exit_from_db()

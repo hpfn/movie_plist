@@ -9,6 +9,6 @@ def generate_html(d_scan, stored_d):
     """
     html_page = HtmlTags(d_scan)
     html_page.top_header()
-    m_data = stored_d.show_data()
-    html_page.parse_data_to_inside_table(m_data)
+    # m_data = stored_d.show_data()
+    html_page.parse_data_to_inside_table(stored_d.show_data())
     html_page.bottom_tags()
