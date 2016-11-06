@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QComboBox
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QEvent
 from info_in_db.movie_plist_sqlite3 import DataStorage
+
+from subprocess import call
 
 
 class Combo(QComboBox):
@@ -58,21 +61,36 @@ class Combo(QComboBox):
 
     def confirm_option(self, movie_selected):
         """ show msg about what to_do with the movie selected"""
-        print(self.to_do)
-        print('conf_op: {}' .format(movie_selected))
         txt_info = "You will " + self.to_do + " " + movie_selected
         msg = QMessageBox()
         reply = msg.question(self, 'The selected movie', txt_info,
-                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                             QMessageBox.Yes | QMessageBox.Cancel, QMessageBox.Cancel)
 
         if reply == QMessageBox.Yes:
             # call db
             # rebuild .html file
-            print(movie_selected)
-            msg.setText('to be implement!!!')
+            msg.setText('remove this window!!!')
+            def update():
+                print(movie_selected)
+
+            def remove():
+                print(movie_selected)
+
+            def seen():
+                path = self.stored_data.movie_to_watchagain(movie_selected)
+                to_watch = str(path[0]) + '/' + str(path[1])
+                call(['/usr/bin/vlc', to_watch])
+
+            option = {"update": update,
+                      "remove": remove,
+                      "watch_again": seen}
+
+            option[self.to_do]()
         else:
-            # ignore this ???
+            # how to ignore this ???
+            # QEvent.setAccepted()
             msg.setText('Doing nothing.')
+
 
         msg.show()
         msg.exec_()

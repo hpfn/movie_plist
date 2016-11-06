@@ -56,6 +56,11 @@ class DataStorage(object):
         self.c.execute('select title_year from movie_plist where watch="1"')
         return  self.c.fetchall()
 
+    def movie_to_watchagain(self, title):
+        print(type(title))
+        self.c.execute('select path, moviefile from movie_plist where title_year=? ', (title,))
+        return self.c.fetchone()
+
     def no_movie_yet(self):
         self.c.execute('select title_year from movie_plist where moviefile="No_movie_file_yet"')
         return self.c.fetchall()
