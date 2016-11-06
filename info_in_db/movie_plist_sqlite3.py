@@ -52,6 +52,10 @@ class DataStorage(object):
         return self.c.fetchall()
         # return list(self.c.fetchall())
 
+    def movie_seen(self):
+        self.c.execute('select title_year from movie_plist where watch="1"')
+        return  self.c.fetchall()
+
     def no_movie_yet(self):
         self.c.execute('select title_year from movie_plist where moviefile="No_movie_file_yet"')
         return self.c.fetchall()
