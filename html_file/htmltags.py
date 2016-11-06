@@ -11,14 +11,27 @@ from data import pimdbdata
 
 
 class HtmlTags:
-    def __init__(self, path, mode):
+    def __init__(self, path, mode, data_to_insert=None):
         self.file_name = path + '/pymovieinfo.html'
-        try:
-            self.open_file = open(self.file_name, mode)
-        except IOError as ioerr:
-            print("Error when trying to open .html file: " + str(ioerr))
-            print("Correct path ?")
-            sys.exit(1)
+        if mode is 'w':
+            try:
+                self.open_file = open(self.file_name, mode)
+            except IOError as ioerr:
+                print("Error when trying to open .html file: " + str(ioerr))
+                print(" Please, check the path ")
+                sys.exit(1)
+        elif mode is 'inplace':
+            try:
+                self.open_file = None
+                import fileinput
+                for line in fileinput.input(self.file_name, inplace=1):
+                    print(line)
+                    if line.startswith('<table border'):
+                        print(self.parse_data_to_inside_table(data_to_insert))
+            except IOError as ioerr:
+                print("Error when trying to insert data in the .html file: " + str(ioerr))
+                print(" Please, check the path ")
+                sys.exit(1)
 
     def top_header(self):
         """ from <html> tag until <table> tag """
