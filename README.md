@@ -23,3 +23,5 @@ Message box about 'no_movie_file_yet'. 2016-09-13
 
 More Pyqt-like. A menu (not working yet) layout. 2016-10-16
 
+Editing .html file on the fly. 2016-11-06
+
