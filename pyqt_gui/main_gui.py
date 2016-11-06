@@ -28,6 +28,7 @@ class Window(QWidget):
         # movie selected. remove/update info in the db
         movie_update_cbox.get_item_selected()
         movie_remove_cbox.get_item_selected()
+        movie_seen_cbox.get_item_selected()
 
         browser = qt_browser(self.scanned_dir)
 
@@ -39,6 +40,6 @@ class Window(QWidget):
         grid.addWidget(movie_update_cbox, 0, 1)
         grid.addWidget(movie_remove_cbox, 0, 2)
 
-        grid.addWidget(browser, 1, 0, 7, 7)
+        grid.addWidget(browser, 1, 0,7 ,7)
 
         self.show()
