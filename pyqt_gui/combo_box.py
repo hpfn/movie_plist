@@ -20,8 +20,12 @@ class Combo(QComboBox):
         def remove():
             self.addItem("remove movie from hd")
 
+        def seen():
+            self.addItem("seen movies")
+
         option = {"update": update,
-                  "remove": remove}
+                  "remove": remove,
+                  "seen": seen}
         option[self.to_do]()
 
     def combo_list(self):
@@ -31,8 +35,12 @@ class Combo(QComboBox):
         def remove():
             self.movies_stored = self.stored_data.movie_list_title()
 
+        def seen():
+            self.movies_stored = self.stored_data.movie_seen()
+
         option = {"update": update,
-                  "remove": remove}
+                  "remove": remove,
+                  "seen": seen}
 
         option[self.to_do]()
         self.show_list()
