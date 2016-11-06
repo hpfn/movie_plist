@@ -21,7 +21,7 @@ class HtmlTags:
             sys.exit(1)
 
     def top_header(self):
-        """ from <html_file> tag until <table> tag """
+        """ from <html> tag until <table> tag """
         head = ("<html>\n<head>\n"
                 "<meta http-equiv=\"Content-Type\" content=\"text/html_file; charset=utf-8\">\n"
                 "<title>Py Movie Info</title>\n"
@@ -32,18 +32,21 @@ class HtmlTags:
     def inside_table(self, poster_jpg, movie_data, link, file=None):
         """
         poster_jpg: jpg file
-        movie_data: list() with title titleYear, director, writers, actors, synopsis
+        movie_data: list() with title titleYear, rate/votes, director, writers, actors, synopsis
         link: link to the directory where the movie is stored
+        print everything in the .html file
         """
         print("\n<!-- start {} -->" .format(movie_data[0]), file=self.open_file)
         print("<tr valign=\"top\">", file=self.open_file)
-        print("<td><img src=\"{}\" width=\"226\" height=\"300\"><br></td><td><p>".format(poster_jpg),
+        print("<td>\n<img src=\"{}\" width=\"226\" height=\"300\"><br></td><td>\n<p>".format(poster_jpg),
               file=self.open_file)
+
         fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
         for f, m_d in zip(fields, movie_data):
             print("{} {}<br>".format(f, m_d), file=self.open_file)
         print("<a href=\"{}\">{}</a>".format(link + '/' + file, file), file=self.open_file)  # last arg
         # last lines
+
         last_lines = ("</p>\n</td>\n</tr>\n\n<tr>\n"
                       "<td colspan=\"2\" style=\"border-top: none; border-bottom: none; border-left: none; \
                       border-right: none; padding-top: 0.5cm; padding-bottom: 0.5cm; \
@@ -51,14 +54,15 @@ class HtmlTags:
                       "<center>-------------------------------------------------------</center>\n"
                       "</td>\n</tr>")
         print(last_lines, file=self.open_file)
+
         print("<!-- end {} -->\n" .format(movie_data[0]), file=self.open_file)
 
     def bottom_tags(self):
-        """ from </table> to </html_file> """
+        """ from </table> to </html> """
         bottom = """
         </table>
         </body>
-        </html_file>
+        </html>
         """
         print(bottom, file=self.open_file)
         self.open_file.close()
