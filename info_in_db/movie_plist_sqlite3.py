@@ -23,7 +23,11 @@ class DataStorage(object):
             raise err
 
     def insert_data(self, url, path, moviefile):
-        """ data does not exist in database """
+        """
+            data does not exist in database
+            return the data inserted to .html file. This
+            avoid query the db more than needed
+         """
         try:
             with self.conn:
                 html = urllib.request.urlopen(url).read()
@@ -32,6 +36,7 @@ class DataStorage(object):
                           ' '.join(movie.actors()), movie.synopsis(), path, moviefile, 0]
                 self.conn.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?)', m_data)
                 self.conn.commit()
+                return m_data
         except sqlite3.IntegrityError:
             if self.conn:
                 self.conn.rollback()
