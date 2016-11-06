@@ -25,7 +25,7 @@ class Combo(QComboBox):
 
         option = {"update": update,
                   "remove": remove,
-                  "seen": seen}
+                  "watch_again": seen}
         option[self.to_do]()
 
     def combo_list(self):
@@ -40,7 +40,7 @@ class Combo(QComboBox):
 
         option = {"update": update,
                   "remove": remove,
-                  "seen": seen}
+                  "watch_again": seen}
 
         option[self.to_do]()
         self.show_list()

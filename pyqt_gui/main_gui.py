@@ -23,7 +23,7 @@ class Window(QWidget):
         # Combo inherit QComboBox
         movie_update_cbox = Combo("update")
         movie_remove_cbox = Combo("remove")
-        movie_seen_cbox = Combo("seen")
+        movie_seen_cbox = Combo("watch_again")
 
         # movie selected. remove/update info in the db
         movie_update_cbox.get_item_selected()
