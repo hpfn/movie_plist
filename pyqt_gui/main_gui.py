@@ -17,12 +17,13 @@ class Window(QWidget):
         grid = QGridLayout()
         self.setLayout(grid)
 
-        watch_0_button = QRadioButton(self.tr("&seen"))
-        watch_1_button = QRadioButton(self.tr("&unseen"))
+        # watch_0_button = QRadioButton(self.tr("&seen"))
+        # watch_1_button = QRadioButton(self.tr("&unseen"))
 
         # Combo inherit QComboBox
         movie_update_cbox = Combo("update")
         movie_remove_cbox = Combo("remove")
+        movie_seen_cbox = Combo("seen")
 
         # movie selected. remove/update info in the db
         movie_update_cbox.get_item_selected()
@@ -31,14 +32,13 @@ class Window(QWidget):
         browser = qt_browser(self.scanned_dir)
 
         # formatted as
-        # seen      insert (movie in db)
-        # unseen    remove (movie from db)
-        grid.addWidget(watch_0_button, 0, 0)
-        grid.addWidget(watch_1_button, 1, 0)
+        # seen insert (movie in db) remove (movie from db)
+        # old format grid.addWidget(watch_0_button, 0, 0)
+        # old format grid.addWidget(watch_1_button, 1, 0)
+        grid.addWidget(movie_seen_cbox, 0, 0)
+        grid.addWidget(movie_update_cbox, 0, 1)
+        grid.addWidget(movie_remove_cbox, 0, 2)
 
-        grid.addWidget(movie_update_cbox, 0, 2)
-        grid.addWidget(movie_remove_cbox, 1, 2)
-
-        grid.addWidget(browser, 2, 0, 7, 7)
+        grid.addWidget(browser, 1, 0, 7, 7)
 
         self.show()
