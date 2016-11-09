@@ -71,7 +71,8 @@ class DataStorage(object):
         return self.c.fetchone()
 
     def update_movie_file(self, movie_f, t_y):
-        self.c.execute('update movie_plist set moviefile=? where title_year=? ', (movie_f, t_y))
+        self.conn.execute("update movie_plist set moviefile=? where title_year=? ", (movie_f, t_y))
+        self.conn.commit()
 
     def check_movie(self):
         self.c.execute("select url from movie_plist")  # where url=?", url)
