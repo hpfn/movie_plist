@@ -59,9 +59,9 @@ class Combo(QComboBox):
         self.addItem(item)
 
     def get_item_selected(self):
-        self.activated.connect(lambda s_item: self.confirm_option(self.currentText()))
+        self.activated.connect(lambda s_item: self.confirm_option(s_item, self.currentText()))
 
-    def confirm_option(self, movie_selected):
+    def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""
         txt_info = "You will " + self.to_do + " " + movie_selected
         msg = QMessageBox()
@@ -73,11 +73,16 @@ class Combo(QComboBox):
             # rebuild .html file
             msg.setText('remove this window!!!')
             def update():
-                print(movie_selected)
                 p_file = self.stored_data.movie_path(movie_selected)
-                scan_dir = PyScan(p_file)
-                file_n = scan_dir[2]
+                # scan selected movie dir
+                scan_dir = PyScan(p_file[0])
+                scan_dir = scan_dir.dir_to_scan()
+                # file name
+                file_n = scan_dir[0][2]
                 self.stored_data.update_movie_file(file_n,movie_selected)
+                # update list
+                self.removeItem(index)
+                # edit .html file ?
 
             def remove():
                 print(movie_selected)
