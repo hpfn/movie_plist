@@ -47,7 +47,7 @@ class DataStorage(object):
         return self.c.fetchall()
         #return list(self.c.fetchall())
 
-    def movie_list_title(self):
+    def movie_title_list(self):
         self.c.execute('select title_year from movie_plist')
         return self.c.fetchall()
         # return list(self.c.fetchall())
