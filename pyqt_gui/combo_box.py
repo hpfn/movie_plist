@@ -36,7 +36,7 @@ class Combo(QComboBox):
             self.movies_stored = self.stored_data.no_movie_yet()
 
         def remove():
-            self.movies_stored = self.stored_data.movie_list_title()
+            self.movies_stored = self.stored_data.movie_title_list()
 
         def seen():
             self.movies_stored = self.stored_data.movie_seen()
