@@ -66,6 +66,10 @@ class DataStorage(object):
         return self.c.fetchall()
         # return list(self.c.fetchall())
 
+    def movie_path(self, t_y):
+        self.c.execute('select path from movie_plist where title_year=? ', (t_y,))
+        return self.c.fetchone()
+
     def update_movie_file(self, movie_f, t_y):
         self.c.execute('update movie_plist set moviefile=? where title_year=? ', (movie_f, t_y))
 
