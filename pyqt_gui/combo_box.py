@@ -5,6 +5,8 @@ from info_in_db.movie_plist_sqlite3 import DataStorage
 
 from subprocess import call
 
+from data.pyscan import PyScan
+
 
 class Combo(QComboBox):
     def __init__(self, will_do):
@@ -72,6 +74,10 @@ class Combo(QComboBox):
             msg.setText('remove this window!!!')
             def update():
                 print(movie_selected)
+                p_file = self.stored_data.movie_path(movie_selected)
+                scan_dir = PyScan(p_file)
+                file_n = scan_dir[2]
+                self.stored_data.update_movie_file(file_n,movie_selected)
 
             def remove():
                 print(movie_selected)
