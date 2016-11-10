@@ -6,12 +6,15 @@ from info_in_db.movie_plist_sqlite3 import DataStorage
 from subprocess import call
 
 from data.pyscan import PyScan
+import html_file.create_page
 
 
 class Combo(QComboBox):
-    def __init__(self, will_do):
+    def __init__(self, will_do, scan_local=None, browser_obj=None):
         super().__init__()
         self.to_do = will_do
+        self.scan_local = scan_local
+        self.browser_reload = browser_obj
         self.stored_data = DataStorage()
         self.movies_stored = ""
 
@@ -82,7 +85,14 @@ class Combo(QComboBox):
                 self.stored_data.update_movie_file(file_n,movie_selected)
                 # update list
                 self.removeItem(index)
-                # edit .html file ?
+                # edit .html file ? re-create by now. First get the movies
+                # then rm the html file and re-create.
+                # This can be better
+                unseen_movies = self.stored_data.unseen_movie()
+                html_f = self.scan_local + '/' + 'pymovieinfo.html'
+                call(['/bin/rm', html_f])
+                html_file.create_page.generate_html(self.scan_local, unseen_movies)
+                self.browser_reload.reload()
 
             def remove():
                 print(movie_selected)
