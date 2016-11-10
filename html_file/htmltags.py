@@ -4,7 +4,6 @@
    with it and put in the .html file
 """
 
-import sys
 import urllib.request
 
 from data import pimdbdata
@@ -12,26 +11,20 @@ from data import pimdbdata
 
 class HtmlTags:
     def __init__(self, path, mode, data_to_insert=None):
+        # the path is checked before calling main()
         self.file_name = path + '/pymovieinfo.html'
         if mode is 'w':
-            try:
-                self.open_file = open(self.file_name, mode)
-            except IOError as ioerr:
-                print("Error when trying to open .html file: " + str(ioerr))
-                print(" Please, check the path ")
-                sys.exit(1)
+            # create a new .html file
+            self.open_file = open(self.file_name, mode)
         elif mode is 'inplace':
-            try:
-                self.open_file = None
-                import fileinput
-                for line in fileinput.input(self.file_name, inplace=1):
-                    print(line)
-                    if line.startswith('<table border'):
-                        print(self.parse_data_to_inside_table(data_to_insert))
-            except IOError as ioerr:
-                print("Error when trying to insert data in the .html file: " + str(ioerr))
-                print(" Please, check the path ")
-                sys.exit(1)
+            # insert a new movie in the .html file
+            self.open_file = None
+            import fileinput
+
+            for line in fileinput.input(self.file_name, inplace=1):
+                print(line)
+                if line.startswith('<table border'):
+                    print(self.parse_data_to_inside_table(data_to_insert))
 
     def top_header(self):
         """ from <html> tag until <table> tag """
@@ -44,10 +37,12 @@ class HtmlTags:
 
     def inside_table(self, poster_jpg, movie_data, link, file=None):
         """
-        poster_jpg: jpg file
-        movie_data: list() with title titleYear, rate/votes, director, writers, actors, synopsis
-        link: link to the directory where the movie is stored
-        print everything in the .html file
+        one table cell (tr) at a time:
+            poster_jpg: jpg file
+            movie_data: list() with title titleYear, rate/votes, director, writers, actors, synopsis
+            link: link to the directory where the movie is stored
+
+            print everything in the .html file
         """
         print("\n<!-- start {} -->" .format(movie_data[0]), file=self.open_file)
         print("<tr valign=\"top\">", file=self.open_file)
@@ -60,30 +55,26 @@ class HtmlTags:
         print("<a href=\"{}\">{}</a>".format(link + '/' + file, file), file=self.open_file)  # last arg
         # last lines
 
-        last_lines = ("</p>\n</td>\n</tr>\n\n<tr>\n"
+        last_lines = ("</p></td></tr><tr>\n"
                       "<td colspan=\"2\" style=\"border-top: none; border-bottom: none; border-left: none; \
                       border-right: none; padding-top: 0.5cm; padding-bottom: 0.5cm; \
                       padding-left: 0.1cm; padding-right: 0.1cm\" valign=\"top\" width=\"100%\">\n"
                       "<center>-------------------------------------------------------</center>\n"
-                      "</td>\n</tr>")
+                      "</td></tr>")
         print(last_lines, file=self.open_file)
 
         print("<!-- end {} -->\n" .format(movie_data[0]), file=self.open_file)
 
     def bottom_tags(self):
         """ from </table> to </html> """
-        bottom = """
-        </table>
-        </body>
-        </html>
-        """
+        bottom = "</table></body>\n</html>"
         print(bottom, file=self.open_file)
         self.open_file.close()
 
     def parse_data_to_inside_table(self, m_data):
         """
-            all data is split and call inside_table
-            for each movie
+            all data is split and call inside_table one movie
+            at a time
         """
         for db_info in m_data:
             db_info_list = list(db_info)
