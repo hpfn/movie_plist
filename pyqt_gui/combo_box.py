@@ -10,10 +10,10 @@ import html_file.create_page
 
 
 class Combo(QComboBox):
-    def __init__(self, will_do, scan_local=None, browser_obj=None):
+    def __init__(self, will_do, scan_local_html=None, browser_obj=None):
         super().__init__()
         self.to_do = will_do
-        self.scan_local = scan_local
+        self.path_html = scan_local_html
         self.browser_reload = browser_obj
         self.stored_data = DataStorage()
         self.movies_stored = ""
@@ -89,9 +89,9 @@ class Combo(QComboBox):
                 # then rm the html file and re-create.
                 # This can be better
                 unseen_movies = self.stored_data.unseen_movie()
-                html_f = self.scan_local + '/' + 'pymovieinfo.html'
+                html_f = self.path_html
                 call(['/bin/rm', html_f])
-                html_file.create_page.generate_html(self.scan_local, unseen_movies)
+                html_file.create_page.generate_html(self.path_html, unseen_movies)
                 self.browser_reload.reload()
 
             def remove():

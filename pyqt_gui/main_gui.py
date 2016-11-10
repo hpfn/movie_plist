@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QWidget, QRadioButton
 class Window(QWidget):
     def __init__(self, scan_dir):
         super(QWidget, self).__init__()
-        self.scanned_dir = scan_dir
+        self.scanned_dir_and_html = scan_dir + "/pymovieinfo.html"
 
         self.initui()
 
@@ -18,13 +18,13 @@ class Window(QWidget):
         self.setLayout(grid)
 
         # QWebView object
-        browser = qt_browser(self.scanned_dir)
+        browser = qt_browser(self.scanned_dir_and_html)
 
         # watch_0_button = QRadioButton(self.tr("&seen"))
         # watch_1_button = QRadioButton(self.tr("&unseen"))
 
         # Combo inherit QComboBox
-        movie_update_cbox = Combo("update", self.scanned_dir, browser)
+        movie_update_cbox = Combo("update", self.scanned_dir_and_html, browser)
         movie_remove_cbox = Combo("remove")
         movie_seen_cbox = Combo("watch_again")
 

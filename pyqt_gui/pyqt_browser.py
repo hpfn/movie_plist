@@ -35,10 +35,10 @@ def call_vlc(link):
         msg.exec_()
 
 
-def qt_browser(path):
+def qt_browser(path_html):
     browser = QWebView()
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
     browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
-    url = "file://" + path + "/pymovieinfo.html"
+    url = "file://" + path_html
     browser.setUrl(QUrl(url))
     return browser
