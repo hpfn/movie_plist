@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import sys
+from pathlib import Path
 import time
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
@@ -49,4 +50,8 @@ if __name__ == '__main__':
     else:
         path_dir_scan = input(" Do the scan in which directory ? ")
 
-    main(path_dir_scan)
+    check_path = Path(path_dir_scan)
+    if not check_path.is_dir():
+        print(" Please, check the path ")
+    else:
+        main(path_dir_scan)
