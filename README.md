@@ -28,3 +28,5 @@ Seen list to watch a movie again and new menu. 2016-11-06
 
 Update info on db (movie file insert) and on combobox list. 2016-11-09
 
+Re-create html file after update info on db. 2016-11-10
+
