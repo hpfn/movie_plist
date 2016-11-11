@@ -7,9 +7,9 @@ from PyQt5.QtWidgets import QWidget, QRadioButton
 
 
 class Window(QWidget):
-    def __init__(self, scan_dir):
+    def __init__(self, scan_dir_html):
         super(QWidget, self).__init__()
-        self.scanned_dir_and_html = scan_dir + "/pymovieinfo.html"
+        self.scanned_dir_and_html = scan_dir_html
 
         self.initui()
 

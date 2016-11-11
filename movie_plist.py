@@ -10,7 +10,7 @@ from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_gui import Window
 
-def check_pushto_db(url_got, scan):
+def check_pushto_db(url_got, p_html):
     """
         if movie info is not in db put data in it
         also call create_page (html) module
@@ -26,7 +26,7 @@ def check_pushto_db(url_got, scan):
 
     stored_data.exit_from_db()
 
-    html_file.create_page.generate_html(scan, data_to_html)
+    html_file.create_page.generate_html(p_html, data_to_html)
 
 
 def main(d_scan):
@@ -36,11 +36,12 @@ def main(d_scan):
 
     # will push data to db if necessary
     # and call create_page.generate_html
-    check_pushto_db(obtain_url, d_scan)
+    dir_to_html = d_scan + '/pymovieinfo.html'
+    check_pushto_db(obtain_url, dir_to_html)
 
     # launch movie_plist
     app = QApplication(sys.argv)
-    ex = Window(d_scan)
+    ex = Window(dir_to_html)
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

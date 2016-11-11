@@ -10,9 +10,9 @@ from data import pimdbdata
 
 
 class HtmlTags:
-    def __init__(self, path, mode, data_to_insert=None):
+    def __init__(self, path_and_html, mode, data_to_insert=None):
         # the path is checked before calling main()
-        self.file_name = path + '/pymovieinfo.html'
+        self.file_name = path_and_html
         if mode is 'w':
             # create a new .html file
             self.open_file = open(self.file_name, mode)
@@ -24,7 +24,7 @@ class HtmlTags:
             for line in fileinput.input(self.file_name, inplace=1):
                 print(line, end='')
                 if line.startswith('<table border'):
-                    print(self.parse_data_to_inside_table(data_to_insert), end='')
+                    self.parse_data_to_inside_table(data_to_insert)
 
     def top_header(self):
         """ from <html> tag until <table> tag """
@@ -35,7 +35,7 @@ class HtmlTags:
                 "<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">\n")
         print(head, file=self.open_file)
 
-    def inside_table(self, poster_jpg, movie_data, link, file=None):
+    def inside_table(self, poster_jpg, movie_data, link, file):
         """
         one table cell (tr) at a time:
             poster_jpg: jpg file
