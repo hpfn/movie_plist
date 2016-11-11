@@ -22,9 +22,9 @@ class HtmlTags:
             import fileinput
 
             for line in fileinput.input(self.file_name, inplace=1):
-                print(line)
+                print(line, end='')
                 if line.startswith('<table border'):
-                    print(self.parse_data_to_inside_table(data_to_insert))
+                    print(self.parse_data_to_inside_table(data_to_insert), end='')
 
     def top_header(self):
         """ from <html> tag until <table> tag """
