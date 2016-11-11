@@ -2,7 +2,7 @@
 
 import sys
 from pathlib import Path
-import time
+# import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
 import html_file.create_page
@@ -26,8 +26,7 @@ def check_pushto_db(url_got, scan):
 
     stored_data.exit_from_db()
 
-    if data_to_html:
-        html_file.create_page.generate_html(scan, data_to_html)
+    html_file.create_page.generate_html(scan, data_to_html)
 
 
 def main(d_scan):
