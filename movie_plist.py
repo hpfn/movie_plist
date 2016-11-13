@@ -2,6 +2,7 @@
 
 import sys
 from pathlib import Path
+from subprocess import Popen
 # import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
@@ -38,6 +39,13 @@ def main(d_scan):
     # and call create_page.generate_html
     dir_to_html = d_scan + '/pymovieinfo.html'
     check_pushto_db(obtain_url, dir_to_html)
+
+    # this is a fake implementation to test the use of a server to
+    # run a cgi script to mark as seen a movie on db
+    # but how to run the server on a specific location ?
+    # cgi_server = d_scan + '/simple_httpd.py'
+    #run_cgi = ['/usr/bin/python3', cgi_server]
+    #Popen(run_cgi)
 
     # launch movie_plist
     app = QApplication(sys.argv)
