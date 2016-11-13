@@ -39,6 +39,6 @@ def qt_browser(path_html):
     browser = QWebView()
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
     browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
-    url = "file://" + path_html
-    browser.setUrl(QUrl(url))
+    # url = "file://" + path_html
+    browser.setUrl(QUrl('http://localhost:8080/'))
     return browser
