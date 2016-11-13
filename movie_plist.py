@@ -3,6 +3,7 @@
 import sys
 from pathlib import Path
 from subprocess import Popen
+import os
 # import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
@@ -10,6 +11,7 @@ import html_file.create_page
 from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_gui import Window
+
 
 def check_pushto_db(url_got, p_html):
     """
@@ -40,17 +42,24 @@ def main(d_scan):
     dir_to_html = d_scan + '/pymovieinfo.html'
     check_pushto_db(obtain_url, dir_to_html)
 
-    # this is a fake implementation to test the use of a server to
-    # run a cgi script to mark as seen a movie on db
-    # but how to run the server on a specific location ?
-    # cgi_server = d_scan + '/simple_httpd.py'
-    #run_cgi = ['/usr/bin/python3', cgi_server]
-    #Popen(run_cgi)
+    # This is a fake implementation to test a cgi script to
+    # mark as seen a movie on db. Needs a httpd.
+    # But how to run the server on a specific location ?
+    # every ugly this manner. The simple_httpd script call
+    # os.chdir(), but from there it does not work as expected
+    cgi_server = d_scan + '/simple_httpd.py'
+    dir_now = os.path.join(os.path.dirname(__file__))
+    run_at = os.path.join(d_scan)
+    os.chdir(run_at)
+    run_cgi = ['/usr/bin/python3', cgi_server]
+    Popen(run_cgi)
+    os.chdir(dir_now)
 
     # launch movie_plist
     app = QApplication(sys.argv)
     ex = Window(dir_to_html)
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     if len(sys.argv) is 2:
