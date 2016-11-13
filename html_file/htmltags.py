@@ -32,6 +32,7 @@ class HtmlTags:
                 "<meta http-equiv=\"Content-Type\" content=\"text/html_file; charset=utf-8\">\n"
                 "<title>Py Movie Info</title>\n"
                 "</head>\n<body>\n"
+                "<form action=\"cgi-bin/mark_seen.py\" method=\"POST\">\n"
                 "<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">\n")
         print(head, file=self.open_file)
 
@@ -48,11 +49,12 @@ class HtmlTags:
         print("<tr valign=\"top\">", file=self.open_file)
         print("<td>\n<img src=\"{}\" width=\"226\" height=\"300\"><br></td><td>\n<p>".format(poster_jpg),
               file=self.open_file)
-
         fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
         for f, m_d in zip(fields, movie_data):
             print("{} {}<br>".format(f, m_d), file=self.open_file)
         print("<a href=\"{}\">{}</a>".format(link + '/' + file, file), file=self.open_file)  # last arg
+        print("<input type=\"checkbox\" name=\"title_year\" \
+               value=\"{}\"> seen" .format(movie_data[0]), file=self.open_file)
         # last lines
 
         last_lines = ("</p></td></tr><tr>\n"
@@ -67,7 +69,7 @@ class HtmlTags:
 
     def bottom_tags(self):
         """ from </table> to </html> """
-        bottom = "</table></body>\n</html>"
+        bottom = "</table><input type=submit value=\"Submit\"></form></body>\n</html>"
         print(bottom, file=self.open_file)
         self.open_file.close()
 
