@@ -30,3 +30,4 @@ Update info on db (movie file insert) and on combobox list. 2016-11-09
 
 Re-create html file after update info on db. 2016-11-10
 
+Trying to run a simple_httpd - cgi. 2016-11-13
