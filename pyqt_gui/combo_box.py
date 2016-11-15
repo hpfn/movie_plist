@@ -10,10 +10,12 @@ import html_file.create_page
 
 
 class Combo(QComboBox):
-    def __init__(self, will_do, scan_local_html=None, browser_obj=None):
+    def __init__(self, will_do, seen_object=None, scan_local_html=None, browser_obj=None):
         super().__init__()
         self.to_do = will_do
         self.path_html = scan_local_html
+        self.watch_again = seen_object
+        self.watch_again_list = ''
         self.browser_reload = browser_obj
         self.stored_data = DataStorage()
         self.movies_stored = ""
@@ -45,6 +47,8 @@ class Combo(QComboBox):
 
         def seen():
             self.movies_stored = self.stored_data.movie_seen()
+            self.watch_again_list = list(self.movies_stored)
+            self.watch_again_list.insert(0, 'seen movies')
 
         option = {"update": update,
                   "remove": remove,
@@ -85,17 +89,34 @@ class Combo(QComboBox):
                 self.stored_data.update_movie_file(file_n,movie_selected)
                 # update list
                 self.removeItem(index)
-                # edit .html file ? re-create by now. First get the movies
+                # Regrex edit .html file ? re-create by now. First get the movies
                 # then rm the html file and re-create.
                 # This can be better
-                unseen_movies = self.stored_data.unseen_movie()
+                unseen_movies = self.stored_data.movie_unseen()
                 html_f = self.path_html
                 call(['/bin/rm', html_f])
                 html_file.create_page.generate_html(self.path_html, unseen_movies)
                 self.browser_reload.reload()
 
             def remove():
-                print(movie_selected)
+                seen_movie = self.stored_data.movie_select_one(movie_selected, '1')
+                if seen_movie:
+                    self.removeItem(index)
+                    print(movie_selected)
+                    print(" -- {}" .format(self.watch_again.watch_again_list))
+                    # count = self.watch_again.watch_again_list.index(movie_selected)
+                    # print('count {}' .format(count))
+                    count = 0
+                    for item in self.watch_again.watch_again_list:
+                        if movie_selected in item:
+                            self.watch_again.watch_again_list.remove(item)
+                            break
+                        count += 1
+                    self.watch_again.removeItem(count)
+                    print("{} must be removed from 'seen() - watchagain' list" .format(movie_selected))
+                else:
+                    print("{} must be removed from 'update() - insert movie file' list")
+                    print("and from the .html file")
 
             def seen():
                 path = self.stored_data.movie_to_watchagain(movie_selected)
