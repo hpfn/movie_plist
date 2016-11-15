@@ -52,13 +52,13 @@ def main(d_scan):
     run_at = os.path.join(d_scan)
     os.chdir(run_at)
     run_cgi = ['/usr/bin/python3', cgi_server]
-    Popen(run_cgi)
+    proc = Popen(run_cgi)
     os.chdir(dir_now)
 
     # launch movie_plist
     app = QApplication(sys.argv)
     ex = Window(dir_to_html)
-    sys.exit(app.exec_())
+    sys.exit([app.exec_(), proc.terminate()])
 
 
 if __name__ == '__main__':
