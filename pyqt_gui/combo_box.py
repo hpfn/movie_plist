@@ -15,7 +15,7 @@ class Combo(QComboBox):
         self.to_do = will_do
         self.path_html = scan_local_html
         self.watch_again = seen_object
-        self.watch_again_list = ''
+        self.watch_again_list = None
         self.browser_reload = browser_obj
         self.stored_data = DataStorage()
         self.movies_stored = ""
@@ -102,10 +102,13 @@ class Combo(QComboBox):
                 seen_movie = self.stored_data.movie_select_one(movie_selected, '1')
                 if seen_movie:
                     self.removeItem(index)
-                    print(movie_selected)
-                    print(" -- {}" .format(self.watch_again.watch_again_list))
-                    # count = self.watch_again.watch_again_list.index(movie_selected)
-                    # print('count {}' .format(count))
+                    #print(movie_selected)
+                    #print(" -- {}" .format(self.watch_again.watch_again_list))
+                    #count = self.watch_again.watch_again_list.index(movie_selected)
+                    #self.watch_again.watch_again_list = self.watch_again.watch_again_list[0:count] + \
+                    #    self.watch_again.watch_again_list[count+1:]
+                    #self.watch_again.removeItem(count)
+
                     count = 0
                     for item in self.watch_again.watch_again_list:
                         if movie_selected in item:
@@ -113,7 +116,7 @@ class Combo(QComboBox):
                             break
                         count += 1
                     self.watch_again.removeItem(count)
-                    print("{} must be removed from 'seen() - watchagain' list" .format(movie_selected))
+                    print("{} must be removed from db / hd" .format(movie_selected))
                 else:
                     print("{} must be removed from 'update() - insert movie file' list")
                     print("and from the .html file")
