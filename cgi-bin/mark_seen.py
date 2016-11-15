@@ -74,6 +74,6 @@ else:
     print('</p>')
     stored_data.update_movie_watch('1', movie)
     edit_html(movie)
-    time.sleep(1)
+    time.sleep(2)
 time.sleep(2)
 print(footer())
