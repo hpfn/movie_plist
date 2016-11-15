@@ -11,7 +11,9 @@ from data import pimdbdata
 class DataStorage(object):
     def __init__(self):
         try:
-            self.conn = sqlite3.connect('./info_in_db/movie_plist_sqlite3.db')
+            path_to_db = '/home/zaza/Documentos/Programacao/python/movie_plist/info_in_db/'
+            db_file = path_to_db + 'movile_plist-sqlite3.db'
+            self.conn = sqlite3.connect(db_file)
             self.c = self.conn.cursor()
             self.c.execute('''create table if not exists movie_plist (url UNIQUE,
                            title_year TEXT, director, writers_list, actors_list,
@@ -72,6 +74,10 @@ class DataStorage(object):
 
     def update_movie_file(self, movie_f, t_y):
         self.conn.execute("update movie_plist set moviefile=? where title_year=? ", (movie_f, t_y))
+        self.conn.commit()
+
+    def update_movie_watch(self, mark, t_y):
+        self.conn.execute("update movie_plist set watch=? where title_year=? ", (mark, t_y))
         self.conn.commit()
 
     def check_movie(self):
