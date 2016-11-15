@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-
 # how to pass the path to .html file
 # how to update the seen list on combobox
-
+# with a module ?
 from info_in_db.movie_plist_sqlite3 import DataStorage
 import time
 import cgi
@@ -32,7 +31,7 @@ def footer():
 def edit_html(movie_title):
     start_line = ''
     end_line = ''
-    count = 1
+    count = 0
     with open('/home/zaza/Vídeos/index.html', 'r') as html_file:
         html_file_lines = html_file.readlines()
 
@@ -67,16 +66,14 @@ if isinstance(movie, list):
         print("Marking {} as Seen on db...".format(i))
         print('</p>')
         stored_data.update_movie_watch('1', i)
-        time.sleep(2)
         edit_html(i)
-        time.sleep(2)
-
+        time.sleep(1)
 else:
     print('<p>')
     print("Marking {} as Seen on db...".format(movie))
     print('</p>')
     stored_data.update_movie_watch('1', movie)
-    time.sleep(2)
     edit_html(movie)
-    time.sleep(2)
+    time.sleep(1)
+time.sleep(2)
 print(footer())
