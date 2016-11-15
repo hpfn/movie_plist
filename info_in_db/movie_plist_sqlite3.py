@@ -44,7 +44,7 @@ class DataStorage(object):
                 self.conn.rollback()
             print("Record already exists")
 
-    def unseen_movie(self):
+    def movie_unseen(self):
         self.c.execute('select * from movie_plist where watch="0" ')
         return self.c.fetchall()
         #return list(self.c.fetchall())
