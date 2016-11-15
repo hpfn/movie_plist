@@ -84,5 +84,9 @@ class DataStorage(object):
         self.c.execute("select url from movie_plist")  # where url=?", url)
         return str(self.c.fetchall())
 
+    def movie_select_one(self, t_y, state):
+        self.c.execute('select ? from movie_plist where watch=? ', (t_y, state))
+        return self.c.fetchone()
+
     def exit_from_db(self):
         self.conn.close()
