@@ -33,3 +33,5 @@ Re-create html file after update info on db. 2016-11-10
 Trying to run a simple_httpd - cgi. 2016-11-13
 
 Cgi running. Update db and edit the .html file 2016-11-15
+
+Remove from combo list working (partial) 2016-11-15
