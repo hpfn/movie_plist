@@ -27,7 +27,7 @@ def generate_html(dscan_html, data_from_db):
         html_page.bottom_tags()
     elif not movie_file_check.is_file() and not data_from_db:
         stored_data = DataStorage()
-        data_from_db = stored_data.unseen_movie()
+        data_from_db = stored_data.movie_unseen()
         html_page = HtmlTags(dscan_html, 'w')
         html_page.top_header()
         html_page.parse_data_to_inside_table(data_from_db)
