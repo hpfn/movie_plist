@@ -35,3 +35,5 @@ Trying to run a simple_httpd - cgi. 2016-11-13
 Cgi running. Update db and edit the .html file 2016-11-15
 
 Remove from combo list working (partial) 2016-11-15
+
+Almost everything about combo_box is done. DB part missing. 2016-11-17
