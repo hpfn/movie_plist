@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QComboBox
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtCore import QEvent
+# from PyQt5.QtCore import QEvent
 from info_in_db.movie_plist_sqlite3 import DataStorage
 
 from subprocess import call
@@ -79,6 +79,7 @@ class Combo(QComboBox):
             # call db
             # rebuild .html file
             msg.setText('remove this window!!!')
+
             def update():
                 p_file = self.stored_data.movie_path(movie_selected)
                 # scan selected movie dir
@@ -86,7 +87,7 @@ class Combo(QComboBox):
                 scan_dir = scan_dir.dir_to_scan()
                 # file name
                 file_n = scan_dir[0][2]
-                self.stored_data.update_movie_file(file_n,movie_selected)
+                self.stored_data.update_movie_file(file_n, movie_selected)
                 # update list
                 self.removeItem(index)
                 # Regrex edit .html file ? re-create by now. First get the movies
@@ -102,12 +103,12 @@ class Combo(QComboBox):
                 seen_movie = self.stored_data.movie_select_one(movie_selected, '1')
                 if seen_movie:
                     self.removeItem(index)
-                    #print(movie_selected)
-                    #print(" -- {}" .format(self.watch_again.watch_again_list))
-                    #count = self.watch_again.watch_again_list.index(movie_selected)
-                    #self.watch_again.watch_again_list = self.watch_again.watch_again_list[0:count] + \
+                    # print(movie_selected)
+                    # print(" -- {}" .format(self.watch_again.watch_again_list))
+                    # count = self.watch_again.watch_again_list.index(movie_selected)
+                    # self.watch_again.watch_again_list = self.watch_again.watch_again_list[0:count] + \
                     #    self.watch_again.watch_again_list[count+1:]
-                    #self.watch_again.removeItem(count)
+                    # self.watch_again.removeItem(count)
 
                     count = 0
                     for item in self.watch_again.watch_again_list:
@@ -116,7 +117,7 @@ class Combo(QComboBox):
                             break
                         count += 1
                     self.watch_again.removeItem(count)
-                    print("{} must be removed from db / hd" .format(movie_selected))
+                    print("{} must be removed from db / hd".format(movie_selected))
                 else:
                     print("{} must be removed from 'update() - insert movie file' list")
                     print("and from the .html file")
@@ -135,7 +136,6 @@ class Combo(QComboBox):
             # how to ignore this ???
             # QEvent.setAccepted()
             msg.setText('Doing nothing.')
-
 
         msg.show()
         msg.exec_()
