@@ -10,13 +10,14 @@ import html_file.create_page
 
 
 class Combo(QComboBox):
-    def __init__(self, will_do, seen_object=None, scan_local_html=None, browser_obj=None):
+    def __init__(self, will_do, update_object=None, seen_object=None, scan_local_html=None, browser_obj=None):
         super().__init__()
         self.to_do = will_do
         self.path_html = scan_local_html
         self.watch_again = seen_object
         self.watch_again_list = None
-        self.insert_movie_file = None
+        self.up_date = update_object
+        self.insert_movie_file_list= None
         self.browser_reload = browser_obj
         self.stored_data = DataStorage()
         self.movies_stored = ""
@@ -27,7 +28,7 @@ class Combo(QComboBox):
     def first_item_combo(self):
         def update(self):
             self.addItem("insert movie file ")
-            self.insert_movie_file = ['insert movie file']
+            self.insert_movie_file_list = ['insert movie file']
 
         def remove(self):
             self.addItem("remove movie from db")
@@ -42,13 +43,17 @@ class Combo(QComboBox):
         option[self.to_do](self)
 
     def combo_list(self):
-        def update():
+        def update(self):
             self.movies_stored = self.stored_data.no_movie_yet()
+            # doing this here make update in confirm_option
+            # method easier to read
+            for i in self.movies_stored:
+                self.insert_movie_file_list.append(i[0])
 
-        def remove():
+        def remove(self):
             self.movies_stored = self.stored_data.movie_title_list()
 
-        def seen():
+        def seen(self):
             self.movies_stored = self.stored_data.movie_seen()
             # doing this here make remove() in confirm_option
             # method easier to read
@@ -59,7 +64,7 @@ class Combo(QComboBox):
                   "remove": remove,
                   "watch_again": seen}
 
-        option[self.to_do]()
+        option[self.to_do](self)
         self.show_list()
 
     def show_list(self):
@@ -85,7 +90,7 @@ class Combo(QComboBox):
             # rebuild .html file
             msg.setText('remove this window!!!')
 
-            def update():
+            def update(self):
                 p_file = self.stored_data.movie_path(movie_selected)
                 # scan selected movie dir
                 scan_dir = PyScan(p_file[0])
@@ -104,19 +109,22 @@ class Combo(QComboBox):
                 html_file.create_page.generate_html(self.path_html, unseen_movies)
                 self.browser_reload.reload()
 
-            def remove():
-                useen_movie = self.stored_data.movie_select_one(movie_selected, '0')
-                if useen_movie:
-                    print(useen_movie[0])
-                    print("{} must be removed from 'update() - insert movie file' list")
-                    print("and from the .html file")
+            def remove(self):
+                db_seen_movie = self.stored_data.movie_select_one(movie_selected, '0')
+                if db_seen_movie:
+                    self.removeItem(index)
+                    count = self.up_date.insert_movie_file_list.index(movie_selected)
+                    self.up_date.insert_movie_file_list.remove(movie_selected)
+                    self.up_date.removeItem(count)
+                    print("{} must be removed from the .html file and db" .format(movie_selected))
                 else:
                     self.removeItem(index)
                     count = self.watch_again.watch_again_list.index(movie_selected)
                     self.watch_again.watch_again_list.remove(movie_selected)
                     self.watch_again.removeItem(count)
+                    print("{} must be removed from db" .format(movie_selected))
 
-            def seen():
+            def seen(self):
                 path = self.stored_data.movie_to_watchagain(movie_selected)
                 to_watch = str(path[0]) + '/' + str(path[1])
                 call(['/usr/bin/vlc', to_watch])
@@ -125,7 +133,7 @@ class Combo(QComboBox):
                       "remove": remove,
                       "watch_again": seen}
 
-            option[self.to_do]()
+            option[self.to_do](self)
         else:
             # how to ignore this ???
             # QEvent.setAccepted()
