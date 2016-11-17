@@ -3,9 +3,9 @@
 
 # how to pass the path to .html file
 # how to update the seen list on combobox
-# with a module ?
+# with a module ? var at least
 from info_in_db.movie_plist_sqlite3 import DataStorage
-import time
+# import time
 import cgi
 import cgitb
 
@@ -19,13 +19,14 @@ def start_response(resp="text/html"):
 def head():
     html_to_body = ("<html>\n<head>\n"
                     "<meta http-equiv=\"Content-Type\" content=\"text/html_file; charset=utf-8\">\n"
+                    "<meta http-equiv=\"refresh\" content=\"5; URL=../index.html\">\n"
                     "<title>Py Movie Info</title>\n"
                     "</head>\n<body>\n")
     return html_to_body
 
 
 def footer():
-    return "<p>Please, wait a few seconds, right click on mouse and 'Go Back'</p></body>\n</html>"
+    return "<p>Please, wait a few seconds...</p></body>\n</html>"
 
 
 def edit_html(movie_title):
@@ -67,13 +68,10 @@ if isinstance(movie, list):
         print('</p>')
         stored_data.update_movie_watch('1', i)
         edit_html(i)
-        time.sleep(1)
 else:
     print('<p>')
     print("Marking {} as Seen on db...".format(movie))
     print('</p>')
     stored_data.update_movie_watch('1', movie)
     edit_html(movie)
-    time.sleep(2)
-time.sleep(2)
 print(footer())
