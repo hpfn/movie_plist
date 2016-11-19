@@ -1,14 +1,17 @@
 # from PyQt5.QtWidgets import QComboBox
 from info_in_db.movie_plist_sqlite3 import DataStorage
+from data.pyscan import PyScan
+import html_file.create_page
+from subprocess import call
 
 class InteractBox():
     """ remove item and update combo box list """
-    def __init__(self, index_number, movie_choice):
-        self.index = index_number
+    def __init__(self, movie_choice):
+        # self.index = index_number
         self.movie_selected = movie_choice
         self.stored_data = DataStorage()
 
-    def insert_movie_file_action(self):
+    def insert_movie_file_action(self, html_path, browser):
         """
             use self.index to update combo box list
             recreate the .html file with a new movie file
@@ -22,15 +25,14 @@ class InteractBox():
         file_n = scan_dir[0][2]
         self.stored_data.update_movie_file(file_n, self.movie_selected)
         # update list
-        self.removeItem(self.index)
         # Regrex edit .html file ? re-create by now. First get the movies
         # then rm the html file and re-create.
         # This can be better
         unseen_movies = self.stored_data.movie_unseen()
-        html_f = self.path_html
-        call(['/bin/rm', html_f])
-        html_file.create_page.generate_html(self.path_html, unseen_movies)
-        self.browser_reload.reload()
+        # html_f = html_path
+        call(['/bin/rm', html_path])
+        html_file.create_page.generate_html(html_path, unseen_movies)
+        browser.reload()
 
     def movie_remove(self, update, watch):
         """

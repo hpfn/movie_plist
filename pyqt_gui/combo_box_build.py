@@ -90,12 +90,13 @@ class Combo(QComboBox):
             msg.setText('remove this window!!!')
 
             def update():
-                update_list_html = InteractBox(index, movie_selected)
-                update_list_html.insert_movie_file_list()
+                update_list_html = InteractBox(movie_selected)
+                update_list_html.insert_movie_file_action(self.path_html, self.browser_reload)
+                self.removeItem(index)
                 # self.insert_movie_file_action(index, movie_selected)
 
             def remove():
-                remove_item = InteractBox(index, movie_selected)
+                remove_item = InteractBox(movie_selected)
                 remove_item.movie_remove(self.up_date, self.watch_again)
                 self.removeItem(index)
                 # self.movie_remove(index, movie_selected)
