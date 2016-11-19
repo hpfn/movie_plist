@@ -6,6 +6,7 @@ from info_in_db.movie_plist_sqlite3 import DataStorage
 from subprocess import call
 
 from data.pyscan import PyScan
+from .combo_box_interact import InteractBox
 import html_file.create_page
 
 
@@ -89,13 +90,20 @@ class Combo(QComboBox):
             msg.setText('remove this window!!!')
 
             def update():
-                self.insert_movie_file_action(index, movie_selected)
+                update_list_html = InteractBox(index, movie_selected)
+                update_list_html.insert_movie_file_list()
+                # self.insert_movie_file_action(index, movie_selected)
 
             def remove():
-                self.movie_remove(index, movie_selected)
+                remove_item = InteractBox(index, movie_selected)
+                remove_item.movie_remove(self.up_date, self.watch_again)
+                self.removeItem(index)
+                # self.movie_remove(index, movie_selected)
 
             def seen():
-                self.watch_movie(movie_selected)
+                watch_movie = InteractBox(movie_selected)
+                watch_movie.watch_movie()
+                # self.watch_movie(movie_selected)
 
             option = {"update": update,
                       "remove": remove,
