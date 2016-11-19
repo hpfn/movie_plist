@@ -5,7 +5,7 @@
 # how to update the seen list on combobox
 # with a module ? var at least
 from info_in_db.movie_plist_sqlite3 import DataStorage
-from html_file.remove_movie import EditHtml
+from html_file.remove_movie import EditHtmlRemove
 # import time
 import cgi
 import cgitb
@@ -42,11 +42,11 @@ if isinstance(movie, list):
         print("Marking {} as Seen on db...".format(i))
         print('</p>')
         stored_data.update_movie_watch('1', i)
-        EditHtml(i)
+        EditHtmlRemove(i)
 else:
     print('<p>')
     print("Marking {} as Seen on db...".format(movie))
     print('</p>')
     stored_data.update_movie_watch('1', movie)
-    EditHtml(movie)
+    EditHtmlRemove(movie)
 print(footer())
