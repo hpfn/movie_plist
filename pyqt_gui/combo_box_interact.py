@@ -1,6 +1,7 @@
-from .combo_box_build import Combo
+# from PyQt5.QtWidgets import QComboBox
+from info_in_db.movie_plist_sqlite3 import DataStorage
 
-class InteractBox(Combo):
+class InteractBox():
     """ remove item and update combo box list """
     def __init__(self, index_number, movie_choice):
         self.index = index_number
@@ -31,7 +32,7 @@ class InteractBox(Combo):
         html_file.create_page.generate_html(self.path_html, unseen_movies)
         self.browser_reload.reload()
 
-    def movie_remove(self):
+    def movie_remove(self, update, watch):
         """
             remove a movie on combo box list
             and  on db.
@@ -39,17 +40,15 @@ class InteractBox(Combo):
         """
         db_seen_movie = self.stored_data.movie_select_one(self.movie_selected, '0')
         if db_seen_movie:
-            self.removeItem(self.index)
-            count = self.up_date.insert_movie_file_list.index(self.movie_selected)
-            self.up_date.insert_movie_file_list.remove(self.movie_selected)
-            self.up_date.removeItem(count)
+            count = update.insert_movie_file_list.index(self.movie_selected)
+            update.insert_movie_file_list.remove(self.movie_selected)
+            update.removeItem(count)
             print("{} must be removed from the .html file and db".format(self.movie_selected))
         else:
-            self.removeItem(self.index)
-            count = self.watch_again.watch_again_list.index(self.movie_selected)
-        self.watch_again.watch_again_list.remove(self.movie_selected)
-        self.watch_again.removeItem(count)
-        print("{} must be removed from db".format(self.movie_selected))
+            count = watch.watch_again_list.index(self.movie_selected)
+            watch.watch_again_list.remove(self.movie_selected)
+            watch.removeItem(count)
+            print("{} must be removed from db".format(self.movie_selected))
 
     def watch_movie(self):
         """
