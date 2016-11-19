@@ -3,11 +3,7 @@ from PyQt5.QtWidgets import QMessageBox
 # from PyQt5.QtCore import QEvent
 from info_in_db.movie_plist_sqlite3 import DataStorage
 
-from subprocess import call
-
-from data.pyscan import PyScan
 from .combo_box_interact import InteractBox
-import html_file.create_page
 
 
 class Combo(QComboBox):
@@ -23,28 +19,12 @@ class Combo(QComboBox):
         self.stored_data = DataStorage()
         self.movies_stored = ""
 
-        self.first_item_combo()
         self.combo_list()
-
-    def first_item_combo(self):
-        def update():
-            self.addItem("insert movie file ")
-            self.insert_movie_file_list = ['insert movie file']
-
-        def remove():
-            self.addItem("remove movie from db")
-
-        def seen():
-            self.addItem("seen movies")
-            self.watch_again_list = ['seen movies']
-
-        option = {"update": update,
-                  "remove": remove,
-                  "watch_again": seen}
-        option[self.to_do]()
 
     def combo_list(self):
         def update():
+            self.addItem("insert movie file ")
+            self.insert_movie_file_list = ['insert movie file']
             self.movies_stored = self.stored_data.no_movie_yet()
             # doing this here make update in confirm_option
             # method easier to read
@@ -52,9 +32,12 @@ class Combo(QComboBox):
                 self.insert_movie_file_list.append(i[0])
 
         def remove():
+            self.addItem("remove movie from db")
             self.movies_stored = self.stored_data.movie_title_list()
 
         def seen():
+            self.addItem("seen movies")
+            self.watch_again_list = ['seen movies']
             self.movies_stored = self.stored_data.movie_seen()
             # doing this here make remove() in confirm_option
             # method easier to read
@@ -93,18 +76,15 @@ class Combo(QComboBox):
                 update_list_html = InteractBox(movie_selected)
                 update_list_html.insert_movie_file_action(self.path_html, self.browser_reload)
                 self.removeItem(index)
-                # self.insert_movie_file_action(index, movie_selected)
 
             def remove():
                 remove_item = InteractBox(movie_selected)
                 remove_item.movie_remove(self.up_date, self.watch_again)
                 self.removeItem(index)
-                # self.movie_remove(index, movie_selected)
 
             def seen():
                 watch_movie = InteractBox(movie_selected)
                 watch_movie.watch_movie()
-                # self.watch_movie(movie_selected)
 
             option = {"update": update,
                       "remove": remove,
@@ -119,56 +99,55 @@ class Combo(QComboBox):
         msg.show()
         msg.exec_()
 
-    def insert_movie_file_action(self, i, m):
-        """
-            :param i: index
-            :param m: movie_selected
-            :return: nothing
-        """
-        p_file = self.stored_data.movie_path(m)
-        # scan selected movie dir
-        scan_dir = PyScan(p_file[0])
-        scan_dir = scan_dir.dir_to_scan()
-        # file name
-        file_n = scan_dir[0][2]
-        self.stored_data.update_movie_file(file_n, m)
-        # update list
-        self.removeItem(i)
-        # Regrex edit .html file ? re-create by now. First get the movies
-        # then rm the html file and re-create.
-        # This can be better
-        unseen_movies = self.stored_data.movie_unseen()
-        html_f = self.path_html
-        print(html_f)
-        call(['/bin/rm', html_f])
-        html_file.create_page.generate_html(self.path_html, unseen_movies)
-        self.browser_reload.reload()
 
-    def movie_remove(self, i, m):
-        """
-            :param i: index
-            :param m: movie_selected
-            :return: nothing
-        """
-        db_seen_movie = self.stored_data.movie_select_one(m, '0')
-        if db_seen_movie:
-            self.removeItem(i)
-            count = self.up_date.insert_movie_file_list.index(m)
-            self.up_date.insert_movie_file_list.remove(m)
-            self.up_date.removeItem(count)
-            print("{} must be removed from the .html file and db".format(m))
-        else:
-            self.removeItem(i)
-            count = self.watch_again.watch_again_list.index(m)
-            self.watch_again.watch_again_list.remove(m)
-            self.watch_again.removeItem(count)
-            print("{} must be removed from db".format(m))
 
-    def watch_movie(self, m):
-        """
-            :param m: movie_selected
-            :return: nothing
-        """
-        path = self.stored_data.movie_to_watchagain(m)
-        to_watch = str(path[0]) + '/' + str(path[1])
-        call(['/usr/bin/vlc', to_watch])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
