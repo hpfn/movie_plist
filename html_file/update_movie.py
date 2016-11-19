@@ -10,7 +10,7 @@ def EditHtmlUpdate(file_name, movie_title):
 
     mark_start = 'start ' + movie_title
     count_l = 0
-    # probably can be better
+    # probably can be better. use .index()
     for line in html_file_lines:
         if mark_start in line:
             sub_count = count_l

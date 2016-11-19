@@ -11,6 +11,7 @@ def EditHtmlRemove(movie_title):
 
     mark_start = 'start ' + movie_title
     mark_end = 'end ' + movie_title
+    # use .index()
     for unwanted in html_file_lines:
         if mark_start in unwanted:
             start_line = count
