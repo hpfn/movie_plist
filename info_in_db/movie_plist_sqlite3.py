@@ -80,6 +80,10 @@ class DataStorage(object):
         self.conn.execute("update movie_plist set watch=? where title_year=? ", (mark, t_y))
         self.conn.commit()
 
+    def movie_delete(self, t_y):
+        self.conn.execute("delete from movie_plist where title_year=? ", (t_y,))
+        self.conn.commit()
+
     def check_movie(self):
         self.c.execute("select url from movie_plist")  # where url=?", url)
         return str(self.c.fetchall())
