@@ -49,14 +49,13 @@ class InteractBox():
                 update.removeItem(count)
             remove_movie.EditHtml(self.movie_selected)
             browser.reload()
-            print("{} must be removed from the .html file".format(self.movie_selected))
         else:
             count = watch.watch_again_list.index(self.movie_selected)
             watch.watch_again_list.remove(self.movie_selected)
             watch.removeItem(count)
-            print("{} must be removed from hb".format(self.movie_selected))
 
         self.stored_data.movie_delete(self.movie_selected)
+        print("{} must be removed from hb".format(self.movie_selected))
 
     def watch_movie(self):
         """
