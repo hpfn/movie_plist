@@ -1,4 +1,4 @@
-from html_file.htmltags import HtmlTags
+from .htmltags import HtmlTags
 from pathlib import Path
 from info_in_db.movie_plist_sqlite3 import DataStorage
 
