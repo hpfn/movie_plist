@@ -79,7 +79,7 @@ class Combo(QComboBox):
 
             def remove():
                 remove_item = InteractBox(movie_selected)
-                remove_item.movie_remove(self.up_date, self.watch_again)
+                remove_item.movie_remove(self.up_date, self.watch_again, self.browser_reload)
                 self.removeItem(index)
 
             def seen():
