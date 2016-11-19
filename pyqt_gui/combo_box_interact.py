@@ -1,7 +1,8 @@
 # from PyQt5.QtWidgets import QComboBox
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from data.pyscan import PyScan
-import html_file.create_page
+from html_file import create_page, remove_movie
+
 from subprocess import call
 
 class InteractBox():
@@ -31,10 +32,10 @@ class InteractBox():
         unseen_movies = self.stored_data.movie_unseen()
         # html_f = html_path
         call(['/bin/rm', html_path])
-        html_file.create_page.generate_html(html_path, unseen_movies)
+        create_page.generate_html(html_path, unseen_movies)
         browser.reload()
 
-    def movie_remove(self, update, watch):
+    def movie_remove(self, update, watch, browser):
         """
             remove a movie on combo box list
             and  on db.
@@ -42,15 +43,20 @@ class InteractBox():
         """
         db_seen_movie = self.stored_data.movie_select_one(self.movie_selected, '0')
         if db_seen_movie:
-            count = update.insert_movie_file_list.index(self.movie_selected)
-            update.insert_movie_file_list.remove(self.movie_selected)
-            update.removeItem(count)
-            print("{} must be removed from the .html file and db".format(self.movie_selected))
+            if self.movie_selected in update.insert_movie_file_list:
+                count = update.insert_movie_file_list.index(self.movie_selected)
+                update.insert_movie_file_list.remove(self.movie_selected)
+                update.removeItem(count)
+            remove_movie.EditHtml(self.movie_selected)
+            browser.reload()
+            print("{} must be removed from the .html file".format(self.movie_selected))
         else:
             count = watch.watch_again_list.index(self.movie_selected)
             watch.watch_again_list.remove(self.movie_selected)
             watch.removeItem(count)
-            print("{} must be removed from db".format(self.movie_selected))
+            print("{} must be removed from hb".format(self.movie_selected))
+
+        self.stored_data.movie_delete(self.movie_selected)
 
     def watch_movie(self):
         """
