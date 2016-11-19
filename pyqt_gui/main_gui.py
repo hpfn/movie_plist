@@ -1,6 +1,6 @@
 
-from pyqt_gui.pyqt_browser import qt_browser
-from pyqt_gui.combo_box_build import Combo
+from .pyqt_browser import qt_browser
+from .combo_box_build import Combo
 
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QWidget  # , QRadioButton
