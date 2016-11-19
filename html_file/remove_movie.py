@@ -2,7 +2,7 @@
    edit the .html file to remove a movie entry
 """
 
-def EditHtml(movie_title):
+def EditHtmlRemove(movie_title):
     start_line = ''
     end_line = ''
     count = 0
