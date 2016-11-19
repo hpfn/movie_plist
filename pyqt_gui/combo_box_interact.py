@@ -1,7 +1,7 @@
 # from PyQt5.QtWidgets import QComboBox
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from data.pyscan import PyScan
-from html_file import create_page, remove_movie
+from html_file import create_page, remove_movie, update_movie
 
 from subprocess import call
 
@@ -25,14 +25,8 @@ class InteractBox():
         # file name
         file_n = scan_dir[0][2]
         self.stored_data.update_movie_file(file_n, self.movie_selected)
-        # update list
-        # Regrex edit .html file ? re-create by now. First get the movies
-        # then rm the html file and re-create.
-        # This can be better
-        unseen_movies = self.stored_data.movie_unseen()
-        # html_f = html_path
-        call(['/bin/rm', html_path])
-        create_page.generate_html(html_path, unseen_movies)
+        # edit .html file and reload page
+        update_movie.EditHtmlUpdate(file_n, self.movie_selected)
         browser.reload()
 
     def movie_remove(self, update, watch, browser):
@@ -47,7 +41,7 @@ class InteractBox():
                 count = update.insert_movie_file_list.index(self.movie_selected)
                 update.insert_movie_file_list.remove(self.movie_selected)
                 update.removeItem(count)
-            remove_movie.EditHtml(self.movie_selected)
+            remove_movie.EditHtmlRemove(self.movie_selected)
             browser.reload()
         else:
             count = watch.watch_again_list.index(self.movie_selected)
