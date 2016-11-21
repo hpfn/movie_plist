@@ -18,7 +18,7 @@ def internet_on():
         r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=3.0)
         return r.status
     except urllib3.exceptions.NewConnectionError:
-        print('No Internet Connection !')
+        print('No Internet Connection ! Or IMDB has a problem...')
         print('No poster')
         print('If the .html file must be re-created, no rate/votes')
         return False
