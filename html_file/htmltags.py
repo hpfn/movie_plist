@@ -45,16 +45,21 @@ class HtmlTags:
 
             print everything in the .html file
         """
-        print("\n<!-- start {} -->" .format(movie_data[0]), file=self.open_file)
+        print("\n<!-- start {} -->".format(movie_data[0]), file=self.open_file)
         print("<tr valign=\"top\">", file=self.open_file)
+
         print("<td>\n<img src=\"{}\" width=\"226\" height=\"300\"><br></td><td>\n<p>".format(poster_jpg),
               file=self.open_file)
+
         fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
         for f, m_d in zip(fields, movie_data):
             print("{} {}<br>".format(f, m_d), file=self.open_file)
+
         print("<a href=\"{}\">{}</a>".format(link + '/' + file, file), file=self.open_file)  # last arg
-        print("<input type=\"checkbox\" name=\"title_year\" \
-               value=\"{}\"> seen" .format(movie_data[0]), file=self.open_file)
+        # implement this make edit .html file more difficult
+        # if file is not 'No_movie_file_yet':
+        print("<input type=\"checkbox\" name=\"title_year\" value=\"{}\"> seen"
+              .format(movie_data[0]), file=self.open_file)
         # last lines
 
         last_lines = ("</p></td></tr><tr>\n"
@@ -65,7 +70,7 @@ class HtmlTags:
                       "</td></tr>")
         print(last_lines, file=self.open_file)
 
-        print("<!-- end {} -->\n" .format(movie_data[0]), file=self.open_file)
+        print("<!-- end {} -->\n".format(movie_data[0]), file=self.open_file)
 
     def bottom_tags(self):
         """ from </table> to </html> """
