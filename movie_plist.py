@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-import sys
+import sys, os
 from pathlib import Path
 from subprocess import Popen
-import os
+import urllib3
 # import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
@@ -12,6 +12,16 @@ from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_gui import Window
 
+def internet_on():
+    try:
+        http = urllib3.PoolManager()
+        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=3.0)
+        return r.status
+    except urllib3.exceptions.NewConnectionError:
+        print('No Internet Connection !')
+        print('No poster')
+        print('If the .html file must be re-created, no rate/votes')
+        return False
 
 def check_pushto_db(url_got, p_html):
     """
@@ -62,6 +72,9 @@ def main(d_scan):
 
 
 if __name__ == '__main__':
+    net_status = internet_on()
+    if net_status:
+        print('Internet Connection: ok - {}' .format(net_status))
     if len(sys.argv) is 2:
         path_dir_scan = sys.argv[1]
     else:
