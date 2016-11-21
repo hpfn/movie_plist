@@ -3,21 +3,13 @@
 """
 
 def EditHtmlRemove(movie_title):
-    start_line = ''
-    end_line = ''
-    count = 0
     with open('/home/zaza/Vídeos/index.html', 'r') as html_file:
         html_file_lines = html_file.readlines()
 
-    mark_start = 'start ' + movie_title
-    mark_end = 'end ' + movie_title
-    # use .index()
-    for unwanted in html_file_lines:
-        if mark_start in unwanted:
-            start_line = count
-        if mark_end in unwanted:
-            end_line = count
-        count += 1
+    mark_start = '<!-- start ' + movie_title + ' -->\n'
+    mark_end = '<!-- end ' + movie_title + ' -->\n'
+    start_line = html_file_lines.index(mark_start)
+    end_line = html_file_lines.index(mark_end)
 
     print("remove from {} to {}" .format(start_line, end_line))
     del html_file_lines[start_line:end_line+1]
