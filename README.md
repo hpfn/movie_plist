@@ -39,3 +39,5 @@ Remove from combo list working (partial) 2016-11-15
 Almost everything about combo_box is done. DB part missing. 2016-11-17
 
 Removing from db. 2016-11-19
+
+Internet connection test. 2016-11-21
