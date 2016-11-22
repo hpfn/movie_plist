@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 # how to update the seen list on combobox
-
+from html_file.edit_html import EditHtml
 from info_in_db.movie_plist_sqlite3 import DataStorage
-from html_file.remove_movie import EditHtmlRemove
+# from html_file.remove_movie import EditHtmlRemove
 # import time
 import cgi
 import cgitb
@@ -35,17 +35,22 @@ print(start_response())
 print('')
 print(head())
 print('')
+e_html = EditHtml('remove')
 if isinstance(movie, list):
     for i in movie:
         print('<p>')
         print("Marking {} as Seen on db...".format(i))
         print('</p>')
         stored_data.update_movie_watch('1', i)
-        EditHtmlRemove(i)
+        # EditHtmlRemove(i)
+        e_html.edithtmlaction(i)
+
 else:
     print('<p>')
     print("Marking {} as Seen on db...".format(movie))
     print('</p>')
     stored_data.update_movie_watch('1', movie)
-    EditHtmlRemove(movie)
+    # EditHtmlRemove(movie)
+    e_html.edithtmlaction(movie)
+
 print(footer())

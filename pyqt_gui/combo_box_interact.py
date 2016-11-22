@@ -4,8 +4,10 @@ from data.pyscan import PyScan
 from html_file import create_page, remove_movie, update_movie
 
 from subprocess import call
+from html_file.edit_html import EditHtml
 
-class InteractBox():
+
+class InteractBox(object):
     """ remove item and update combo box list """
     def __init__(self, movie_choice):
         # self.index = index_number
@@ -41,7 +43,9 @@ class InteractBox():
                 count = update.insert_movie_file_list.index(self.movie_selected)
                 update.insert_movie_file_list.remove(self.movie_selected)
                 update.removeItem(count)
-            remove_movie.EditHtmlRemove(self.movie_selected)
+            # remove_movie.EditHtmlRemove(self.movie_selected)
+            e_html = EditHtml('remove')
+            e_html.edithtmlaction(self.movie_selected)
             browser.reload()
         else:
             count = watch.watch_again_list.index(self.movie_selected)
