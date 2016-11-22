@@ -1,11 +1,13 @@
 import re
+import getpass
 
 def EditHtmlUpdate(file_name, movie_title):
     """
        :param file_name: name of the movie file
        :return: nothing
     """
-    with open('/home/zaza/Vídeos/index.html', 'r') as html_file:
+    path_html_file = '/home/' + getpass.getuser() + 'Vídeos/index.html'
+    with open(path_html_file, 'r') as html_file:
         html_file_lines = html_file.readlines()
 
     mark_start = '<!-- start ' + movie_title + ' -->\n'
@@ -18,7 +20,7 @@ def EditHtmlUpdate(file_name, movie_title):
             break
         sub_count += 1
 
-    f = open('/home/zaza/Vídeos/index.html', 'w')
+    f = open(path_html_file, 'w')
     f.writelines(html_file_lines)
     f.close()
 
