@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# how to pass the path to .html file
 # how to update the seen list on combobox
-# with a module ? var at least
+
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from html_file.remove_movie import EditHtmlRemove
 # import time
