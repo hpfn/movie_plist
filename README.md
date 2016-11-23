@@ -3,9 +3,9 @@ Based on smoviecat (sf.net).
 
 Put a .desktop file inside of the movie's directory - drag and drop the url from imdb site to the file manager.
 Tell a directory to do the scan - like /home/user/Videos.
-A html file will be generated and choose QWebView or Firefox to see it.
+A html file will be generated and PyQt will show it.
 
-Basic feature untill now - 2016-08-16.
+Basic feature until now - 2016-08-16.
 
 Using sqlite3.
 If a directory has only a .desktop file there is no problem.
@@ -40,4 +40,4 @@ Almost everything about combo_box is done. DB part missing. 2016-11-17
 
 Removing from db. 2016-11-19
 
-Internet connection test. 2016-11-21
+Internet connection test. 2016-11-21.
