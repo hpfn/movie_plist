@@ -1,20 +1,18 @@
-# from PyQt5.QtWidgets import QComboBox
-from info_in_db.movie_plist_sqlite3 import DataStorage
 from data.pyscan import PyScan
-from html_file import create_page, remove_movie, update_movie
-
 from subprocess import call
 from html_file.edit_html import EditHtml
+from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
 class InteractBox(object):
     """ remove item and update combo box list """
+
     def __init__(self, movie_choice):
         # self.index = index_number
         self.movie_selected = movie_choice
         self.stored_data = DataStorage()
 
-    def insert_movie_file_action(self, html_path, browser):
+    def insert_movie_file_action(self, browser):
         """
             use self.index to update combo box list
             recreate the .html file with a new movie file
@@ -28,7 +26,8 @@ class InteractBox(object):
         file_n = scan_dir[0][2]
         self.stored_data.update_movie_file(file_n, self.movie_selected)
         # edit .html file and reload page
-        update_movie.EditHtmlUpdate(file_n, self.movie_selected)
+        update_movie = EditHtml()
+        update_movie.update_m_html(self.movie_selected, file_n)
         browser.reload()
 
     def movie_remove(self, update, watch, browser):
@@ -62,4 +61,3 @@ class InteractBox(object):
         path = self.stored_data.movie_to_watchagain(self.movie_selected)
         to_watch = str(path[0]) + '/' + str(path[1])
         call(['/usr/bin/vlc', to_watch])
-
