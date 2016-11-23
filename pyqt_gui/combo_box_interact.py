@@ -44,8 +44,8 @@ class InteractBox(object):
                 update.insert_movie_file_list.remove(self.movie_selected)
                 update.removeItem(count)
             # remove_movie.EditHtmlRemove(self.movie_selected)
-            e_html = EditHtml('remove')
-            e_html.edithtmlaction(self.movie_selected)
+            e_html = EditHtml()
+            e_html.remove_m_html(self.movie_selected)
             browser.reload()
         else:
             count = watch.watch_again_list.index(self.movie_selected)

@@ -35,7 +35,7 @@ print(start_response())
 print('')
 print(head())
 print('')
-e_html = EditHtml('remove')
+e_html = EditHtml()
 if isinstance(movie, list):
     for i in movie:
         print('<p>')
@@ -43,7 +43,7 @@ if isinstance(movie, list):
         print('</p>')
         stored_data.update_movie_watch('1', i)
         # EditHtmlRemove(i)
-        e_html.edithtmlaction(i)
+        e_html.remove_m_html(i)
 
 else:
     print('<p>')
@@ -51,6 +51,6 @@ else:
     print('</p>')
     stored_data.update_movie_watch('1', movie)
     # EditHtmlRemove(movie)
-    e_html.edithtmlaction(movie)
+    e_html.remove_m_html(movie)
 
 print(footer())
