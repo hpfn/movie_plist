@@ -21,6 +21,8 @@ def internet_on():
         print('No Internet Connection ! Or IMDB has a problem...')
         print('No poster')
         print('If the .html file must be re-created, no rate/votes')
+        print('If there is a new movie, no data will be retrieve')
+        print('and movie_plist will crash, probably')
         return False
 
 def check_pushto_db(url_got, p_html):
