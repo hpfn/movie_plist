@@ -74,7 +74,7 @@ class Combo(QComboBox):
 
             def update():
                 update_list_html = InteractBox(movie_selected)
-                update_list_html.insert_movie_file_action(self.path_html, self.browser_reload)
+                update_list_html.insert_movie_file_action(self.browser_reload)
                 self.removeItem(index)
 
             def remove():
