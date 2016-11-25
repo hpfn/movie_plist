@@ -72,19 +72,21 @@ class Combo(QComboBox):
         if reply == QMessageBox.Yes:
             msg.setText('remove this window!!!')
 
+            html_cboxlist_changes = InteractBox(movie_selected)
+
             def update():
-                update_list_html = InteractBox(movie_selected)
-                update_list_html.insert_movie_file_action(self.browser_reload)
+                # update_list_html = InteractBox(movie_selected)
+                html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
                 self.removeItem(index)
 
             def remove():
-                remove_item = InteractBox(movie_selected)
-                remove_item.movie_remove(self.up_date, self.watch_again, self.browser_reload)
+                # remove_item = InteractBox(movie_selected)
+                html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
                 self.removeItem(index)
 
             def seen():
-                watch_movie = InteractBox(movie_selected)
-                watch_movie.watch_movie()
+                # watch_movie = InteractBox(movie_selected)
+                html_cboxlist_changes.watch_movie()
 
             option = {"update": update,
                       "remove": remove,
