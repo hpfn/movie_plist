@@ -12,37 +12,34 @@ class Combo(QComboBox):
         self.to_do = will_do
         self.path_html = scanlocal_htmlf
         self.watch_again = seen_object
-        self.watch_again_list = None
         self.up_date = update_object
-        self.insert_movie_file_list = None
         self.browser_reload = browser_obj
         self.stored_data = DataStorage()
-        self.movies_stored = ""
+        self.movies_stored = []
 
         self.combo_list()
 
     def combo_list(self):
+        """
+            sqlite returns a list of tuples
+            using a for loop to have a 'str' item
+            and be easier to find the index on
+            confirm_option method (InteractBox())
+        """
         def update():
-            self.addItem("insert movie file ")
-            self.insert_movie_file_list = ['insert movie file']
-            self.movies_stored = self.stored_data.no_movie_yet()
-            # doing this here make update in confirm_option
-            # method easier to read
-            for i in self.movies_stored:
-                self.insert_movie_file_list.append(i[0])
+            self.movies_stored = ['insert movie file']
+            for i in self.stored_data.no_movie_yet():
+                self.movies_stored.append(i[0])
 
         def remove():
-            self.addItem("remove movie from db")
-            self.movies_stored = self.stored_data.movie_title_list()
+            self.movies_stored = ['remove movie from db']
+            for i in self.stored_data.movie_title_list():
+                self.movies_stored.append(i[0])
 
         def seen():
-            self.addItem("seen movies")
-            self.watch_again_list = ['seen movies']
-            self.movies_stored = self.stored_data.movie_seen()
-            # doing this here make remove() in confirm_option
-            # method easier to read
-            for i in self.movies_stored:
-                self.watch_again_list.append(i[0])
+            self.movies_stored = ['seen movies']
+            for i in self.stored_data.movie_seen():
+                self.movies_stored.append(i[0])
 
         option = {"update": update,
                   "remove": remove,
@@ -53,8 +50,7 @@ class Combo(QComboBox):
 
     def show_list(self):
         for title_year in self.movies_stored:
-            title_l = list(title_year)
-            self.add_to_cbox(title_l[0])
+            self.add_to_cbox(title_year)
 
     def add_to_cbox(self, item):
         self.addItem(item)
@@ -75,17 +71,14 @@ class Combo(QComboBox):
             html_cboxlist_changes = InteractBox(movie_selected)
 
             def update():
-                # update_list_html = InteractBox(movie_selected)
                 html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
                 self.removeItem(index)
 
             def remove():
-                # remove_item = InteractBox(movie_selected)
                 html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
                 self.removeItem(index)
 
             def seen():
-                # watch_movie = InteractBox(movie_selected)
                 html_cboxlist_changes.watch_movie()
 
             option = {"update": update,

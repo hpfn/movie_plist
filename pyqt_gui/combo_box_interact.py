@@ -38,21 +38,20 @@ class InteractBox(object):
         """
         db_seen_movie = self.stored_data.movie_select_one(self.movie_selected, '0')
         if db_seen_movie:
-            if self.movie_selected in update.insert_movie_file_list:
-                count = update.insert_movie_file_list.index(self.movie_selected)
-                update.insert_movie_file_list.remove(self.movie_selected)
+            if self.movie_selected in update.movies_stored:
+                count = update.movies_stored.index(self.movie_selected)
+                update.movies_stored.remove(self.movie_selected)
                 update.removeItem(count)
-            # remove_movie.EditHtmlRemove(self.movie_selected)
             e_html = EditHtml()
             e_html.remove_m_html(self.movie_selected)
             browser.reload()
         else:
-            count = watch.watch_again_list.index(self.movie_selected)
-            watch.watch_again_list.remove(self.movie_selected)
+            count = watch.movies_stored.index(self.movie_selected)
+            watch.movies_stored.remove(self.movie_selected)
             watch.removeItem(count)
 
         self.stored_data.movie_delete(self.movie_selected)
-        print("{} must be removed from hb".format(self.movie_selected))
+        print("{} must be removed from hd".format(self.movie_selected))
 
     def watch_movie(self):
         """
