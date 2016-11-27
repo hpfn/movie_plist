@@ -7,10 +7,9 @@ from .combo_box_interact import InteractBox
 
 
 class Combo(QComboBox):
-    def __init__(self, will_do, update_object=None, seen_object=None, scanlocal_htmlf=None, browser_obj=None):
+    def __init__(self, will_do, update_object=None, seen_object=None, browser_obj=None):
         super().__init__()
         self.to_do = will_do
-        self.path_html = scanlocal_htmlf
         self.watch_again = seen_object
         self.up_date = update_object
         self.browser_reload = browser_obj
