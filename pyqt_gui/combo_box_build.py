@@ -1,9 +1,5 @@
 from PyQt5.QtWidgets import QComboBox
-from PyQt5.QtWidgets import QMessageBox
-# from PyQt5.QtCore import QEvent
 from info_in_db.movie_plist_sqlite3 import DataStorage
-
-from .combo_box_interact import InteractBox
 
 
 class Combo(QComboBox):
