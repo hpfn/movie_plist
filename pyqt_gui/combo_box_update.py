@@ -33,6 +33,7 @@ class CboxUpdate(Combo):
             msg.setText(txt_info)
         except TypeError:
             print('Error when updating the .html file')
+            print('"{}" is not a valid entry' .format(movie_selected))
             # how to ignore this ???
             # QEvent.setAccepted()
             msg.setText('Doing nothing.')
