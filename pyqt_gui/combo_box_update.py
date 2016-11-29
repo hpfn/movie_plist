@@ -24,18 +24,15 @@ class CboxUpdate(Combo):
 
     def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""
-        txt_info = "You will update " + movie_selected
         msg = QMessageBox()
-        reply = msg.question(self, 'The selected movie', txt_info,
-                             QMessageBox.Yes | QMessageBox.Cancel, QMessageBox.Cancel)
-
-        if reply == QMessageBox.Yes:
-            msg.setText('remove this window!!!')
-
+        try:
             html_cboxlist_changes = InteractBox(movie_selected)
             html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
             self.removeItem(index)
-        else:
+            txt_info = movie_selected + " movie file on the .html file"
+            msg.setText(txt_info)
+        except TypeError:
+            print('Error when updating the .html file')
             # how to ignore this ???
             # QEvent.setAccepted()
             msg.setText('Doing nothing.')
