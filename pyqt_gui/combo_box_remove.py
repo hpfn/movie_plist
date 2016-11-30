@@ -29,9 +29,13 @@ class CboxRemove(Combo):
 
         if reply == QMessageBox.Yes:
             msg.setText('remove this window!!!')
-            html_cboxlist_changes = InteractBox(movie_selected)
-            html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
-            self.removeItem(index)
+            try:
+                html_cboxlist_changes = InteractBox(movie_selected)
+                html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
+                self.removeItem(index)
+            except AttributeError:
+                print('Error when getting the seen index')
+                print('"{}" is not a valid entry'.format(self.movie_selected))
         else:
             # how to ignore this ???
             # QEvent.setAccepted()
