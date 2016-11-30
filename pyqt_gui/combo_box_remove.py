@@ -17,13 +17,8 @@ class CboxRemove(Combo):
             and be easier to find the index on
             confirm_option method (InteractBox())
         """
-        # self.movies_stored = ['remove movie from db']
-        # for i in self.stored_data.movie_title_list():
-        #    self.movies_stored.append(i[0])
         self.movies_stored = [i[0] for i in self.stored_data.movie_title_list()]
         self.movies_stored.insert(0, 'remove movie from db')
-
-        # self.show_list()
 
     def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""
@@ -34,7 +29,6 @@ class CboxRemove(Combo):
 
         if reply == QMessageBox.Yes:
             msg.setText('remove this window!!!')
-
             html_cboxlist_changes = InteractBox(movie_selected)
             html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
             self.removeItem(index)
@@ -43,7 +37,6 @@ class CboxRemove(Combo):
             # QEvent.setAccepted()
             msg.setText('Doing nothing.')
 
-        msg.show()
         msg.exec_()
 
 
