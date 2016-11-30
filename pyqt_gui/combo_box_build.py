@@ -9,6 +9,7 @@ class Combo(QComboBox):
         self.movies_stored = []
 
         self.combo_list()
+        self.show_list()
 
     def combo_list(self):
         """
