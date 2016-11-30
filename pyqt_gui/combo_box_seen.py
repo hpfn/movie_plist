@@ -14,9 +14,11 @@ class CboxSeen(Combo):
             and be easier to find the index on
             confirm_option method (InteractBox())
         """
-        self.movies_stored = ['seen movies']
-        for i in self.stored_data.movie_seen():
-            self.movies_stored.append(i[0])
+        # self.movies_stored = ['seen movies']
+        #for i in self.stored_data.movie_seen():
+        #    self.movies_stored.append(i[0])
+        self.movies_stored = [i[0] for i in self.stored_data.movie_seen()]
+        self.movies_stored.insert(0, 'seen movies')
 
         self.show_list()
 

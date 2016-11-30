@@ -17,9 +17,11 @@ class CboxRemove(Combo):
             and be easier to find the index on
             confirm_option method (InteractBox())
         """
-        self.movies_stored = ['remove movie from db']
-        for i in self.stored_data.movie_title_list():
-            self.movies_stored.append(i[0])
+        # self.movies_stored = ['remove movie from db']
+        # for i in self.stored_data.movie_title_list():
+        #    self.movies_stored.append(i[0])
+        self.movies_stored = [i[0] for i in self.stored_data.movie_title_list()]
+        self.movies_stored.insert(0, 'remove movie from db')
 
         self.show_list()
 
