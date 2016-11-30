@@ -16,9 +16,11 @@ class CboxUpdate(Combo):
             and be easier to find the index on
             confirm_option method (InteractBox())
         """
-        self.movies_stored = ['insert movie file']
-        for i in self.stored_data.no_movie_yet():
-            self.movies_stored.append(i[0])
+        # self.movies_stored = ['insert movie file']
+        self.movies_stored = [i[0] for i in self.stored_data.no_movie_yet()]
+        self.movies_stored.insert(0, 'insert movie file')
+        #for i in self.stored_data.no_movie_yet():
+        #    self.movies_stored.append(i[0])
 
         self.show_list()
 
