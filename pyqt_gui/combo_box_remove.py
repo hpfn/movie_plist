@@ -23,7 +23,7 @@ class CboxRemove(Combo):
         self.movies_stored = [i[0] for i in self.stored_data.movie_title_list()]
         self.movies_stored.insert(0, 'remove movie from db')
 
-        self.show_list()
+        # self.show_list()
 
     def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""

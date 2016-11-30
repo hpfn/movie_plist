@@ -22,7 +22,7 @@ class CboxUpdate(Combo):
         #for i in self.stored_data.no_movie_yet():
         #    self.movies_stored.append(i[0])
 
-        self.show_list()
+        # self.show_list()
 
     def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""

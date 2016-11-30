@@ -20,7 +20,7 @@ class CboxSeen(Combo):
         self.movies_stored = [i[0] for i in self.stored_data.movie_seen()]
         self.movies_stored.insert(0, 'seen movies')
 
-        self.show_list()
+        # self.show_list()
 
     def confirm_option(self, index, movie_selected):
         """ show msg with a synopsis of the movie"""
