@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+# -*-coding-utf8-*
 """
    It will be a class for web browser.
    I do not know how to do it yet. So
@@ -25,7 +25,10 @@ from PyQt5.QtWidgets import QMessageBox
 def call_vlc(link):
     # print(link)
     if 'No_movie_file_yet' not in link:
-        call(['/usr/bin/vlc', link])
+        # ugly fix to remove the
+        # http://localhost:8080 part
+        # of the 'link'. cgi fault
+        call(['/usr/bin/vlc', link[21:]])
     else:
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -41,4 +44,5 @@ def qt_browser(path_html):
     browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
     # url = "file://" + path_html
     browser.setUrl(QUrl('http://localhost:8080/'))
+    # browser.setUrl(QUrl(url))
     return browser
