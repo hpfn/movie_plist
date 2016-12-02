@@ -44,7 +44,7 @@ class InteractBox(object):
             e_html = EditHtml()
             e_html.remove_m_html(self.movie_selected)
             browser.reload()
-        elif self.stored_data.movie_select_one(self.movie_selected, '1'):  # seen movie
+        else:  # if self.stored_data.movie_select_one(self.movie_selected, '1'):  # seen movie
             count = watch.movies_stored.index(self.movie_selected)
             watch.movies_stored.remove(self.movie_selected)
             watch.removeItem(count)
