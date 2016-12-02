@@ -29,16 +29,11 @@ class CboxRemove(Combo):
                                  QMessageBox.Yes | QMessageBox.Cancel, QMessageBox.Cancel)
 
             if reply == QMessageBox.Yes:
-                msg.setText('remove this window!!!')
                 html_cboxlist_changes = InteractBox(movie_selected)
                 html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
                 self.removeItem(index)
-            else:
-                # how to ignore this ???
-                # QEvent.setAccepted()
-                msg.setText('Doing nothing.')
 
-            msg.exec_()
+            msg.show()
 
 
 

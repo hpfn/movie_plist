@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QTimer
 from .combo_box_interact import InteractBox
 from .combo_box_build import Combo
 
@@ -32,63 +33,7 @@ class CboxSeen(Combo):
                                  QMessageBox.Yes | QMessageBox.Cancel, QMessageBox.Cancel)
 
             if reply == QMessageBox.Yes:
-                msg.setText('useless')
                 html_cboxlist_changes = InteractBox(movie_selected)
                 html_cboxlist_changes.watch_movie()
-            else:
-                msg.setText('nothing')
 
-            msg.exec()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            msg.show()
