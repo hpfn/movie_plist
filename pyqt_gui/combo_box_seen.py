@@ -26,9 +26,9 @@ class CboxSeen(Combo):
         """ show msg with a synopsis of the movie"""
         # msg.setIcon(QMessageBox.Information)
         try:
-            txt_info = "Put a synopsis here for " + movie_selected
+            txt_info = self.stored_data.movie_synopsis(movie_selected)
             msg = QMessageBox()
-            reply = msg.question(self, 'The selected movie', txt_info,
+            reply = msg.question(self, movie_selected + ' synopsis: ', txt_info[0],
                                  QMessageBox.Yes | QMessageBox.Cancel, QMessageBox.Cancel)
             if reply == QMessageBox.Yes:
                 html_cboxlist_changes = InteractBox(movie_selected)
