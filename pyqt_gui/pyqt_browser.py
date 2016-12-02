@@ -14,14 +14,6 @@ from PyQt5.QtWebKitWidgets import QWebPage
 from PyQt5.QtWidgets import QMessageBox
 
 
-# class Browser(QWebView):
-#    def __init__(self, scan_dir):
-#        super().__init__()
-#        self.browser = QWebView()
-#        self.scan_dir_final = scan_dir
-#
-#        self.qt_browser()
-
 def call_vlc(link):
     # print(link)
     if 'No_movie_file_yet' not in link:
