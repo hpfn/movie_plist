@@ -92,5 +92,9 @@ class DataStorage(object):
         self.c.execute('select title_year from movie_plist where title_year=? and watch=? ', (t_y, state))
         return self.c.fetchone()
 
+    def movie_synopsis(self, t_y):
+        self.c.execute('select snps_txt from movie_plist where title_year=?', (t_y,))
+        return self.c.fetchone()
+
     def exit_from_db(self):
         self.conn.close()
