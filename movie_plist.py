@@ -71,7 +71,7 @@ def main(d_scan):
     app = QApplication(sys.argv)
     ex = Window(dir_to_html)
     sys.exit([app.exec_(), proc.terminate()])
-
+    #sys.exit(app.exec_())
 
 if __name__ == '__main__':
     net_status = internet_on()
