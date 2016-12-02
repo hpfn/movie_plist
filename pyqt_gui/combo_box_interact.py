@@ -36,27 +36,18 @@ class InteractBox(object):
             and  on db.
             from the hd too ?
         """
-        db_seen_movie = self.stored_data.movie_select_one(self.movie_selected, '0')
-        if db_seen_movie:  # if is an unseen movie
+        if self.stored_data.movie_select_one(self.movie_selected, '0'):  # unseen movie
             if self.movie_selected in update.movies_stored:
-                try:
-                    count = update.movies_stored.index(self.movie_selected)
-                    update.movies_stored.remove(self.movie_selected)
-                    update.removeItem(count)
-                except ValueError:
-                    print('Error when getting the update index')
-                    print('"{}" is not a valid entry'.format(self.movie_selected))
+                count = update.movies_stored.index(self.movie_selected)
+                update.movies_stored.remove(self.movie_selected)
+                update.removeItem(count)
             e_html = EditHtml()
             e_html.remove_m_html(self.movie_selected)
             browser.reload()
-        else:  # if is a seen movie
-            try:
-                count = watch.movies_stored.index(self.movie_selected)
-                watch.movies_stored.remove(self.movie_selected)
-                watch.removeItem(count)
-            except ValueError:
-                print('Error when getting the seen index')
-                print('"{}" is not a valid entry'.format(self.movie_selected))
+        elif self.stored_data.movie_select_one(self.movie_selected, '1'):  # seen movie
+            count = watch.movies_stored.index(self.movie_selected)
+            watch.movies_stored.remove(self.movie_selected)
+            watch.removeItem(count)
 
         self.stored_data.movie_delete(self.movie_selected)
         print("{} must be removed from hd".format(self.movie_selected))
