@@ -33,9 +33,9 @@ class CboxRemove(Combo):
                 html_cboxlist_changes = InteractBox(movie_selected)
                 html_cboxlist_changes.movie_remove(self.up_date, self.watch_again, self.browser_reload)
                 self.removeItem(index)
-            except AttributeError:
+            except ValueError:
                 print('Error when getting the seen index')
-                print('"{}" is not a valid entry'.format(self.movie_selected))
+                print('"{}" is not a valid entry'.format(movie_selected))
         else:
             # how to ignore this ???
             # QEvent.setAccepted()
