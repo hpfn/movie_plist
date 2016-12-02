@@ -22,18 +22,7 @@ class CboxUpdate(Combo):
     def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""
         # msg = QMessageBox()
-        try:
+        if index:
             html_cboxlist_changes = InteractBox(movie_selected)
             html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
             self.removeItem(index)
-            # txt_info = movie_selected + " movie file on the .html file"
-            # msg.setText(txt_info)
-        except TypeError:
-            print('Error when updating the .html file')
-            print('"{}" is not a valid entry' .format(movie_selected))
-            # how to ignore this ???
-            # QEvent.setAccepted()
-            # msg.setText('Doing nothing.')
-
-        # msg.show()
-        # msg.exec_()
