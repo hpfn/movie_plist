@@ -27,7 +27,6 @@ def call_vlc(link):
         msg.setText('You do not have this movie file.')
         msg.setStandardButtons(QMessageBox.Ok)
         msg.show()
-        msg.exec_()
 
 
 def qt_browser(path_html):
