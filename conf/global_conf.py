@@ -8,3 +8,4 @@
 
 # httpd port
 
+# skip url part
