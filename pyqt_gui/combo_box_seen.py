@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtCore import QTimer
 from .combo_box_interact import InteractBox
 from .combo_box_build import Combo
 
@@ -15,13 +14,8 @@ class CboxSeen(Combo):
             and be easier to find the index on
             confirm_option method (InteractBox())
         """
-        # self.movies_stored = ['seen movies']
-        #for i in self.stored_data.movie_seen():
-        #    self.movies_stored.append(i[0])
         self.movies_stored = [i[0] for i in self.stored_data.movie_seen()]
         self.movies_stored.insert(0, 'seen movies')
-
-        # self.show_list()
 
     def confirm_option(self, index, movie_selected):
         """ show msg with a synopsis of the movie"""
