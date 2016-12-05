@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from subprocess import call, Popen
+import urllib3
 
 # user
 user_name = os.environ['USER']
@@ -31,4 +31,18 @@ if not check_path.is_dir():
 # httpd port
 PORT = 8123
 
+
 # skip url part
+
+def internet_on():
+    try:
+        http = urllib3.PoolManager()
+        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
+        return r.status
+    except urllib3.exceptions.ConnectTimeoutError:
+        print('No Internet Connection ! Or IMDB has a problem...')
+        print('No poster')
+        print('If the .html file must be re-created, no rate/votes')
+        print('If there is a new movie, no data will be retrieve')
+        print('and movie_plist will crash, probably')
+        return False
