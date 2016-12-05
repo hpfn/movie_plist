@@ -3,28 +3,29 @@
 import sys, os
 from pathlib import Path
 from subprocess import Popen
-import urllib3
+# import urllib3
 # import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
 from conf.global_conf import movie_plist_stuff_html_dir as html_dir
+from conf.global_conf import internet_on
 import html_file.create_page
 from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_gui import Window
 
-def internet_on():
-    try:
-        http = urllib3.PoolManager()
-        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
-        return r.status
-    except urllib3.exceptions.ConnectTimeoutError:
-        print('No Internet Connection ! Or IMDB has a problem...')
-        print('No poster')
-        print('If the .html file must be re-created, no rate/votes')
-        print('If there is a new movie, no data will be retrieve')
-        print('and movie_plist will crash, probably')
-        return False
+# def internet_on():
+#    try:
+#        http = urllib3.PoolManager()
+#        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
+#        return r.status
+#    except urllib3.exceptions.ConnectTimeoutError:
+#        print('No Internet Connection ! Or IMDB has a problem...')
+#        print('No poster')
+#        print('If the .html file must be re-created, no rate/votes')
+#        print('If there is a new movie, no data will be retrieve')
+#        print('and movie_plist will crash, probably')
+#        return False
 
 def check_pushto_db(url_got, p_html):
     """
