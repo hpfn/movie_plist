@@ -1,6 +1,9 @@
 
 from http.server import HTTPServer, CGIHTTPRequestHandler
 # import os
+
+# this path must be fixed if this file goes
+# to some /home/user dir
 from conf.global_conf import PORT
 port = PORT
 
