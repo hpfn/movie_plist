@@ -7,6 +7,7 @@ import urllib3
 # import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
+import conf.global_conf
 import html_file.create_page
 from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
@@ -51,7 +52,8 @@ def main(d_scan):
 
     # will push data to db if necessary
     # and call create_page.generate_html
-    dir_to_html = d_scan + '/pymovieinfo.html'
+    # dir_to_html = d_scan + '/pymovieinfo.html'
+    dir_to_html = conf.global_conf.movie_plist_stuff_html_dir + '/index.html'
     check_pushto_db(obtain_url, dir_to_html)
 
     # This is a fake implementation to test a cgi script to
@@ -59,9 +61,10 @@ def main(d_scan):
     # But how to run the server on a specific location ?
     # every ugly this manner. The simple_httpd script call
     # os.chdir(), but from there it does not work as expected
-    cgi_server = d_scan + '/simple_httpd.py'
+    # cgi_server = d_scan + '/simple_httpd.py'
+    cgi_server = conf.global_conf.movie_plist_stuff_html_dir + '/simple_httpd.py'
     dir_now = os.path.join(os.path.dirname(__file__))
-    run_at = os.path.join(d_scan)
+    run_at = os.path.join(conf.global_conf.movie_plist_stuff_html_dir)
     os.chdir(run_at)
     run_cgi = ['/usr/bin/python3', cgi_server]
     proc = Popen(run_cgi)
