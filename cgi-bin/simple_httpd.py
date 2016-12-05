@@ -1,7 +1,8 @@
 
 from http.server import HTTPServer, CGIHTTPRequestHandler
 # import os
-port = 8080
+import conf.global_conf
+port = conf.global_conf.PORT
 
 # run_at = os.path.join('/home/zaza/Vídeos')
 # os.chdir(run_at)
