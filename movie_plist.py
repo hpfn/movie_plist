@@ -7,7 +7,7 @@ import urllib3
 # import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
 # movie_plist stuff
-import conf.global_conf
+from conf.global_conf import movie_plist_stuff_html_dir as html_dir
 import html_file.create_page
 from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
@@ -53,7 +53,7 @@ def main(d_scan):
     # will push data to db if necessary
     # and call create_page.generate_html
     # dir_to_html = d_scan + '/pymovieinfo.html'
-    dir_to_html = conf.global_conf.movie_plist_stuff_html_dir + '/index.html'
+    dir_to_html = html_dir + '/index.html'
     check_pushto_db(obtain_url, dir_to_html)
 
     # This is a fake implementation to test a cgi script to
@@ -62,9 +62,9 @@ def main(d_scan):
     # every ugly this manner. The simple_httpd script call
     # os.chdir(), but from there it does not work as expected
     # cgi_server = d_scan + '/simple_httpd.py'
-    cgi_server = conf.global_conf.movie_plist_stuff_html_dir + '/simple_httpd.py'
+    cgi_server = html_dir + '/simple_httpd.py'
     dir_now = os.path.join(os.path.dirname(__file__))
-    run_at = os.path.join(conf.global_conf.movie_plist_stuff_html_dir)
+    run_at = os.path.join(html_dir)
     os.chdir(run_at)
     run_cgi = ['/usr/bin/python3', cgi_server]
     proc = Popen(run_cgi)
@@ -74,7 +74,6 @@ def main(d_scan):
     app = QApplication(sys.argv)
     ex = Window(dir_to_html)
     sys.exit([app.exec_(), proc.terminate()])
-    #sys.exit(app.exec_())
 
 if __name__ == '__main__':
     net_status = internet_on()
