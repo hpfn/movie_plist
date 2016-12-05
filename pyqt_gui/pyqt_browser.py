@@ -12,7 +12,7 @@ from PyQt5.QtCore import QUrl
 from PyQt5.QtWebKitWidgets import QWebView
 from PyQt5.QtWebKitWidgets import QWebPage
 from PyQt5.QtWidgets import QMessageBox
-
+import conf.global_conf
 
 def call_vlc(link):
     # print(link)
@@ -34,6 +34,6 @@ def qt_browser(path_html):
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
     browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
     # url = "file://" + path_html
-    browser.setUrl(QUrl('http://localhost:8123/'))
-    # browser.setUrl(QUrl(url))
+    url = 'http://localhost:' + str(conf.global_conf.PORT)
+    browser.setUrl(QUrl(url))
     return browser
