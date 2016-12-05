@@ -16,9 +16,9 @@ from pyqt_gui.main_gui import Window
 def internet_on():
     try:
         http = urllib3.PoolManager()
-        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=3.0)
+        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
         return r.status
-    except urllib3.exceptions.NewConnectionError:
+    except urllib3.exceptions.ConnectTimeoutError:
         print('No Internet Connection ! Or IMDB has a problem...')
         print('No poster')
         print('If the .html file must be re-created, no rate/votes')
