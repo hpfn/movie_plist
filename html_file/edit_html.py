@@ -1,17 +1,17 @@
 import re
 import getpass
-
+from conf.global_conf import movie_plist_stuff_html_dir as html_dir
 
 class EditHtml(object):
     def __init__(self):
-        self.path_html_file = '/home/' + getpass.getuser() + '/Vídeos/index.html'
+        # self.path_html_file = '/home/' + getpass.getuser() + '/Vídeos/index.html'
+        self.path_html_file = html_dir + '/index.html'
         self.html_file_lines = None
 
     def pull_from_html(self):
         """
            get lines in the .html file
         """
-        # path_html_file = '/home/' + getpass.getuser() + 'Vídeos/index.html'
         with open(self.path_html_file, 'r') as html_file:
             self.html_file_lines = html_file.readlines()
 
