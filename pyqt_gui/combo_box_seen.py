@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QMessageBox
-from .combo_box_interact import InteractBox
+# from PyQt5.QtWidgets import QMessageBox
+# from .combo_box_interact import InteractBox
 from .combo_box_build import Combo
 
 
@@ -21,6 +21,9 @@ class CboxSeen(Combo):
         """ show msg with a synopsis of the movie"""
         # msg.setIcon(QMessageBox.Information)
         if index:
+            from PyQt5.QtWidgets import QMessageBox
+            from .combo_box_interact import InteractBox
+
             txt_info = self.stored_data.movie_synopsis(movie_selected)
             msg = QMessageBox()
             reply = msg.question(self, movie_selected + ' synopsis: ', txt_info[0],

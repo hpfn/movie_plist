@@ -1,7 +1,7 @@
 # from PyQt5.QtWidgets import QMessageBox
 # from PyQt5.QtCore import QEvent
 from .combo_box_build import Combo
-from .combo_box_interact import InteractBox
+# from .combo_box_interact import InteractBox
 
 
 class CboxUpdate(Combo):
@@ -23,6 +23,8 @@ class CboxUpdate(Combo):
         """ show msg about what to_do with the movie selected"""
         # msg = QMessageBox()
         if index:
+            from .combo_box_interact import InteractBox
+
             html_cboxlist_changes = InteractBox(movie_selected)
             html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
             self.removeItem(index)

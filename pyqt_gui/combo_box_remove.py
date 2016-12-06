@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QMessageBox
+# from PyQt5.QtWidgets import QMessageBox
 from .combo_box_build import Combo
-from .combo_box_interact import InteractBox
+# from .combo_box_interact import InteractBox
 
 
 class CboxRemove(Combo):
@@ -23,6 +23,9 @@ class CboxRemove(Combo):
     def confirm_option(self, index, movie_selected):
         """ show msg about what to_do with the movie selected"""
         if index:
+            from PyQt5.QtWidgets import QMessageBox
+            from .combo_box_interact import InteractBox
+
             txt_info = "You will remove " + movie_selected
             msg = QMessageBox()
             reply = msg.question(self, 'The selected movie', txt_info,
