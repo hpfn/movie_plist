@@ -35,7 +35,8 @@ def qt_browser(path_html):
     browser.page().setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
     browser.page().linkClicked.connect(lambda link: call_vlc(link.toString()))
     # url = "file://" + path_html
+    # PORT from global_conf. check simple_httpd.py
     url = 'http://localhost:' + str(PORT)
-    browser.setUrl(QUrl('http://localhost:8123/'))
-    # browser.setUrl(QUrl(url))
+    # browser.setUrl(QUrl('http://localhost:8123/'))
+    browser.setUrl(QUrl(url))
     return browser
