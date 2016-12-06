@@ -36,19 +36,21 @@ class HtmlTags:
                 "<table border=\"1\" width=\"100%\" cellpadding=\"4\" cellspacing=\"0\">\n")
         print(head, file=self.open_file)
 
-    def inside_table(self, poster_jpg, movie_data, link, file):
+    def inside_table(self, poster, movie_data, link, file):
         """
         one table cell (tr) at a time:
-            poster_jpg: jpg file
-            movie_data: list() with title titleYear, rate/votes, director, writers, actors, synopsis
-            link: link to the directory where the movie is stored
+            poster - db_info_list[-1]: jpg file
+            movie_data - db_info_list[1:-3]: list() with
+                   title titleYear, rate/votes, director, writers, actors, synopsis
+            link - db_info_list[-4]: link to the directory where the movie is stored
+            file - db_info_list[-3]: file to play
 
             print everything in the .html file
         """
         print("\n<!-- start {} -->".format(movie_data[0]), file=self.open_file)
         print("<tr valign=\"top\">", file=self.open_file)
 
-        print("<td>\n<img src=\"{}\" width=\"226\" height=\"300\"><br></td><td>\n<p>".format(poster_jpg),
+        print("<td>\n<img src=\"{}\" width=\"226\" height=\"300\"><br></td><td>\n<p>".format(poster),
               file=self.open_file)
 
         fields = ['title:', 'rate/votes:', 'director:', 'writer:', 'actors:', 'synopsis:']
@@ -87,7 +89,7 @@ class HtmlTags:
             db_info_list = list(db_info)
             html = urllib.request.urlopen(db_info_list[0]).read()
             movie = pimdbdata.ParseImdbData(html)
-            m_poster = movie.movie_poster()
+            # m_poster = movie.movie_poster()
             rate_votes = movie.rate_value_and_votes()
             db_info_list.insert(2, rate_votes)
-            self.inside_table(m_poster, db_info_list[1:-3], db_info_list[-3], db_info_list[-2])
+            self.inside_table(db_info_list[-1], db_info_list[1:-3], db_info_list[-4], db_info_list[-3])

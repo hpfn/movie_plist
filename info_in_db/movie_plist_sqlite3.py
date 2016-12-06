@@ -17,7 +17,7 @@ class DataStorage(object):
             self.c = self.conn.cursor()
             self.c.execute('''create table if not exists movie_plist (url UNIQUE,
                            title_year TEXT, director, writers_list, actors_list,
-                           snps_txt TEXT, path, moviefile, watch INTEGER)''')
+                           snps_txt TEXT, path, moviefile, watch INTEGER, poster TEXT)''')
             self.conn.commit()
         except sqlite3.Error as err:
             if self.conn:
@@ -35,8 +35,8 @@ class DataStorage(object):
                 html = urllib.request.urlopen(url).read()
                 movie = pimdbdata.ParseImdbData(html)
                 m_data = [url, movie.title_year(), movie.director(), ' '.join(movie.creator_writers()),
-                          ' '.join(movie.actors()), movie.synopsis(), path, moviefile, 0]
-                self.conn.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?)', m_data)
+                          ' '.join(movie.actors()), movie.synopsis(), path, moviefile, 0, movie.movie_poster()]
+                self.conn.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?,?)', m_data)
                 self.conn.commit()
                 return m_data
         except sqlite3.IntegrityError:
