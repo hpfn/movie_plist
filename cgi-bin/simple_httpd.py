@@ -4,8 +4,8 @@ from http.server import HTTPServer, CGIHTTPRequestHandler
 
 # this path must be fixed if this file goes
 # to some /home/user dir
-from conf.global_conf import PORT
-port = PORT
+# from conf.global_conf import PORT
+port = 8123
 
 # run_at = os.path.join('/home/zaza/Vídeos')
 # os.chdir(run_at)
