@@ -26,5 +26,6 @@ class CboxUpdate(Combo):
             from .combo_box_interact import InteractBox
 
             html_cboxlist_changes = InteractBox(movie_selected)
-            html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
-            self.removeItem(index)
+            update_combo = html_cboxlist_changes.insert_movie_file_action(self.browser_reload)
+            if update_combo:
+                self.removeItem(index)

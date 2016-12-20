@@ -24,11 +24,15 @@ class InteractBox(object):
         scan_dir = scan_dir.dir_to_scan()
         # file name
         file_n = scan_dir[0][2]
-        self.stored_data.update_movie_file(file_n, self.movie_selected)
-        # edit .html file and reload page
-        update_movie = EditHtml()
-        update_movie.update_m_html(self.movie_selected, file_n)
-        browser.reload()
+        if file_n is not 'No_movie_file_yet':
+            self.stored_data.update_movie_file(file_n, self.movie_selected)
+            # edit .html file and reload page
+            update_movie = EditHtml()
+            update_movie.update_m_html(self.movie_selected, file_n)
+            browser.reload()
+            return True
+
+        return False
 
     def movie_remove(self, update, watch, browser):
         """
