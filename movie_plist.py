@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+# -*-coding-utf8-*
 import sys, os
 from pathlib import Path
 from subprocess import Popen
@@ -14,18 +14,6 @@ from data.pyscan import PyScan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_gui import Window
 
-# def internet_on():
-#    try:
-#        http = urllib3.PoolManager()
-#        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
-#        return r.status
-#    except urllib3.exceptions.ConnectTimeoutError:
-#        print('No Internet Connection ! Or IMDB has a problem...')
-#        print('No poster')
-#        print('If the .html file must be re-created, no rate/votes')
-#        print('If there is a new movie, no data will be retrieve')
-#        print('and movie_plist will crash, probably')
-#        return False
 
 def check_pushto_db(url_got, p_html):
     """
@@ -53,16 +41,11 @@ def main(d_scan):
 
     # will push data to db if necessary
     # and call create_page.generate_html
-    # dir_to_html = d_scan + '/pymovieinfo.html'
     dir_to_html = html_dir + '/index.html'
     check_pushto_db(obtain_url, dir_to_html)
 
-    # This is a fake implementation to test a cgi script to
-    # mark as seen a movie on db. Needs a httpd.
-    # But how to run the server on a specific location ?
-    # every ugly this manner. The simple_httpd script call
-    # os.chdir(), but from there it does not work as expected
-    # cgi_server = d_scan + '/simple_httpd.py'
+    # start a cgi http server
+    # after change directory
     cgi_server = html_dir + '/simple_httpd.py'
     dir_now = os.path.join(os.path.dirname(__file__))
     run_at = os.path.join(html_dir)
@@ -78,15 +61,16 @@ def main(d_scan):
 
 if __name__ == '__main__':
     net_status = internet_on()
-    if net_status:
+    if net_status == 200:
         print('Internet Connection: ok - {}' .format(net_status))
-    if len(sys.argv) is 2:
-        path_dir_scan = sys.argv[1]
-    else:
+        # if len(sys.argv) is 2:
+        #    path_dir_scan = sys.argv[1]
+        #else:
+
         path_dir_scan = input(" Do the scan in which directory ? ")
 
-    check_path = Path(path_dir_scan)
-    if not check_path.is_dir():
-        print(" Please, check the path ")
-    else:
-        main(path_dir_scan)
+        check_path = Path(path_dir_scan)
+        if not check_path.is_dir():
+            print(" Please, check the path ")
+        else:
+            main(path_dir_scan)
