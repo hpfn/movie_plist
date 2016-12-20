@@ -29,13 +29,16 @@ class EditHtml(object):
 
         mark_start = '<!-- start ' + u_movie + ' -->\n'
         count_l = self.html_file_lines.index(mark_start)
-        sub_count = count_l
-        for sub_line in self.html_file_lines[count_l:]:
-            if sub_line.startswith('<a href'):
-                get_string = re.compile('No_movie_file_yet')
-                self.html_file_lines[sub_count] = get_string.sub(u_file, sub_line, count=2)
-                break
-            sub_count += 1
+        # sub_count = count_l
+        # for sub_line in self.html_file_lines[count_l:]:
+        #    if sub_line.startswith('<a href'):
+        #        get_string = re.compile('No_movie_file_yet')
+        #        self.html_file_lines[sub_count] = get_string.sub(u_file, sub_line, count=2)
+        #        break
+        #    sub_count += 1
+        get_string = re.compile('No_movie_file_yet')
+        sub_line = self.html_file_lines[count_l+11]
+        self.html_file_lines[count_l+11] = get_string.sub(u_file, sub_line, count=2)
 
         self.push_to_html()
 
