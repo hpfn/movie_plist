@@ -21,12 +21,12 @@ class Window(QWidget):
         # QWebView object
         browser = qt_browser(self.scanned_dir_and_html)
 
-        # Combo inherit QComboBox
+        # Cbox* inherit Combo inherit QComboBox
         movie_update_cbox = CboxUpdate(browser)
         movie_seen_cbox = CboxSeen()
         movie_remove_cbox = CboxRemove(movie_update_cbox, movie_seen_cbox, browser)
 
-        # movie selected. remove/update info in the db
+        # movie selected. remove/update info in the db/ Cbox
         movie_update_cbox.get_item_selected()
         movie_remove_cbox.get_item_selected()
         movie_seen_cbox.get_item_selected()
