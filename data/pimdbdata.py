@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import re
 
@@ -9,14 +10,12 @@ class ParseImdbData(object):
 
     def title_year(self):
         """
-        :rtype:
-
+        title_year: title and year in your language
         """
         return self.soup.title.string[:-7]
 
     def rate_value_and_votes(self):
         """
-
         :rtype: list() - two items
         """
         try:
@@ -72,19 +71,6 @@ class ParseImdbData(object):
     def synopsis(self):
         description = self.soup.find(itemprop="description")
         raw_txt = description.contents[0].strip()
-        # maybe split() is better than this
-        # count = 0
-        # for i in raw_txt:
-        #     if count < 70 or i is not ' ':
-        #         print(i, end='')
-        #     else:
-        #         if i is ' ':
-        #             print()
-        #             count = 0
-        #             continue
-        #    count += 1
-
-        # print()
         return raw_txt
 
     def movie_poster(self):
