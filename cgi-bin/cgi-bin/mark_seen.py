@@ -39,9 +39,7 @@ print('')
 e_html = EditHtml()
 if isinstance(movie, list):
     for i in movie:
-        if i in no_movie_file_yet_list:
-            continue
-        else:
+        if i not in no_movie_file_yet_list:
             print('<p>')
             print("Marking {} as Seen on db...".format(i))
             print('</p>')
@@ -49,9 +47,7 @@ if isinstance(movie, list):
             e_html.remove_m_html(i)
 
 else:
-    if movie in no_movie_yet_list:
-        pass
-    else:
+    if movie not in no_movie_file_yet_list:
         print('<p>')
         print("Marking {} as Seen on db...".format(movie))
         print('</p>')
