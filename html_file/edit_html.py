@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import re
-import getpass
+# import getpass
 from conf.global_conf import movie_plist_stuff_html_dir as html_dir
+
 
 class EditHtml(object):
     def __init__(self):
@@ -25,22 +27,25 @@ class EditHtml(object):
         f.close()
 
     def update_m_html(self, u_movie, u_file):
-        self.pull_from_html()
+        if u_file is not 'No_movie_file_yet':
+            self.pull_from_html()
 
-        mark_start = '<!-- start ' + u_movie + ' -->\n'
-        count_l = self.html_file_lines.index(mark_start)
-        # sub_count = count_l
-        # for sub_line in self.html_file_lines[count_l:]:
-        #    if sub_line.startswith('<a href'):
-        #        get_string = re.compile('No_movie_file_yet')
-        #        self.html_file_lines[sub_count] = get_string.sub(u_file, sub_line, count=2)
-        #        break
-        #    sub_count += 1
-        get_string = re.compile('No_movie_file_yet')
-        sub_line = self.html_file_lines[count_l+11]
-        self.html_file_lines[count_l+11] = get_string.sub(u_file, sub_line, count=2)
+            mark_start = '<!-- start ' + u_movie + ' -->\n'
+            count_l = self.html_file_lines.index(mark_start)
+            # sub_count = count_l
+            # for sub_line in self.html_file_lines[count_l:]:
+            #    if sub_line.startswith('<a href'):
+            #        get_string = re.compile('No_movie_file_yet')
+            #        self.html_file_lines[sub_count] = get_string.sub(u_file, sub_line, count=2)
+            #        break
+            #    sub_count += 1
+            get_string = re.compile('No_movie_file_yet')
+            sub_line = self.html_file_lines[count_l + 11]
+            self.html_file_lines[count_l + 11] = get_string.sub(u_file, sub_line, count=2)
 
-        self.push_to_html()
+            self.push_to_html()
+        else:
+            print('no u_file as argument')
 
     def remove_m_html(self, r_movie):
         """
