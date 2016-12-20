@@ -30,6 +30,7 @@ def footer():
 form_data = cgi.FieldStorage()
 movie = form_data.getvalue("title_year")
 stored_data = DataStorage()
+no_movie_file_yet_list = str(stored_data.no_movie_yet())
 
 print(start_response())
 print('')
@@ -38,19 +39,23 @@ print('')
 e_html = EditHtml()
 if isinstance(movie, list):
     for i in movie:
-        print('<p>')
-        print("Marking {} as Seen on db...".format(i))
-        print('</p>')
-        stored_data.update_movie_watch('1', i)
-        # EditHtmlRemove(i)
-        e_html.remove_m_html(i)
+        if i in no_movie_file_yet_list:
+            continue
+        else:
+            print('<p>')
+            print("Marking {} as Seen on db...".format(i))
+            print('</p>')
+            stored_data.update_movie_watch('1', i)
+            e_html.remove_m_html(i)
 
 else:
-    print('<p>')
-    print("Marking {} as Seen on db...".format(movie))
-    print('</p>')
-    stored_data.update_movie_watch('1', movie)
-    # EditHtmlRemove(movie)
-    e_html.remove_m_html(movie)
+    if movie in no_movie_yet_list:
+        pass
+    else:
+        print('<p>')
+        print("Marking {} as Seen on db...".format(movie))
+        print('</p>')
+        stored_data.update_movie_watch('1', movie)
+        e_html.remove_m_html(movie)
 
 print(footer())
