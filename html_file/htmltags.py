@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
    only parse_data_to_inside_table
    receive data from outside to deal
@@ -82,6 +83,8 @@ class HtmlTags:
 
     def parse_data_to_inside_table(self, m_data):
         """
+            m_data: info stored in db
+
             all data is split and call inside_table one movie
             at a time
         """
