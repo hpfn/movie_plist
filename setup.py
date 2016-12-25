@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name='movie_plist',
     version='20161225',
-    # packages=['conf', 'data', 'pyqt_gui', 'html_file', 'info_in_db'],
-    packages=find_packages(),
+    packages=['conf', 'data', 'pyqt_gui', 'html_file', 'info_in_db'],
+    #packages=find_packages(),
     scripts=['movie_plist.py'],
     setup_requires=['setuptools >= 28.7.1'],
     install_requires=['PyQt5 >= 5.7', 'beautifulsoup4 >= 4.5'],
