@@ -8,5 +8,5 @@ setup(
     license='GPL-3.0+',
     author='zaza',
     author_email='hpfn@users.noreply.github.com',
-    description='list ypur movies'
+    description='list your movies'
 )
