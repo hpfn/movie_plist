@@ -45,3 +45,5 @@ Internet connection test. 2016-11-21.
 I think it is ready for a release. 2016-12-20
 
 I want to change a lot of things. No QWebView.
+
+[screenshot](./Movie_plist_first_version.png)
