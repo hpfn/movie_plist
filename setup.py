@@ -7,7 +7,7 @@ setup(
     #packages=find_packages(),
     scripts=['movie_plist.py'],
     setup_requires=['setuptools >= 28.7.1'],
-    install_requires=['PyQt5 >= 5.7', 'beautifulsoup4 >= 4.5'],
+    install_requires=['python >= 3.5', 'PyQt5 >= 5.7', 'beautifulsoup4 >= 4.5'],
     url='https://github.com/hpfn/movie_plist',
     license='GPLv3+',
     author='Herbert Parentes Fortes Neto',
