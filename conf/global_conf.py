@@ -14,8 +14,8 @@ movie_plist_stuff_cgi_dir = movie_plist_stuff_html_dir + '/cgi-bin'
 movie_plist_stuff_httpd = movie_plist_stuff_html_dir + '/simple_httpd.py'
 
 # link target
-target_cgi_dir = '/home/' + user_name + '/Documentos/Programacao/python/movie_plist/cgi-bin/cgi-bin'
-target_httpd = '/home/' + user_name + '/Documentos/Programacao/python/movie_plist/cgi-bin/simple_httpd.py'
+target_cgi_dir = '/usr/share/movie_plist/cgi-bin/cgi-bin'
+target_httpd = '/usr/share/movie_plist/cgi-bin/simple_httpd.py'
 
 # complete link command
 target_to_cgi = '/bin/ln -s ' + target_cgi_dir + ' ' + movie_plist_stuff_cgi_dir
