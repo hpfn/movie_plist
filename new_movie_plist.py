@@ -50,7 +50,7 @@ class Example(QMainWindow):
         toolbar.addAction(unseen_action)
         toolbar.addAction(seen_action)
 
-        self.setGeometry(100, 100, 600, 400)
+        self.setGeometry(100, 100, 800, 650)
         self.setWindowTitle('Main Window')
         self.show()
 
