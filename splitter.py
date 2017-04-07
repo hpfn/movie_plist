@@ -8,7 +8,8 @@ from zetcode tutorial
 # import sys
 # import time
 import urllib.request
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QLabel, QSplitter, QListWidget)
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
+                             QSplitter, QTabWidget, QListWidget)
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
@@ -23,9 +24,10 @@ from PyQt5.QtGui import *
 class TwoLines(QWidget):
     def __init__(self):
         super().__init__()
-
-        self.bottom = QLabel()
         self.top = QListWidget()
+        self.bottom = QLabel()
+        self.tabs = QTabWidget()
+
         self.init_ui()
 
     def init_ui(self):
@@ -41,6 +43,18 @@ class TwoLines(QWidget):
         # bottom = QFrame(self)
         # bottom.setFrameShape(QFrame.StyledPanel)
         self.bottom.setText(self.top.currentItem().text())
+
+        # TABS
+        tab_synopsys = QWidget()
+        tab_lsdir = QWidget()
+
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.bottom)
+
+        tab_synopsys.setLayout(vbox)
+
+        self.tabs.addTab(tab_synopsys, "Info")
+        self.tabs.addTab(tab_lsdir, "lst dir")
 
         def changed_item():
             if self.top.currentItem():
@@ -59,7 +73,8 @@ class TwoLines(QWidget):
 
         splitter1 = QSplitter(Qt.Vertical)
         splitter1.addWidget(self.top)
-        splitter1.addWidget(self.bottom)
+        splitter1.addWidget(self.tabs)
+        # splitter1.addWidget(self.bottom)
 
         hbox.addWidget(splitter1)
         self.setLayout(hbox)
