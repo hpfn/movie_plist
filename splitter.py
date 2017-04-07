@@ -9,7 +9,8 @@ from zetcode tutorial
 # import time
 import urllib.request
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-                             QSplitter, QTabWidget, QListWidget)
+                             QSplitter, QTabWidget, QListWidget, 
+                             QFileSystemModel, QTreeView)
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
@@ -44,14 +45,29 @@ class TwoLines(QWidget):
         # bottom.setFrameShape(QFrame.StyledPanel)
         self.bottom.setText(self.top.currentItem().text())
 
+        # ls dir 
+        dir_path = '/tmp'
+        self.model = QFileSystemModel()
+        self.model.setRootPath(dir_path)
+        
+        self.tree = QTreeView()
+        self.tree.setModel(self.model)
+        self.tree.setRootIndex(self.model.index(dir_path))
+        self.tree.setAnimated(True)
+        self.tree.setIndentation(30)
+        self.tree.setSortingEnabled(True)
+        
         # TABS
         tab_synopsys = QWidget()
         tab_lsdir = QWidget()
 
-        vbox = QVBoxLayout()
-        vbox.addWidget(self.bottom)
-
-        tab_synopsys.setLayout(vbox)
+        vbox_0 = QVBoxLayout()
+        vbox_0.addWidget(self.bottom)
+        tab_synopsys.setLayout(vbox_0)
+        
+        vbox_1 = QVBoxLayout()
+        vbox_1.addWidget(self.tree)
+        tab_lsdir.setLayout(vbox_1)
 
         self.tabs.addTab(tab_synopsys, "Info")
         self.tabs.addTab(tab_lsdir, "lst dir")
