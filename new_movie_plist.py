@@ -11,10 +11,14 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QTextEdit, QAction)
 import splitter
 
 
-class Example(QMainWindow):
-    def __init__(self):
+class Window(QMainWindow):
+    def __init__(self, s_list, us_list, m_seen, m_unseen):
         super().__init__()
-        self.two_lines = splitter.TwoLines()
+        self.two_lines = splitter.TwoLines(us_list, m_unseen)
+        self.seen_list = s_list
+        self.unseen_list = us_list
+        self.seen_dict = m_seen
+        self.unseen_dict = m_unseen
 
         self.init_ui()
 
@@ -57,17 +61,21 @@ class Example(QMainWindow):
     def unseenmovies(self):
         # botão 'unseen'
         self.two_lines.top.clear()
-        self.two_lines.top.addItem('unseen')
+        self.two_lines.top.addItem(self.unseen_list)
         self.two_lines.top.setCurrentRow(0)
+        self.two_lines.current_dict = self.unseen_dict
 
     def seenmovies(self):
         # botão 'seen'
-        self.two_lines.top.clear()
-        self.two_lines.top.addItem('already seen')
-        self.two_lines.top.setCurrentRow(0)
+        if len(self.seen_list) > 1:
+            self.two_lines.top.clear()
+            self.two_lines.top.addItem(self.seen_list)
+            self.two_lines.top.setCurrentRow(0)
+            self.two_lines.current_dict = self.seen_dict
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
+#if __name__ == '__main__':
+#    app = QApplication(sys.argv)
+#    ex = Window()
+#    sys.exit(app.exec_())
+

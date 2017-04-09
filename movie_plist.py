@@ -1,71 +1,66 @@
 #!/usr/bin/python3
 # -*-coding-utf8-*
-import sys, os
+import sys
 from pathlib import Path
-from subprocess import Popen
-# import urllib3
-# import time # to see how long a job takes
 from PyQt5.QtWidgets import QApplication
-# movie_plist stuff
-from conf.global_conf import movie_plist_stuff_html_dir as html_dir
 from conf.global_conf import internet_on
-import html_file.create_page
-from data.pyscan import PyScan
+from data.pyscan import dir_to_scan
 from info_in_db.movie_plist_sqlite3 import DataStorage
-from pyqt_gui.main_gui import Window
+from new_movie_plist import Window
+import urllib.request
+from data import pimdbdata
 
 
-def check_pushto_db(url_got, p_html):
+def create_dicts(s_dir):
     """
-        if movie info is not in db put data in it
-        also call create_page (html) module
+    
     """
-    data_to_html = list()
+    movie_seen = dict()
+    movie_unseen = dict()
     stored_data = DataStorage()
-    movies_stored = stored_data.check_movie()
+    movies_stored = str(stored_data.movie_url())
     # check if the movie info is in movie_plist_sqlite3.db
-    # if not, put it in there
-    for url, path, movie_file in url_got:
-        if url not in movies_stored:
-            data_to_html.append(stored_data.insert_data(url, path, movie_file))
+    for i in dir_to_scan(s_dir):
+        # print(i)
+        html = urllib.request.urlopen(i[0]).read()
+        movie = pimdbdata.ParseImdbData(html)
+        title = movie.title_year()
+        # print(movies_stored)
+        if i[0] in movies_stored:
+            movie_seen[title] = i
+        else:
+            movie_unseen[title] = i
 
     stored_data.exit_from_db()
 
-    html_file.create_page.generate_html(p_html, data_to_html)
+    return movie_seen, movie_unseen
 
 
 def main(d_scan):
-    # scan the directory
-    obtain_url = PyScan(d_scan)
-    obtain_url = obtain_url.dir_to_scan()
+    # will check data in db and create dict - two
+    movie_seen, movie_unseen = create_dicts(d_scan)
+    # send the two dicts to new_movie_plist.py file. A class
+    seen_list = [s for s in movie_seen.keys()]
+    unseen_list = [us for us in movie_unseen.keys()]
 
-    # will push data to db if necessary
-    # and call create_page.generate_html
-    dir_to_html = html_dir + '/index.html'
-    check_pushto_db(obtain_url, dir_to_html)
-
-    # start a cgi http server
-    # after change directory
-    cgi_server = html_dir + '/simple_httpd.py'
-    dir_now = os.path.join(os.path.dirname(__file__))
-    run_at = os.path.join(html_dir)
-    os.chdir(run_at)
-    run_cgi = ['/usr/bin/python3', cgi_server]
-    proc = Popen(run_cgi)
-    os.chdir(dir_now)
+    # print(seen_list)
+    # print(unseen_list)
+    # print(movie_seen)
+    # print(movie_unseen)
 
     # launch movie_plist
     app = QApplication(sys.argv)
-    ex = Window(dir_to_html)
-    sys.exit([app.exec_(), proc.terminate()])
+    ex = Window(seen_list, unseen_list, movie_seen, movie_unseen)
+    sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     net_status = internet_on()
     if net_status == 200:
-        print('Internet Connection: ok - {}' .format(net_status))
+        print('Internet Connection: ok - {}'.format(net_status))
         # if len(sys.argv) is 2:
         #    path_dir_scan = sys.argv[1]
-        #else:
+        # else:
 
         path_dir_scan = input(" Do the scan in which directory ? ")
 
