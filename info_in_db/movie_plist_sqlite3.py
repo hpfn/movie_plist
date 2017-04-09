@@ -1,7 +1,6 @@
 import sqlite3
-import urllib.request
-
-from data import pimdbdata
+# import urllib.request
+# from data import pimdbdata
 import conf.global_conf
 
 # http://stackoverflow.com/questions/21360271/pythons-sqlite3-module-exceptions-where-is-the-documentation
@@ -15,28 +14,23 @@ class DataStorage(object):
             db_file = path_to_db + '/movile_plist-sqlite3.db'
             self.conn = sqlite3.connect(db_file)
             self.c = self.conn.cursor()
-            self.c.execute('''create table if not exists movie_plist (url UNIQUE,
-                           title_year TEXT, director, writers_list, actors_list,
-                           snps_txt TEXT, path, moviefile, watch INTEGER, poster TEXT)''')
+            self.c.execute('''create table if not exists movie_plist
+            (url UNIQUE)''')
             self.conn.commit()
         except sqlite3.Error as err:
             if self.conn:
                 self.conn.rollback()
             raise err
 
-    def insert_data(self, url, path, moviefile):
+    def insert_data(self, url):
         """
-            data does not exist in database
-            return the data inserted to .html file. This
-            avoid query the db more than needed
          """
         try:
             with self.conn:
-                html = urllib.request.urlopen(url).read()
-                movie = pimdbdata.ParseImdbData(html)
-                m_data = [url, movie.title_year(), movie.director(), ' '.join(movie.creator_writers()),
-                          ' '.join(movie.actors()), movie.synopsis(), path, moviefile, 0, movie.movie_poster()]
-                self.conn.execute('insert into movie_plist values (?,?,?,?,?,?,?,?,?,?)', m_data)
+                # html = urllib.request.urlopen(url).read()
+                # movie = pimdbdata.ParseImdbData(html)
+                # m_data = [url, movie.title_year(), path]
+                self.conn.execute('insert into movie_plist values (?)', url)
                 self.conn.commit()
                 return m_data
         except sqlite3.IntegrityError:
@@ -44,57 +38,13 @@ class DataStorage(object):
                 self.conn.rollback()
             print("Record already exists")
 
-    def movie_unseen(self):
-        self.c.execute('select * from movie_plist where watch="0" ')
-        return self.c.fetchall()
-        #return list(self.c.fetchall())
-
-    def movie_title_list(self):
-        self.c.execute('select title_year from movie_plist')
-        return self.c.fetchall()
-        # return list(self.c.fetchall())
-
-    def movie_seen(self):
-        self.c.execute('select title_year from movie_plist where watch="1"')
-        return  self.c.fetchall()
-
-    def movie_to_watchagain(self, title):
-        print(type(title))
-        self.c.execute('select path, moviefile from movie_plist where title_year=? ', (title,))
-        return self.c.fetchone()
-
-    def no_movie_yet(self):
-        self.c.execute('select title_year from movie_plist where moviefile="No_movie_file_yet"')
-        return self.c.fetchall()
-        # return list(self.c.fetchall())
-
-    def movie_path(self, t_y):
-        self.c.execute('select path from movie_plist where title_year=? ', (t_y,))
-        return self.c.fetchone()
-
-    def update_movie_file(self, movie_f, t_y):
-        self.conn.execute("update movie_plist set moviefile=? where title_year=? ", (movie_f, t_y))
-        self.conn.commit()
-
-    def update_movie_watch(self, mark, t_y):
-        self.conn.execute("update movie_plist set watch=? where title_year=? ", (mark, t_y))
-        self.conn.commit()
-
-    def movie_delete(self, t_y):
-        self.conn.execute("delete from movie_plist where title_year=? ", (t_y,))
-        self.conn.commit()
-
-    def check_movie(self):
-        self.c.execute("select url from movie_plist")  # where url=?", url)
+    def movie_url(self):
+        self.c.execute("select url from movie_plist")
         return str(self.c.fetchall())
 
-    def movie_select_one(self, t_y, state):
-        self.c.execute('select title_year from movie_plist where title_year=? and watch=? ', (t_y, state))
-        return self.c.fetchone()
-
-    def movie_synopsis(self, t_y):
-        self.c.execute('select snps_txt from movie_plist where title_year=?', (t_y,))
-        return self.c.fetchone()
+    def movie_delete(self, url):
+        self.conn.execute("delete from movie_plist where url=? ", (url))
+        self.conn.commit()
 
     def exit_from_db(self):
         self.conn.close()
