@@ -91,6 +91,7 @@ class TwoLines(QWidget):
         html = urllib.request.urlopen(url).read()
         movie = pimdbdata.ParseImdbData(html)
         poster = movie.movie_poster()
+        synopsis = movie.synopsis()
         # print(poster)
         # if no internet, commented
         img = QImage()  # (8,10,4)
@@ -98,7 +99,7 @@ class TwoLines(QWidget):
         #        "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5Mzg3NjI4OF5BMl5BanBnXkFtZTgwNzA3Mzg4MDI@._V1_UX182_CR0,0,182,268_AL_.jpg").read()
         img.loadFromData(data)
         img.save('picture.png')
-        texto = '<html><table><td><img src="picture.png"></td><td>' + self.top.currentItem().text() + '</td></table></html>'
+        texto = '<html><table><td><img src="picture.png"></td><td>' + synopsis + '</td></table></html>'
         self.bottom.setText(texto)
 
     def ls_current_dir(self):
