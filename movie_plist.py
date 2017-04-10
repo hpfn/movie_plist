@@ -44,6 +44,8 @@ def main(d_scan):
     seen_list = [s for s in movie_seen.keys()]
     unseen_list = [us for us in all_movies.keys()]
     all_movies.update(movie_seen)
+    # .clear() ?
+    movie_seen = {}
 
     # print(seen_list)
     # print(unseen_list)
