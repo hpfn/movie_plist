@@ -9,12 +9,13 @@ from subprocess import call
 # import sys
 # import time
 import urllib.request
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, 
-        QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
+                             QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import urllib.request
 from data import pimdbdata
+
 
 class TwoLines(QWidget):
     def __init__(self, first_list, unseen_d):
@@ -23,7 +24,7 @@ class TwoLines(QWidget):
         self.first_list = first_list
         # self.seen_d = seen_d
         # self.unseen_d = unseen_d
-        self. current_dict = unseen_d
+        self.current_dict = unseen_d
         self.tabs = QTabWidget()
         # movie info
         self.tab_synopsys = QWidget()
@@ -44,11 +45,11 @@ class TwoLines(QWidget):
         hbox = QHBoxLayout(self)
 
         # will be the scan result (unseen)
-        list_items = ['unseen 1', 'unseen 2', 'unseen 3']
+        # list_items = ['unseen 1', 'unseen 2', 'unseen 3']
         self.top.addItems(self.first_list)
         self.top.setCurrentRow(0)
         # self.top.itemClicked.connect(self.top.Clicked)
-        #self.bottom.setText(self.top.currentItem().text())
+        # self.bottom.setText(self.top.currentItem().text())
 
         # TAB movie infor
         self.data_to_show()
@@ -60,7 +61,7 @@ class TwoLines(QWidget):
         def clicked_movie():
             item = self.tree.selectedIndexes()[0]
             file_to_play = item.model().filePath(item)
-            if file_to_play.endswith(('.avi','mp4', '.mkv')):
+            if file_to_play.endswith(('.avi', 'mp4', '.mkv')):
                 call(['/usr/bin/mpv', file_to_play])
 
         def changed_item():
@@ -119,7 +120,6 @@ class TwoLines(QWidget):
         # self.tree.AdjustToContents = 2
         self.tree.setAnimated(True)
         self.tree.setIndentation(30)
-        
 
     def on_changed(self, text):
         self.lbl.setText(text)
