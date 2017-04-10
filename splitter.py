@@ -5,25 +5,20 @@
 from zetcode tutorial
 """
 
+from subprocess import call
 # import sys
 # import time
 import urllib.request
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-                             QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, 
+        QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-import urllib.request
-from data import pimdbdata
 
 
 class TwoLines(QWidget):
-    def __init__(self, first_list, unseen_d):  # , unseen_d):
+    def __init__(self):
         super().__init__()
         self.top = QListWidget()
-        self.first_list = first_list
-        # self.seen_d = seen_d
-        # self.unseen_d = unseen_d
-        self. current_dict = unseen_d
         self.tabs = QTabWidget()
         # movie info
         self.tab_synopsys = QWidget()
@@ -44,11 +39,11 @@ class TwoLines(QWidget):
         hbox = QHBoxLayout(self)
 
         # will be the scan result (unseen)
-        # list_items = ['unseen 1', 'unseen 2', 'unseen 3']
-        self.top.addItems(self.first_list)
+        list_items = ['unseen 1', 'unseen 2', 'unseen 3']
+        self.top.addItems(list_items)
         self.top.setCurrentRow(0)
         # self.top.itemClicked.connect(self.top.Clicked)
-        # self.bottom.setText(self.top.currentItem().text())
+        #self.bottom.setText(self.top.currentItem().text())
 
         # TAB movie infor
         self.data_to_show()
@@ -57,12 +52,19 @@ class TwoLines(QWidget):
         # TABS
         self.set_tabs()
 
+        def clicked_movie():
+            item = self.tree.selectedIndexes()[0]
+            file_to_play = item.model().filePath(item)
+            if file_to_play.endswith(('.avi','mp4', '.mkv')):
+                call(['/usr/bin/mpv', file_to_play])
+
         def changed_item():
             if self.top.currentItem():
                 self.data_to_show()
                 self.ls_current_dir()
 
         self.top.currentItemChanged.connect(changed_item)
+        self.tree.doubleClicked.connect(clicked_movie)
 
         splitter1 = QSplitter(Qt.Vertical)
         splitter1.addWidget(self.top)
@@ -87,31 +89,25 @@ class TwoLines(QWidget):
 
     def data_to_show(self):
         """ get data from a dict or named_tupla """
-        url = self.current_dict[self.top.currentItem().text()][0]
-        html = urllib.request.urlopen(url).read()
-        movie = pimdbdata.ParseImdbData(html)
-        poster = movie.movie_poster()
-        synopsis = movie.synopsis()
-        # print(poster)
         # if no internet, commented
-        img = QImage()  # (8,10,4)
-        data = urllib.request.urlopen(poster).read()
+        #img = QImage()  # (8,10,4)
+        #data = urllib.request.urlopen(
         #        "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5Mzg3NjI4OF5BMl5BanBnXkFtZTgwNzA3Mzg4MDI@._V1_UX182_CR0,0,182,268_AL_.jpg").read()
-        img.loadFromData(data)
-        img.save('picture.png')
-        texto = '<html><table><td><img src="picture.png"></td><td>' + synopsis + '</td></table></html>'
+        #img.loadFromData(data)
+        #img.save('picture.png')
+        texto = '<html><table><td><img src="picture.png"></td><td>' + self.top.currentItem().text() + '</td></table></html>'
         self.bottom.setText(texto)
 
     def ls_current_dir(self):
-        dir_to_path = self.current_dict[self.top.currentItem().text()][1]
-        # dir_to_path = "/tmp"
+        dir_to_path = "/tmp"
         self.lsdir.setRootPath(dir_to_path)
         self.tree.setModel(self.lsdir)
         self.tree.setRootIndex(self.lsdir.index(dir_to_path))
-        # self.tree.resizeColumnToContents(100)
-        # self.tree.AdjustToContents = 2
+        #self.tree.resizeColumnToContents(100)
+        self.tree.AdjustToContents = 2
         self.tree.setAnimated(True)
         self.tree.setIndentation(30)
+        
 
     def on_changed(self, text):
         self.lbl.setText(text)
