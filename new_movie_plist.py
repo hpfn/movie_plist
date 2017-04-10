@@ -61,7 +61,7 @@ class Window(QMainWindow):
     def unseenmovies(self):
         # botão 'unseen'
         self.two_lines.top.clear()
-        self.two_lines.top.addItem(self.unseen_list)
+        self.two_lines.top.addItems(self.unseen_list)
         self.two_lines.top.setCurrentRow(0)
         # self.two_lines.current_dict = self.unseen_dict
 
@@ -69,7 +69,7 @@ class Window(QMainWindow):
         # botão 'seen'
         if len(self.seen_list) > 1:
             self.two_lines.top.clear()
-            self.two_lines.top.addItem(self.seen_list)
+            self.two_lines.top.addItems(self.seen_list)
             self.two_lines.top.setCurrentRow(0)
             # self.two_lines.current_dict = self.seen_dict
 
