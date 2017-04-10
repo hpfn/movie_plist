@@ -18,13 +18,13 @@ from data import pimdbdata
 
 
 class TwoLines(QWidget):
-    def __init__(self, first_list, unseen_d):
+    def __init__(self, first_list, all_movies):
         super().__init__()
         self.top = QListWidget()
         self.first_list = first_list
         # self.seen_d = seen_d
         # self.unseen_d = unseen_d
-        self.current_dict = unseen_d
+        self.current_dict = all_movies
         self.tabs = QTabWidget()
         # movie info
         self.tab_synopsys = QWidget()

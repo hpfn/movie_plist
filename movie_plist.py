@@ -38,10 +38,12 @@ def create_dicts(s_dir):
 
 def main(d_scan):
     # will check data in db and create dict - two
-    movie_seen, movie_unseen = create_dicts(d_scan)
+    # unseen now is all_movies
+    movie_seen, all_movies = create_dicts(d_scan)
     # send the two dicts to new_movie_plist.py file. A class
     seen_list = [s for s in movie_seen.keys()]
-    unseen_list = [us for us in movie_unseen.keys()]
+    unseen_list = [us for us in all_movies.keys()]
+    all_movies.update(movie_seen)
 
     # print(seen_list)
     # print(unseen_list)
@@ -50,7 +52,7 @@ def main(d_scan):
 
     # launch movie_plist
     app = QApplication(sys.argv)
-    ex = Window(seen_list, unseen_list, movie_seen, movie_unseen)
+    ex = Window(seen_list, unseen_list, all_movies)
     sys.exit(app.exec_())
 
 
