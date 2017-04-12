@@ -49,6 +49,7 @@ class TwoLines(QWidget):
         # list_items = ['unseen 1', 'unseen 2', 'unseen 3']
         self.top.addItems(self.first_list)
         self.top.setCurrentRow(0)
+        self.top.setContextMenuPolicy(Qt.CustomContextMenu)
         # self.top.itemClicked.connect(self.top.Clicked)
         # self.bottom.setText(self.top.currentItem().text())
 
@@ -58,6 +59,9 @@ class TwoLines(QWidget):
         self.ls_current_dir()
         # TABS
         self.set_tabs()
+
+        def right_click():
+            print("OLA")
 
         def clicked_movie():
             item = self.tree.selectedIndexes()[0]
@@ -71,6 +75,7 @@ class TwoLines(QWidget):
                 self.ls_current_dir()
 
         self.top.currentItemChanged.connect(changed_item)
+        self.top.customContextMenuRequested.connect(right_click)
         self.tree.doubleClicked.connect(clicked_movie)
 
         splitter1 = QSplitter(Qt.Vertical)
