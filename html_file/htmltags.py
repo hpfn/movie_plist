@@ -29,19 +29,19 @@ class HtmlTags:
         """
         
         """
-        x = 59
-        y = 59
+        x = 60
+        y = 60
         s_list = list(self.synopsis)
         list_size = len(s_list)
         for i in s_list[x:]:
-            if i is ' ':
+            if i is ' ' and y < list_size:
                 place = s_list[x:].index(i)
                 s_list[x+place] = '<br>'
                 x *= 2
                 y = x
             else:
                 y += 1
-            if y > list_size: break
+            #if y > list_size: break
 
         # print("<tr valign=\"top\">", file=self.open_file)
         self.context += "<td>\n<img src=\"/tmp/picture.png\"></td>"
