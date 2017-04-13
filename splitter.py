@@ -9,10 +9,10 @@ from subprocess import call
 # import sys
 # import time
 import urllib.request
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QMenu, QAction,
                              QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QCursor, QImage
 import urllib.request
 from data import pimdbdata
 from html_file.htmltags import HtmlTags
@@ -36,7 +36,7 @@ class TwoLines(QWidget):
         self.lsdir_vbox = QVBoxLayout()
         # movie info
         self.bottom = QLabel()
-        # ls content of the current dir
+        # ls content of the current dirQt.CustomContextMenu
         self.lsdir = QFileSystemModel()
         self.tree = QTreeView()
 
@@ -61,7 +61,23 @@ class TwoLines(QWidget):
         self.set_tabs()
 
         def right_click():
-            print("OLA")
+            menu = QMenu()
+
+            m_seen_action = QAction('Mark as Seen', self)
+            # unseenAction.setShortcut()
+            m_seen_action.setStatusTip('Mark as Seen')
+            m_seen_action.triggered.connect(self.m_seen_movies)
+
+            m_rm_action = QAction('Remove from Database', self)
+            # unseenAction.setShortcut()
+            m_rm_action.setStatusTip('Remove from Database')
+            m_rm_action.triggered.connect(self.m_rm_from_db)
+
+            menu.addAction(m_seen_action)
+            menu.addAction(m_rm_action)
+
+            # posição do menu na tela
+            menu.exec_(QCursor.pos())
 
         def clicked_movie():
             item = self.tree.selectedIndexes()[0]
@@ -100,7 +116,12 @@ class TwoLines(QWidget):
         self.tabs.addTab(self.tab_ls_dir, "ls dir")
 
     def data_to_show(self):
-        """ get data from a dict """
+        """ 
+        call HtmlTags to build html with
+        a poster and a synopsis and put
+        the result on 'bottom'
+        obs: must lines should go to HtmlTags
+        """
         url = self.current_dict[self.top.currentItem().text()][0]
         html = urllib.request.urlopen(url).read()
         movie = pimdbdata.ParseImdbData(html)
@@ -111,7 +132,6 @@ class TwoLines(QWidget):
         img.loadFromData(data)
         img.save('/tmp/picture.png')
         context = HtmlTags(url, synopsis)
-        #texto = '<html><table><td><img src="picture.png"></td><td>' + synopsis + '</td></table></html>'
         self.bottom.setText(context.context)
 
     def ls_current_dir(self):
@@ -120,10 +140,25 @@ class TwoLines(QWidget):
         self.lsdir.setRootPath(dir_to_path)
         self.tree.setModel(self.lsdir)
         self.tree.setRootIndex(self.lsdir.index(dir_to_path))
-        # self.tree.resizeColumnToContents(100)
+        self.tree.setColumnWidth(0, 450)
         # self.tree.AdjustToContents = 2
         self.tree.setAnimated(True)
         self.tree.setIndentation(30)
+
+    def m_seen_movies(self):
+        """
+        mark a movie as seen. 
+        check unseen list and seen list
+        check on db if it is already a seen movie
+        """
+        print('mark as seem {}' .format(self.top.currentItem().text()))
+
+    def m_rm_from_db(self):
+        """
+        remove from current list and from db
+        the user remove from HD
+        """
+        print('remove from db : {}' .format(self.top.currentItem().text()))
 
     def on_changed(self, text):
         self.lbl.setText(text)
