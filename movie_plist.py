@@ -38,12 +38,12 @@ def create_dicts(s_dir):
 
 def main(d_scan):
     # will check data in db and create dict - two
-    # unseen now is all_movies
-    movie_seen, all_movies = create_dicts(d_scan)
+    # seen movies now are all_movies
+    all_movies, unseen_movies = create_dicts(d_scan)
     # send the two dicts to new_movie_plist.py file. A class
-    seen_list = [s for s in movie_seen.keys()]
-    unseen_list = [us for us in all_movies.keys()]
-    all_movies.update(movie_seen)
+    seen_list = [s for s in all_movies.keys()]
+    unseen_list = [us for us in unseen_movies.keys()]
+    all_movies.update(unseen_movies)
     # .clear() ?
     movie_seen = {}
 
