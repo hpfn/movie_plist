@@ -14,7 +14,7 @@ import splitter
 class Window(QMainWindow):
     def __init__(self, s_list, us_list, all_movies): #m_seen, m_unseen):
         super().__init__()
-        self.two_lines = splitter.TwoLines(us_list, all_movies)
+        self.two_lines = splitter.TwoLines(s_list, us_list, all_movies)
         self.seen_list = s_list
         self.unseen_list = us_list
         #self.seen_dict = m_seen
@@ -61,14 +61,16 @@ class Window(QMainWindow):
     def unseenmovies(self):
         # botão 'unseen'
         self.two_lines.top.clear()
+        self.two_lines.current_list = self.unseen_list
         self.two_lines.top.addItems(self.unseen_list)
         self.two_lines.top.setCurrentRow(0)
         # self.two_lines.current_dict = self.unseen_dict
 
     def seenmovies(self):
         # botão 'seen'
-        if len(self.seen_list) > 1:
+        if len(self.seen_list) > 0:
             self.two_lines.top.clear()
+            self.two_lines.current_list = self.seen_list
             self.two_lines.top.addItems(self.seen_list)
             self.two_lines.top.setCurrentRow(0)
             # self.two_lines.current_dict = self.seen_dict

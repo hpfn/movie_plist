@@ -30,9 +30,9 @@ class DataStorage(object):
                 # html = urllib.request.urlopen(url).read()
                 # movie = pimdbdata.ParseImdbData(html)
                 # m_data = [url, movie.title_year(), path]
-                self.conn.execute('insert into movie_plist values (?)', url)
+                self.conn.execute('insert into movie_plist values (?)', (url,))
                 self.conn.commit()
-                return m_data
+                # return m_data
         except sqlite3.IntegrityError:
             if self.conn:
                 self.conn.rollback()
@@ -42,8 +42,12 @@ class DataStorage(object):
         self.c.execute("select url from movie_plist")
         return str(self.c.fetchall())
 
+    def movie_isregistered(self, url):
+        self.c.execute("select url from movie_plist where url=(?) ", (url,))
+        return self.c.fetchone()
+
     def movie_delete(self, url):
-        self.conn.execute("delete from movie_plist where url=? ", (url))
+        self.conn.execute("delete from movie_plist where url=(?) ", (url,))
         self.conn.commit()
 
     def exit_from_db(self):

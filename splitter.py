@@ -16,13 +16,16 @@ from PyQt5.QtGui import QCursor, QImage
 import urllib.request
 from data import pimdbdata
 from html_file.htmltags import HtmlTags
+from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
 class TwoLines(QWidget):
-    def __init__(self, first_list, all_movies):
+    def __init__(self, s_list, us_list, all_movies):
         super().__init__()
         self.top = QListWidget()
-        self.first_list = first_list
+        self.current_list = us_list
+        self.us_list = us_list
+        self.s_list = s_list
         # self.seen_d = seen_d
         # self.unseen_d = unseen_d
         self.current_dict = all_movies
@@ -47,7 +50,7 @@ class TwoLines(QWidget):
 
         # will be the scan result (unseen)
         # list_items = ['unseen 1', 'unseen 2', 'unseen 3']
-        self.top.addItems(self.first_list)
+        self.top.addItems(self.current_list)
         self.top.setCurrentRow(0)
         self.top.setContextMenuPolicy(Qt.CustomContextMenu)
         # self.top.itemClicked.connect(self.top.Clicked)
@@ -151,7 +154,18 @@ class TwoLines(QWidget):
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        print('mark as seem {}' .format(self.top.currentItem().text()))
+        title_year = self.top.currentItem().text()
+        url = self.current_dict[title_year][0]
+        stored_data = DataStorage()
+        if stored_data.movie_isregistered(url):
+            pass
+        else:
+            item = self.top.currentItem().text()
+            self.current_list.remove(item)
+            self.top.takeItem(self.top.currentRow())
+            self.s_list.append(item)
+            stored_data.insert_data(url)
+            #print('mark as seem {}' .format(self.top.currentItem().text()))
 
     def m_rm_from_db(self):
         """
