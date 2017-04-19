@@ -6,17 +6,12 @@ from zetcode tutorial
 """
 
 from subprocess import call
-# import sys
-# import time
-import urllib.request
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QMenu, QAction,
                              QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QCursor, QImage
-import urllib.request
-from data import pimdbdata
+from PyQt5.QtGui import QCursor  # , QImage
 from html_file.htmltags import HtmlTags
-from info_in_db.movie_plist_sqlite3 import DataStorage
+
 
 
 class TwoLines(QWidget):
@@ -48,8 +43,6 @@ class TwoLines(QWidget):
     def init_ui(self):
         hbox = QHBoxLayout(self)
 
-        # will be the scan result (unseen)
-        # list_items = ['unseen 1', 'unseen 2', 'unseen 3']
         self.top.addItems(self.current_list)
         self.top.setCurrentRow(0)
         self.top.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -126,27 +119,15 @@ class TwoLines(QWidget):
         obs: must lines should go to HtmlTags
         """
         url = self.current_dict[self.top.currentItem().text()][0]
-        html = urllib.request.urlopen(url).read()
-        movie = pimdbdata.ParseImdbData(html)
-        poster = movie.movie_poster()
-        synopsis = movie.synopsis()
-        img = QImage()  # (8,10,4)
-        data = urllib.request.urlopen(poster).read()
-        img.loadFromData(data)
-        img.save('/tmp/picture.png')
-        context = HtmlTags(url, synopsis)
+        context = HtmlTags(url)
         self.bottom.setText(context.context)
 
     def ls_current_dir(self):
         dir_to_path = self.current_dict[self.top.currentItem().text()][1]
-        # dir_to_path = "/tmp"
         self.lsdir.setRootPath(dir_to_path)
         self.tree.setModel(self.lsdir)
         self.tree.setRootIndex(self.lsdir.index(dir_to_path))
         self.tree.setColumnWidth(0, 450)
-        # self.tree.AdjustToContents = 2
-        self.tree.setAnimated(True)
-        self.tree.setIndentation(30)
 
     def m_seen_movies(self):
         """
@@ -154,25 +135,39 @@ class TwoLines(QWidget):
         check unseen list and seen list
         check on db if it is already a seen movie
         """
+        from info_in_db.movie_plist_sqlite3 import DataStorage
+
         title_year = self.top.currentItem().text()
         url = self.current_dict[title_year][0]
         stored_data = DataStorage()
+
         if stored_data.movie_isregistered(url):
             pass
         else:
-            item = self.top.currentItem().text()
-            self.current_list.remove(item)
+            self.current_list.remove(title_year)
             self.top.takeItem(self.top.currentRow())
-            self.s_list.append(item)
+            self.s_list.append(title_year)
             stored_data.insert_data(url)
-            #print('mark as seem {}' .format(self.top.currentItem().text()))
 
     def m_rm_from_db(self):
         """
         remove from current list and from db
         the user remove from HD
         """
-        print('remove from db : {}' .format(self.top.currentItem().text()))
+        from PyQt5.QtWidgets import QMessageBox
+        from info_in_db.movie_plist_sqlite3 import DataStorage
+
+        title_year = self.top.currentItem().text()
+        url = self.current_dict[title_year][0]
+        self.current_list.remove(title_year)
+        self.top.takeItem(self.top.currentRow())
+        stored_data = DataStorage()
+        stored_data.movie_delete(url)
+
+        msg = QMessageBox()
+        msg.setText(title_year + "\n removed from DB.\n Remove from HD yourself.")
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec()
 
     def on_changed(self, text):
         self.lbl.setText(text)
