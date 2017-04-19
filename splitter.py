@@ -55,39 +55,9 @@ class TwoLines(QWidget):
         # TABS
         self.set_tabs()
 
-        def right_click():
-            menu = QMenu()
-
-            m_seen_action = QAction('Mark as Seen', self)
-            # unseenAction.setShortcut()
-            m_seen_action.setStatusTip('Mark as Seen')
-            m_seen_action.triggered.connect(self.m_seen_movies)
-
-            m_rm_action = QAction('Remove from Database', self)
-            # unseenAction.setShortcut()
-            m_rm_action.setStatusTip('Remove from Database')
-            m_rm_action.triggered.connect(self.m_rm_from_db)
-
-            menu.addAction(m_seen_action)
-            menu.addAction(m_rm_action)
-
-            # posição do menu na tela
-            menu.exec_(QCursor.pos())
-
-        def clicked_movie():
-            item = self.tree.selectedIndexes()[0]
-            file_to_play = item.model().filePath(item)
-            if file_to_play.endswith(('.avi', 'mp4', '.mkv')):
-                call(['/usr/bin/mpv', file_to_play])
-
-        def changed_item():
-            if self.top.currentItem():
-                self.data_to_show()
-                self.ls_current_dir()
-
-        self.top.currentItemChanged.connect(changed_item)
-        self.top.customContextMenuRequested.connect(right_click)
-        self.tree.doubleClicked.connect(clicked_movie)
+        self.top.currentItemChanged.connect(self.changed_item)
+        self.top.customContextMenuRequested.connect(self.right_click)
+        self.tree.doubleClicked.connect(self.clicked_movie)
 
         # to choose a browser
         # self.labelOnlineHelp.linkActivated.connect(self.link_handler)
@@ -132,6 +102,30 @@ class TwoLines(QWidget):
         self.tree.setRootIndex(self.lsdir.index(dir_to_path))
         self.tree.setColumnWidth(0, 450)
 
+    def changed_item(self):
+        if self.top.currentItem():
+            self.data_to_show()
+            self.ls_current_dir()
+
+    def right_click(self):
+        menu = QMenu()
+
+        m_seen_action = QAction('Mark as Seen', self)
+        # unseenAction.setShortcut()
+        m_seen_action.setStatusTip('Mark as Seen')
+        m_seen_action.triggered.connect(self.m_seen_movies)
+
+        m_rm_action = QAction('Remove from Database', self)
+        # unseenAction.setShortcut()
+        m_rm_action.setStatusTip('Remove from Database')
+        m_rm_action.triggered.connect(self.m_rm_from_db)
+
+        menu.addAction(m_seen_action)
+        menu.addAction(m_rm_action)
+
+        # posição do menu na tela
+        menu.exec_(QCursor.pos())
+
     def m_seen_movies(self):
         """
         mark a movie as seen. 
@@ -171,6 +165,12 @@ class TwoLines(QWidget):
         msg.setText(title_year + "\n removed from DB.\n Remove from HD yourself.")
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec()
+
+    def clicked_movie(self):
+        item = self.tree.selectedIndexes()[0]
+        file_to_play = item.model().filePath(item)
+        if file_to_play.endswith(('.avi', 'mp4', '.mkv')):
+            call(['/usr/bin/mpv', file_to_play])
 
     def on_changed(self, text):
         self.lbl.setText(text)
