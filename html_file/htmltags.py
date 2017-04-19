@@ -56,15 +56,13 @@ class HtmlTags:
                 y = x
             else:
                 y += 1
-                # if y > list_size: break
 
-        # print("<tr valign=\"top\">", file=self.open_file)
+        self.synopsis = ''.join(s_list)
+
         self.context += "<td>\n<img src=\"/tmp/picture.png\"></td>"
 
         self.context += "<td width=\"70\">"
-        self.context += ''.join(s_list)
-        self.context += "<br>"
-        # self.context += self.synopsis + "<br>"
+        self.context += self.synopsis + "<br>"
         self.context += "<a href=\"" + self.url + "\">imdb</a><br>"
         self.context += "</td>"
 
