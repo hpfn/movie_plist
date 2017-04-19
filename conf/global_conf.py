@@ -6,7 +6,7 @@ import urllib3
 user_name = os.environ['USER']
 # first, main path
 movie_plist_stuff = '/home/' + user_name + '/.config/movie_plist'
-cfg_file = movie_plist_stuff + '/movie_plist.cfg
+cfg_file = movie_plist_stuff + '/movie_plist.cfg'
 
 
 # if path to movie_plist does not exist create one
