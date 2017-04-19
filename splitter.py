@@ -89,6 +89,10 @@ class TwoLines(QWidget):
         self.top.customContextMenuRequested.connect(right_click)
         self.tree.doubleClicked.connect(clicked_movie)
 
+        # to choose a browser
+        # self.labelOnlineHelp.linkActivated.connect(self.link_handler)
+        self.bottom.setOpenExternalLinks(True)
+
         splitter1 = QSplitter(Qt.Vertical)
         splitter1.addWidget(self.top)
         splitter1.addWidget(self.tabs)
