@@ -6,17 +6,33 @@
 import urllib.request
 
 from data import pimdbdata
+import urllib.request
+from PyQt5.QtGui import QImage
+from data import pimdbdata
 
 
 class HtmlTags:
-    def __init__(self, url, synopsis):
+    def __init__(self, url):
         self.url = url
-        self.synopsis = synopsis
         self.context = ''
 
+        self.first_steps()
         self.top_header()
         self.inside_table()
         self.bottom_tags()
+
+    def first_steps(self):
+        html = urllib.request.urlopen(self.url).read()
+        movie = pimdbdata.ParseImdbData(html)
+
+        self.synopsis = movie.synopsis()
+
+        poster = movie.movie_poster()
+        img = QImage()  # (8,10,4)
+        data = urllib.request.urlopen(poster).read()
+        img.loadFromData(data)
+        img.save('/tmp/picture.png')
+
 
     def top_header(self):
         """ from <html> tag until <table> tag """
