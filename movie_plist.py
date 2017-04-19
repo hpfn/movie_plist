@@ -3,7 +3,7 @@
 import sys
 from pathlib import Path
 from PyQt5.QtWidgets import QApplication
-from conf.global_conf import internet_on
+from conf.global_conf import internet_on, cfg_file
 from data.pyscan import dir_to_scan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 from new_movie_plist import Window
@@ -65,11 +65,15 @@ if __name__ == '__main__':
         # if len(sys.argv) is 2:
         #    path_dir_scan = sys.argv[1]
         # else:
-
-        path_dir_scan = input(" Do the scan in which directory ? ")
+        check_path = Path(cfg_file)
+        if check_path.is_file():
+            print("Arquivo existe. Pular pergunta.")
+        else:
+            path_dir_scan = input(" Do the scan in which directory ? ")
 
         check_path = Path(path_dir_scan)
         if not check_path.is_dir():
             print(" Please, check the path ")
         else:
+            print("The path will be saved.")
             main(path_dir_scan)
