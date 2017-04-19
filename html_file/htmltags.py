@@ -49,6 +49,7 @@ class HtmlTags:
         list_size = len(s_list)
         for i in s_list[x:]:
             if i is ' ' and y < list_size:
+                # a try/except here
                 place = s_list[x:].index(i)
                 s_list[x + place] = '<br>'
                 x *= 2
