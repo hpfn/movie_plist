@@ -4,8 +4,6 @@
 """
 
 import urllib.request
-
-from data import pimdbdata
 import urllib.request
 from PyQt5.QtGui import QImage
 from data import pimdbdata
@@ -15,6 +13,7 @@ class HtmlTags:
     def __init__(self, url):
         self.url = url
         self.context = ''
+        self.synopsis = ''
 
         self.first_steps()
         self.top_header()
@@ -33,13 +32,12 @@ class HtmlTags:
         img.loadFromData(data)
         img.save('/tmp/picture.png')
 
-
     def top_header(self):
         """ from <html> tag until <table> tag """
         self.context = ("<html><head>"
-                "<meta http-equiv=\"Content-Type\" content=\"text/html_file; charset=utf-8\">"
-                "</head><body>"
-                "<table>")
+                        "<meta http-equiv=\"Content-Type\" content=\"text/html_file; charset=utf-8\">"
+                        "</head><body>"
+                        "<table>")
 
     def inside_table(self):
         """
@@ -52,12 +50,12 @@ class HtmlTags:
         for i in s_list[x:]:
             if i is ' ' and y < list_size:
                 place = s_list[x:].index(i)
-                s_list[x+place] = '<br>'
+                s_list[x + place] = '<br>'
                 x *= 2
                 y = x
             else:
                 y += 1
-            #if y > list_size: break
+                # if y > list_size: break
 
         # print("<tr valign=\"top\">", file=self.open_file)
         self.context += "<td>\n<img src=\"/tmp/picture.png\"></td>"

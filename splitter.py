@@ -13,7 +13,6 @@ from PyQt5.QtGui import QCursor  # , QImage
 from html_file.htmltags import HtmlTags
 
 
-
 class TwoLines(QWidget):
     def __init__(self, s_list, us_list, all_movies):
         super().__init__()
