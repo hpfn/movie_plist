@@ -63,6 +63,10 @@ class TwoLines(QWidget):
         # self.labelOnlineHelp.linkActivated.connect(self.link_handler)
         self.bottom.setOpenExternalLinks(True)
 
+        # after organization (self methods), movie_plist has after exit:
+        # QBasicTimer::start: QBasicTimer can only be used
+        # with threads started with QThread
+
         splitter1 = QSplitter(Qt.Vertical)
         splitter1.addWidget(self.top)
         splitter1.addWidget(self.tabs)
