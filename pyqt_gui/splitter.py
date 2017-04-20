@@ -6,11 +6,11 @@ from zetcode tutorial
 """
 
 from subprocess import call
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QMenu, QAction,
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QAction,
                              QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QCursor  # , QImage
 from html_file.htmltags import HtmlTags
+from pyqt_gui.right_click_menu import RightClickMenu
 
 
 class TwoLines(QWidget):
@@ -48,7 +48,7 @@ class TwoLines(QWidget):
         # self.top.itemClicked.connect(self.top.Clicked)
         # self.bottom.setText(self.top.currentItem().text())
 
-        # TAB movie infor
+        # TAB movie info
         self.data_to_show()
         # TAB ls dir
         self.ls_current_dir()
@@ -109,68 +109,8 @@ class TwoLines(QWidget):
         self.tree.setRootIndex(self.lsdir.index(dir_to_path))
         self.tree.setColumnWidth(0, 450)
 
-#    def changed_item(self):
-#        if self.top.currentItem():
-#            self.data_to_show()
-#            self.ls_current_dir()
-
     def right_click(self):
-        menu = QMenu()
-
-        m_seen_action = QAction('Mark as Seen', self)
-        # unseenAction.setShortcut()
-        m_seen_action.setStatusTip('Mark as Seen')
-        m_seen_action.triggered.connect(self.m_seen_movies)
-
-        m_rm_action = QAction('Remove from Database', self)
-        # unseenAction.setShortcut()
-        m_rm_action.setStatusTip('Remove from Database')
-        m_rm_action.triggered.connect(self.m_rm_from_db)
-
-        menu.addAction(m_seen_action)
-        menu.addAction(m_rm_action)
-
-        menu.exec_(QCursor.pos())
-
-    def m_seen_movies(self):
-        """
-        mark a movie as seen. 
-        check unseen list and seen list
-        check on db if it is already a seen movie
-        """
-        from info_in_db.movie_plist_sqlite3 import DataStorage
-
-        title_year = self.top.currentItem().text()
-        url = self.current_dict[title_year][0]
-        stored_data = DataStorage()
-
-        if stored_data.movie_isregistered(url):
-            pass
-        else:
-            self.current_list.remove(title_year)
-            self.top.takeItem(self.top.currentRow())
-            self.s_list.append(title_year)
-            stored_data.insert_data(url)
-
-    def m_rm_from_db(self):
-        """
-        remove from current list and from db
-        the user remove from HD
-        """
-        from PyQt5.QtWidgets import QMessageBox
-        from info_in_db.movie_plist_sqlite3 import DataStorage
-
-        title_year = self.top.currentItem().text()
-        url = self.current_dict[title_year][0]
-        self.current_list.remove(title_year)
-        self.top.takeItem(self.top.currentRow())
-        stored_data = DataStorage()
-        stored_data.movie_delete(url)
-
-        msg = QMessageBox()
-        msg.setText(title_year + "\n removed from DB.\n Remove from HD yourself.")
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.exec()
+        menu = RightClickMenu(self.current_list, self.current_dict, self.top, self.s_list)
 
     def clicked_movie(self):
         item = self.tree.selectedIndexes()[0]
