@@ -55,17 +55,20 @@ class TwoLines(QWidget):
         # TABS
         self.set_tabs()
 
-        self.top.currentItemChanged.connect(self.changed_item)
+        # must be here because of QBasicTimer red msg
+        # QBasicTimer can only be used with threads started with QThread
+        def changed_item():
+            if self.top.currentItem():
+                self.data_to_show()
+                self.ls_current_dir()
+
+        self.top.currentItemChanged.connect(changed_item)
         self.top.customContextMenuRequested.connect(self.right_click)
         self.tree.doubleClicked.connect(self.clicked_movie)
 
         # to choose a browser
         # self.labelOnlineHelp.linkActivated.connect(self.link_handler)
         self.bottom.setOpenExternalLinks(True)
-
-        # after organization (self methods), movie_plist has after exit:
-        # QBasicTimer::start: QBasicTimer can only be used
-        # with threads started with QThread
 
         splitter1 = QSplitter(Qt.Vertical)
         splitter1.addWidget(self.top)
@@ -106,10 +109,10 @@ class TwoLines(QWidget):
         self.tree.setRootIndex(self.lsdir.index(dir_to_path))
         self.tree.setColumnWidth(0, 450)
 
-    def changed_item(self):
-        if self.top.currentItem():
-            self.data_to_show()
-            self.ls_current_dir()
+#    def changed_item(self):
+#        if self.top.currentItem():
+#            self.data_to_show()
+#            self.ls_current_dir()
 
     def right_click(self):
         menu = QMenu()
@@ -127,7 +130,6 @@ class TwoLines(QWidget):
         menu.addAction(m_seen_action)
         menu.addAction(m_rm_action)
 
-        # posição do menu na tela
         menu.exec_(QCursor.pos())
 
     def m_seen_movies(self):
