@@ -5,10 +5,10 @@
 from zetcode tutorial
 """
 
-import sys
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QTextEdit, QAction)
+from PyQt5.QtWidgets import (QMainWindow, QAction)
+
 # from PyQt5.QtCore import QIcon
-import splitter
+from pyqt_gui import splitter
 
 
 class Window(QMainWindow):
