@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 # -*-coding-utf8-*
 import sys
+import urllib.request
 from pathlib import Path
+
 from PyQt5.QtWidgets import QApplication
+
 from conf.global_conf import internet_on, cfg_file
+from data import pimdbdata
 from data.pyscan import dir_to_scan
 from info_in_db.movie_plist_sqlite3 import DataStorage
-from new_movie_plist import Window
-import urllib.request
-from data import pimdbdata
+from pyqt_gui.new_movie_plist import Window
 
 
 def create_dicts(s_dir):
@@ -45,7 +47,7 @@ def main(d_scan):
     unseen_list = [us for us in unseen_movies.keys()]
     all_movies.update(unseen_movies)
     # .clear() ?
-    movie_seen = {}
+    # movie_seen = {}
 
     # print(seen_list)
     # print(unseen_list)
