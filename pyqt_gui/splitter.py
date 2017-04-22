@@ -17,7 +17,10 @@ class TwoLines(QWidget):
     def __init__(self, s_list, us_list, all_movies):
         super().__init__()
         self.top = QListWidget()
-        self.current_list = us_list
+        if len(us_list) < 1:
+            self.current_list = s_list
+        else:
+            self.current_list = us_list
         self.us_list = us_list
         self.s_list = s_list
         # self.seen_d = seen_d
