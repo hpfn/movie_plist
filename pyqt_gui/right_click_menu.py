@@ -2,11 +2,12 @@ from PyQt5.QtWidgets import QMenu, QAction
 from PyQt5.QtGui import QCursor
 
 
-class RightClickMenu():
+class RightClickMenu:
     def __init__(self, current_list, current_dict, qt_list, s_list):
         self.current_item = qt_list.currentItem().text()
         self.current_list = current_list
-        self.current_dict = current_dict[self.current_item][0]
+        self.current_dict = current_dict
+        self.url = current_dict[self.current_item][0]
         self.qt_list = qt_list
         self.s_list = s_list
         self.menu = QMenu()
@@ -38,16 +39,16 @@ class RightClickMenu():
         from info_in_db.movie_plist_sqlite3 import DataStorage
 
         title_year = self.current_item
-        url = self.current_dict
+        # url = self.url
         stored_data = DataStorage()
 
-        if stored_data.movie_isregistered(url):
+        if stored_data.movie_isregistered(self.url):
             pass
         else:
             self.current_list.remove(title_year)
             self.qt_list.takeItem(self.qt_list.currentRow())
             self.s_list.append(title_year)
-            stored_data.insert_data(url)
+            stored_data.insert_data(self.url)
 
     def m_rm_from_db(self):
         """
@@ -58,11 +59,12 @@ class RightClickMenu():
         from info_in_db.movie_plist_sqlite3 import DataStorage
 
         title_year = self.current_item
-        url = self.current_dict
+        # url = self.current_dict
         self.current_list.remove(title_year)
         self.qt_list.takeItem(self.qt_list.currentRow())
+        del self.current_dict[title_year]
         stored_data = DataStorage()
-        stored_data.movie_delete(url)
+        stored_data.movie_delete(self.url)
 
         msg = QMessageBox()
         msg.setText(title_year + "\n removed from DB.\n Remove from HD yourself.")
