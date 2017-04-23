@@ -11,7 +11,7 @@ from conf.global_conf import cfg_file, read_path, write_path
 from data import pimdbdata
 from data.pyscan import dir_to_scan
 from info_in_db.movie_plist_sqlite3 import DataStorage
-from pyqt_gui.new_movie_plist import Window
+from pyqt_gui.main_window import Window
 
 
 def create_dicts(s_dir):
@@ -43,7 +43,7 @@ def main(d_scan):
     # will check data in db and create dict - two
     # seen movies now are all_movies
     all_movies, unseen_movies = create_dicts(d_scan)
-    # send the two dicts to new_movie_plist.py file. A class
+    # send the two dicts to main_window.py file. A class
     seen_list = [s for s in all_movies.keys()]
     unseen_list = [us for us in unseen_movies.keys()]
     all_movies.update(unseen_movies)
