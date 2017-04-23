@@ -4,4 +4,4 @@ Everything seems ready.
 
 TODO list: 
     - search
-    - update status bar
+    - update status bar from menu is missing
