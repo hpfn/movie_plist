@@ -33,14 +33,16 @@ class Window(QMainWindow):
         exit_action.setStatusTip('Exit app')
         exit_action.triggered.connect(self.close)
 
+        count_unseen = str(len(self.unseen_list))
         unseen_action = QAction('Unseen', self)
         # unseenAction.setShortcut()
-        unseen_action.setStatusTip('Unseen movies')
+        unseen_action.setStatusTip('Unseen movies: ' + count_unseen)
         unseen_action.triggered.connect(self.unseenmovies)
 
+        count_seen = str(len(self.seen_list))
         seen_action = QAction('Seen', self)
         # unseenAction.setShortcut()
-        seen_action.setStatusTip('Seen movies')
+        seen_action.setStatusTip('Seen movies: ' + count_seen)
         seen_action.triggered.connect(self.seenmovies)
 
         self.statusBar()
