@@ -1,6 +1,8 @@
 import os
+import sys
 from pathlib import Path
 import urllib3
+
 
 # user
 user_name = os.environ['USER']
@@ -8,11 +10,34 @@ user_name = os.environ['USER']
 movie_plist_stuff = '/home/' + user_name + '/.config/movie_plist'
 cfg_file = movie_plist_stuff + '/movie_plist.cfg'
 
-
 # if path to movie_plist does not exist create one
 check_path = Path(movie_plist_stuff)
 if not check_path.is_dir():
     os.system('/bin/mkdir -p ' + movie_plist_stuff)
+
+
+def read_path():
+    with open(cfg_file, 'r') as movie_plist_cfg:
+        cfg_path = movie_plist_cfg.readline()
+
+    chck_path = Path(cfg_path)
+    if chck_path.is_dir():
+        return cfg_path
+    else:
+        print("Invalid path in movie_plist.cfg file")
+        sys.exit(1)
+
+
+def write_path(cfg_path):
+    chck_path = Path(cfg_path)
+    if not chck_path.is_dir():
+        print(" Please, check the path. ")
+        sys.exit(2)
+    else:
+        with open(cfg_file, 'w') as cfg_write:
+            cfg_write.write(cfg_path)
+
+    return cfg_path
 
 
 def internet_on():

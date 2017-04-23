@@ -6,7 +6,8 @@ from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication
 
-from conf.global_conf import internet_on, cfg_file
+from conf.global_conf import internet_on
+from conf.global_conf import cfg_file, read_path, write_path
 from data import pimdbdata
 from data.pyscan import dir_to_scan
 from info_in_db.movie_plist_sqlite3 import DataStorage
@@ -47,7 +48,7 @@ def main(d_scan):
     unseen_list = [us for us in unseen_movies.keys()]
     all_movies.update(unseen_movies)
     # .clear() ?
-    movie_seen = {}
+    unseen_movies.clear()  # = {}
 
     # print(seen_list)
     # print(unseen_list)
@@ -63,19 +64,13 @@ def main(d_scan):
 if __name__ == '__main__':
     net_status = internet_on()
     if net_status == 200:
-        print('Internet Connection: ok - {}'.format(net_status))
-        # if len(sys.argv) is 2:
-        #    path_dir_scan = sys.argv[1]
-        # else:
         check_path = Path(cfg_file)
         if check_path.is_file():
-            print("Arquivo existe. Pular pergunta.")
+            path_dir_scan = read_path()
         else:
             path_dir_scan = input(" Do the scan in which directory ? ")
+            path_dir_scan = write_path(path_dir_scan)
 
-        check_path = Path(path_dir_scan)
-        if not check_path.is_dir():
-            print(" Please, check the path ")
-        else:
-            print("The path will be saved.")
-            main(path_dir_scan)
+        main(path_dir_scan)
+    else:
+        print(" Please, check your internet connection. ")
