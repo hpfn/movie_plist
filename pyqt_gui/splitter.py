@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-from zetcode tutorial
+most from zetcode tutorial
 """
 
 from subprocess import call
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QAction,
-                             QSplitter, QListWidget, QTabWidget, QFileSystemModel, QTreeView)
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSplitter,
+                             QListWidget, QTabWidget, QFileSystemModel, QTreeView)
 from PyQt5.QtCore import Qt
 from html_file.htmltags import HtmlTags
 from pyqt_gui.right_click_menu import RightClickMenu
@@ -23,8 +23,6 @@ class TwoLines(QWidget):
             self.current_list = us_list
         self.us_list = us_list
         self.s_list = s_list
-        # self.seen_d = seen_d
-        # self.unseen_d = unseen_d
         self.current_dict = all_movies
         self.tabs = QTabWidget()
         # movie info
@@ -83,7 +81,7 @@ class TwoLines(QWidget):
     def set_tabs(self):
         """ 
         movie info on one tab
-        ls dir on other tab
+        ls dir on the other tab
         """
         # tab one
         self.synopsys_vbox.addWidget(self.bottom)
@@ -96,20 +94,18 @@ class TwoLines(QWidget):
 
     def data_to_show(self):
         """ 
-        call HtmlTags to build html with
-        a poster and a synopsis and put
-        the result on 'bottom'
-        obs: must lines should go to HtmlTags
+        call HtmlTags to build html with a poster and a synopsis 
+        and put the result on self.bottom
         """
         url = self.current_dict[self.top.currentItem().text()][0]
         context = HtmlTags(url)
         self.bottom.setText(context.context)
 
     def ls_current_dir(self):
-        dir_to_path = self.current_dict[self.top.currentItem().text()][1]
-        self.lsdir.setRootPath(dir_to_path)
+        path_to_dir = self.current_dict[self.top.currentItem().text()][1]
+        self.lsdir.setRootPath(path_to_dir)
         self.tree.setModel(self.lsdir)
-        self.tree.setRootIndex(self.lsdir.index(dir_to_path))
+        self.tree.setRootIndex(self.lsdir.index(path_to_dir))
         self.tree.setColumnWidth(0, 450)
 
     def right_click(self):
