@@ -27,6 +27,8 @@ def dir_to_scan(scan_dir):
 
                 # colocar yield aqui. enviar para conferir se esta no db
                 # urls_movies.append([imdb_url, root])
+                # imdb_url will go to sqlite3 when marked as seen
+                # root will go to QTab-QTree
                 yield [imdb_url, root]
 
                 # return urls_movies
