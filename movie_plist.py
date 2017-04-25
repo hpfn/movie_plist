@@ -23,6 +23,9 @@ def create_dicts(s_dir):
     stored_data = DataStorage()
     movies_stored = str(stored_data.movie_url())
     # check if the movie info is in movie_plist_sqlite3.db
+    # if yes goes to movie_seen dict
+    # if not goes to movie_unseen dict
+    # dict's key is title_year of the movie
     for i in dir_to_scan(s_dir):
         # print(i)
         html = urllib.request.urlopen(i[0]).read()
@@ -40,20 +43,14 @@ def create_dicts(s_dir):
 
 
 def main(d_scan):
-    # will check data in db and create dict - two
     # seen movies now are all_movies
-    all_movies, unseen_movies = create_dicts(d_scan)
-    # send the two dicts to main_window.py file. A class
+    all_movies, movie_unseen = create_dicts(d_scan)
+    # create two lists from dicts
     seen_list = [s for s in all_movies.keys()]
-    unseen_list = [us for us in unseen_movies.keys()]
-    all_movies.update(unseen_movies)
-    # .clear() ?
-    unseen_movies.clear()  # = {}
-
-    # print(seen_list)
-    # print(unseen_list)
-    # print(movie_seen)
-    # print(movie_unseen)
+    unseen_list = [us for us in movie_unseen.keys()]
+    # merge dicts and clean unseen - probably smaller
+    all_movies.update(movie_unseen)
+    movie_unseen.clear()  # = {}
 
     # launch movie_plist
     app = QApplication(sys.argv)
@@ -62,8 +59,8 @@ def main(d_scan):
 
 
 if __name__ == '__main__':
-    net_status = internet_on()
-    if net_status == 200:
+    # net_status = internet_on()
+    if internet_on() == 200:
         check_path = Path(cfg_file)
         if check_path.is_file():
             path_dir_scan = read_path()
