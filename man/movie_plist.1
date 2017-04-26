@@ -11,22 +11,25 @@
 .fam T
 .fi
 .SH DESCRIPTION
-\fBmovie_plist\fP will ask for a directory to search for .desktop
-files. The path will be saved in a file:
+\fBmovie_plist\fP must be run by a terminal at a first time. It will ask
+for a directory where your movies are. The path will be saved in a file,
+so you will do this only once:
 .PP
   /home/USER/.config/movie_plist/movie_plist.cfg
 .PP
-These .desktop files can be created by grap and drop an url from imdb.com
-to a file manager like Nautilus or by you with these two last lines:
+Then it will start searching for . desktop files. These .desktop files can
+be created by grap and drop an url from imdb.com to a file manager like
+Nautilus or by you with these two last lines:
 .PP
-URL=http://www.imdb.com/title/tt2404435/
+URL=http://www.imdb.com/title/ttXXXXXXX/
 .fi
 blablabla
 .PP
-Put the .desktop file inside a directory with the name of the movie. Using
-example above which uses the url for \'The Magnificent Seven\':
+Put the .desktop file inside a directory where the movie is stored. Do not
+put two .desktop files in the same directory. Using the example above which
+uses the url for \'XXXXXXX\':
 .PP
-/home/USER/Videos/Magnificent Seven 2016/magnificent-seven_2016.desktop
+/home/USER/Videos/XXXXXXX year/XXXXXX_year.desktop
 .PP
 .SH AUTHOR
 This manual page was written by Herbert Parentes Fortes Neto. And was used
