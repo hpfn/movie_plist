@@ -58,8 +58,5 @@ def internet_on():
     # more except is needed
     except urllib3.exceptions.ConnectTimeoutError:
         print('No Internet Connection ! Or IMDB has a problem...')
-        print('No poster')
-        print('If the .html file must be re-created, no rate/votes')
-        print('If there is a new movie, no data will be retrieve')
         print('and movie_plist will crash, probably')
         return False
