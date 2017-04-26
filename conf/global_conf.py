@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 import urllib3
 
-
 # user
 user_name = os.environ['USER']
 # first, main path
@@ -40,11 +39,23 @@ def write_path(cfg_path):
     return cfg_path
 
 
+def get_dir_path():
+    chck_path = Path(cfg_file)
+    if chck_path.is_file():
+        path_dir_scan = read_path()
+    else:
+        path_dir_scan = input(" Do the scan in which directory ? ")
+        path_dir_scan = write_path(path_dir_scan)
+
+    return path_dir_scan
+
+
 def internet_on():
     try:
         http = urllib3.PoolManager()
         r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
         return r.status
+    # more except is needed
     except urllib3.exceptions.ConnectTimeoutError:
         print('No Internet Connection ! Or IMDB has a problem...')
         print('No poster')
