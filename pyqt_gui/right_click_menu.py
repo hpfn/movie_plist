@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QMenu, QAction
+from PyQt5.QtWidgets import QMenu, QAction, QMessageBox
 from PyQt5.QtGui import QCursor
+from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
 class RightClickMenu:
@@ -36,7 +37,7 @@ class RightClickMenu:
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        from info_in_db.movie_plist_sqlite3 import DataStorage
+        #        from info_in_db.movie_plist_sqlite3 import DataStorage
 
         title_year = self.current_item
         # url = self.url
@@ -55,8 +56,8 @@ class RightClickMenu:
         remove from current list and from db
         the user remove from HD
         """
-        from PyQt5.QtWidgets import QMessageBox
-        from info_in_db.movie_plist_sqlite3 import DataStorage
+        #        from PyQt5.QtWidgets import QMessageBox
+        #        from info_in_db.movie_plist_sqlite3 import DataStorage
 
         title_year = self.current_item
         # url = self.current_dict
