@@ -10,8 +10,8 @@ movie_plist_stuff = '/home/' + user_name + '/.config/movie_plist'
 cfg_file = movie_plist_stuff + '/movie_plist.cfg'
 
 # if path to movie_plist does not exist create one
-check_path = Path(movie_plist_stuff)
-if not check_path.is_dir():
+movie_plist_config_dir = Path(movie_plist_stuff)
+if not movie_plist_config_dir.is_dir():
     os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
 
@@ -28,13 +28,9 @@ def read_path():
 
 
 def write_path(cfg_path):
-    chck_path = Path(cfg_path)
-    if not chck_path.is_dir():
-        print(" Please, check the path. ")
-        sys.exit(2)
-    else:
-        with open(cfg_file, 'w') as cfg_write:
-            cfg_write.write(cfg_path)
+    # path already checked
+    with open(cfg_file, 'w') as cfg_write:
+        cfg_write.write(cfg_path)
 
     return cfg_path
 
