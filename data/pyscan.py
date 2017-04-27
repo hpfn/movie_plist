@@ -29,6 +29,7 @@ def dir_to_scan(scan_dir):
                 # urls_movies.append([imdb_url, root])
                 # imdb_url will go to sqlite3 when marked as seen
                 # root will go to QTab-QTree
-                yield [imdb_url, root]
+                # dir_name is a replacement to title_year
+                yield [imdb_url, root], dir_name
 
                 # return urls_movies

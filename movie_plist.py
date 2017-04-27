@@ -2,6 +2,7 @@
 # -*-coding-utf8-*
 import sys
 import urllib.request
+import urllib.error
 from PyQt5.QtWidgets import QApplication
 from conf.global_conf import internet_on, get_dir_path
 from data import pimdbdata
@@ -22,15 +23,20 @@ def create_dicts(s_dir):
     # if yes goes to movie_seen dict
     # if not goes to movie_unseen dict
     # dict's key is title_year of the movie
-    for i in dir_to_scan(s_dir):
-        html = urllib.request.urlopen(i[0]).read()
-        movie = pimdbdata.ParseImdbData(html)
-        title = movie.title_year()
-        # print(movies_stored)
+    for i, dir_name in dir_to_scan(s_dir):
+        try:
+            html = urllib.request.urlopen(i[0], timeout=3).read()
+            movie = pimdbdata.ParseImdbData(html)
+            title_year = movie.title_year()
+        except urllib.error.URLError:
+            title_year = dir_name
+        except ValueError:
+            print("please, check .desktop file in {}" .format(dir_name))
+            title_year = dir_name
         if i[0] in movies_stored:
-            movie_seen[title] = i
+            movie_seen[title_year] = i
         else:
-            movie_unseen[title] = i
+            movie_unseen[title_year] = i
 
     stored_data.exit_from_db()
 
