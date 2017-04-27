@@ -5,5 +5,6 @@ Everything seems ready.
 TODO list:<br> 
     - search<br>
     - update status bar from menu is missing
+    - tests!
 
-It is slow, probably.
+It is slow. And
