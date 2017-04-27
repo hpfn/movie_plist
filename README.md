@@ -5,6 +5,6 @@ Everything seems ready.
 TODO list:<br> 
     - search<br>
     - update status bar from menu is missing
-    - tests!
+    - pytest!
 
-It is slow. And
+It is really slow.
