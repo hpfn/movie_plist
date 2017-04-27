@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 # -*-coding-utf8-*
 import sys
-import urllib.request
-import urllib.error
+# import urllib.request
+# import urllib.error
 from PyQt5.QtWidgets import QApplication
 from conf.global_conf import internet_on, get_dir_path
-from data import pimdbdata
-from data.pyscan import dir_to_scan
-from info_in_db.movie_plist_sqlite3 import DataStorage
+# from data import pimdbdata
+from data.pyscan import create_dicts
+# from info_in_db.movie_plist_sqlite3 import DataStorage
 from pyqt_gui.main_window import Window
 
-
+'''
 def create_dicts(s_dir):
     """
     
@@ -41,6 +41,7 @@ def create_dicts(s_dir):
     stored_data.exit_from_db()
 
     return movie_seen, movie_unseen
+'''
 
 
 def main(d_scan):
