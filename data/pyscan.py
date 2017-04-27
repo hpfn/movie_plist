@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 
 import os
+import urllib.request
+import urllib.error
+from data import pimdbdata
+# from data.pyscan import dir_to_scan
+from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
 def open_right_file(root_path, right_file):
@@ -13,23 +18,51 @@ def open_right_file(root_path, right_file):
 
 def dir_to_scan(scan_dir):
     """
-    find .desktop file and call others methods
-    to append: path to dir with movie
-    imdb url
+    find .desktop file  to get imdb url
+    get path to movie file
+    dir name
     """
-    # urls_movies = list()
     for root, dir_name, filename in os.walk(scan_dir):
-        # print(root)
         for wanted_file in filename:
             if wanted_file.endswith('.desktop'):
                 imdb_url = open_right_file(root, wanted_file)
-                # print(imdb_url)
-
-                # colocar yield aqui. enviar para conferir se esta no db
-                # urls_movies.append([imdb_url, root])
                 # imdb_url will go to sqlite3 when marked as seen
                 # root will go to QTab-QTree
                 # dir_name is a replacement to title_year
                 yield [imdb_url, root], dir_name
 
                 # return urls_movies
+
+
+def create_dicts(s_dir):
+    """
+    # check if the movie info is in movie_plist_sqlite3.db
+    # if yes goes to movie_seen dict
+    # if not goes to movie_unseen dict
+    # dict's key is title_year of the movie
+    """
+    movie_seen = dict()
+    movie_unseen = dict()
+    stored_data = DataStorage()
+    movies_stored = str(stored_data.movie_url())
+
+    for i, dir_name in dir_to_scan(s_dir):
+        try:
+            html = urllib.request.urlopen(i[0], timeout=3).read()
+            movie = pimdbdata.ParseImdbData(html)
+            title_year = movie.title_year()
+        except urllib.error.URLError:
+            title_year = dir_name
+        except ValueError:
+            print("please, check .desktop file in {}".format(dir_name))
+            # check pyqt_guit/splitter.py
+            i[0] = 'bad url'
+            title_year = dir_name
+        if i[0] in movies_stored:
+            movie_seen[title_year] = i
+        else:
+            movie_unseen[title_year] = i
+
+    stored_data.exit_from_db()
+
+    return movie_seen, movie_unseen
