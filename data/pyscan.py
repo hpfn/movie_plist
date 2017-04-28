@@ -2,10 +2,10 @@
 
 import os
 import re
-import urllib.request
-import urllib.error
-from socket import timeout
-from data import pimdbdata
+# import urllib.request
+# import urllib.error
+# from socket import timeout
+# from data import pimdbdata
 # from data.pyscan import dir_to_scan
 from info_in_db.movie_plist_sqlite3 import DataStorage
 
