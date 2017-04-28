@@ -7,6 +7,7 @@ import urllib.request
 import urllib.request
 from PyQt5.QtGui import QImage
 from data import pimdbdata
+from socket import timeout
 
 
 class HtmlTags:
@@ -15,13 +16,19 @@ class HtmlTags:
         self.context = ''
         self.synopsis = ''
 
-        self.first_steps()
-        self.top_header()
-        self.inside_table()
-        self.bottom_tags()
+        try:
+            self.first_steps()
+        except timeout:
+            self.context = "Connection timeout. Try again."
+        except ValueError:
+            self.context = "Please, check the .desktop file for this movie."
+        else:
+            self.top_header()
+            self.inside_table()
+            self.bottom_tags()
 
     def first_steps(self):
-        html = urllib.request.urlopen(self.url).read()
+        html = urllib.request.urlopen(self.url, timeout=3).read()
         movie = pimdbdata.ParseImdbData(html)
 
         self.synopsis = movie.synopsis()
@@ -52,7 +59,7 @@ class HtmlTags:
                 try:
                     place = s_list[x:].index(i)
                     s_list[x + place] = '<br>'
-                    x *= 2
+                    x += 60
                     y = x
                 except ValueError:
                     print("Please, fix the way the synopsis is formated")
