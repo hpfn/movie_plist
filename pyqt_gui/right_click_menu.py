@@ -22,9 +22,9 @@ class RightClickMenu:
         m_seen_action.setStatusTip('Mark as Seen')
         m_seen_action.triggered.connect(self.m_seen_movies)
 
-        m_rm_action = QAction('Remove from Database', self.menu)
+        m_rm_action = QAction('Remove from movie_plist', self.menu)
         # unseenAction.setShortcut()
-        m_rm_action.setStatusTip('Remove from Database')
+        m_rm_action.setStatusTip('Remove from movie_plist')
         m_rm_action.triggered.connect(self.m_rm_from_db)
 
         self.menu.addAction(m_seen_action)
