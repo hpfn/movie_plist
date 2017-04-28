@@ -11,6 +11,7 @@ class RightClickMenu:
         self.url = current_dict[self.current_item][0]
         self.qt_list = qt_list
         self.s_list = s_list
+        self.stored_data = DataStorage()
         self.menu = QMenu()
 
         self.right_click()
@@ -37,37 +38,35 @@ class RightClickMenu:
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        #        from info_in_db.movie_plist_sqlite3 import DataStorage
 
-        title_year = self.current_item
-        # url = self.url
-        stored_data = DataStorage()
-
-        if stored_data.movie_isregistered(self.url):
+        if self.stored_data.movie_isregistered(self.url):
             pass
         else:
+            title_year = self.current_item
             self.current_list.remove(title_year)
             self.qt_list.takeItem(self.qt_list.currentRow())
             self.s_list.append(title_year)
-            stored_data.insert_data(self.url)
+            self.stored_data.insert_data(self.url)
+
+        self.stored_data.exit_from_db()
 
     def m_rm_from_db(self):
         """
         remove from current list and from db
         the user remove from HD
         """
-        #        from PyQt5.QtWidgets import QMessageBox
-        #        from info_in_db.movie_plist_sqlite3 import DataStorage
+
+        if self.stored_data.movie_isregistered(self.url):
+            self.stored_data.movie_delete(self.url)
+            self.stored_data.exit_from_db()
 
         title_year = self.current_item
-        # url = self.current_dict
         self.current_list.remove(title_year)
         self.qt_list.takeItem(self.qt_list.currentRow())
         del self.current_dict[title_year]
-        stored_data = DataStorage()
-        stored_data.movie_delete(self.url)
 
         msg = QMessageBox()
-        msg.setText(title_year + "\n removed from DB.\n Remove from HD yourself.")
+        msg.setText(title_year + " removed from movie_plist.\n\n"
+                                 "Remove from HD yourself.")
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec()
