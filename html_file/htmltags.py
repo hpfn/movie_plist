@@ -4,10 +4,10 @@
 """
 
 import urllib.request
-import urllib.request
+import urllib.error
+from socket import timeout
 from PyQt5.QtGui import QImage
 from data import pimdbdata
-from socket import timeout
 
 
 class HtmlTags:
@@ -18,6 +18,8 @@ class HtmlTags:
 
         try:
             self.first_steps()
+        except urllib.error.URLError:
+            self.context = "URLError. Try again."
         except timeout:
             self.context = "Connection timeout. Try again."
         except ValueError:
