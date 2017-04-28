@@ -98,11 +98,11 @@ class TwoLines(QWidget):
         and put the result on self.bottom
         """
         url = self.current_dict[self.top.currentItem().text()][0]
-        if url in 'bad url':
-            self.bottom.setText('bad url')
-        else:
-            context = HtmlTags(url)
-            self.bottom.setText(context.context)
+        # if url in 'bad url':
+        #    self.bottom.setText('bad url')
+        #else:
+        context = HtmlTags(url)
+        self.bottom.setText(context.context)
 
     def ls_current_dir(self):
         path_to_dir = self.current_dict[self.top.currentItem().text()][1]
