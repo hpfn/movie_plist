@@ -2,6 +2,7 @@
 
 import os
 import re
+import sys
 # import urllib.request
 # import urllib.error
 # from socket import timeout
@@ -73,5 +74,9 @@ def create_dicts(s_dir):
             movie_unseen[title_year] = i
 
     stored_data.exit_from_db()
+
+    if len(movie_unseen) == 0 and len(movie_seen) == 0:
+        print("No .desktop file found.")
+        sys.exit()
 
     return movie_seen, movie_unseen
