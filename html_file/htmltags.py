@@ -52,23 +52,25 @@ class HtmlTags:
         """
         
         """
-        x = 60
+        '''x = 60
         y = 60
         s_list = list(self.synopsis)
-        list_size = len(s_list)
+        list_size = len(s_list) - 1
         for i in s_list[x:]:
             if i is ' ' and y < list_size:
                 try:
                     place = s_list[x:].index(i)
                     s_list[x + place] = '<br>'
                     x += 60
-                    y = x
+                    y = x + 1
                 except ValueError:
                     print("Please, fix the way the synopsis is formated")
             else:
                 y += 1
 
         self.synopsis = ''.join(s_list)
+        '''
+        self.format_synopsis()
 
         self.context += "<td>\n<img src=\"/tmp/picture.png\"></td>"
 
@@ -80,3 +82,22 @@ class HtmlTags:
     def bottom_tags(self):
         """ from </table> to </html> """
         self.context += "</table><input type=submit value=\"Submit\"></form></body>\n</html>"
+
+    def format_synopsis(self):
+        x = 60
+        y = 60
+        s_list = list(self.synopsis)
+        list_size = len(s_list) - 1
+        for i in s_list[x:]:
+            if i is ' ' and y < list_size:
+                try:
+                    place = s_list[x:].index(i)
+                    s_list[x + place] = '<br>'
+                    x += 60
+                    y = x + 1
+                except ValueError:
+                    print("Please, fix the way the synopsis is formated")
+            else:
+                y += 1
+
+        self.synopsis = ''.join(s_list)
