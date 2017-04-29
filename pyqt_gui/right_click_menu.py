@@ -4,13 +4,14 @@ from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
 class RightClickMenu:
-    def __init__(self, current_list, current_dict, qt_list, s_list):
+    def __init__(self, current_list, current_dict, qt_list, s_list, us_list):
         self.current_item = qt_list.currentItem().text()
         self.current_list = current_list
         self.current_dict = current_dict
         self.url = current_dict[self.current_item][0]
         self.qt_list = qt_list
         self.s_list = s_list
+        self.us_list = us_list
         self.stored_data = DataStorage()
         self.menu = QMenu()
 
@@ -39,9 +40,10 @@ class RightClickMenu:
         check on db if it is already a seen movie
         """
 
-        if self.stored_data.movie_isregistered(self.url):
-            pass
-        else:
+        # if self.stored_data.movie_isregistered(self.url):
+        #    pass
+        # else:
+        if self.current_item in self.us_list:
             title_year = self.current_item
             self.current_list.remove(title_year)
             self.qt_list.takeItem(self.qt_list.currentRow())
@@ -56,7 +58,8 @@ class RightClickMenu:
         the user remove from HD
         """
 
-        if self.stored_data.movie_isregistered(self.url):
+        # if self.stored_data.movie_isregistered(self.url):
+        if self.current_item not in self.us_list:
             self.stored_data.movie_delete(self.url)
             self.stored_data.exit_from_db()
 

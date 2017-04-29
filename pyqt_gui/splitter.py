@@ -112,7 +112,8 @@ class TwoLines(QWidget):
         self.tree.setColumnWidth(0, 450)
 
     def right_click(self):
-        menu = RightClickMenu(self.current_list, self.current_dict, self.top, self.s_list)
+        menu = RightClickMenu(self.current_list, self.current_dict, self.top,
+                              self.s_list, self.us_list)
 
     def clicked_movie(self):
         item = self.tree.selectedIndexes()[0]
