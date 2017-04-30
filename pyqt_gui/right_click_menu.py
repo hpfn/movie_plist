@@ -61,7 +61,7 @@ class RightClickMenu:
         # if self.stored_data.movie_isregistered(self.url):
         if self.current_item not in self.us_list:
             self.stored_data.movie_delete(self.url)
-            self.stored_data.exit_from_db()
+        self.stored_data.exit_from_db()
 
         title_year = self.current_item
         self.current_list.remove(title_year)
