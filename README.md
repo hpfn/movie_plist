@@ -1,7 +1,7 @@
-Starting a new version. No QWebBrowser, no cgi. It<br>
-will look like deluge-gtk.
+Starting a new version. No QWebBrowser, no<br>
+cgi. It will look like deluge-gtk.
 
-Everything seems ready.
+Everything seems ready. On a Debian Stretch.
 
 TODO list:<br> 
     - search<br>
