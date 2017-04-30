@@ -94,10 +94,10 @@ class HtmlTags:
                     place = s_list[x:].index(i)
                     s_list[x + place] = '<br>'
                     x += 60
-                    y = x + 1
+                    y = x
                 except ValueError:
                     print("Please, fix the way the synopsis is formated")
-            else:
-                y += 1
+
+            y += 1
 
         self.synopsis = ''.join(s_list)
