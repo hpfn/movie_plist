@@ -45,7 +45,7 @@ class Window(QMainWindow):
         toolbar.addAction(seen_action)
 
         self.setGeometry(100, 100, 800, 650)
-        self.setWindowTitle('Main Window')
+        self.setWindowTitle('movie_plist')
         self.show()
 
     def unseenmovies(self):
