@@ -23,7 +23,7 @@ class Window(QMainWindow):
 
         exit_action = QAction('Exit', self)
         exit_action.setShortcut('Ctrl+Q')
-        exit_action.setStatusTip('Exit app')
+        # exit_action.setStatusTip('Exit app')
         exit_action.triggered.connect(self.close)
 
         unseen_action = QAction('Unseen', self)
