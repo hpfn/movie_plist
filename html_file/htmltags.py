@@ -67,7 +67,7 @@ class HtmlTags:
         self.context += "</table><input type=submit value=\"Submit\"></form></body>\n</html>"
 
     def format_synopsis(self):
-        '''
+        """
         x = 60
         y = 60
         s_list = list(self.synopsis)
@@ -83,7 +83,7 @@ class HtmlTags:
                     print("Please, fix the way the synopsis is formated")
 
             y += 1
-        
+
         self.synopsis = ''.join(s_list)
-        '''
+        """
         self.synopsis = '<br>'.join(textwrap.wrap(self.synopsis, width=60))
