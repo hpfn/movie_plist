@@ -23,7 +23,7 @@ def dir_to_scan(scan_dir):
     """
     find .desktop file  to get imdb url
     get path to movie file
-    dir name
+    dir name is not used
     """
     for root, dir_name, filename in os.walk(scan_dir):
         for wanted_file in filename:
@@ -52,7 +52,7 @@ def create_dicts(s_dir):
     movies_stored = str(stored_data.movie_url())
 
     for i, dir_name in dir_to_scan(s_dir):
-        ''' this is too slow...
+        """ this is too slow...
         try:
             html = urllib.request.urlopen(i[0], timeout=3).read()
             movie = pimdbdata.ParseImdbData(html)
@@ -66,7 +66,7 @@ def create_dicts(s_dir):
             # check pyqt_guit/splitter.py
             i[0] = 'bad url'
             title_year = dir_name
-        '''
+        """
         title_year = dir_name
         if i[0] in movies_stored:
             movie_seen[title_year] = i
