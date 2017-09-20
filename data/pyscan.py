@@ -23,20 +23,21 @@ def dir_to_scan(scan_dir):
     """
     find .desktop file  to get imdb url
     get path to movie file
-    dir name is not used
-    """
-    for root, dir_name, filename in os.walk(scan_dir):
-        for wanted_file in filename:
-            if wanted_file.endswith('.desktop'):
-                imdb_url = open_right_file(root, wanted_file)
-                # imdb_url will go to sqlite3 when marked as seen
-                # root will go to QTab-QTree
-                # named_dir is a replacement to title_year
-                named_dir = re.compile('/.*/')
-                named_dir = named_dir.sub('', root)
-                yield [imdb_url, root], named_dir
+    dir_name is not used
 
-                # return urls_movies
+    yield:
+      imdb_url will go to sqlite3 when marked as seen
+      root will go to QTab-QTree
+      named_dir is a replacement to title_year
+    """
+    arq_pattern = re.compile(r"[\d\w,'-_.]+\.desktop")
+    named_dir_pattern = re.compile('/.*/')
+    for root, dir_name, filename in os.walk(scan_dir):
+        this_one = re.search(arq_pattern, ' '.join(filename))
+        if this_one:
+            imdb_url = open_right_file(root, this_one.group(0))
+            named_dir = named_dir_pattern.sub('', root)
+            yield [imdb_url, root], named_dir
 
 
 def create_dicts(s_dir):
@@ -52,21 +53,6 @@ def create_dicts(s_dir):
     movies_stored = str(stored_data.movie_url())
 
     for i, dir_name in dir_to_scan(s_dir):
-        """ this is too slow...
-        try:
-            html = urllib.request.urlopen(i[0], timeout=3).read()
-            movie = pimdbdata.ParseImdbData(html)
-            title_year = movie.title_year()
-        except timeout:
-            title_year = dir_name
-        except urllib.error.URLError:
-            title_year = dir_name
-        except ValueError:
-            print("please, check .desktop file in {}".format(dir_name))
-            # check pyqt_guit/splitter.py
-            i[0] = 'bad url'
-            title_year = dir_name
-        """
         title_year = dir_name
         if i[0] in movies_stored:
             movie_seen[title_year] = i
