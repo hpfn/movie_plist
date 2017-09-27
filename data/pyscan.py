@@ -30,7 +30,7 @@ def dir_to_scan(scan_dir):
       root will go to QTab-QTree
       named_dir is a replacement to title_year
     """
-    arq_pattern = re.compile(r"[\d\w,'-_.]+\.desktop")
+    arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
     named_dir_pattern = re.compile('/.*/')
     for root, dir_name, filename in os.walk(scan_dir):
         this_one = re.search(arq_pattern, ' '.join(filename))
