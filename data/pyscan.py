@@ -50,11 +50,12 @@ def create_dicts(s_dir):
     movie_seen = dict()
     movie_unseen = dict()
     stored_data = DataStorage()
-    movies_stored = str(stored_data.movie_url())
+    movies_stored = set(x for x in stored_data.movie_url())
 
     for i, dir_name in dir_to_scan(s_dir):
         title_year = dir_name
-        if i[0] in movies_stored:
+        item = set([i[0]])
+        if item.issubset(movies_stored):
             movie_seen[title_year] = i
         else:
             movie_unseen[title_year] = i
