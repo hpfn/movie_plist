@@ -40,7 +40,7 @@ class DataStorage(object):
 
     def movie_url(self):
         self.c.execute("select url from movie_plist")
-        return str(self.c.fetchall())
+        return self.c.fetchall()
 
     def movie_isregistered(self, url):
         self.c.execute("select url from movie_plist where url=(?) ", (url,))
