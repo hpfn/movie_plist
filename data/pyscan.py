@@ -50,7 +50,7 @@ def create_dicts(s_dir):
     movie_seen = dict()
     movie_unseen = dict()
     stored_data = DataStorage()
-    movies_stored = set(x for x in stored_data.movie_url())
+    movies_stored = set(x[0] for x in stored_data.movie_url())
 
     for i, dir_name in dir_to_scan(s_dir):
         title_year = dir_name
