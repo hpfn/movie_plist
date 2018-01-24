@@ -3,6 +3,7 @@
 import os
 import re
 import sys
+import json
 # import urllib.request
 # import urllib.error
 # from socket import timeout
@@ -47,20 +48,25 @@ def create_dicts(s_dir):
     # if not goes to movie_unseen dict
     # dict's key is title_year of the movie
     """
-    movie_seen = dict()
-    movie_unseen = dict()
-    stored_data = DataStorage()
-    movies_stored = set(x[0] for x in stored_data.movie_url())
+    with open('seen_movies.json') as json_data:
+        movie_seen = json.load(json_data)
 
-    for i, dir_name in dir_to_scan(s_dir):
-        title_year = dir_name
-        item = set([i[0]])
-        if item.issubset(movies_stored):
-            movie_seen[title_year] = i
-        else:
-            movie_unseen[title_year] = i
+    movie_unseen = {dir_name: i for i, dir_name in dir_to_scan(s_dir)
+                    if dir_name not in movie_seen.keys()}
+    # movie_seen = dict()
+    # movie_unseen = dict()
+    # stored_data = DataStorage()
+    # movies_stored = set(x[0] for x in stored_data.movie_url())
 
-    stored_data.exit_from_db()
+    # for i, dir_name in dir_to_scan(s_dir):
+    #     title_year = dir_name
+    #     item = set([i[0]])
+    #     if item.issubset(movies_stored):
+    #         movie_seen[title_year] = i
+    #     else:
+    #         movie_unseen[title_year] = i
+    #
+    # stored_data.exit_from_db()
 
     if len(movie_unseen) == 0 and len(movie_seen) == 0:
         print("No .desktop file found.")
