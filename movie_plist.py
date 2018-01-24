@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*-coding-utf8-*
-import sys
+import sys, json
 from PyQt5.QtWidgets import QApplication
 from conf.global_conf import internet_on, get_dir_path
 from data.pyscan import create_dicts
@@ -20,7 +20,12 @@ def main(d_scan):
     # launch movie_plist
     app = QApplication(sys.argv)
     ex = Window(seen_list, unseen_list, all_movies)
-    sys.exit(app.exec_())
+    
+    def json_seen_m(movie_dic):
+        with open('all_movies.json', 'w') as outfile:
+            json.dump(movie_dic, outfile)
+
+    sys.exit([app.exec_(), json_seen_m(all_movies)])
 
 
 if __name__ == '__main__':
