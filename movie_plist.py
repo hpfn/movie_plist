@@ -23,7 +23,7 @@ def main(d_scan):
     
     def json_seen_m(movie_dic, u_l):
         seen_dict = {key: list_items for key, list_items in movie_dic.items() if key not in set(u_l)}
-        with open('all_movies.json', 'w') as outfile:
+        with open('seen_movies.json', 'w') as outfile:
             json.dump(seen_dict, outfile)
 
     sys.exit([app.exec_(), json_seen_m(all_movies, unseen_list)])
