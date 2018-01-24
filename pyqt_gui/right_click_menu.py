@@ -12,7 +12,7 @@ class RightClickMenu:
         self.qt_list = qt_list
         self.s_list = s_list
         self.us_list = us_list
-        self.stored_data = DataStorage()
+        # self.stored_data = DataStorage()
         self.menu = QMenu()
 
         self.right_click()
@@ -48,9 +48,9 @@ class RightClickMenu:
             self.current_list.remove(title_year)
             self.qt_list.takeItem(self.qt_list.currentRow())
             self.s_list.append(title_year)
-            self.stored_data.insert_data(self.url)
+            # self.stored_data.insert_data(self.url)
 
-        self.stored_data.exit_from_db()
+        # self.stored_data.exit_from_db()
 
     def m_rm_from_db(self):
         """
@@ -59,9 +59,9 @@ class RightClickMenu:
         """
 
         # if self.stored_data.movie_isregistered(self.url):
-        if self.current_item not in self.us_list:
-            self.stored_data.movie_delete(self.url)
-        self.stored_data.exit_from_db()
+        # if self.current_item not in self.us_list:
+        #    self.stored_data.movie_delete(self.url)
+        # self.stored_data.exit_from_db()
 
         title_year = self.current_item
         self.current_list.remove(title_year)
