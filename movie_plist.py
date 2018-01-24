@@ -21,11 +21,12 @@ def main(d_scan):
     app = QApplication(sys.argv)
     ex = Window(seen_list, unseen_list, all_movies)
     
-    def json_seen_m(movie_dic):
+    def json_seen_m(movie_dic, u_l):
+        seen_dict = {key: list_items for key, list_items in movie_dic.items() if key not in set(u_l)}
         with open('all_movies.json', 'w') as outfile:
-            json.dump(movie_dic, outfile)
+            json.dump(seen_dict, outfile)
 
-    sys.exit([app.exec_(), json_seen_m(all_movies)])
+    sys.exit([app.exec_(), json_seen_m(all_movies, unseen_list)])
 
 
 if __name__ == '__main__':
