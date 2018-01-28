@@ -4,12 +4,13 @@ import os
 import re
 import sys
 import json
+from conf.global_conf import json_file
 # import urllib.request
 # import urllib.error
 # from socket import timeout
 # from data import pimdbdata
 # from data.pyscan import dir_to_scan
-from info_in_db.movie_plist_sqlite3 import DataStorage
+# from info_in_db.movie_plist_sqlite3 import DataStorage
 
 
 def open_right_file(root_path, right_file):
@@ -48,7 +49,7 @@ def create_dicts(s_dir):
     # if not goes to movie_unseen dict
     # dict's key is title_year of the movie
     """
-    with open('seen_movies.json') as json_data:
+    with open(json_file) as json_data:
         movie_seen = json.load(json_data)
 
     movie_unseen = {dir_name: i for i, dir_name in dir_to_scan(s_dir)

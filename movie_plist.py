@@ -2,7 +2,7 @@
 # -*-coding-utf8-*
 import sys, json
 from PyQt5.QtWidgets import QApplication
-from conf.global_conf import internet_on, get_dir_path
+from conf.global_conf import internet_on, get_dir_path, json_file
 from data.pyscan import create_dicts
 from pyqt_gui.main_window import Window
 
@@ -23,7 +23,7 @@ def main(d_scan):
     
     def json_seen_m(movie_dic, u_l):
         seen_dict = {key: list_items for key, list_items in movie_dic.items() if key not in set(u_l)}
-        with open('seen_movies.json', 'w') as outfile:
+        with open(json_file, 'w') as outfile:
             json.dump(seen_dict, outfile)
 
     sys.exit([app.exec_(), json_seen_m(all_movies, unseen_list)])
