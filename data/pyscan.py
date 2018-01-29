@@ -38,7 +38,6 @@ def dir_to_scan(scan_dir, seen_movies):
     for root, dir_name, filename in os.walk(scan_dir):
         # seen_movies_set = set(seen_movies)
         named_dir = named_dir_pattern.sub('', root)
-        print(dir_name)
         if not set([named_dir]).issubset(seen_movies_set):
             this_one = re.search(arq_pattern, ' '.join(filename))
             if this_one:
