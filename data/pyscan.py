@@ -4,6 +4,9 @@ import os
 import re
 import sys
 import json
+
+from PyQt5.QtWidgets import QMessageBox, QApplication
+
 from conf.global_conf import json_file
 # import urllib.request
 # import urllib.error
@@ -73,8 +76,18 @@ def create_dicts(s_dir):
     #
     # stored_data.exit_from_db()
 
-    if len(movie_unseen) == 0 and len(movie_seen) == 0:
-        print("No .desktop file found.")
-        sys.exit()
+    if len(movie_unseen) == 0:
+        app = QApplication(['0'])
+        msg = QMessageBox()
+        button_reply =msg.question(msg,
+                                   'No unseen movies.',
+                                   'Maybe a good tip is to check the scan dir.'
+                                   'Continue anyway?',
+                                   QMessageBox.Yes | QMessageBox.No)
+
+        if button_reply == QMessageBox.Yes:
+            pass
+        else:
+            sys.exit('1')
 
     return movie_seen, movie_unseen
