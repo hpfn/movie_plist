@@ -38,14 +38,12 @@ def dir_to_scan(scan_dir, seen_movies):
     seen_movies_set = set(seen_movies)
     arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
     named_dir_pattern = re.compile('/.*/')
-    for root, dir_name, filename in os.walk(scan_dir):
-        # seen_movies_set = set(seen_movies)
+    for root, _, filename in os.walk(scan_dir):
         named_dir = named_dir_pattern.sub('', root)
-        if not set([named_dir]).issubset(seen_movies_set):
+        if not {named_dir}.issubset(seen_movies_set):
             this_one = re.search(arq_pattern, ' '.join(filename))
             if this_one:
                 imdb_url = open_right_file(root, this_one.group(0))
-                # named_dir = named_dir_pattern.sub('', root)
                 yield [imdb_url, root], named_dir
 
 
