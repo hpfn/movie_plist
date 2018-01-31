@@ -27,8 +27,12 @@ def open_right_file(root_path, right_file):
     """ open the right file and get the url"""
     file_to_search = os.path.join(root_path, right_file)
     with open(file_to_search, 'r') as check_content:
-        url = check_content.readlines()
-        return url[-2][4:-1]
+        file_lines = check_content.readlines()
+
+    url = re.search(r"(URL|url)=http://.*", ' '.join(file_lines))
+
+    if url:
+        return url.group(0)[4:-1]
 
 
 def dir_to_scan(scan_dir, seen_movies):
