@@ -51,7 +51,7 @@ def dir_to_scan(scan_dir, seen_movies):
             if this_one:
                 imdb_url = open_right_file(root, this_one.group(0))
                 # named_dir = dirname_titleyear.sub('', root)
-                yield [imdb_url, root], dirname_titleyear.sub('', root)  # named_dir
+                yield dirname_titleyear.sub('', root), [imdb_url, root]
 
 
 def create_dicts(s_dir):
@@ -65,7 +65,7 @@ def create_dicts(s_dir):
 
     movies_path = set(m_path for _, m_path in movie_seen.values())
 
-    movie_unseen = {dir_name: i for i, dir_name in dir_to_scan(s_dir, movies_path)}
+    movie_unseen = {dir_name: i for dir_name, i in dir_to_scan(s_dir, movies_path)}
 
     if len(movie_unseen) == 0:
         empty_unseen_dict()
