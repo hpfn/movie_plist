@@ -39,15 +39,16 @@ def dir_to_scan(scan_dir, seen_movies):
       root will go to QTab-QTree
       named_dir is title_year (user mkdir name)
     """
-    seen_movies_set = set(seen_movies)
+    # seen_movies_set = set(seen_movies)
     arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
     named_dir_pattern = re.compile('/.*/')
     for root, _, filename in os.walk(scan_dir):
-        named_dir = named_dir_pattern.sub('', root)
-        if not {named_dir}.issubset(seen_movies_set):
+        # named_dir = named_dir_pattern.sub('', root)
+        if not {root}.issubset(seen_movies):
             this_one = re.search(arq_pattern, ' '.join(filename))
             if this_one:
                 imdb_url = open_right_file(root, this_one.group(0))
+                named_dir = named_dir_pattern.sub('', root)
                 yield [imdb_url, root], named_dir
 
 
@@ -60,7 +61,9 @@ def create_dicts(s_dir):
     with open(json_file) as json_data:
         movie_seen = json.load(json_data)
 
-    movie_unseen = {dir_name: i for i, dir_name in dir_to_scan(s_dir, movie_seen.keys())}
+    movies_path = set(m_path for _, m_path in movie_seen.values())
+
+    movie_unseen = {dir_name: i for i, dir_name in dir_to_scan(s_dir, movies_path)}
 
     if len(movie_unseen) == 0:
         empty_unseen_dict()
