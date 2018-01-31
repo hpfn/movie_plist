@@ -4,14 +4,15 @@ import os
 import re
 import sys
 import json
-from PyQt5.QtWidgets import QMessageBox, QApplication
+# from PyQt5.QtWidgets import QMessageBox, QApplication
 from conf.global_conf import json_file
 
 
 def empty_unseen_dict():
+    from PyQt5.QtWidgets import QMessageBox, QApplication
     app = QApplication(['0'])
     msg = QMessageBox()
-    button_reply =msg.question(
+    button_reply = msg.question(
         msg,
         'No unseen movies.',
         'Maybe a good tip is to check the scan dir. Continue anyway?',
