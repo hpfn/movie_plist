@@ -32,7 +32,7 @@ def open_right_file(root_path, right_file):
     url = re.search(r"(URL|url)=http://.*", ' '.join(file_lines))
 
     if url:
-        return url.group(0)[4:-1]
+        return url.group(0)[4:]
 
 
 def dir_to_scan(scan_dir, seen_movies):
