@@ -44,17 +44,14 @@ def dir_to_scan(scan_dir, seen_movies):
       root will go to QTab-QTree
       named_dir is title_year (user mkdir name)
     """
-    # seen_movies_set = set(seen_movies)
     arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
     # dirname is the title_year if the user do it right
     dirname_titleyear = re.compile('/.*/')
     for root, _, filename in os.walk(scan_dir):
-        # named_dir = dirname_titleyear.sub('', root)
         if not {root}.issubset(seen_movies):
             this_one = re.search(arq_pattern, ' '.join(filename))
             if this_one:
                 imdb_url = open_right_file(root, this_one.group(0))
-                # named_dir = dirname_titleyear.sub('', root)
                 yield dirname_titleyear.sub('', root), [imdb_url, root]
 
 
