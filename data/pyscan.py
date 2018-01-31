@@ -42,15 +42,16 @@ def dir_to_scan(scan_dir, seen_movies):
     """
     # seen_movies_set = set(seen_movies)
     arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
-    named_dir_pattern = re.compile('/.*/')
+    # dirname is the title_year if the user do it right
+    dirname_titleyear = re.compile('/.*/')
     for root, _, filename in os.walk(scan_dir):
-        # named_dir = named_dir_pattern.sub('', root)
+        # named_dir = dirname_titleyear.sub('', root)
         if not {root}.issubset(seen_movies):
             this_one = re.search(arq_pattern, ' '.join(filename))
             if this_one:
                 imdb_url = open_right_file(root, this_one.group(0))
-                named_dir = named_dir_pattern.sub('', root)
-                yield [imdb_url, root], named_dir
+                # named_dir = dirname_titleyear.sub('', root)
+                yield [imdb_url, root], dirname_titleyear.sub('', root)  # named_dir
 
 
 def create_dicts(s_dir):
