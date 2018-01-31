@@ -4,16 +4,22 @@ import os
 import re
 import sys
 import json
-
 from PyQt5.QtWidgets import QMessageBox, QApplication
-
 from conf.global_conf import json_file
-# import urllib.request
-# import urllib.error
-# from socket import timeout
-# from data import pimdbdata
-# from data.pyscan import dir_to_scan
-# from info_in_db.movie_plist_sqlite3 import DataStorage
+
+
+def empty_unseen_dict():
+    app = QApplication(['0'])
+    msg = QMessageBox()
+    button_reply =msg.question(
+        msg,
+        'No unseen movies.',
+        'Maybe a good tip is to check the scan dir. Continue anyway?',
+        QMessageBox.Yes | QMessageBox.No
+    )
+
+    if button_reply == QMessageBox.No:
+        sys.exit('1')
 
 
 def open_right_file(root_path, right_file):
@@ -27,13 +33,11 @@ def open_right_file(root_path, right_file):
 def dir_to_scan(scan_dir, seen_movies):
     """
     find .desktop file  to get imdb url
-    get path to movie file
-    dir_name is not used
 
     yield:
-      imdb_url will go to sqlite3 when marked as seen
+      imdb_url: to get poster and synopsis
       root will go to QTab-QTree
-      named_dir is a replacement to title_year
+      named_dir is title_year (user mkdir name)
     """
     seen_movies_set = set(seen_movies)
     arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
@@ -49,43 +53,16 @@ def dir_to_scan(scan_dir, seen_movies):
 
 def create_dicts(s_dir):
     """
-    # check if the movie info is in movie_plist_sqlite3.db
-    # if yes goes to movie_seen dict
-    # if not goes to movie_unseen dict
-    # dict's key is title_year of the movie
+    # get seen movies from json file
+    # build unseen movies based on json file
+    # if no unseen movies ask if continue
     """
     with open(json_file) as json_data:
         movie_seen = json.load(json_data)
 
     movie_unseen = {dir_name: i for i, dir_name in dir_to_scan(s_dir, movie_seen.keys())}
-                    # if dir_name not in movie_seen.keys()}
-    # movie_seen = dict()
-    # movie_unseen = dict()
-    # stored_data = DataStorage()
-    # movies_stored = set(x[0] for x in stored_data.movie_url())
-
-    # for i, dir_name in dir_to_scan(s_dir):
-    #     title_year = dir_name
-    #     item = set([i[0]])
-    #     if item.issubset(movies_stored):
-    #         movie_seen[title_year] = i
-    #     else:
-    #         movie_unseen[title_year] = i
-    #
-    # stored_data.exit_from_db()
 
     if len(movie_unseen) == 0:
-        app = QApplication(['0'])
-        msg = QMessageBox()
-        button_reply =msg.question(msg,
-                                   'No unseen movies.',
-                                   'Maybe a good tip is to check the scan dir.'
-                                   'Continue anyway?',
-                                   QMessageBox.Yes | QMessageBox.No)
-
-        if button_reply == QMessageBox.Yes:
-            pass
-        else:
-            sys.exit('1')
+        empty_unseen_dict()
 
     return movie_seen, movie_unseen
