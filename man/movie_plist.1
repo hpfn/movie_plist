@@ -19,11 +19,12 @@ so you will do this only once:
 .PP
 Then it will start searching for . desktop files. These .desktop files can
 be created by grap and drop an url from imdb.com to a file manager like
-Nautilus or by you with these two last lines:
+Nautilus or by you with this line:
 .PP
 URL=http://www.imdb.com/title/ttXXXXXXX/
-.fi
-blablabla
+.PP
+The REGEX will search for "(URL|url)=http://.*" so you can use 'URL or 'url'.
+But does no validate the url yet.
 .PP
 Put the .desktop file inside a directory where the movie is stored. Do not
 put two .desktop files in the same directory. Using the example above which
