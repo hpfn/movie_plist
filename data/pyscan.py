@@ -24,7 +24,7 @@ def empty_unseen_dict():
 
 def open_right_file(root_path, right_file):
     """ open the right file and get the url"""
-    file_to_search = root_path + '/' + right_file
+    file_to_search = os.path.join(root_path, right_file)
     with open(file_to_search, 'r') as check_content:
         url = check_content.readlines()
         return url[-2][4:-1]
