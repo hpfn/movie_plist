@@ -22,6 +22,6 @@ class ParseImdbData(object):
 
     def synopsis(self):
         description = self.soup.find(itemprop="description")
-        raw_txt = description.contents[0].strip()
+        raw_txt = description.get_text()
         return raw_txt
 
