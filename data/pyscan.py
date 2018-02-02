@@ -52,6 +52,7 @@ def dir_to_scan(scan_dir, seen_movies):
             this_one = re.search(arq_pattern, ' '.join(filename))
             if this_one:
                 imdb_url = open_right_file(root, this_one.group(0))
+                seen_movies.discard(root)
                 yield dirname_titleyear.sub('', root), [imdb_url, root]
 
 
