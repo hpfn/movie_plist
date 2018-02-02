@@ -86,4 +86,4 @@ class HtmlTags:
 
         self.synopsis = ''.join(s_list)
         """
-        self.synopsis = '<br>'.join(textwrap.wrap(self.synopsis, width=60))
+        self.synopsis = '<br />'.join(textwrap.wrap(self.synopsis))
