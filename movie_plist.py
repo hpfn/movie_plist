@@ -22,7 +22,8 @@ def main(d_scan):
     ex = Window(seen_list, unseen_list, all_movies)
     
     def json_seen_m(movie_dic, u_l):
-        seen_dict = {key: list_items for key, list_items in movie_dic.items() if key not in set(u_l)}
+        unseen_l = set(u_l)
+        seen_dict = {key: list_items for key, list_items in movie_dic.items() if not {key}.issubset(unseen_l)}
         with open(json_file, 'w') as outfile:
             json.dump(seen_dict, outfile)
 
