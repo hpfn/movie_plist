@@ -43,7 +43,8 @@ class RightClickMenu:
         # if self.stored_data.movie_isregistered(self.url):
         #    pass
         # else:
-        if self.current_item in self.us_list:
+        us_list_set = set(self.us_list)
+        if {self.current_item}.issubset(us_list_set):
             title_year = self.current_item
             self.current_list.remove(title_year)
             self.qt_list.takeItem(self.qt_list.currentRow())
