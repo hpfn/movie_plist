@@ -11,8 +11,8 @@ def main(d_scan):
     # seen movies now are all_movies
     all_movies, movie_unseen = create_dicts(d_scan)
     # create two lists from dicts
-    seen_list = [s for s in all_movies.keys()]
-    unseen_list = [us for us in movie_unseen.keys()]
+    seen_list = sorted(all_movies.keys())
+    unseen_list = sorted(movie_unseen.keys())
     # merge dicts and clean unseen - probably smaller
     all_movies.update(movie_unseen)
     movie_unseen.clear()  # = {}
