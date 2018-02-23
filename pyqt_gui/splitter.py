@@ -14,16 +14,19 @@ from pyqt_gui.right_click_menu import RightClickMenu
 
 
 class TwoLines(QWidget):
-    def __init__(self, s_list, us_list, all_movies):
+    def __init__(self, m_seen, m_unseen):
         super().__init__()
         self.top = QListWidget()
-        if len(us_list) < 1:
-            self.current_list = s_list
+        if len(m_unseen) < 1:
+            self.current_dict = m_seen
+            self.current_list = sorted(m_seen.keys())
         else:
-            self.current_list = us_list
-        self.us_list = us_list
-        self.s_list = s_list
-        self.current_dict = all_movies
+            self.current_dict = m_unseen
+            self.current_list = sorted(m_unseen.keys())
+
+        self.us_list = m_unseen
+        self.s_list = m_seen
+        # self.current_dict = all_movies
         self.tabs = QTabWidget()
         # movie info
         self.tab_synopsys = QWidget()
@@ -112,7 +115,7 @@ class TwoLines(QWidget):
         self.tree.setColumnWidth(0, 450)
 
     def right_click(self):
-        menu = RightClickMenu(self.current_list, self.current_dict, self.top,
+        menu = RightClickMenu(self.current_dict, self.top,
                               self.s_list, self.us_list)
 
     def clicked_movie(self):
