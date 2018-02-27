@@ -8,16 +8,16 @@ user_name = os.environ['USER']
 # first, main path
 movie_plist_stuff = '/home/' + user_name + '/.config/movie_plist'
 cfg_file = movie_plist_stuff + '/movie_plist.cfg'
-json_file = movie_plist_stuff + '/seen_movies.json'
+seen_json_file = movie_plist_stuff + '/seen_movies.json'
 
 # if path to movie_plist does not exist create one
 movie_plist_config_dir = Path(movie_plist_stuff)
 if not movie_plist_config_dir.is_dir():
     os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
-path_json_file = Path(json_file)
+path_json_file = Path(seen_json_file)
 if not path_json_file.is_file():
-    with open(json_file, 'w') as j_file:
+    with open(seen_json_file, 'w') as j_file:
         j_file.write('{}')
 
 
