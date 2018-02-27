@@ -4,11 +4,11 @@ from pathlib import Path
 import urllib3
 
 # user
-user_name = os.environ['USER']
+home_user = os.environ['HOME']
 # first, main path
-movie_plist_stuff = '/home/' + user_name + '/.config/movie_plist'
-cfg_file = movie_plist_stuff + '/movie_plist.cfg'
-seen_json_file = movie_plist_stuff + '/seen_movies.json'
+movie_plist_stuff = os.path.join(home_user, '.config/movie_plist')
+cfg_file = os.path.join(movie_plist_stuff, 'movie_plist.cfg')
+seen_json_file = os.path.join(movie_plist_stuff, 'seen_movies.json')
 
 # if path to movie_plist does not exist create one
 movie_plist_config_dir = Path(movie_plist_stuff)
