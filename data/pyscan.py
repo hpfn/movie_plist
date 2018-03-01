@@ -5,7 +5,7 @@ import re
 import sys
 import json
 # from PyQt5.QtWidgets import QMessageBox, QApplication
-from conf.global_conf import seen_json_file
+from conf.global_conf import seen_json_file, unseen_json_file
 
 
 def empty_unseen_dict():
@@ -64,9 +64,15 @@ def create_dicts(s_dir):
     with open(seen_json_file) as json_data:
         movie_seen = json.load(json_data)
 
-    movies_path = set(m_path for _, m_path in movie_seen.values())
+    with open(unseen_json_file) as u_json_data:
+        movie_unseen = json.load(u_json_data)
 
-    movie_unseen = {dir_name: i for dir_name, i in dir_to_scan(s_dir, movies_path)}
+    movies_path = set(m_path for _, m_path in movie_seen.values())
+    umovies_path = set(um_path for _, um_path in movie_unseen.values())
+    all_movies_path = set.union(movies_path, umovies_path)
+
+    movie_unseen_to_add = {dir_name: i for dir_name, i in dir_to_scan(s_dir, all_movies_path)}
+    movie_unseen.update(movie_unseen_to_add)
 
     if len(movie_unseen) == 0:
         empty_unseen_dict()
