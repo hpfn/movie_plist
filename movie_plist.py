@@ -28,9 +28,9 @@ def main(d_scan):
             json.dump(movie_dic, outfile)
 
     exit_task = [
+        app.exec_(),
         w_json_movie_file(movie_unseen, unseen_json_file),
         w_json_movie_file(movie_seen, seen_json_file),
-        app.exec_()
     ]
     sys.exit(exit_task)
 
