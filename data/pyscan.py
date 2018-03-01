@@ -5,7 +5,7 @@ import re
 import sys
 import json
 # from PyQt5.QtWidgets import QMessageBox, QApplication
-from conf.global_conf import json_file
+from conf.global_conf import seen_json_file
 
 
 def empty_unseen_dict():
@@ -61,7 +61,7 @@ def create_dicts(s_dir):
     # build unseen movies based on json file
     # if no unseen movies ask if continue
     """
-    with open(json_file) as json_data:
+    with open(seen_json_file) as json_data:
         movie_seen = json.load(json_data)
 
     movies_path = set(m_path for _, m_path in movie_seen.values())
