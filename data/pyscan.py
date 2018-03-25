@@ -30,7 +30,7 @@ def open_right_file(root_path, right_file):
     with open(file_to_search, 'r') as check_content:
         file_lines = check_content.readlines()
 
-    url = re.search(r"(URL|url)=http://.*", ' '.join(file_lines))
+    url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))
 
     if url:
         return url.group(0)[4:]
