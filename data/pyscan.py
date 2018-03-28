@@ -60,11 +60,14 @@ def dir_to_scan(scan_dir, seen_movies):
 
     for root, _, filename in os.walk(scan_dir):
         if not {root}.issubset(seen_movies):
-            this_one = re.search(arq_pattern, ' '.join(filename))
-            if this_one:
-                imdb_url = open_right_file(root, this_one.group(0))
-                yield dirname_titleyear.sub('', root), [imdb_url, root]
-
+            # this_one = re.search(arq_pattern, ' '.join(filename))
+            # if this_one:
+            #    imdb_url = open_right_file(root, this_one.group(0))
+            #    yield dirname_titleyear.sub('', root), [imdb_url, root]
+            for file_n in filename:
+                if file_n.endswith('.desktop'):
+                    imdb_url = open_right_file(root, file_n)
+                    yield dirname_titleyear.sub('', root), [imdb_url, root]
 
 def create_dicts(s_dir):
     """
