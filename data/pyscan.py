@@ -45,9 +45,9 @@ def dir_to_scan(scan_dir, seen_movies):
       root will go to QTab-QTree
       named_dir is title_year (user mkdir name)
     """
-    arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
+    # arq_pattern = re.compile(r"[\w,'-.]+\.desktop")
     # dirname is the title_year if the user do it right
-    dirname_titleyear = re.compile('/.*/')
+    # dirname_titleyear = re.compile('/.*/')
     # selection_dirs = ((root, filename)
     #                   for root, _, filename in os.walk(scan_dir)
     #                   if not {root}.issubset(seen_movies))
@@ -67,7 +67,9 @@ def dir_to_scan(scan_dir, seen_movies):
             for file_n in filename:
                 if file_n.endswith('.desktop'):
                     imdb_url = open_right_file(root, file_n)
-                    yield dirname_titleyear.sub('', root), [imdb_url, root]
+                    # yield dirname_titleyear.sub('', root), [imdb_url, root]
+                    yield root.rpartition('/')[-1], [imdb_url, root]
+
 
 def create_dicts(s_dir):
     """
