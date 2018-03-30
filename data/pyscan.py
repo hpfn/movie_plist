@@ -52,23 +52,22 @@ def dir_to_scan(scan_dir, seen_movies):
     #                   for root, _, filename in os.walk(scan_dir)
     #                   if not {root}.issubset(seen_movies))
     #
-    # for root, filename in selection_dirs:
-    #     this_one = re.search(arq_pattern, ' '.join(filename))
-    #     if this_one:
-    #         imdb_url = open_right_file(root, this_one.group(0))
-    #         yield dirname_titleyear.sub('', root), [imdb_url, root]
+    # chosen_ones = ((root, filename)
+    #                 for root, filename in selection_dirs
+    #                 if re.search(arq_pattern, ' '.join(filename)))
+    # for root, filename in choosen_ones:
+    #     for file_n in filename:
+    #         if file_n.endswith('.desktop'):
+    #             file_with_url = os.path.join(root, file_n)
+    #             imdb_url = open_right_file(file_with_url)
+    #             yield root.rpartition('/')[-1], (imdb_url, root)
 
     for root, _, filename in os.walk(scan_dir):
         if not {root}.issubset(seen_movies):
-            # this_one = re.search(arq_pattern, ' '.join(filename))
-            # if this_one:
-            #    imdb_url = open_right_file(root, this_one.group(0))
-            #    yield dirname_titleyear.sub('', root), [imdb_url, root]
             for file_n in filename:
                 if file_n.endswith('.desktop'):
                     file_with_url = os.path.join(root, file_n)
                     imdb_url = open_right_file(file_with_url)
-                    # yield dirname_titleyear.sub('', root), [imdb_url, root]
                     yield root.rpartition('/')[-1], (imdb_url, root)
 
 
