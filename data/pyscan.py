@@ -68,7 +68,7 @@ def dir_to_scan(scan_dir, seen_movies):
                 if file_n.endswith('.desktop'):
                     imdb_url = open_right_file(root, file_n)
                     # yield dirname_titleyear.sub('', root), [imdb_url, root]
-                    yield root.rpartition('/')[-1], [imdb_url, root]
+                    yield root.rpartition('/')[-1], (imdb_url, root)
 
 
 def create_dicts(s_dir):
