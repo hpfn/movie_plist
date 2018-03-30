@@ -24,10 +24,10 @@ def empty_unseen_dict():
         sys.exit('1')
 
 
-def open_right_file(root_path, right_file):
+def open_right_file(desktop_file):
     """ open the right file and get the url"""
-    file_to_search = os.path.join(root_path, right_file)
-    with open(file_to_search, 'r') as check_content:
+    # file_to_search = os.path.join(root_path, right_file)
+    with open(desktop_file, 'r') as check_content:
         file_lines = check_content.readlines()
 
     url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))
@@ -66,7 +66,8 @@ def dir_to_scan(scan_dir, seen_movies):
             #    yield dirname_titleyear.sub('', root), [imdb_url, root]
             for file_n in filename:
                 if file_n.endswith('.desktop'):
-                    imdb_url = open_right_file(root, file_n)
+                    file_with_url = os.path.join(root, file_n)
+                    imdb_url = open_right_file(file_with_url)
                     # yield dirname_titleyear.sub('', root), [imdb_url, root]
                     yield root.rpartition('/')[-1], (imdb_url, root)
 
