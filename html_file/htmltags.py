@@ -16,29 +16,53 @@ class HtmlTags:
         self.url = url
         self.context = ''
         self.synopsis = ''
+        self.html = ''
+        self.movie = ''
 
+        self.retrieve_data()
+        self.build_html()
+
+    def retrieve_data(self):
+        self.get_html()
+        self.parse_html()
+        self.get_synopsis()
+        self.wrap_synopsis()
+        self.do_poster_png_file()
+
+    def build_html(self):
+        self.top_header()
+        self.inside_table()
+        self.bottom_tags()
+
+    def get_html(self):
         try:
-            self.first_steps()
+            self.html = urllib.request.urlopen(self.url, timeout=3).read()
         except urllib.error.URLError:
-            self.context = "URLError. Try again."
+            self.context = "HTML - URLError. Try again."
         except timeout:
-            self.context = "Connection timeout. Try again."
+            self.context = "HTML - Connection timeout. Try again."
         except ValueError:
-            self.context = "Please, check the .desktop file for this movie."
-        else:
-            self.top_header()
-            self.inside_table()
-            self.bottom_tags()
+            self.context = "HTML - Please, check the .desktop file for this movie."
 
-    def first_steps(self):
-        html = urllib.request.urlopen(self.url, timeout=3).read()
-        movie = pimdbdata.ParseImdbData(html)
+    def parse_html(self):
+        self.movie = pimdbdata.ParseImdbData(self.html)
 
-        self.synopsis = movie.synopsis()
+    def get_synopsis(self):
+        self.synopsis = self.movie.synopsis()
 
-        poster = movie.movie_poster()
+    def wrap_synopsis(self):
+        self.synopsis = '<br />'.join(textwrap.wrap(self.synopsis))
+
+    def do_poster_png_file(self):
+        poster = self.movie.movie_poster()
+        try:
+            data = urllib.request.urlopen(poster).read()
+        except urllib.error.URLError:
+            self.context = "Poster - URLError. Try again."
+        except timeout:
+            self.context = "Poster - Connection timeout. Try again."
+
         img = QImage()  # (8,10,4)
-        data = urllib.request.urlopen(poster).read()
         img.loadFromData(data)
         img.save('/tmp/picture.png')
 
@@ -50,13 +74,7 @@ class HtmlTags:
                         "<table>")
 
     def inside_table(self):
-        """
-        
-        """
-        self.format_synopsis()
-
         self.context += "<td>\n<img src=\"/tmp/picture.png\"></td>"
-
         self.context += "<td width=\"70\">"
         self.context += self.synopsis + "<br>"
         self.context += "<a href=\"" + self.url + "\">imdb</a><br>"
@@ -66,24 +84,3 @@ class HtmlTags:
         """ from </table> to </html> """
         self.context += "</table><input type=submit value=\"Submit\"></form></body>\n</html>"
 
-    def format_synopsis(self):
-        """
-        x = 60
-        y = 60
-        s_list = list(self.synopsis)
-        list_size = len(s_list) - 1
-        for i in s_list[x:]:
-            if i is ' ' and y < list_size:
-                try:
-                    place = s_list[x:].index(i)
-                    s_list[x + place] = '<br>'
-                    x += 60
-                    y = x
-                except ValueError:
-                    print("Please, fix the way the synopsis is formated")
-
-            y += 1
-
-        self.synopsis = ''.join(s_list)
-        """
-        self.synopsis = '<br />'.join(textwrap.wrap(self.synopsis))
