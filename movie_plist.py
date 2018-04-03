@@ -36,8 +36,8 @@ def main(d_scan):
 
 
 if __name__ == '__main__':
-    if internet_on() == 200:
-        path_dir_scan = get_dir_path()
-        main(path_dir_scan)
-    else:
-        print(" Please, check your internet connection. ")
+    # if internet_on() == 200:
+    path_dir_scan = get_dir_path()
+    main(path_dir_scan)
+    # else:
+    #     print(" Please, check your internet connection. ")
