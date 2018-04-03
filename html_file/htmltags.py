@@ -64,6 +64,7 @@ class HtmlTags:
 
         img = QImage()  # (8,10,4)
         img.loadFromData(data)
+        # save file in .cache/movie_plist - self.movie.title_year
         img.save('/tmp/picture.png')
 
     def top_header(self):
