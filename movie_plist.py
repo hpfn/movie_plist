@@ -8,18 +8,7 @@ from pyqt_gui.main_window import Window
 
 
 def main(d_scan):
-    # seen movies now are all_movies
     movie_seen, movie_unseen = create_dicts(d_scan)
-    # create two lists from dicts
-    # seen_list = sorted(movie_seen.keys())
-    # unseen_list = sorted(movie_unseen.keys())
-    # merge dicts and clean unseen - probably smaller
-    # all_movies = {}
-    # all_movies.update(movie_unseen)
-    # all_movies.update(movie_seen)
-    # movie_unseen.clear()  # = {}
-
-    # launch movie_plist
     app = QApplication(sys.argv)
     ex = Window(movie_seen, movie_unseen)
     
