@@ -1,13 +1,13 @@
-from setuptools import setup, find_packages
+from setuptools import setup  # , find_packages
 
 setup(
     name='movie_plist',
     version='20161225',
     packages=['conf', 'data', 'pyqt_gui', 'html_file', 'info_in_db'],
-    #packages=find_packages(),
+    # packages=find_packages(),
     scripts=['movie_plist.py'],
     setup_requires=['setuptools >= 28.7.1'],
-    install_requires=['python >= 3.5', 'PyQt5 >= 5.7', 'urllib3', 'beautifulsoup4 >= 4.5'],
+    install_requires=['urllib3', 'beautifulsoup4 >= 4.5', 'PyQt5', 'sip'],
     url='https://github.com/hpfn/movie_plist',
     license='GPLv3+',
     author='Herbert Parentes Fortes Neto',
@@ -15,6 +15,7 @@ setup(
     description='list your movies',
     classifiers=[
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: GNU General Public License v3 (GPL-3+)',
         'Operating System :: Linux',
         'Intended Audience :: End Users/Desktop',
