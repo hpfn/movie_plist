@@ -2,7 +2,7 @@ from setuptools import setup  # , find_packages
 
 setup(
     name='movie_plist',
-    version='20161225',
+    version='20180406',
     packages=['conf', 'data', 'pyqt_gui', 'html_file', 'info_in_db'],
     # packages=find_packages(),
     scripts=['movie_plist.py'],
