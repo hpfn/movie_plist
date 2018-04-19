@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 # -*-coding-utf8-*
-import sys, json
+import sys
+import json
 from PyQt5.QtWidgets import QApplication
 from conf.global_conf import internet_on, get_dir_path, seen_json_file, unseen_json_file
-from data.pyscan import create_dicts
+from data.pyscan import CreateDict
 from pyqt_gui.main_window import Window
 
 
 def main(d_scan):
-    movie_seen, movie_unseen = create_dicts(d_scan)
+    c_d = CreateDict(d_scan)
+    movie_seen, movie_unseen = c_d.create_dicts()
     app = QApplication(sys.argv)
     ex = Window(movie_seen, movie_unseen)
     
