@@ -34,6 +34,7 @@ def read_path():
         return cfg_path
     else:
         print("Invalid path in movie_plist.cfg file")
+        print(chck_path)
         sys.exit(1)
 
 
@@ -66,3 +67,30 @@ def internet_on():
         print('No Internet Connection ! Or IMDB has a problem...')
         print('and movie_plist will crash, probably')
         return False
+
+
+def scan_dir_has_movies(scan_dir):
+    # tem que fazer uma checagem melhor
+    d_size = os.lstat(scan_dir)
+
+    if d_size.st_size > 5000:
+        return True
+
+    from PyQt5.QtWidgets import QMessageBox, QApplication
+
+    app = QApplication(['0'])
+
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Warning)
+    msg.setWindowTitle("Empty Directory")
+
+    text = """
+        The directory scanned seems empty. 
+        Please check the scan dir.
+        """ + scan_dir
+
+    msg.setText(text)
+    msg.setStandardButtons(QMessageBox.Ok)
+    msg.exec_()
+
+    sys.exit('1')

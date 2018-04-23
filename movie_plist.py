@@ -3,7 +3,9 @@
 import sys
 import json
 from PyQt5.QtWidgets import QApplication
-from conf.global_conf import internet_on, get_dir_path, seen_json_file, unseen_json_file
+from conf.global_conf import (
+    internet_on, get_dir_path, seen_json_file, unseen_json_file,
+    scan_dir_has_movies)
 from data.pyscan import CreateDict
 from pyqt_gui.main_window import Window
 
@@ -29,6 +31,7 @@ def main(d_scan):
 if __name__ == '__main__':
     # if internet_on() == 200:
     path_dir_scan = get_dir_path()
+    scan_dir_has_movies(path_dir_scan)
     main(path_dir_scan)
     # else:
     #     print(" Please, check your internet connection. ")

@@ -2,10 +2,8 @@
 
 import os
 import re
-import sys
 import json
 import time
-# from PyQt5.QtWidgets import QMessageBox, QApplication
 from conf.global_conf import seen_json_file, unseen_json_file
 
 
@@ -36,9 +34,6 @@ class CreateDict:
 
         movie_unseen_to_add = {dir_name: i for dir_name, i in self._new_data()}
         movie_unseen.update(movie_unseen_to_add)
-
-        if not movie_unseen:
-            self._empty_unseen_dict()
 
         end = time.time()
         print(end - start)
@@ -74,51 +69,3 @@ class CreateDict:
 
         if url:
             return url.group(0)[4:]
-
-    @staticmethod
-    def _empty_unseen_dict():
-        from PyQt5.QtWidgets import QMessageBox, QApplication
-        app = QApplication(['0'])
-        msg = QMessageBox()
-        button_reply = msg.question(
-            msg,
-            'No unseen movies.',
-            'Maybe a good tip is to check the scan dir. Continue anyway?',
-            QMessageBox.Yes | QMessageBox.No
-        )
-
-        if button_reply == QMessageBox.No:
-            sys.exit('1')
-
-
-# def dir_to_scan(scan_dir, seen_movies):
-#     """
-#     find .desktop file  to get imdb url
-#
-#     yield:
-#       imdb_url: to get poster and synopsis
-#       root will go to QTab-QTree
-#       named_dir is title_year (user mkdir name)
-#     """
-#     new_dirs = ((root, filename)
-#                 for root, _, filename in os.walk(scan_dir)
-#                 if not {root}.issubset(seen_movies))
-#
-#     new_desktop_f = ((root, file_n)
-#                      for root, filename in new_dirs
-#                      for file_n in filename
-#                      if file_n.endswith('.desktop'))
-#
-#     for root, file_n in new_desktop_f:
-#         file_with_url = os.path.join(root, file_n)
-#         imdb_url = open_right_file(file_with_url)
-#         yield root.rpartition('/')[-1], (imdb_url, root)
-#
-
-    # for root, _, filename in os.walk(scan_dir):
-    #    if not {root}.issubset(seen_movies):
-    #        for file_n in filename:
-    #            if file_n.endswith('.desktop'):
-    #                file_with_url = os.path.join(root, file_n)
-    #                imdb_url = open_right_file(file_with_url)
-    #                yield root.rpartition('/')[-1], (imdb_url, root)
