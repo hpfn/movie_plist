@@ -31,19 +31,27 @@ def read_path():
 
     chck_path = Path(cfg_path)
     if chck_path.is_dir():
+        scan_dir_has_movies()
         return cfg_path
-    else:
-        print("Invalid path in movie_plist.cfg file")
-        print(chck_path)
-        sys.exit(1)
+
+    invalid_path()
 
 
 def write_path(cfg_path):
-    # path already checked
-    with open(cfg_file, 'w') as cfg_write:
-        cfg_write.write(cfg_path)
+    chck_path = Path(cfg_path)
+    if chck_path.is_dir():
+        with open(cfg_file, 'w') as cfg_write:
+            cfg_write.write(cfg_path)
 
-    return cfg_path
+        return cfg_path
+
+    invalid_path()
+
+
+def invalid_path():
+    print("Invalid path in movie_plist.cfg file.")
+    print("Do not edit the file manually.")
+    sys.exit(1)
 
 
 def get_dir_path():
@@ -57,6 +65,8 @@ def get_dir_path():
     return path_dir_scan
 
 
+# this will die.
+# check html_file/htmltags
 def internet_on():
     try:
         http = urllib3.PoolManager()
