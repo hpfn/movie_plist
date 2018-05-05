@@ -31,7 +31,7 @@ def read_path():
 
     chck_path = Path(cfg_path)
     if chck_path.is_dir():
-        scan_dir_has_movies()
+        scan_dir_has_movies(cfg_path)
         return cfg_path
 
     invalid_path()
@@ -81,10 +81,10 @@ def internet_on():
 
 def scan_dir_has_movies(scan_dir):
     # tem que fazer uma checagem melhor
-    d_size = os.lstat(scan_dir)
-
-    if d_size.st_size > 5000:
-        return True
+    for _, _, filename in os.walk(scan_dir):
+        for file in filename:
+            if file.endswith('.desktop'):
+                return True
 
     from PyQt5.QtWidgets import QMessageBox, QApplication
 
