@@ -12,9 +12,8 @@ class ParseImdbData:
         """
         receive an url to be
         """
-        # self.url = url
-        html_page = self._get_html(url)
-        self.soup = BeautifulSoup(html_page, 'html.parser')
+        self._url = url
+        self.soup = BeautifulSoup(self._get_html(), 'html.parser')
         self._do_poster_png_file()
 
     def title_year(self):
@@ -36,15 +35,22 @@ class ParseImdbData:
         obs: tem um conserto no azak
         """
         try:
-            poster = self._movie_poster()
-            data = urllib.request.urlopen(poster).read()
-            self._save_poster_file(data)
+            self._save_poster_file()
         except urllib.error.URLError:
             print("Poster - URLError. Try again.")
         except timeout:
             print("Poster - Connection timeout. Try again.")
 
-    def _movie_poster(self):
+    def _save_poster_file(self):
+        img = QImage()  # (8,10,4)
+        img.loadFromData(self._poster_file())
+        # TODO: save file in .cache/movie_plist - self.movie.title_year
+        img.save('/tmp/picture.png')
+
+    def _poster_file(self):
+        return urllib.request.urlopen(self._poster_url()).read()
+
+    def _poster_url(self):
         """
         obs: tem um conserto no azak
         """
@@ -53,19 +59,12 @@ class ParseImdbData:
         result = re_poster.search(str(poster))
         return result.group(0)
 
-    @staticmethod
-    def _save_poster_file(data):
-        img = QImage()  # (8,10,4)
-        img.loadFromData(data)
-        # TODO: save file in .cache/movie_plist - self.movie.title_year
-        img.save('/tmp/picture.png')
-
-    def _get_html(self, url):
+    def _get_html(self):
         """
         obs: tem um conserto no azak
         """
         try:
-            return urllib.request.urlopen(url, timeout=3).read()
+            return urllib.request.urlopen(self._url, timeout=3).read()
         except urllib.error.URLError:
             print("HTML - URLError. Try again.")
         except timeout:
