@@ -67,11 +67,11 @@ class ParseImdbData:
         try:
             return urllib.request.urlopen(url, timeout=3).read()
         except urllib.error.URLError:
-            self.context = "HTML - URLError. Try again."
+            print("HTML - URLError. Try again.")
         except timeout:
-            self.context = "HTML - Connection timeout. Try again."
+            print("HTML - Connection timeout. Try again.")
         except ValueError:
-            self.context = "HTML - Please, check the .desktop file for this movie."
+            print("HTML - Please, check the .desktop file for this movie.")
 
     # def parse_html(self):
     #            self.soup = BeautifulSoup(self.html, 'html.parser')
