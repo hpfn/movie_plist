@@ -7,6 +7,8 @@ import conf.global_conf
 # https://www.python.org/dev/peps/pep-0249/#exceptions
 # http://pythoncentral.io/introduction-to-sqlite-in-python/
 # http://zetcode.com/db/sqlitepythontutorial/
+
+
 class DataStorage(object):
     def __init__(self):
         try:
