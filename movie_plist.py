@@ -16,7 +16,7 @@ def main(d_scan):
     c_d = CreateDict(d_scan)
     movie_seen, movie_unseen = c_d.create_dicts()
     app = QApplication(sys.argv)
-    ex = Window(movie_seen, movie_unseen)
+    ex = Window(movie_seen, movie_unseen)  # noqa: F841
 
     def w_json_movie_file(movie_dic, json_file):
         with open(json_file, 'w') as outfile:

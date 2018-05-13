@@ -88,7 +88,7 @@ def scan_dir_has_movies(scan_dir):
 
     from PyQt5.QtWidgets import QMessageBox, QApplication
 
-    app = QApplication(['0'])
+    app = QApplication(['0'])  # noqa: F841
 
     msg = QMessageBox()
     msg.setIcon(QMessageBox.Warning)
