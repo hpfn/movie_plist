@@ -26,9 +26,14 @@ class ParseImdbData:
         """
         obs: tem um conserto no azak.
         """
-        description = self.soup.find(itemprop="description")
-        raw_txt = description.get_text()
-        return raw_txt
+        try:
+            description = self.soup.find(itemprop="description")
+            return description.get_text()
+        except AttributeError:
+            return """
+                   Maybe something is wrong with internet connection.
+                   If the poster is a skull, that's it. Just try again.
+                   """
 
     def _do_poster_png_file(self):
         """
@@ -52,12 +57,18 @@ class ParseImdbData:
 
     def _poster_url(self):
         """
-        obs: tem um conserto no azak
+
         """
-        poster = self.soup.find(itemprop="image")
-        re_poster = re.compile("http.*\.jpg")
-        result = re_poster.search(str(poster))
-        return result.group(0)
+        try:
+            poster = self.soup.find(itemprop="image")
+            re_poster = re.compile("http.*\.jpg")
+            result = re_poster.search(str(poster))
+            return result.group(0)
+        except AttributeError:
+            # tem que retornar uma url
+            url_err = 'https://static.significados.com.br/'
+            url_err += 'foto/adesivo-caveira-mexicana-caveira-mexicana_th.jpg'
+            return url_err
 
     def _get_html(self):
         """
