@@ -82,7 +82,7 @@ class TwoLines(QWidget):
         self.setLayout(hbox)
 
     def set_tabs(self):
-        """ 
+        """
         movie info on one tab
         ls dir on the other tab
         """
@@ -96,14 +96,14 @@ class TwoLines(QWidget):
         self.tabs.addTab(self.tab_ls_dir, "ls dir")
 
     def data_to_show(self):
-        """ 
-        call HtmlTags to build html with a poster and a synopsis 
+        """
+        call HtmlTags to build html with a poster and a synopsis
         and put the result on self.bottom
         """
         url = self.current_dict[self.top.currentItem().text()][0]
         # if url in 'bad url':
         #    self.bottom.setText('bad url')
-        #else:
+        # else:
         context = HtmlTags(url)
         self.bottom.setText(context.context)
 
@@ -115,8 +115,8 @@ class TwoLines(QWidget):
         self.tree.setColumnWidth(0, 450)
 
     def right_click(self):
-        menu = RightClickMenu(self.current_dict, self.top,
-                              self.s_list, self.us_list)
+        RightClickMenu(self.current_dict, self.top,
+                       self.s_list, self.us_list)
 
     def clicked_movie(self):
         item = self.tree.selectedIndexes()[0]

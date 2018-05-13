@@ -95,7 +95,7 @@ def scan_dir_has_movies(scan_dir):
     msg.setWindowTitle("Empty Directory")
 
     text = """
-        The directory scanned seems empty. 
+        The directory scanned seems empty.
         Please check the scan dir.
         """ + scan_dir
 

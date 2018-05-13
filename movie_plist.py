@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 # -*-coding-utf8-*
-import sys
 import json
+import sys
+
 from PyQt5.QtWidgets import QApplication
+
 from conf.global_conf import (
-    internet_on, get_dir_path, seen_json_file, unseen_json_file,
+    get_dir_path, seen_json_file, unseen_json_file,
     scan_dir_has_movies)
 from data.pyscan import CreateDict
 from pyqt_gui.main_window import Window
@@ -15,7 +17,7 @@ def main(d_scan):
     movie_seen, movie_unseen = c_d.create_dicts()
     app = QApplication(sys.argv)
     ex = Window(movie_seen, movie_unseen)
-    
+
     def w_json_movie_file(movie_dic, json_file):
         with open(json_file, 'w') as outfile:
             json.dump(movie_dic, outfile)

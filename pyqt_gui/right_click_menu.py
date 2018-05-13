@@ -1,6 +1,5 @@
-from PyQt5.QtWidgets import QMenu, QAction, QMessageBox
 from PyQt5.QtGui import QCursor
-from info_in_db.movie_plist_sqlite3 import DataStorage
+from PyQt5.QtWidgets import QMenu, QAction, QMessageBox
 
 
 class RightClickMenu:
@@ -35,7 +34,7 @@ class RightClickMenu:
 
     def m_seen_movies(self):
         """
-        mark a movie as seen. 
+        mark a movie as seen.
         check unseen list and seen list
         check on db if it is already a seen movie
         """
@@ -43,7 +42,7 @@ class RightClickMenu:
         # if self.stored_data.movie_isregistered(self.url):
         #    pass
         # else:
-        #us_list_set = set(self.us_list)
+        # us_list_set = set(self.us_list)
         if self.current_item in self.us_list:
             title_year = self.current_item
             # self.current_list.remove(title_year)
@@ -68,9 +67,9 @@ class RightClickMenu:
         title_year = self.current_item
         # self.current_list.remove(title_year)
         self.qt_list.takeItem(self.qt_list.currentRow())
-        #if self.us_list.get(title_year):
+        # if self.us_list.get(title_year):
         #    del self.us_list[title_year]
-        #else:
+        # else:
         #    del self.s_list[title_year]
         del self.current_dict[title_year]
 
