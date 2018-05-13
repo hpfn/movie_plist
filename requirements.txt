@@ -1,10 +1,5 @@
-attrs==18.1.0
 beautifulsoup4==4.6.0
-more-itertools==4.1.0
 pluggy==0.6.0
-py==1.5.3
 PyQt5==5.10.1
-pytest==3.5.1
 sip==4.19.8
-six==1.11.0
 urllib3==1.22
