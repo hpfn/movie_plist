@@ -4,10 +4,7 @@
 [![codecov](https://codecov.io/gh/hpfn/movie_plist/branch/master/graph/badge.svg)](https://codecov.io/gh/hpfn/movie_plist)
 
 
-Starting a new version. No QWebBrowser, no<br>
-cgi. It will look like deluge-gtk.
-
-Everything seems ready. On a Debian Stretch.
+On a Debian Stretch.
 
 TODO list:<br> 
     - search<br>
