@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/hpfn/movie_plist.svg?branch=master)](https://travis-ci.org/hpfn/movie_plist)
 [![Updates](https://pyup.io/repos/github/hpfn/movie_plist/shield.svg)](https://pyup.io/repos/github/hpfn/movie_plist/)
 [![Python 3](https://pyup.io/repos/github/hpfn/movie_plist/python-3-shield.svg)](https://pyup.io/repos/github/hpfn/movie_plist/)
+[![codecov](https://codecov.io/gh/hpfn/movie_plist/branch/master/graph/badge.svg)](https://codecov.io/gh/hpfn/movie_plist)
+
 
 Starting a new version. No QWebBrowser, no<br>
 cgi. It will look like deluge-gtk.
