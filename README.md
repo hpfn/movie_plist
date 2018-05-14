@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hpfn/movie_plist.svg?branch=master)](https://travis-ci.org/hpfn/movie_plist)
+
 Starting a new version. No QWebBrowser, no<br>
 cgi. It will look like deluge-gtk.
 
