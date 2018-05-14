@@ -2,7 +2,7 @@ import pytest
 import sys
 import os
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
-from data import pyscan
+from data import pyscan  # noqa: E402
 
 
 pyscan.seen_json_file = './tests/seen_json_file.json'
