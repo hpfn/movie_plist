@@ -5,12 +5,12 @@
 import sys
 import os
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
-from html_file.htmltags import HtmlTags
+from html_file.htmltags import HtmlTags  # noqa: E402
 
 
-#@patch('html_file.htmltags.HtmlTags._retrieve_data')
+# @patch('html_file.htmltags.HtmlTags._retrieve_data')
 def test_htmltags_class(mocker):
-    #html_patch.value = None
+    # html_patch.value = None
     mocker.patch.object(HtmlTags, '_retrieve_data', value=None)
 
     url = 'http://www.example.com'
@@ -19,6 +19,3 @@ def test_htmltags_class(mocker):
     # not be here because of mocker
     assert 'Maybe something is wrong' not in _html_page.context
     assert url in _html_page.context
-
-
-
