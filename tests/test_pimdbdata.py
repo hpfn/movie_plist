@@ -1,14 +1,14 @@
 import sys
 import os
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
-from data.pimdbdata import ParseImdbData
+from data.pimdbdata import ParseImdbData  # noqa: E402
 
 
 # usar pytest.fixture ?
 
 def test_synopsis(mocker):
     # mocker just mock methods, no attrs
-    #mocker.patch.object(ParseImdbData, 'BeautifulSoup', value=None)
+    # mocker.patch.object(ParseImdbData, 'BeautifulSoup', value=None)
     mocker.patch.object(ParseImdbData, '__init__', return_value=None)
 
     test_synopsis = ParseImdbData('http://www.example.com')
