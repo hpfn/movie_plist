@@ -133,8 +133,11 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Framework :: Pytest",
     ],
+    # requests
     install_requires=[
-        'requests'
+        'beautifulsoup4>=4.6.0',
+        'PyQt5>=5.10.1',
+        'urllib3>=1.22'
     ],
     zip_safe=False,
 )
