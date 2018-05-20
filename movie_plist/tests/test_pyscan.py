@@ -5,10 +5,10 @@ sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
 from data import pyscan  # noqa: E402
 
 
-pyscan.seen_json_file = './tests/seen_json_file.json'
-pyscan.unseen_json_file = './tests/unseen_json_file.json'
+pyscan.seen_json_file = 'movie_plist/tests/seen_json_file.json'
+pyscan.unseen_json_file = 'movie_plist/tests/unseen_json_file.json'
 
-c_d = pyscan.CreateDict('./tests/videos_test/')
+c_d = pyscan.CreateDict('movie_plist/tests/videos_test/')
 movie_seen, movie_unseen = c_d.create_dicts()
 url, path_to = list(movie_unseen.values())[0]
 
@@ -26,7 +26,7 @@ def test_dict_instance(a, b):
 str_params = [
     ('Shawshank Redemption, the 1994', movie_unseen.keys()),
     ('https://www.imdb.com/title/tt0111161/', url),
-    ('./tests/videos_test/Shawshank Redemption, the 1994', path_to)
+    ('movie_plist/tests/videos_test/Shawshank Redemption, the 1994', path_to)
 ]
 
 
