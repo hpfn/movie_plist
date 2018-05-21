@@ -6,7 +6,7 @@ from zetcode tutorial
 """
 
 from PyQt5.QtWidgets import (QMainWindow, QAction)
-from pyqt_gui import splitter
+from . import splitter
 
 
 class Window(QMainWindow):

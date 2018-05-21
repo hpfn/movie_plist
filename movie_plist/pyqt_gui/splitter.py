@@ -9,8 +9,8 @@ from subprocess import call
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSplitter,
                              QListWidget, QTabWidget, QFileSystemModel, QTreeView)
 from PyQt5.QtCore import Qt
-from html_file.htmltags import HtmlTags
-from pyqt_gui.right_click_menu import RightClickMenu
+from movie_plist.html_file.htmltags import HtmlTags
+from movie_plist.pyqt_gui.right_click_menu import RightClickMenu
 
 
 class TwoLines(QWidget):

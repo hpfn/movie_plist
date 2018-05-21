@@ -1,7 +1,7 @@
-import sys
-import os
-sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
-from data.pimdbdata import ParseImdbData  # noqa: E402
+# import sys
+# import os
+# sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
+from movie_plist.data.pimdbdata import ParseImdbData  # noqa: E402
 
 
 # usar pytest.fixture ?
