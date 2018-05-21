@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import textwrap
 
-from data import pimdbdata
+from movie_plist.data import pimdbdata
 
 
 class HtmlTags:

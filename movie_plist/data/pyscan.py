@@ -4,7 +4,7 @@ import os
 import re
 import json
 import time
-from conf.global_conf import seen_json_file, unseen_json_file
+from movie_plist.conf.global_conf import seen_json_file, unseen_json_file
 
 
 class CreateDict:
