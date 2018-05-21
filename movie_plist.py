@@ -5,11 +5,11 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from conf.global_conf import (
+from movie_plist.conf.global_conf import (
     get_dir_path, seen_json_file, unseen_json_file,
     scan_dir_has_movies)
-from data.pyscan import CreateDict
-from pyqt_gui.main_window import Window
+from movie_plist.data.pyscan import CreateDict
+from movie_plist.pyqt_gui.main_window import Window
 
 
 def main(d_scan):
