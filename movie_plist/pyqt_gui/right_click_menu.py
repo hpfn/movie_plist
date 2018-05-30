@@ -4,30 +4,32 @@ from PyQt5.QtWidgets import QMenu, QAction, QMessageBox
 
 class RightClickMenu:
     def __init__(self, current_dict, qt_list, m_seen, m_unseen):
-        self.current_item = qt_list.currentItem().text()
+        # self.current_item = qt_list.currentItem().text()
         self.current_dict = current_dict
         self.qt_list = qt_list
         self.s_dict = m_seen
         self.us_dict = m_unseen
-        self.menu = QMenu()
+        # self.menu = QMenu()
 
         self.right_click()
 
     def right_click(self):
-        m_seen_action = QAction('Mark as Seen', self.menu)
+        menu = QMenu()
+
+        m_seen_action = QAction('Mark as Seen', menu)
         # unseenAction.setShortcut()
         m_seen_action.setStatusTip('Mark as Seen')
         m_seen_action.triggered.connect(self.m_seen_movies)
 
-        m_rm_action = QAction('Remove from movie_plist', self.menu)
+        m_rm_action = QAction('Remove from movie_plist', menu)
         # unseenAction.setShortcut()
         m_rm_action.setStatusTip('Remove from movie_plist')
         m_rm_action.triggered.connect(self.m_rm_from_dict)
 
-        self.menu.addAction(m_seen_action)
-        self.menu.addAction(m_rm_action)
+        menu.addAction(m_seen_action)
+        menu.addAction(m_rm_action)
 
-        self.menu.exec_(QCursor.pos())
+        menu.exec_(QCursor.pos())
 
     def m_seen_movies(self):
         """
@@ -35,8 +37,9 @@ class RightClickMenu:
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        if self.current_item in self.us_dict:
-            title_year = self.current_item
+        title_year = self.qt_list.currentItem().text()
+        if title_year in self.us_dict:
+            # title_year = self.current_item
             self.qt_list.takeItem(self.qt_list.currentRow())
             self.s_dict[title_year] = self.us_dict[title_year]
             del self.us_dict[title_year]
@@ -47,8 +50,9 @@ class RightClickMenu:
         the user remove from HD
         """
 
-        title_year = self.current_item
+        # title_year = self.qt_list.currentItem().text()
         self.qt_list.takeItem(self.qt_list.currentRow())
+        title_year = self.qt_list.currentItem().text()
         del self.current_dict[title_year]
 
         msg = QMessageBox()
