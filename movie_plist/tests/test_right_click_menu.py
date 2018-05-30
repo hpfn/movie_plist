@@ -3,6 +3,7 @@ import pytest
 from movie_plist.pyqt_gui.right_click_menu import RightClickMenu
 from unittest.mock import Mock
 
+
 # one test missing
 
 
@@ -28,9 +29,9 @@ def test_mark_as_seen(create_obj):
 
 
 def test_rm_from_dict(create_obj):
-     obj = create_obj
-     obj.current_dict = obj.us_dict
-     obj.m_rm_from_dict()
-     obj.qt_list.takeItem.assert_called_once_with(obj.current_item)
-     assert obj.current_item not in obj.current_dict.keys()
-     assert obj.current_dict == {}
+    obj = create_obj
+    obj.current_dict = obj.us_dict
+    obj.m_rm_from_dict()
+    obj.qt_list.takeItem.assert_called_once_with(obj.current_item)
+    assert obj.current_item not in obj.current_dict.keys()
+    assert obj.current_dict == {}
