@@ -7,8 +7,8 @@ class RightClickMenu:
         self.current_item = qt_list.currentItem().text()
         self.current_dict = current_dict
         self.qt_list = qt_list
-        self.s_list = m_seen
-        self.us_list = m_unseen
+        self.s_dict = m_seen
+        self.us_dict = m_unseen
         self.menu = QMenu()
 
         self.right_click()
@@ -22,7 +22,7 @@ class RightClickMenu:
         m_rm_action = QAction('Remove from movie_plist', self.menu)
         # unseenAction.setShortcut()
         m_rm_action.setStatusTip('Remove from movie_plist')
-        m_rm_action.triggered.connect(self.m_rm_from_db)
+        m_rm_action.triggered.connect(self.m_rm_from_dict)
 
         self.menu.addAction(m_seen_action)
         self.menu.addAction(m_rm_action)
@@ -35,13 +35,13 @@ class RightClickMenu:
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        if self.current_item in self.us_list:
+        if self.current_item in self.us_dict:
             title_year = self.current_item
             self.qt_list.takeItem(self.qt_list.currentRow())
-            self.s_list[title_year] = self.us_list[title_year]
-            del self.us_list[title_year]
+            self.s_dict[title_year] = self.us_dict[title_year]
+            del self.us_dict[title_year]
 
-    def m_rm_from_db(self):
+    def m_rm_from_dict(self):
         """
         remove from current list and from db
         the user remove from HD
