@@ -9,25 +9,26 @@ class RightClickMenu:
         self.qt_list = qt_list
         self.s_dict = m_seen
         self.us_dict = m_unseen
-        self.menu = QMenu()
+        # self.menu = QMenu()
 
         self.right_click()
 
     def right_click(self):
-        m_seen_action = QAction('Mark as Seen', self.menu)
+        menu = QMenu()
+        m_seen_action = QAction('Mark as Seen', menu)
         # unseenAction.setShortcut()
         m_seen_action.setStatusTip('Mark as Seen')
         m_seen_action.triggered.connect(self.m_seen_movies)
 
-        m_rm_action = QAction('Remove from movie_plist', self.menu)
+        m_rm_action = QAction('Remove from movie_plist', menu)
         # unseenAction.setShortcut()
         m_rm_action.setStatusTip('Remove from movie_plist')
         m_rm_action.triggered.connect(self.m_rm_from_dict)
 
-        self.menu.addAction(m_seen_action)
-        self.menu.addAction(m_rm_action)
+        menu.addAction(m_seen_action)
+        menu.addAction(m_rm_action)
 
-        self.menu.exec_(QCursor.pos())
+        menu.exec_(QCursor.pos())
 
     def m_seen_movies(self):
         """
