@@ -1,7 +1,7 @@
 import os
 import sys
 from pathlib import Path
-import urllib3
+# import urllib3
 
 # user
 home_user = os.environ['HOME']
@@ -11,18 +11,20 @@ cfg_file = os.path.join(movie_plist_stuff, 'movie_plist.cfg')
 seen_json_file = os.path.join(movie_plist_stuff, 'seen_movies.json')
 unseen_json_file = os.path.join(movie_plist_stuff, 'unseen_movies.json')
 
-# if path to movie_plist does not exist create one
-movie_plist_config_dir = Path(movie_plist_stuff)
-if not movie_plist_config_dir.is_dir():
-    os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
-if not os.path.isfile(seen_json_file):
-    with open(seen_json_file, 'w') as j_file:
-        j_file.write('{}')
+def check_module_attr():
+    # if path to movie_plist does not exist create one
+    movie_plist_config_dir = Path(movie_plist_stuff)
+    if not movie_plist_config_dir.is_dir():
+        os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
-if not os.path.isfile(unseen_json_file):
-    with open(unseen_json_file, 'w') as j_file:
-        j_file.write('{}')
+    if not os.path.isfile(seen_json_file):
+        with open(seen_json_file, 'w') as j_file:
+            j_file.write('{}')
+
+    if not os.path.isfile(unseen_json_file):
+        with open(unseen_json_file, 'w') as j_file:
+            j_file.write('{}')
 
 
 def read_path():
@@ -67,17 +69,17 @@ def get_dir_path():
 
 # this will die.
 # check html_file/htmltags
-def internet_on():
-    try:
-        http = urllib3.PoolManager()
-        r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
-        return r.status
-    # more except is needed
-    except urllib3.exceptions.ConnectTimeoutError:
-        print('No Internet Connection ! Or IMDB has a problem...')
-        print('and movie_plist will crash, probably')
-        return False
-
+# def internet_on():
+#     try:
+#         http = urllib3.PoolManager()
+#         r = http.request('GET', 'http://www.imdb.com', retries=False, timeout=4.0)
+#         return r.status
+#     # more except is needed
+#     except urllib3.exceptions.ConnectTimeoutError:
+#         print('No Internet Connection ! Or IMDB has a problem...')
+#         print('and movie_plist will crash, probably')
+#         return False
+#
 
 def scan_dir_has_movies(scan_dir):
     # tem que fazer uma checagem melhor
