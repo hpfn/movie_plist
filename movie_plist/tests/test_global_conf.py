@@ -1,7 +1,4 @@
 import os
-import sys
-from unittest.mock import Mock
-
 import pytest
 from movie_plist.conf import global_conf
 
@@ -57,11 +54,11 @@ def test_whole_success_process(mock_attrs):
 
 
 def test_fail_write_path():
-    sys.exit = Mock()
-    assert global_conf.write_path('/tmp/XXX') is None
+    with pytest.raises(global_conf.InvalidPath):
+        global_conf.write_path('/tmp/XXX')
 
 
 def test_fail_read_path():
     global_conf.cfg_file = global_conf.unseen_json_file
-    sys.exit = Mock()
-    assert global_conf.read_path() is None
+    with pytest.raises(global_conf.InvalidPath):
+        global_conf.read_path()
