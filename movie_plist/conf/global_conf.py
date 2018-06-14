@@ -1,7 +1,5 @@
 import os
 import sys
-from pathlib import Path
-
 
 # user
 home_user = os.environ['HOME']
@@ -17,55 +15,42 @@ class InvalidPath(Exception):
 
 
 def check_module_attr():
-    # if path to movie_plist does not exist create one
-    movie_plist_config_dir = Path(movie_plist_stuff)
-    if not movie_plist_config_dir.is_dir():
+    if not os.path.isdir(movie_plist_stuff):
         os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
-    if not os.path.isfile(seen_json_file):
-        with open(seen_json_file, 'w') as j_file:
-            j_file.write('{}')
-
-    if not os.path.isfile(unseen_json_file):
-        with open(unseen_json_file, 'w') as j_file:
-            j_file.write('{}')
+    for json_file in [seen_json_file, unseen_json_file]:
+        if not os.path.isfile(json_file):
+            with open(json_file, 'w') as j_file:
+                j_file.write('{}')
 
 
 def read_path():
     with open(cfg_file, 'r') as movie_plist_cfg:
         cfg_path = movie_plist_cfg.readline()
 
-    chck_path = Path(cfg_path)
-    if chck_path.is_dir():
-        scan_dir_has_movies(cfg_path)
-        return cfg_path
+    if not os.path.isdir(cfg_path):
+        raise InvalidPath('Invalid path in movie_plist.cfg file.')
 
-    raise InvalidPath(
-        'Invalid path in movie_plist.cfg file. Do not edit the file manually'
-    )
-    # invalid_path()
+    scan_dir_has_movies(cfg_path)
+    return cfg_path
 
 
 def write_path(cfg_path):
-    chck_path = Path(cfg_path)
-    if chck_path.is_dir():
-        with open(cfg_file, 'w') as cfg_write:
-            cfg_write.write(cfg_path)
+    if not os.path.isdir(cfg_path):
+        raise InvalidPath('Invalid path. Please try again.')
 
-        return cfg_path
+    with open(cfg_file, 'w') as cfg_write:
+        cfg_write.write(cfg_path)
 
-    raise InvalidPath(
-        'Invalid path in movie_plist.cfg file. Do not edit the file manually'
-    )
+    return cfg_path
 
 
 def get_dir_path():
-    chck_path = Path(cfg_file)
-    if chck_path.is_file():
+    if os.path.isfile(cfg_file):
         path_dir_scan = read_path()
     else:
-        path_dir_scan = input(" Do the scan in which directory ? ")
-        path_dir_scan = write_path(path_dir_scan)
+        get_dir_scan = input(" Do the scan in which directory ? ")
+        path_dir_scan = write_path(get_dir_scan)
 
     return path_dir_scan
 
@@ -87,8 +72,8 @@ def scan_dir_has_movies(scan_dir):
 
     text = """
         The directory scanned seems empty.
-        Please check the scan dir.
-        """ + scan_dir
+        Please check the directory
+         """ + scan_dir
 
     msg.setText(text)
     msg.setStandardButtons(QMessageBox.Ok)
