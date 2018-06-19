@@ -1,7 +1,7 @@
 import pytest
 
 from movie_plist.pyqt_gui.right_click_menu import RightClickMenu
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 
 # one test missing
@@ -35,3 +35,14 @@ def test_rm_from_dict(create_obj):
     obj.qt_list.takeItem.assert_called_once_with(0)
     assert obj.current_item not in obj.current_dict.keys()
     assert obj.current_dict == {}
+
+
+@patch('movie_plist.pyqt_gui.right_click_menu.QMenu')
+@patch('movie_plist.pyqt_gui.right_click_menu.QAction')
+def test_menu(qaction, qmenu):
+    current_item = 'Brave Heart - 1995'
+    un_seen = {current_item: 'blabla'}
+    RightClickMenu({}, Mock(), {}, un_seen)
+    assert qmenu.call_count == 1
+    qaction.assert_has_calls(qmenu)
+    assert qaction.call_count == 2
