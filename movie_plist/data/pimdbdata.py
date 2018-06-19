@@ -13,6 +13,7 @@ class ParseImdbData:
         receive an url to be
         """
         self._url = url
+        print(url)
         self.soup = BeautifulSoup(self._get_html(), 'html.parser')
         self._do_poster_png_file()
 

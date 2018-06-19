@@ -1,5 +1,6 @@
 import os
 import sys
+from PyQt5.QtWidgets import QMessageBox, QApplication
 
 # user
 home_user = os.environ['HOME']
@@ -62,7 +63,7 @@ def scan_dir_has_movies(scan_dir):
             if file.endswith('.desktop'):
                 return True
 
-    from PyQt5.QtWidgets import QMessageBox, QApplication
+#    from PyQt5.QtWidgets import QMessageBox, QApplication
 
     app = QApplication(['0'])  # noqa: F841
 

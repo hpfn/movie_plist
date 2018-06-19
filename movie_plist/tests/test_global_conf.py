@@ -1,4 +1,6 @@
 import os
+from unittest.mock import patch
+
 import pytest
 from movie_plist.conf import global_conf
 
@@ -62,3 +64,13 @@ def test_fail_read_path():
     global_conf.cfg_file = global_conf.unseen_json_file
     with pytest.raises(global_conf.InvalidPath):
         global_conf.read_path()
+
+
+@patch('movie_plist.conf.global_conf.sys')
+@patch('movie_plist.conf.global_conf.QApplication')
+@patch('movie_plist.conf.global_conf.QMessageBox')
+def test_fail_scan(message, app, sys):
+    global_conf.scan_dir_has_movies('/tmp/XXX')
+    assert message.call_count == 1
+    assert app.call_count == 1
+    # assert sys.call_count == 1
