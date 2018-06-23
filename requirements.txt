@@ -1,5 +1,5 @@
 beautifulsoup4==4.6.0
 pluggy==0.6.0
-PyQt5==5.10.1
+PyQt5==5.11
 sip==4.19.8
 urllib3==1.22
