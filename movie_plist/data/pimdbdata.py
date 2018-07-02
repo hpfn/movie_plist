@@ -13,6 +13,7 @@ class ParseImdbData:
         receive an url to be
         """
         self._url = url
+        self.cache_poster = '/tmp/picture.png'
         self.soup = BeautifulSoup(self._get_html(), 'html.parser')
         self._do_poster_png_file()
 
@@ -50,7 +51,7 @@ class ParseImdbData:
         img = QImage()  # (8,10,4)
         img.loadFromData(self._poster_file())
         # TODO: save file in .cache/movie_plist - self.movie.title_year
-        img.save('/tmp/picture.png')
+        img.save(self.cache_poster)
 
     def _poster_file(self):
         return urllib.request.urlopen(self._poster_url()).read()
