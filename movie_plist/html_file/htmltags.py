@@ -50,4 +50,4 @@ class HtmlTags:
 
     def _bottom_tags(self):
         """ from </table> to </html> """
-        self.context += "</table><input type=submit value=\"Submit\"></form></body>\n</html>"
+        self.context += "</table></body>\n</html>"
