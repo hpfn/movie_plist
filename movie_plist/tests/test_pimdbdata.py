@@ -1,42 +1,43 @@
-# import sys
-# import os
-# sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
 import os
+import textwrap
+import pytest
+from unittest.mock import patch
+from movie_plist.data.pimdbdata import ParseImdbData
 
-from movie_plist.data.pimdbdata import ParseImdbData  # noqa: E402
 
-
-# usar pytest.fixture ?
-
-def test_synopsis(mocker):
-    # mocker just mock methods, no attrs
-    # mocker.patch.object(ParseImdbData, 'BeautifulSoup', value=None)
+@pytest.fixture
+def init_mocked(mocker):
     mocker.patch.object(ParseImdbData, '__init__', return_value=None)
-
-    test_synopsis = ParseImdbData('http://www.example.com')
-    except_msg = test_synopsis.synopsis()
-    assert 'Maybe something is wrong' in except_msg
+    return ParseImdbData()
 
 
-def test_poster_url(mocker):
-    mocker.patch.object(ParseImdbData, '__init__', return_value=None)
-
-    test_poster = ParseImdbData()
-    poster_url = test_poster._poster_url()
-    assert 'https://static.significados.com.br/' in poster_url
+def test_synopsis(init_mocked):
+    init_mocked.url = 'http://www.example.com'
+    assert 'Maybe something is wrong' in init_mocked.synopsis()
 
 
-def test_dunder_init(mocker):
+def test_poster_url(init_mocked):
+    assert 'https://static.significados.com.br/' in init_mocked._poster_url()
+
+
+@pytest.fixture
+def run_init(mocker):
     mocker.patch.object(ParseImdbData, '_poster_file',
                         return_value=b'tests/Shawshank_Redemption-1994.png')
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     html_path = os.path.join(base_dir, 'tests/Shawshank_Redemption-1994.html')
-    test_class = ParseImdbData('file://'+html_path)
-    assert 'Um Sonho de Liberdade (1994)' == test_class.title_year()
+    return ParseImdbData('file://' + html_path)
+
+
+def test_init_title_year(run_init):
+    assert 'Um Sonho de Liberdade (1994)' == run_init.title_year()
+
+
+def test_init_synopsys(run_init):
     synopsys = [
-        'The Shawshank Redemption is a highly-acclaimed movie starring',
-        'Tim Robbins and Morgan Freeman. Andy Dufresne is convicted of',
-        'the murder of his wife and her lover, and sentenced to life',
+        ' The Shawshank Redemption is a highly-acclaimed movie starring',
+        'Tim Robbins and Morgan Freeman. Andy Dufresne is convicted of the',
+        'murder of his wife and her lover, and sentenced to life',
         'imprisonment at Shawshank prison. Life seems to have taken a turn',
         'for the worse, but fortunately Andy befriends some of the other',
         'inmates, in particular a character known only as Red. Over time',
@@ -44,16 +45,22 @@ def test_dunder_init(mocker):
         'a prison, leaving a message for all that while the body may be',
         'locked away in a cell, the spirit can never be truly imprisoned.',
     ]
-    synopsys_parsed = test_class.synopsis()
+    synopsys_parsed = run_init.synopsis()
+    synopsys_parsed = textwrap.wrap(synopsys_parsed, width=65)
+    assert synopsys == synopsys_parsed
 
-    for txt in synopsys:
-        assert txt in synopsys_parsed
 
+def test_init_poster_url(run_init):
     poster_url = 'https://m.media-amazon.com/images/'
     poster_url += 'M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFm'
     poster_url += 'NTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU'
     poster_url += '@._V1_UX182_CR0,0,182,268_AL_.jpg'
+    assert poster_url == run_init._poster_url()
 
-    assert poster_url == test_class._poster_url()
 
-    assert test_class._do_poster_png_file() is None
+@patch('movie_plist.data.pimdbdata.QImage')
+def test_do_save_poster_steps(img_mock, run_init):
+    run_init._do_poster_png_file()
+    assert img_mock.call_count == 1
+    img_mock.assert_has_calls(img_mock.loadFromData)
+    img_mock.assert_has_calls(img_mock.save)
