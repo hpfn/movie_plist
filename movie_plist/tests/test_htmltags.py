@@ -1,16 +1,7 @@
-# import pytest
-# from pytest_mock import mocker
-# import mock
-# from unittest.mock import patch
-# import sys
-# import os
-# sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
-from movie_plist.html_file.htmltags import HtmlTags  # noqa: E402
+from movie_plist.html_file.htmltags import HtmlTags
 
 
-# @patch('html_file.htmltags.HtmlTags._retrieve_data')
 def test_htmltags_class(mocker):
-    # html_patch.value = None
     mocker.patch.object(HtmlTags, '_retrieve_data', value=None)
 
     url = 'http://www.example.com'
