@@ -1,7 +1,7 @@
 # Pytest
 pytest==3.6.4
 attrs==18.1.0
-more-itertools==4.2.0
+more-itertools==4.3.0
 py==1.5.4
 six==1.11.0
 pluggy==0.7.1
