@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QMenu, QAction, QMessageBox
+from PyQt5.QtWidgets import QAction, QMenu, QMessageBox
 
 
 class RightClickMenu:

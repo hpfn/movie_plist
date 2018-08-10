@@ -2,6 +2,7 @@ import os
 from unittest.mock import patch
 
 import pytest
+
 from movie_plist.conf import global_conf
 
 

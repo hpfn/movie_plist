@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import re
-import urllib.request
 import urllib.error
-from _socket import timeout
-from PyQt5.QtGui import QImage
+import urllib.request
+
 from bs4 import BeautifulSoup
+from PyQt5.QtGui import QImage
+
+from _socket import timeout
 
 
 class ParseImdbData:

@@ -1,8 +1,8 @@
+from unittest.mock import Mock, patch
+
 import pytest
 
 from movie_plist.pyqt_gui.right_click_menu import RightClickMenu
-from unittest.mock import Mock, patch
-
 
 # one test missing
 

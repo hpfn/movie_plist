@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
+import json
 import os
 import re
-import json
 import time
+
 from movie_plist.conf.global_conf import seen_json_file, unseen_json_file
 
 

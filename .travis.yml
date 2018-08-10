@@ -4,7 +4,8 @@ python:
 install:
  - pip install -q -r requirements-dev.txt codecov
 script:
- - flake8
+ - isort --recursive --check-only --diff movie_plist
+ - flake8 .
  - pytest --cov=movie_plist
 after_success:
  - codecov

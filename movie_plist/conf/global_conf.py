@@ -1,6 +1,7 @@
 import os
 import sys
-from PyQt5.QtWidgets import QMessageBox, QApplication
+
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 # user
 home_user = os.environ['HOME']

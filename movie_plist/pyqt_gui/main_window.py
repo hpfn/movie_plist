@@ -5,7 +5,8 @@
 from zetcode tutorial
 """
 
-from PyQt5.QtWidgets import (QMainWindow, QAction)
+from PyQt5.QtWidgets import QAction, QMainWindow
+
 from . import splitter
 
 
