@@ -1,9 +1,9 @@
 import pytest
+
 # import sys
 # import os
 # sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
 from movie_plist.data import pyscan  # noqa: E402
-
 
 pyscan.seen_json_file = 'movie_plist/tests/seen_json_file.json'
 pyscan.unseen_json_file = 'movie_plist/tests/unseen_json_file.json'

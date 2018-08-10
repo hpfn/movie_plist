@@ -1,7 +1,9 @@
 import os
 import textwrap
-import pytest
 from unittest.mock import patch
+
+import pytest
+
 from movie_plist.data.pimdbdata import ParseImdbData
 
 

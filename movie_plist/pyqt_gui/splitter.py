@@ -6,9 +6,13 @@ most from zetcode tutorial
 """
 
 from subprocess import call
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSplitter,
-                             QListWidget, QTabWidget, QFileSystemModel, QTreeView)
+
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (
+    QFileSystemModel, QHBoxLayout, QLabel, QListWidget, QSplitter, QTabWidget,
+    QTreeView, QVBoxLayout, QWidget
+)
+
 from movie_plist.html_file.htmltags import HtmlTags
 from movie_plist.pyqt_gui.right_click_menu import RightClickMenu
 
