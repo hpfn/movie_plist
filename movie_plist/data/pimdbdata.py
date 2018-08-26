@@ -27,20 +27,21 @@ class ParseImdbData:
 
     def synopsis(self):
         """
-        obs: tem um conserto no azak.
+
         """
         try:
-            description = self.soup.find(itemprop="description")
-            return description.get_text()
+            description = self.soup.find('meta', property="og:description")
+            return description['content']
         except AttributeError:
             return """
                    Maybe something is wrong with internet connection.
-                   If the poster is a skull, that's it. Just try again.
+                   Or the imdb .css has changed.
+                   A skull and this text, that's it. Try again to confirm.
                    """
 
     def _do_poster_png_file(self):
         """
-        obs: tem um conserto no azak
+
         """
         try:
             self._save_poster_file()
@@ -63,7 +64,7 @@ class ParseImdbData:
 
         """
         try:
-            poster = self.soup.find(itemprop="image")
+            poster = self.soup.find('div', class_="poster")
             re_poster = re.compile("http.*\.jpg")
             result = re_poster.search(str(poster))
             return result.group(0)
@@ -75,7 +76,7 @@ class ParseImdbData:
 
     def _get_html(self):
         """
-        obs: tem um conserto no azak
+
         """
         try:
             return urllib.request.urlopen(self._url, timeout=3).read()

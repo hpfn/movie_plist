@@ -37,16 +37,12 @@ def test_init_title_year(run_init):
 
 def test_init_synopsys(run_init):
     synopsys = [
-        ' The Shawshank Redemption is a highly-acclaimed movie starring',
-        'Tim Robbins and Morgan Freeman. Andy Dufresne is convicted of the',
-        'murder of his wife and her lover, and sentenced to life',
-        'imprisonment at Shawshank prison. Life seems to have taken a turn',
-        'for the worse, but fortunately Andy befriends some of the other',
-        'inmates, in particular a character known only as Red. Over time',
-        'Andy finds ways to live out life with relative ease as one can in',
-        'a prison, leaving a message for all that while the body may be',
-        'locked away in a cell, the spirit can never be truly imprisoned.',
+        'Directed by Frank Darabont.  With Tim Robbins, Morgan Freeman,',
+        'Bob Gunton, William Sadler. Two imprisoned men bond over a number',
+        'of years, finding solace and eventual redemption through acts of',
+        'common decency.'
     ]
+
     synopsys_parsed = run_init.synopsis()
     synopsys_parsed = textwrap.wrap(synopsys_parsed, width=65)
     assert synopsys == synopsys_parsed
