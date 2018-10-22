@@ -22,6 +22,7 @@ def mock_attrs():
 
 
 def test_movie_plist_conf_files(mock_attrs):
+    assert os.path.isdir(global_conf.movie_plist_cache)
     assert os.path.isdir(global_conf.movie_plist_stuff)
     assert os.path.isfile(global_conf.seen_json_file)
     assert os.path.isfile(global_conf.unseen_json_file)

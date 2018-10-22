@@ -4,7 +4,24 @@ from unittest.mock import patch
 
 import pytest
 
+from movie_plist.data import pimdbdata
 from movie_plist.data.pimdbdata import ParseImdbData
+
+expected = [
+
+    hasattr(pimdbdata, 'BeautifulSoup'),
+    hasattr(pimdbdata.ParseImdbData, 'synopsis'),
+    hasattr(pimdbdata.ParseImdbData, '_do_poster_png_file'),
+    hasattr(pimdbdata.ParseImdbData, '_save_poster_file'),
+    hasattr(pimdbdata.ParseImdbData, '_poster_file'),
+    hasattr(pimdbdata.ParseImdbData, '_poster_url'),
+
+]
+
+
+@pytest.mark.parametrize('e', expected)
+def test_init_mocked_attrs(e):
+    assert e
 
 
 @pytest.fixture
@@ -25,14 +42,15 @@ def test_poster_url(init_mocked):
 @pytest.fixture
 def run_init(mocker):
     mocker.patch.object(ParseImdbData, '_poster_file',
-                        return_value=b'tests/Shawshank_Redemption-1994.png')
+                        return_value=b'tests/Shawshank_Redemption_1994.png')
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     html_path = os.path.join(base_dir, 'tests/Shawshank_Redemption-1994.html')
-    return ParseImdbData('file://' + html_path)
+    title = 'Shawshank Redemption 1994'
+    return ParseImdbData('file://' + html_path, title)
 
 
-def test_init_title_year(run_init):
-    assert 'Um Sonho de Liberdade (1994)' == run_init.title_year()
+# def test_init_title_year(run_init):
+#    assert 'Um Sonho de Liberdade (1994)' == run_init.title_year()
 
 
 def test_init_synopsys(run_init):
@@ -56,9 +74,24 @@ def test_init_poster_url(run_init):
     assert poster_url == run_init._poster_url()
 
 
+def test_poster_name(run_init):
+    file_name = run_init.cache_poster.rpartition('/')
+    assert file_name[-1] == 'Shawshank_Redemption_1994.png'
+
+
 @patch('movie_plist.data.pimdbdata.QImage')
-def test_do_save_poster_steps(img_mock, run_init):
+def test_do_save_poster_steps(img_mock, run_init, mocker):
+    mocker.patch.object(os.path, 'isfile', return_value=False)
     run_init._do_poster_png_file()
     assert img_mock.call_count == 1
     img_mock.assert_has_calls(img_mock.loadFromData)
     img_mock.assert_has_calls(img_mock.save)
+
+
+@patch('movie_plist.data.pimdbdata.QImage')
+def test_do_not_save_poster_steps(img_mock, run_init, mocker):
+    mocker.patch.object(os.path, 'isfile', return_value=True)
+    run_init._do_poster_png_file()
+    assert img_mock.call_count == 0
+    img_mock.loadFromData.assert_not_called()
+    img_mock.save.assert_not_called()
