@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import re
 import urllib.error
 import urllib.request
@@ -7,6 +8,7 @@ from bs4 import BeautifulSoup
 from PyQt5.QtGui import QImage
 
 from _socket import timeout
+from movie_plist.conf.global_conf import movie_plist_cache
 
 
 class ParseImdbData:
@@ -15,15 +17,18 @@ class ParseImdbData:
         receive an url to be
         """
         self._url = url
-        self.cache_poster = '/tmp/picture.png'
+        self.cache_poster = ''
         self.soup = BeautifulSoup(self._get_html(), 'html.parser')
+        self.make_poster_name()
         self._do_poster_png_file()
 
-    def title_year(self):
+    def make_poster_name(self):
         """
         title_year: title and year in your language
         """
-        return self.soup.title.string[:-7]
+        title = self.soup.title.string[:-7]
+        count_spaces = title.count(' ')
+        self.cache_poster = movie_plist_cache + '/' + title.replace(' ', '_', count_spaces) + '.png'
 
     def synopsis(self):
         """
@@ -44,13 +49,15 @@ class ParseImdbData:
 
         """
         try:
-            self._save_poster_file()
+            if not os.path.isfile(self.cache_poster):
+                self._save_poster_file()
         except urllib.error.URLError:
             print("Poster - URLError. Try again.")
         except timeout:
             print("Poster - Connection timeout. Try again.")
 
     def _save_poster_file(self):
+        print('sAVE')
         img = QImage()  # (8,10,4)
         img.loadFromData(self._poster_file())
         # TODO: save file in .cache/movie_plist - self.movie.title_year

@@ -7,6 +7,7 @@ from movie_plist.data import pimdbdata
 class HtmlTags:
     def __init__(self, url):
         self._url = url
+        self._poster_path = ''
         self.context = ''
         self._synopsis = ''
 
@@ -24,6 +25,7 @@ class HtmlTags:
 
     def _get_synopsis(self):
         html_movie = pimdbdata.ParseImdbData(self._url)
+        self._poster_path = html_movie.cache_poster
         self._synopsis = html_movie.synopsis()
 
     def _wrap_synopsis(self):
@@ -42,7 +44,7 @@ class HtmlTags:
         """
         '/tmp/picture.png' hardcoded - see pimdbdata.ParseImdbData
         """
-        self.context += "<td>\n<img src=\"/tmp/picture.png\"></td>"
+        self.context += "<td>\n<img src=\"" + self._poster_path + "\"></td>"
         self.context += "<td width=\"70\">"
         self.context += self._synopsis + "<br>"
         self.context += "<a href=\"" + self._url + "\">imdb</a><br>"

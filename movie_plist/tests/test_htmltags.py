@@ -2,6 +2,7 @@ import os
 
 import pytest
 
+from movie_plist.html_file import htmltags
 from movie_plist.html_file.htmltags import HtmlTags
 
 
@@ -24,8 +25,24 @@ def build_obj():
     return HtmlTags('file://' + html_path)
 
 
+attr_exists = build_obj()
+expected = [
+    hasattr(htmltags, 'pimdbdata'),
+    hasattr(attr_exists, '_url'),
+    hasattr(attr_exists, 'context'),
+    hasattr(attr_exists, '_synopsis'),
+    hasattr(attr_exists, '_poster_path'),
+]
+
+
+@pytest.mark.parametrize('e', expected)
+def test_htlmtags_attrs(e):
+    assert e
+
+
 def test_context_has_img_html_tag(build_obj):
-    assert "<img src=\"/tmp/picture.png\">" in build_obj.context
+    poster_path = build_obj._poster_path
+    assert "<img src=\"" + poster_path + "\">" in build_obj.context
 
 
 def test_context_has_url(build_obj):
