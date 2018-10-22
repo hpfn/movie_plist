@@ -104,11 +104,12 @@ class TwoLines(QWidget):
         call HtmlTags to build html with a poster and a synopsis
         and put the result on self.bottom
         """
-        url = self.current_dict[self.top.currentItem().text()][0]
+        title = self.top.currentItem().text()
+        url = self.current_dict[title][0]
         # if url in 'bad url':
         #    self.bottom.setText('bad url')
         # else:
-        context = HtmlTags(url)
+        context = HtmlTags(url, title)
         self.bottom.setText(context.context)
 
     def ls_current_dir(self):

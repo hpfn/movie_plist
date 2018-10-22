@@ -1,3 +1,4 @@
+import os
 from unittest.mock import Mock, patch
 
 import pytest
@@ -28,13 +29,28 @@ def test_mark_as_seen(create_obj):
     assert obj.current_item in obj.s_dict.keys()
 
 
-def test_rm_from_dict(create_obj):
+@patch('subprocess.call')
+def test_rm_from_dict(call, create_obj, mocker):
+    mocker.patch.object(os.path, 'isfile', return_value=False)
     obj = create_obj
     obj.current_dict = obj.us_dict
     obj.m_rm_from_dict()
     obj.qt_list.takeItem.assert_called_once_with(0)
     assert obj.current_item not in obj.current_dict.keys()
     assert obj.current_dict == {}
+    assert call.call_count == 0
+
+
+@patch('os.system')
+def test_rm_from_cache(call, create_obj, mocker):
+    mocker.patch.object(os.path, 'isfile', return_value=True)
+    obj = create_obj
+    obj.current_dict = obj.us_dict
+    obj.m_rm_from_dict()
+    obj.qt_list.takeItem.assert_called_once_with(0)
+    assert obj.current_item not in obj.current_dict.keys()
+    assert obj.current_dict == {}
+    assert call.call_count == 1
 
 
 @patch('movie_plist.pyqt_gui.right_click_menu.QMenu')

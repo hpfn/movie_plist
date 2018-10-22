@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 # user
 home_user = os.environ['HOME']
 # first, main path
+movie_plist_cache = os.path.join(home_user, '.cache/movie_plist')
 movie_plist_stuff = os.path.join(home_user, '.config/movie_plist')
 cfg_file = os.path.join(movie_plist_stuff, 'movie_plist.cfg')
 seen_json_file = os.path.join(movie_plist_stuff, 'seen_movies.json')
@@ -17,6 +18,9 @@ class InvalidPath(Exception):
 
 
 def check_module_attr():
+    if not os.path.isdir(movie_plist_cache):
+        os.system('/bin/mkdir -p ' + movie_plist_cache)
+
     if not os.path.isdir(movie_plist_stuff):
         os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
@@ -64,7 +68,7 @@ def scan_dir_has_movies(scan_dir):
             if file.endswith('.desktop'):
                 return True
 
-#    from PyQt5.QtWidgets import QMessageBox, QApplication
+    #    from PyQt5.QtWidgets import QMessageBox, QApplication
 
     app = QApplication(['0'])  # noqa: F841
 

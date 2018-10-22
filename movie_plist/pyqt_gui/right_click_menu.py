@@ -1,5 +1,9 @@
+import os
+
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QAction, QMenu, QMessageBox
+
+from movie_plist.conf.global_conf import movie_plist_cache
 
 
 class RightClickMenu:
@@ -49,8 +53,16 @@ class RightClickMenu:
         """
 
         title_year = self.current_item
+
         self.qt_list.takeItem(self.qt_list.currentRow())
         del self.current_dict[title_year]
+
+        count_spaces = title_year.count(' ')
+        name = title_year.replace(' ', '_', count_spaces)
+        poster = movie_plist_cache + '/' + name + '.png'
+
+        if os.path.isfile(poster):
+            os.system('/bin/rm -f ' + poster)
 
         msg = QMessageBox()
         msg.setText(title_year + " removed from movie_plist.\n\n"
