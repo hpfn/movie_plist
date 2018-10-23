@@ -10,12 +10,20 @@ from movie_plist.data.pimdbdata import ParseImdbData
 expected = [
 
     hasattr(pimdbdata, 'BeautifulSoup'),
+    # dunder init
+    # hasattr(pimdbdata.ParseImdbData, '_url'),
+    # hasattr(pimdbdata.ParseImdbData, 'title'),
+    # hasattr(pimdbdata.ParseImdbData, 'checked_description'),
+    hasattr(pimdbdata, 'movie_seen'),
+    hasattr(pimdbdata, 'movie_unseen'),
+    hasattr(pimdbdata, 'movie_plist_cache'),
     hasattr(pimdbdata.ParseImdbData, 'synopsis'),
+    hasattr(pimdbdata.ParseImdbData, 'synopsis_exists'),
+    hasattr(pimdbdata.ParseImdbData, 'add_synopsis'),
     hasattr(pimdbdata.ParseImdbData, '_do_poster_png_file'),
     hasattr(pimdbdata.ParseImdbData, '_save_poster_file'),
     hasattr(pimdbdata.ParseImdbData, '_poster_file'),
     hasattr(pimdbdata.ParseImdbData, '_poster_url'),
-
 ]
 
 
@@ -77,6 +85,25 @@ def test_init_poster_url(run_init):
 def test_poster_name(run_init):
     file_name = run_init.cache_poster.rpartition('/')
     assert file_name[-1] == 'Shawshank_Redemption_1994.png'
+
+
+@patch('movie_plist.data.pimdbdata.BeautifulSoup.find')
+@patch('movie_plist.data.pimdbdata.ParseImdbData.add_synopsis')
+def test_description_content(add_synopsis, soup_find, run_init, mocker):
+    mocker.patch.object(ParseImdbData, 'synopsis_exists', return_value=False)
+    run_init.synopsis()
+    # does not check what the method does
+    assert add_synopsis.called_once_with('description_content')
+    assert soup_find.call_count == 1
+
+
+@patch('movie_plist.data.pimdbdata.BeautifulSoup')
+@patch('movie_plist.data.pimdbdata.ParseImdbData.add_synopsis')
+def test_synopsis_exists(add_synopsis, bs4, run_init, mocker):
+    # does not check what the method does
+    mocker.patch.object(ParseImdbData, 'synopsis_exists', return_value=True)
+    assert add_synopsis.call_count == 0
+    assert bs4.call_count == 0
 
 
 @patch('movie_plist.data.pimdbdata.QImage')

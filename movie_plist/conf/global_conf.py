@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -11,6 +12,12 @@ movie_plist_stuff = os.path.join(home_user, '.config/movie_plist')
 cfg_file = os.path.join(movie_plist_stuff, 'movie_plist.cfg')
 seen_json_file = os.path.join(movie_plist_stuff, 'seen_movies.json')
 unseen_json_file = os.path.join(movie_plist_stuff, 'unseen_movies.json')
+
+
+# for json_file in [seen_json_file, unseen_json_file]:
+#     if not os.path.isfile(json_file):
+#         with open(json_file, 'w') as j_file:
+#             j_file.write('{}')
 
 
 class InvalidPath(Exception):
@@ -59,6 +66,22 @@ def get_dir_path():
         path_dir_scan = write_path(get_dir_scan)
 
     return path_dir_scan
+
+
+def load_from_json(json_file):
+    # this is ugly
+    check_module_attr()
+    with open(json_file) as json_data:
+        return json.load(json_data)
+
+
+movie_seen = load_from_json(seen_json_file)
+movie_unseen = load_from_json(unseen_json_file)
+
+
+def dump_json_movie(movie_dic, json_file):
+    with open(json_file, 'w') as outfile:
+        json.dump(movie_dic, outfile)
 
 
 def scan_dir_has_movies(scan_dir):

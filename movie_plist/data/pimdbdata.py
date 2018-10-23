@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 from PyQt5.QtGui import QImage
 
 from _socket import timeout
-from movie_plist.conf.global_conf import movie_plist_cache
+from movie_plist.conf.global_conf import (
+    movie_plist_cache, movie_seen, movie_unseen
+)
 
 
 class ParseImdbData:
@@ -17,10 +19,15 @@ class ParseImdbData:
         receive an url to be
         """
         self._url = url
+        self.title = title
+        self.checked_description = ''
+        # self.seen = load_from_json(seen_json_file)
+        # self.unseen = load_from_json(unseen_json_file)
         count_spaces = title.count(' ')
         title = title.replace(' ', '_', count_spaces)
         self.cache_poster = movie_plist_cache + '/' + title + '.png'
-        self.soup = BeautifulSoup(self._get_html(), 'html.parser')
+        if not self.synopsis_exists():
+            self.soup = BeautifulSoup(self._get_html(), 'html.parser')
         # self.make_poster_name()
         self._do_poster_png_file()
 
@@ -38,14 +45,38 @@ class ParseImdbData:
 
         """
         try:
+            if self.synopsis_exists():
+                return self.checked_description
             description = self.soup.find('meta', property="og:description")
-            return description['content']
+            description_content = description['content']
+
+            self.add_synopsis(description_content)
+
+            return description_content
         except AttributeError:
             return """
                    Maybe something is wrong with internet connection.
                    Or the imdb .css has changed.
                    A skull and this text, that's it. Try again to confirm.
                    """
+
+    def synopsis_exists(self):
+        all_movies = {**movie_unseen, **movie_seen}
+        if self.title in all_movies and len(all_movies[self.title]) == 3:
+            self.checked_description = all_movies[self.title][1]
+            return True
+
+    def add_synopsis(self, new_info):
+        if self.title in movie_unseen:
+            movie_info = list(movie_unseen[self.title])
+            movie_info.insert(1, new_info)
+            movie_unseen[self.title] = tuple(movie_info)
+            print(movie_unseen[self.title])
+        elif self.title in movie_seen:
+            movie_info = list(movie_seen[self.title])
+            movie_info.insert(1, new_info)
+            movie_seen[self.title] = tuple(movie_info)
+            print(movie_seen[self.title])
 
     def _do_poster_png_file(self):
         """
