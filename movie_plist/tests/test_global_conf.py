@@ -10,10 +10,17 @@ from movie_plist.conf import global_conf
 def mock_attrs():
     # SetUp
     global_conf.home_user = 'home'
+    # global_conf.check_module_attr()
     global_conf.movie_plist_stuff = os.path.join(global_conf.home_user, '.config/movie_plist')
+    os.system('/bin/mkdir -p ' + global_conf.movie_plist_stuff)
     global_conf.cfg_file = os.path.join(global_conf.movie_plist_stuff, 'movie_plist.cfg')
     global_conf.seen_json_file = os.path.join(global_conf.movie_plist_stuff, 'seen_movies.json')
     global_conf.unseen_json_file = os.path.join(global_conf.movie_plist_stuff, 'unseen_movies.json')
+    for json_file in [global_conf.seen_json_file, global_conf.unseen_json_file]:
+        if not os.path.isfile(json_file):
+            with open(json_file, 'w') as j_file:
+                j_file.write('{}')
+
     global_conf.check_module_attr()
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     yield os.path.join(base_dir, 'tests/videos_test')
@@ -76,3 +83,13 @@ def test_fail_scan(message, app, sys):
     assert message.call_count == 1
     assert app.call_count == 1
     # assert sys.call_count == 1
+
+
+def test_json_functions_exists():
+    assert hasattr(global_conf, 'load_from_json')
+    assert hasattr(global_conf, 'dump_json_movie')
+
+
+def test_movies_attrs():
+    assert isinstance(global_conf.movie_seen, dict)
+    assert isinstance(global_conf.movie_unseen, dict)

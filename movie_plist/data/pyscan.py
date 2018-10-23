@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import json
+
 import os
 import re
 import time
 
-from movie_plist.conf.global_conf import seen_json_file, unseen_json_file
+from movie_plist.conf.global_conf import movie_seen, movie_unseen
+from movie_plist.data.pimdbdata import ParseImdbData
 
 
 class CreateDict:
@@ -23,18 +24,22 @@ class CreateDict:
         # return seen and unseen movies
         """
         start = time.time()
-        with open(seen_json_file) as json_data:
-            movie_seen = json.load(json_data)
+        # with open(seen_json_file) as json_data:
+        #    movie_seen = json.load(json_data)
+        # movie_seen = load_from_json(seen_json_file)
 
-        with open(unseen_json_file) as u_json_data:
-            movie_unseen = json.load(u_json_data)
+        # with open(unseen_json_file) as u_json_data:
+        #    movie_unseen = json.load(u_json_data)
+        # movie_unseen = load_from_json(unseen_json_file)
 
-        movies_path = set(m_path for _, m_path in movie_seen.values())
-        umovies_path = set(um_path for _, um_path in movie_unseen.values())
+        # alterar para for *_,
+        movies_path = set(m_path for *_, m_path in movie_seen.values())
+        umovies_path = set(um_path for *_, um_path in movie_unseen.values())
         self._json_movies = set.union(movies_path, umovies_path)
 
         movie_unseen_to_add = {dir_name: i for dir_name, i in self._new_data()}
         movie_unseen.update(movie_unseen_to_add)
+        # dump_json_movie(movie_unseen, unseen_json_file)
 
         end = time.time()
         print(end - start)
@@ -46,7 +51,9 @@ class CreateDict:
         for root, file_n in self._new_desktop_f():
             self.file_with_url = os.path.join(root, file_n)
             imdb_url = self._open_right_file()
-            yield root.rpartition('/')[-1], (imdb_url, root)
+            title_year = root.rpartition('/')[-1]
+            synopsis = ParseImdbData(imdb_url, title_year)
+            yield title_year, (imdb_url, synopsis.synopsis(), root)
 
     def _new_desktop_f(self):
         """ search for a .desktop file in a directory """
