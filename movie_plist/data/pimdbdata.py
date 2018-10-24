@@ -105,8 +105,9 @@ class ParseImdbData:
         """
         try:
             poster = self.soup.find('div', class_="poster")
-            re_poster = re.compile("http.*\.jpg")
+            re_poster = re.compile(r'\bhttp\S+jpg\b')
             result = re_poster.search(str(poster))
+            print(result.group(0))
             return result.group(0)
         except AttributeError:
             # tem que retornar uma url
