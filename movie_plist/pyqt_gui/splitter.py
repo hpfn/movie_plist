@@ -113,7 +113,7 @@ class TwoLines(QWidget):
         self.bottom.setText(context.context)
 
     def ls_current_dir(self):
-        path_to_dir = self.current_dict[self.top.currentItem().text()][1]
+        path_to_dir = self.current_dict[self.top.currentItem().text()][2]
         self.lsdir.setRootPath(path_to_dir)
         self.tree.setModel(self.lsdir)
         self.tree.setRootIndex(self.lsdir.index(path_to_dir))
