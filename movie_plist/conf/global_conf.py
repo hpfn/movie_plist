@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMessageBox
+# from PyQt5.QtWidgets import QApplication, QMessageBox
 
 # user
 home_user = os.environ['HOME']
@@ -14,27 +14,21 @@ seen_json_file = os.path.join(movie_plist_stuff, 'seen_movies.json')
 unseen_json_file = os.path.join(movie_plist_stuff, 'unseen_movies.json')
 
 
-# for json_file in [seen_json_file, unseen_json_file]:
-#     if not os.path.isfile(json_file):
-#         with open(json_file, 'w') as j_file:
-#             j_file.write('{}')
-
-
 class InvalidPath(Exception):
     pass
 
 
-def check_module_attr():
+def check_movie_plist_dirs():
     if not os.path.isdir(movie_plist_cache):
         os.system('/bin/mkdir -p ' + movie_plist_cache)
 
     if not os.path.isdir(movie_plist_stuff):
         os.system('/bin/mkdir -p ' + movie_plist_stuff)
 
-    for json_file in [seen_json_file, unseen_json_file]:
-        if not os.path.isfile(json_file):
-            with open(json_file, 'w') as j_file:
-                j_file.write('{}')
+    # for json_file in [seen_json_file, unseen_json_file]:
+    #     if not os.path.isfile(json_file):
+    #         with open(json_file, 'w') as j_file:
+    #             j_file.write('{}')
 
 
 def read_path():
@@ -69,10 +63,11 @@ def get_dir_path():
 
 
 def load_from_json(json_file):
-    # this is ugly
-    check_module_attr()
-    with open(json_file) as json_data:
-        return json.load(json_data)
+    if os.path.isfile(json_file):
+        with open(json_file) as json_data:
+            return json.load(json_data)
+
+    return dict()
 
 
 movie_seen = load_from_json(seen_json_file)
@@ -91,7 +86,7 @@ def scan_dir_has_movies(scan_dir):
             if file.endswith('.desktop'):
                 return True
 
-    #    from PyQt5.QtWidgets import QMessageBox, QApplication
+    from PyQt5.QtWidgets import QMessageBox, QApplication
 
     app = QApplication(['0'])  # noqa: F841
 

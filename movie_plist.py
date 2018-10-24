@@ -5,7 +5,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from movie_plist.conf.global_conf import (
-    check_module_attr, dump_json_movie, get_dir_path, scan_dir_has_movies,
+    check_movie_plist_dirs, dump_json_movie, get_dir_path, scan_dir_has_movies,
     seen_json_file, unseen_json_file
 )
 from movie_plist.data.pyscan import CreateDict
@@ -32,7 +32,7 @@ def main(d_scan):
 
 if __name__ == '__main__':
     # if internet_on() == 200:
-    check_module_attr()
+    check_movie_plist_dirs()
     path_dir_scan = get_dir_path()
     scan_dir_has_movies(path_dir_scan)
     main(path_dir_scan)

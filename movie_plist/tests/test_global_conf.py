@@ -10,7 +10,6 @@ from movie_plist.conf import global_conf
 def mock_attrs():
     # SetUp
     global_conf.home_user = 'home'
-    # global_conf.check_module_attr()
     global_conf.movie_plist_stuff = os.path.join(global_conf.home_user, '.config/movie_plist')
     os.system('/bin/mkdir -p ' + global_conf.movie_plist_stuff)
     global_conf.cfg_file = os.path.join(global_conf.movie_plist_stuff, 'movie_plist.cfg')
@@ -21,7 +20,7 @@ def mock_attrs():
             with open(json_file, 'w') as j_file:
                 j_file.write('{}')
 
-    global_conf.check_module_attr()
+    global_conf.check_movie_plist_dirs()
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     yield os.path.join(base_dir, 'tests/videos_test')
     # TearDown
@@ -76,13 +75,13 @@ def test_fail_read_path():
 
 
 @patch('movie_plist.conf.global_conf.sys')
-@patch('movie_plist.conf.global_conf.QApplication')
-@patch('movie_plist.conf.global_conf.QMessageBox')
+@patch('PyQt5.QtWidgets.QApplication')
+@patch('PyQt5.QtWidgets.QMessageBox')
 def test_fail_scan(message, app, sys):
     global_conf.scan_dir_has_movies('/tmp/XXX')
     assert message.call_count == 1
     assert app.call_count == 1
-    # assert sys.call_count == 1
+    assert sys.call_count == 0
 
 
 def test_json_functions_exists():
