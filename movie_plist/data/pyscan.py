@@ -5,7 +5,7 @@ import os
 import re
 import time
 
-from movie_plist.conf.global_conf import movie_seen, movie_unseen
+from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
 from movie_plist.data.pimdbdata import ParseImdbData
 
 
@@ -33,24 +33,24 @@ class CreateDict:
         # movie_unseen = load_from_json(unseen_json_file)
 
         # alterar para for *_,
-        movies_path = set(m_path for *_, m_path in movie_seen.values())
-        umovies_path = set(um_path for *_, um_path in movie_unseen.values())
+        movies_path = set(m_path for *_, m_path in MOVIE_SEEN.values())
+        umovies_path = set(um_path for *_, um_path in MOVIE_UNSEEN.values())
         self._json_movies = set.union(movies_path, umovies_path)
 
         movie_unseen_to_add = {dir_name: i for dir_name, i in self._new_data()}
-        movie_unseen.update(movie_unseen_to_add)
+        MOVIE_UNSEEN.update(movie_unseen_to_add)
         # dump_json_movie(movie_unseen, unseen_json_file)
 
         end = time.time()
         print(end - start)
 
-        return movie_seen, movie_unseen
+        return MOVIE_SEEN, MOVIE_UNSEEN
 
     def _new_data(self):
         """ return title_year, imdb_url and path to movie """
         for root, file_n in self._new_desktop_f():
-            self.file_with_url = os.path.join(root, file_n)
-            imdb_url = self._open_right_file()
+            file_with_url = os.path.join(root, file_n)
+            imdb_url = self._open_right_file(file_with_url)
             title_year = root.rpartition('/')[-1]
             synopsis = ParseImdbData(imdb_url, title_year)
             yield title_year, (imdb_url, synopsis.synopsis(), root)
@@ -68,9 +68,10 @@ class CreateDict:
                 for root, _, filename in os.walk(self._scan_dir)
                 if not {root}.issubset(self._json_movies))
 
-    def _open_right_file(self):
+    @staticmethod
+    def _open_right_file(file_with_url):
         """ open the right file and get the url"""
-        with open(self.file_with_url, 'r') as check_content:
+        with open(file_with_url, 'r') as check_content:
             file_lines = check_content.readlines()
 
         url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))

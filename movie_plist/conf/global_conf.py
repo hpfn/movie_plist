@@ -7,11 +7,11 @@ import sys
 # user
 home_user = os.environ['HOME']
 # first, main path
-movie_plist_cache = os.path.join(home_user, '.cache/movie_plist')
-movie_plist_stuff = os.path.join(home_user, '.config/movie_plist')
-cfg_file = os.path.join(movie_plist_stuff, 'movie_plist.cfg')
-seen_json_file = os.path.join(movie_plist_stuff, 'seen_movies.json')
-unseen_json_file = os.path.join(movie_plist_stuff, 'unseen_movies.json')
+MOVIE_PLIST_CACHE = os.path.join(home_user, '.cache/movie_plist')
+MOVIE_PLIST_STUFF = os.path.join(home_user, '.config/movie_plist')
+CFG_FILE = os.path.join(MOVIE_PLIST_STUFF, 'movie_plist.cfg')
+SEEN_JSON_FILE = os.path.join(MOVIE_PLIST_STUFF, 'seen_movies.json')
+UNSEEN_JSON_FILE = os.path.join(MOVIE_PLIST_STUFF, 'unseen_movies.json')
 
 
 class InvalidPath(Exception):
@@ -19,11 +19,11 @@ class InvalidPath(Exception):
 
 
 def check_movie_plist_dirs():
-    if not os.path.isdir(movie_plist_cache):
-        os.system('/bin/mkdir -p ' + movie_plist_cache)
+    if not os.path.isdir(MOVIE_PLIST_CACHE):
+        os.system('/bin/mkdir -p ' + MOVIE_PLIST_CACHE)
 
-    if not os.path.isdir(movie_plist_stuff):
-        os.system('/bin/mkdir -p ' + movie_plist_stuff)
+    if not os.path.isdir(MOVIE_PLIST_STUFF):
+        os.system('/bin/mkdir -p ' + MOVIE_PLIST_STUFF)
 
     # for json_file in [seen_json_file, unseen_json_file]:
     #     if not os.path.isfile(json_file):
@@ -32,7 +32,7 @@ def check_movie_plist_dirs():
 
 
 def read_path():
-    with open(cfg_file, 'r') as movie_plist_cfg:
+    with open(CFG_FILE, 'r') as movie_plist_cfg:
         cfg_path = movie_plist_cfg.readline()
 
     if not os.path.isdir(cfg_path):
@@ -46,14 +46,14 @@ def write_path(cfg_path):
     if not os.path.isdir(cfg_path):
         raise InvalidPath('Invalid path. Please try again.')
 
-    with open(cfg_file, 'w') as cfg_write:
+    with open(CFG_FILE, 'w') as cfg_write:
         cfg_write.write(cfg_path)
 
     return cfg_path
 
 
 def get_dir_path():
-    if os.path.isfile(cfg_file):
+    if os.path.isfile(CFG_FILE):
         path_dir_scan = read_path()
     else:
         get_dir_scan = input(" Do the scan in which directory ? ")
@@ -70,8 +70,8 @@ def load_from_json(json_file):
     return dict()
 
 
-movie_seen = load_from_json(seen_json_file)
-movie_unseen = load_from_json(unseen_json_file)
+MOVIE_SEEN = load_from_json(SEEN_JSON_FILE)
+MOVIE_UNSEEN = load_from_json(UNSEEN_JSON_FILE)
 
 
 def dump_json_movie(movie_dic, json_file):
@@ -86,7 +86,7 @@ def scan_dir_has_movies(scan_dir):
             if file.endswith('.desktop'):
                 return True
 
-    from PyQt5.QtWidgets import QMessageBox, QApplication
+    from PyQt5.QtWidgets import QMessageBox, QApplication  # pylint: disable-msg=E0611
 
     app = QApplication(['0'])  # noqa: F841
 

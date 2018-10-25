@@ -5,8 +5,8 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from movie_plist.conf.global_conf import (
-    check_movie_plist_dirs, dump_json_movie, get_dir_path, scan_dir_has_movies,
-    seen_json_file, unseen_json_file
+    SEEN_JSON_FILE, UNSEEN_JSON_FILE, check_movie_plist_dirs, dump_json_movie,
+    get_dir_path, scan_dir_has_movies
 )
 from movie_plist.data.pyscan import CreateDict
 from movie_plist.pyqt_gui.main_window import Window
@@ -24,8 +24,8 @@ def main(d_scan):
 
     exit_task = [
         app.exec_(),
-        dump_json_movie(movie_unseen, unseen_json_file),
-        dump_json_movie(movie_seen, seen_json_file),
+        dump_json_movie(movie_unseen, UNSEEN_JSON_FILE),
+        dump_json_movie(movie_seen, SEEN_JSON_FILE),
     ]
     sys.exit(exit_task)
 
