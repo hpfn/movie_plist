@@ -7,8 +7,8 @@ most from zetcode tutorial
 
 from subprocess import call
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (
+from PyQt5.QtCore import Qt  # pylint: disable-msg=E0611
+from PyQt5.QtWidgets import (  # pylint: disable-msg=E0611
     QFileSystemModel, QHBoxLayout, QLabel, QListWidget, QSplitter, QTabWidget,
     QTreeView, QVBoxLayout, QWidget
 )
@@ -21,7 +21,7 @@ class TwoLines(QWidget):
     def __init__(self, m_seen, m_unseen):
         super().__init__()
         self.top = QListWidget()
-        if len(m_unseen) < 1:
+        if not m_unseen:
             self.current_dict = m_seen
             self.current_list = sorted(m_seen.keys())
         else:
@@ -33,16 +33,16 @@ class TwoLines(QWidget):
         # self.current_dict = all_movies
         self.tabs = QTabWidget()
         # movie info
-        self.tab_synopsys = QWidget()
+        # self.tab_synopsys = QWidget()
         # ls dir
-        self.tab_ls_dir = QWidget()
+        # self.tab_ls_dir = QWidget()
         # layout
-        self.synopsys_vbox = QVBoxLayout()
-        self.lsdir_vbox = QVBoxLayout()
+        # self.synopsys_vbox = QVBoxLayout()
+        # self.lsdir_vbox = QVBoxLayout()
         # movie info
         self.bottom = QLabel()
         # ls content of the current dirQt.CustomContextMenu
-        self.lsdir = QFileSystemModel()
+        # self.lsdir = QFileSystemModel()
         self.tree = QTreeView()
 
         self.init_ui()
@@ -90,14 +90,25 @@ class TwoLines(QWidget):
         movie info on one tab
         ls dir on the other tab
         """
+        # movie info
+        tab_synopsys = QWidget()
+
+        # layout
+        synopsys_vbox = QVBoxLayout()
+
+        # ls dir
+        tab_ls_dir = QWidget()
+
+        lsdir_vbox = QVBoxLayout()
+
         # tab one
-        self.synopsys_vbox.addWidget(self.bottom)
-        self.tab_synopsys.setLayout(self.synopsys_vbox)
-        self.tabs.addTab(self.tab_synopsys, "Movie Info")
+        synopsys_vbox.addWidget(self.bottom)
+        tab_synopsys.setLayout(synopsys_vbox)
+        self.tabs.addTab(tab_synopsys, "Movie Info")
         # tab two
-        self.lsdir_vbox.addWidget(self.tree)
-        self.tab_ls_dir.setLayout(self.lsdir_vbox)
-        self.tabs.addTab(self.tab_ls_dir, "ls dir")
+        lsdir_vbox.addWidget(self.tree)
+        tab_ls_dir.setLayout(lsdir_vbox)
+        self.tabs.addTab(tab_ls_dir, "ls dir")
 
     def data_to_show(self):
         """
@@ -114,9 +125,11 @@ class TwoLines(QWidget):
 
     def ls_current_dir(self):
         path_to_dir = self.current_dict[self.top.currentItem().text()][2]
-        self.lsdir.setRootPath(path_to_dir)
-        self.tree.setModel(self.lsdir)
-        self.tree.setRootIndex(self.lsdir.index(path_to_dir))
+        # ls content of the current dirQt.CustomContextMenu
+        lsdir = QFileSystemModel()
+        lsdir.setRootPath(path_to_dir)
+        self.tree.setModel(lsdir)
+        self.tree.setRootIndex(lsdir.index(path_to_dir))
         self.tree.setColumnWidth(0, 450)
 
     def right_click(self):

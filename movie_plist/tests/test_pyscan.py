@@ -9,8 +9,8 @@ expected = [
     hasattr(pyscan, 'os'),
     hasattr(pyscan, 're'),
     hasattr(pyscan, 'time'),
-    hasattr(pyscan, 'movie_seen'),
-    hasattr(pyscan, 'movie_unseen'),
+    hasattr(pyscan, 'MOVIE_SEEN'),
+    hasattr(pyscan, 'MOVIE_UNSEEN'),
     hasattr(pyscan, 'ParseImdbData')
 ]
 
@@ -20,8 +20,8 @@ def test_attrs(e):
     assert e
 
 
-pyscan.movie_seen = dict()
-pyscan.movie_unseen = dict()
+pyscan.MOVIE_SEEN = dict()
+pyscan.MOVIE_UNSEEN = dict()
 
 c_d = pyscan.CreateDict('movie_plist/tests/videos_test/')
 movie_seen, movie_unseen = c_d.create_dicts()

@@ -5,7 +5,7 @@
 from zetcode tutorial
 """
 
-from PyQt5.QtWidgets import QAction, QMainWindow
+from PyQt5.QtWidgets import QAction, QMainWindow  # pylint: disable-msg=E0611
 
 from . import splitter
 

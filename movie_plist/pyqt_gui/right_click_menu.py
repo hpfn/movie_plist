@@ -1,9 +1,11 @@
 import os
 
-from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QAction, QMenu, QMessageBox
+from PyQt5.QtGui import QCursor  # pylint: disable-msg=E0611
+from PyQt5.QtWidgets import (  # pylint: disable-msg=E0611
+    QAction, QMenu, QMessageBox
+)
 
-from movie_plist.conf.global_conf import movie_plist_cache
+from movie_plist.conf.global_conf import MOVIE_PLIST_CACHE
 
 
 class RightClickMenu:
@@ -59,7 +61,7 @@ class RightClickMenu:
 
         count_spaces = title_year.count(' ')
         name = title_year.replace(' ', '_', count_spaces)
-        poster = movie_plist_cache + '/' + name + '.png'
+        poster = MOVIE_PLIST_CACHE + '/' + name + '.png'
 
         if os.path.isfile(poster):
             os.system('/bin/rm -f ' + poster)

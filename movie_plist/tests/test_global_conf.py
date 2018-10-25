@@ -10,12 +10,12 @@ from movie_plist.conf import global_conf
 def mock_attrs():
     # SetUp
     global_conf.home_user = 'home'
-    global_conf.movie_plist_stuff = os.path.join(global_conf.home_user, '.config/movie_plist')
-    os.system('/bin/mkdir -p ' + global_conf.movie_plist_stuff)
-    global_conf.cfg_file = os.path.join(global_conf.movie_plist_stuff, 'movie_plist.cfg')
-    global_conf.seen_json_file = os.path.join(global_conf.movie_plist_stuff, 'seen_movies.json')
-    global_conf.unseen_json_file = os.path.join(global_conf.movie_plist_stuff, 'unseen_movies.json')
-    for json_file in [global_conf.seen_json_file, global_conf.unseen_json_file]:
+    global_conf.MOVIE_PLIST_STUFF = os.path.join(global_conf.home_user, '.config/movie_plist')
+    os.system('/bin/mkdir -p ' + global_conf.MOVIE_PLIST_STUFF)
+    global_conf.CFG_FILE = os.path.join(global_conf.MOVIE_PLIST_STUFF, 'movie_plist.cfg')
+    global_conf.SEEN_JSON_FILE = os.path.join(global_conf.MOVIE_PLIST_STUFF, 'seen_movies.json')
+    global_conf.UNSEEN_JSON_FILE = os.path.join(global_conf.MOVIE_PLIST_STUFF, 'unseen_movies.json')
+    for json_file in [global_conf.SEEN_JSON_FILE, global_conf.UNSEEN_JSON_FILE]:
         if not os.path.isfile(json_file):
             with open(json_file, 'w') as j_file:
                 j_file.write('{}')
@@ -28,10 +28,10 @@ def mock_attrs():
 
 
 def test_movie_plist_conf_files(mock_attrs):
-    assert os.path.isdir(global_conf.movie_plist_cache)
-    assert os.path.isdir(global_conf.movie_plist_stuff)
-    assert os.path.isfile(global_conf.seen_json_file)
-    assert os.path.isfile(global_conf.unseen_json_file)
+    assert os.path.isdir(global_conf.MOVIE_PLIST_CACHE)
+    assert os.path.isdir(global_conf.MOVIE_PLIST_STUFF)
+    assert os.path.isfile(global_conf.SEEN_JSON_FILE)
+    assert os.path.isfile(global_conf.UNSEEN_JSON_FILE)
 
 
 def test_write_path(mock_attrs):
@@ -39,7 +39,7 @@ def test_write_path(mock_attrs):
     call write_path to create movie_plist.cfg file
     """
     global_conf.write_path(mock_attrs)
-    assert os.path.isfile(global_conf.cfg_file)
+    assert os.path.isfile(global_conf.CFG_FILE)
 
 
 def test_scan_dir_has_movies(mock_attrs):
@@ -69,7 +69,7 @@ def test_fail_write_path():
 
 
 def test_fail_read_path():
-    global_conf.cfg_file = global_conf.unseen_json_file
+    global_conf.CFG_FILE = global_conf.UNSEEN_JSON_FILE
     with pytest.raises(global_conf.InvalidPath):
         global_conf.read_path()
 
@@ -90,5 +90,5 @@ def test_json_functions_exists():
 
 
 def test_movies_attrs():
-    assert isinstance(global_conf.movie_seen, dict)
-    assert isinstance(global_conf.movie_unseen, dict)
+    assert isinstance(global_conf.MOVIE_SEEN, dict)
+    assert isinstance(global_conf.MOVIE_UNSEEN, dict)

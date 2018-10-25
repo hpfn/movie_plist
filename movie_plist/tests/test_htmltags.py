@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from movie_plist.conf.global_conf import movie_plist_cache
+from movie_plist.conf.global_conf import MOVIE_PLIST_CACHE
 from movie_plist.html_file import htmltags
 from movie_plist.html_file.htmltags import HtmlTags
 
@@ -45,7 +45,7 @@ def test_htlmtags_attrs(e):
 
 def test_context_has_img_html_tag(build_obj):
     poster_path = build_obj._poster_path
-    assert poster_path == movie_plist_cache + '/' + 'Shawshank_Redemption_1994.png'
+    assert poster_path == MOVIE_PLIST_CACHE + '/' + 'Shawshank_Redemption_1994.png'
     assert "<img src=\"" + poster_path + "\">" in build_obj.context
 
 
