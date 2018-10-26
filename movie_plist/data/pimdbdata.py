@@ -28,8 +28,8 @@ class ParseImdbData:
         self.cache_poster = MOVIE_PLIST_CACHE + '/' + title + '.png'
         if not self.synopsis_exists():
             self.soup = BeautifulSoup(self._get_html(), 'html.parser')
-        # self.make_poster_name()
-        self._do_poster_png_file()
+            # self.bs4_synopsis()
+            self._do_poster_png_file()
 
     # def make_poster_name(self):
     #     """
@@ -45,14 +45,10 @@ class ParseImdbData:
 
         """
         try:
-            if self.synopsis_exists():
-                return self.checked_description
-            description = self.soup.find('meta', property="og:description")
-            description_content = description['content']
+            if not self.synopsis_exists():
+                self.bs4_synopsis()
 
-            self.add_synopsis(description_content)
-
-            return description_content
+            return self.checked_description
         except AttributeError:
             return """
                    Maybe something is wrong with internet connection.
@@ -64,19 +60,25 @@ class ParseImdbData:
         all_movies = {**MOVIE_UNSEEN, **MOVIE_SEEN}
         if self.title in all_movies and len(all_movies[self.title]) == 3:
             self.checked_description = all_movies[self.title][1]
-            return True
+            # return True
 
-    def add_synopsis(self, new_info):
+        return self.checked_description
+
+    def bs4_synopsis(self):
+        description = self.soup.find('meta', property="og:description")
+        self.checked_description = description['content']
+        self.add_synopsis()
+
+    def add_synopsis(self):
         if self.title in MOVIE_UNSEEN:
-            movie_info = list(MOVIE_UNSEEN[self.title])
-            movie_info.insert(1, new_info)
-            MOVIE_UNSEEN[self.title] = tuple(movie_info)
-            # print(movie_unseen[self.title])
+            self.dict_movie_choice(MOVIE_UNSEEN)
         elif self.title in MOVIE_SEEN:
-            movie_info = list(MOVIE_SEEN[self.title])
-            movie_info.insert(1, new_info)
-            MOVIE_SEEN[self.title] = tuple(movie_info)
-            # print(movie_seen[self.title])
+            self.dict_movie_choice(MOVIE_SEEN)
+
+    def dict_movie_choice(self, d_movie):
+        movie_info = list(d_movie[self.title])
+        movie_info.insert(1, self.checked_description)
+        d_movie[self.title] = tuple(movie_info)
 
     def _do_poster_png_file(self):
         """
