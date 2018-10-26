@@ -6,7 +6,8 @@ import re
 import time
 
 from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
-from movie_plist.data.pimdbdata import ParseImdbData
+
+# from movie_plist.data.pimdbdata import ParseImdbData
 
 
 class CreateDict:
@@ -52,8 +53,9 @@ class CreateDict:
             file_with_url = os.path.join(root, file_n)
             imdb_url = self._open_right_file(file_with_url)
             title_year = root.rpartition('/')[-1]
-            synopsis = ParseImdbData(imdb_url, title_year)
-            yield title_year, (imdb_url, synopsis.synopsis(), root)
+            # synopsis = ParseImdbData(imdb_url, title_year)
+            # yield title_year, (imdb_url, synopsis.synopsis(), root)
+            yield title_year, (imdb_url, root)
 
     def _new_desktop_f(self):
         """ search for a .desktop file in a directory """

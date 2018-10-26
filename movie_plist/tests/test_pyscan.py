@@ -11,7 +11,7 @@ expected = [
     hasattr(pyscan, 'time'),
     hasattr(pyscan, 'MOVIE_SEEN'),
     hasattr(pyscan, 'MOVIE_UNSEEN'),
-    hasattr(pyscan, 'ParseImdbData')
+    # hasattr(pyscan, 'ParseImdbData')
 ]
 
 
@@ -26,7 +26,8 @@ pyscan.MOVIE_UNSEEN = dict()
 c_d = pyscan.CreateDict('movie_plist/tests/videos_test/')
 movie_seen, movie_unseen = c_d.create_dicts()
 
-url, synopsis, path_to = list(movie_unseen.values())[0]
+# url, synopsis, path_to = list(movie_unseen.values())[0]
+url, path_to = list(movie_unseen.values())[0]
 
 instance_params = [
     (isinstance(movie_unseen, dict), True),
@@ -39,15 +40,15 @@ def test_dict_instance(a, b):
     assert a is b
 
 
-synopsis_text = 'Directed by Frank Darabont.'
-synopsis_text += '  With Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler.'
-synopsis_text += ' Two imprisoned men bond over a number of years, finding solace'
-synopsis_text += ' and eventual redemption through acts of common decency.'
+# synopsis_text = 'Directed by Frank Darabont.'
+# synopsis_text += '  With Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler.'
+# synopsis_text += ' Two imprisoned men bond over a number of years, finding solace'
+# synopsis_text += ' and eventual redemption through acts of common decency.'
 
 str_params = [
     ('Shawshank Redemption, the 1994', movie_unseen.keys()),
     ('https://www.imdb.com/title/tt0111161/', url),
-    (synopsis_text, synopsis),
+    # (synopsis_text, synopsis),
     ('movie_plist/tests/videos_test/Shawshank Redemption, the 1994', path_to)
 ]
 
