@@ -1,2 +1,3 @@
 [run]
 omit = .project_env
+# plugins = Cython.Coverage

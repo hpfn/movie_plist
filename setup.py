@@ -4,7 +4,16 @@ import sys
 from distutils.util import convert_path
 from fnmatch import fnmatchcase
 
+# from Cython.Build import cythonize
 from setuptools import find_packages, setup
+
+# Extension,
+# from setuptools.command.build_ext import build_ext
+
+# extensions = [
+#     Extension('pyscan.*', ['movie_plist/data/pyscan.pyx'])
+# ]
+# extensions = cythonize(extensions)
 
 
 def read(fname):
@@ -93,9 +102,8 @@ def find_package_data(
                             or fn.lower() == pattern.lower()):
                         bad_name = True
                         if show_ignored:
-                            print >> sys.stderr, (
-                                    "File %s ignored by pattern %s"
-                                    % (fn, pattern))
+                            print("File %s ignored by pattern %s" %
+                                  (fn, pattern), file=sys.stderr)
                         break
                 if bad_name:
                     continue
@@ -135,9 +143,11 @@ setup(
     ],
     # requests
     install_requires=[
+        'cython>=0.29',
         'beautifulsoup4>=4.6.0',
         'PyQt5>=5.10.1',
         'urllib3>=1.22'
     ],
     zip_safe=False,
+    #    ext_modules=extensions
 )

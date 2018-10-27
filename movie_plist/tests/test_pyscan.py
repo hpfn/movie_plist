@@ -23,8 +23,11 @@ def test_attrs(e):
 pyscan.MOVIE_SEEN = dict()
 pyscan.MOVIE_UNSEEN = dict()
 
-c_d = pyscan.CreateDict('movie_plist/tests/videos_test/')
-movie_seen, movie_unseen = c_d.create_dicts()
+# c_d = pyscan.create_dicts('movie_plist/tests/videos_test/')
+pyscan.create_dicts('movie_plist/tests/videos_test/')
+movie_seen, movie_unseen = pyscan.MOVIE_SEEN, pyscan.MOVIE_UNSEEN
+# pyscan.create_dicts('movie_plist/tests/videos_test/')
+# c_d.create_dicts()
 
 # url, synopsis, path_to = list(movie_unseen.values())[0]
 url, path_to = list(movie_unseen.values())[0]
