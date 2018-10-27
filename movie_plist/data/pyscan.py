@@ -1,6 +1,3 @@
-#!/usr/bin/python3
-
-
 import os
 import re
 import time
@@ -10,73 +7,83 @@ from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
 # from movie_plist.data.pimdbdata import ParseImdbData
 
 
-class CreateDict:
-    def __init__(self, scan_dir):
-        self._scan_dir = scan_dir
-        self._json_movies = ''
-        self._file_with_url = ''
+# class CreateDict:
+#     def __init__(self, scan_dir):
+#         self._scan_dir = scan_dir
+#         self._json_movies = ''
+#         self._file_with_url = ''
+#
 
-    def create_dicts(self):
-        """
-        # get seen movies from json file
-        # get unseen movies from on json file
-        # check for new moview
-        # if no unseen movies ask if continue
-        # return seen and unseen movies
-        """
-        start = time.time()
-        # with open(seen_json_file) as json_data:
-        #    movie_seen = json.load(json_data)
-        # movie_seen = load_from_json(seen_json_file)
+_json_movies = ''
+_scan_dir = ''
 
-        # with open(unseen_json_file) as u_json_data:
-        #    movie_unseen = json.load(u_json_data)
-        # movie_unseen = load_from_json(unseen_json_file)
 
-        # alterar para for *_,
-        movies_path = set(m_path for *_, m_path in MOVIE_SEEN.values())
-        umovies_path = set(um_path for *_, um_path in MOVIE_UNSEEN.values())
-        self._json_movies = set.union(movies_path, umovies_path)
+def create_dicts(scan_dir):
+    """
+    # get seen movies from json file
+    # get unseen movies from on json file
+    # check for new moview
+    # if no unseen movies ask if continue
+    # return seen and unseen movies
+    """
+    global _json_movies
+    global _scan_dir
 
-        movie_unseen_to_add = {dir_name: i for dir_name, i in self._new_data()}
-        MOVIE_UNSEEN.update(movie_unseen_to_add)
-        # dump_json_movie(movie_unseen, unseen_json_file)
+    _scan_dir = scan_dir
 
-        end = time.time()
-        print(end - start)
+    start = time.time()
 
-        return MOVIE_SEEN, MOVIE_UNSEEN
+    # alterar para for *_,
+    movies_path = set(m_path for *_, m_path in MOVIE_SEEN.values())
+    umovies_path = set(um_path for *_, um_path in MOVIE_UNSEEN.values())
+    _json_movies = set.union(movies_path, umovies_path)
 
-    def _new_data(self):
-        """ return title_year, imdb_url and path to movie """
-        for root, file_n in self._new_desktop_f():
-            file_with_url = os.path.join(root, file_n)
-            imdb_url = self._open_right_file(file_with_url)
-            title_year = root.rpartition('/')[-1]
-            # synopsis = ParseImdbData(imdb_url, title_year)
-            # yield title_year, (imdb_url, synopsis.synopsis(), root)
-            yield title_year, (imdb_url, root)
+    movie_unseen_to_add = {dir_name: i for dir_name, i in _new_data()}
+    MOVIE_UNSEEN.update(movie_unseen_to_add)
+    # dump_json_movie(movie_unseen, unseen_json_file)
 
-    def _new_desktop_f(self):
-        """ search for a .desktop file in a directory """
-        return ((root, file_n)
-                for root, filename in self._unknow_dirs()
-                for file_n in filename
-                if file_n.endswith('.desktop'))
+    end = time.time()
+    print(end - start)
 
-    def _unknow_dirs(self):
-        """ root (path) that are not in json files """
-        return ((root, filename)
-                for root, _, filename in os.walk(self._scan_dir)
-                if not {root}.issubset(self._json_movies))
+    # return MOVIE_SEEN, MOVIE_UNSEEN
 
-    @staticmethod
-    def _open_right_file(file_with_url):
-        """ open the right file and get the url"""
-        with open(file_with_url, 'r') as check_content:
-            file_lines = check_content.readlines()
 
-        url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))
+def _new_data():
+    """ return title_year, imdb_url and path to movie """
 
-        if url:
-            return url.group(0)[4:]
+    for root, file_n in _new_desktop_f():
+        file_with_url = os.path.join(root, file_n)
+        imdb_url = _open_right_file(file_with_url)
+        title_year = root.rpartition('/')[-1]
+        # synopsis = ParseImdbData(imdb_url, title_year)
+        # yield title_year, (imdb_url, synopsis.synopsis(), root)
+        yield title_year, (imdb_url, root)
+
+
+def _new_desktop_f():
+    """ search for a .desktop file in a directory """
+    return ((root, file_n)
+            for root, filename in _unknow_dirs()
+            for file_n in filename
+            if file_n.endswith('.desktop'))
+
+
+def _unknow_dirs():
+    """ root (path) that are not in json files """
+    global _json_movies
+    global _scan_dir
+
+    return ((root, filename)
+            for root, _, filename in os.walk(_scan_dir)
+            if not {root}.issubset(_json_movies))
+
+
+def _open_right_file(file_with_url):
+    """ open the right file and get the url"""
+    with open(file_with_url, 'r') as check_content:
+        file_lines = check_content.readlines()
+
+    url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))
+
+    if url:
+        return url.group(0)[4:]

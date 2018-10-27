@@ -5,16 +5,17 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from movie_plist.conf.global_conf import (
-    SEEN_JSON_FILE, UNSEEN_JSON_FILE, check_movie_plist_dirs, dump_json_movie,
-    get_dir_path, scan_dir_has_movies
+    MOVIE_SEEN, MOVIE_UNSEEN, SEEN_JSON_FILE, UNSEEN_JSON_FILE,
+    check_movie_plist_dirs, dump_json_movie, get_dir_path, scan_dir_has_movies
 )
-from movie_plist.data.pyscan import CreateDict
+from movie_plist.data.pyscan import create_dicts
 from movie_plist.pyqt_gui.main_window import Window
 
 
 def main(d_scan):
-    c_d = CreateDict(d_scan)
-    movie_seen, movie_unseen = c_d.create_dicts()
+    # c_d = create_dicts(d_scan)
+    create_dicts(d_scan)
+    movie_seen, movie_unseen = MOVIE_SEEN, MOVIE_UNSEEN  # create_dicts(d_scan)
     app = QApplication(sys.argv)
     ex = Window(movie_seen, movie_unseen)  # noqa: F841
 
