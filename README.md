@@ -6,10 +6,10 @@
 
 On a Debian Stretch.
 
-TODO list:<br> 
-    - search<br>
-    - update status bar from menu<br>
+ - TODO list: 
+    - search
+    - update status bar from menu
  
 - less internet:
   - Directory name as title year for qtlist showed.
-  - Poster and synopsis are saved
+  - Poster and synopsis are saved.
