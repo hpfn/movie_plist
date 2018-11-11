@@ -10,7 +10,6 @@ TODO list:<br>
     - search<br>
     - update status bar from menu<br>
  
-It is used the name of the directory where the movie and .desktop files <br>
-are instead. 
-
-Save poster as title_year
+- less internet:
+  - Directory name as title year for qtlist showed.
+  - Poster and synopsis are saved
