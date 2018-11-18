@@ -28,19 +28,13 @@ def build_obj():
     return HtmlTags('file://' + html_path, title)
 
 
-attr_exists = build_obj()
-expected = [
-    hasattr(htmltags, 'pimdbdata'),
-    hasattr(attr_exists, '_url'),
-    hasattr(attr_exists, 'context'),
-    hasattr(attr_exists, '_synopsis'),
-    hasattr(attr_exists, '_poster_path'),
-]
-
-
-@pytest.mark.parametrize('e', expected)
-def test_htlmtags_attrs(e):
-    assert e
+def test_htlmtags_attrs(build_obj):
+    attrs = build_obj
+    assert hasattr(htmltags, 'pimdbdata')
+    assert hasattr(attrs, '_url')
+    assert hasattr(attrs, 'context')
+    assert hasattr(attrs, '_synopsis')
+    assert hasattr(attrs, '_poster_path')
 
 
 def test_context_has_img_html_tag(build_obj):
