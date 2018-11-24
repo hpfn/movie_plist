@@ -20,7 +20,7 @@ class ParseImdbData:
         """
         self._url = url
         self.title = title
-        self.checked_description = ''
+        self.synopsis = ''
         # self.seen = load_from_json(seen_json_file)
         # self.unseen = load_from_json(unseen_json_file)
         count_spaces = title.count(' ')
@@ -28,7 +28,7 @@ class ParseImdbData:
         self.cache_poster = MOVIE_PLIST_CACHE + '/' + title + '.png'
         if not self.synopsis_exists():
             self.soup = BeautifulSoup(self._get_html(), 'html.parser')
-            # self.bs4_synopsis()
+            self.bs4_synopsis()
             self._do_poster_png_file()
 
     # def make_poster_name(self):
@@ -40,33 +40,33 @@ class ParseImdbData:
     #     self.cache_poster = movie_plist_cache + '/' + title.replace(' ', '_', count_spaces) +
     # '.png'
 
-    def synopsis(self):
-        """
+    # def synopsis(self):
+    #     """
+    #     created by a call to synopsis_exists
+    #     in dunder init
+    #     """
+    #     return self.checked_description
 
-        """
+    def synopsis_exists(self):
+        all_movies = {**MOVIE_UNSEEN, **MOVIE_SEEN}
+        if self.title in all_movies and len(all_movies[self.title]) == 3:
+            self.synopsis = all_movies[self.title][1]
+            # return True
+
+        return self.synopsis
+
+    def bs4_synopsis(self):
         try:
-            if not self.synopsis_exists():
-                self.bs4_synopsis()
-
-            return self.checked_description
+            description = self.soup.find('meta', property="og:description")
+            # self.synopsis = description['content']
+            # self.add_synopsis()
         except AttributeError:
             return """
                    Maybe something is wrong with internet connection.
                    Or the imdb .css has changed.
                    A skull and this text, that's it. Try again to confirm.
                    """
-
-    def synopsis_exists(self):
-        all_movies = {**MOVIE_UNSEEN, **MOVIE_SEEN}
-        if self.title in all_movies and len(all_movies[self.title]) == 3:
-            self.checked_description = all_movies[self.title][1]
-            # return True
-
-        return self.checked_description
-
-    def bs4_synopsis(self):
-        description = self.soup.find('meta', property="og:description")
-        self.checked_description = description['content']
+        self.synopsis = description['content']
         self.add_synopsis()
 
     def add_synopsis(self):
@@ -74,10 +74,12 @@ class ParseImdbData:
             self.dict_movie_choice(MOVIE_UNSEEN)
         elif self.title in MOVIE_SEEN:
             self.dict_movie_choice(MOVIE_SEEN)
+        # else:
+        #    raise self.title + ' a ser inserido '
 
     def dict_movie_choice(self, d_movie):
         movie_info = list(d_movie[self.title])
-        movie_info.insert(1, self.checked_description)
+        movie_info.insert(1, self.synopsis)
         d_movie[self.title] = tuple(movie_info)
 
     def _do_poster_png_file(self):

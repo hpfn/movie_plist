@@ -27,7 +27,7 @@ class HtmlTags:
     def _get_synopsis(self):
         html_movie = pimdbdata.ParseImdbData(self._url, self.title)
         self._poster_path = html_movie.cache_poster
-        self._synopsis = html_movie.synopsis()
+        self._synopsis = html_movie.synopsis
 
     def _wrap_synopsis(self):
         self._synopsis = '<br />'.join(textwrap.wrap(self._synopsis))

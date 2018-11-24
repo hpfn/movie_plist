@@ -1,5 +1,4 @@
 import os
-import textwrap
 from unittest.mock import patch
 
 import pytest
@@ -17,9 +16,11 @@ expected = [
     hasattr(pimdbdata, 'MOVIE_SEEN'),
     hasattr(pimdbdata, 'MOVIE_UNSEEN'),
     hasattr(pimdbdata, 'MOVIE_PLIST_CACHE'),
-    hasattr(pimdbdata.ParseImdbData, 'synopsis'),
+    # hasattr(pimdbdata.ParseImdbData, 'synopsis'),
     hasattr(pimdbdata.ParseImdbData, 'synopsis_exists'),
+    hasattr(pimdbdata.ParseImdbData, 'bs4_synopsis'),
     hasattr(pimdbdata.ParseImdbData, 'add_synopsis'),
+    hasattr(pimdbdata.ParseImdbData, 'dict_movie_choice'),
     hasattr(pimdbdata.ParseImdbData, '_do_poster_png_file'),
     hasattr(pimdbdata.ParseImdbData, '_save_poster_file'),
     hasattr(pimdbdata.ParseImdbData, '_poster_file'),
@@ -34,13 +35,12 @@ def test_init_mocked_attrs(e):
 
 @pytest.fixture
 def init_mocked(mocker):
-    mocker.patch.object(ParseImdbData, '__init__', return_value=None)
-    return ParseImdbData()
+    mocker.patch.object(pimdbdata, 'BeautifulSoup', return_value=None)
+    return ParseImdbData('url', 'title')
 
 
 def test_synopsis(init_mocked):
-    init_mocked.url = 'http://www.example.com'
-    assert 'Maybe something is wrong' in init_mocked.synopsis()
+    assert 'Maybe something is wrong' in init_mocked.bs4_synopsis()
 
 
 def test_poster_url(init_mocked):
@@ -62,16 +62,12 @@ def run_init(mocker):
 
 
 def test_init_synopsys(run_init):
-    synopsys = [
-        'Directed by Frank Darabont.  With Tim Robbins, Morgan Freeman,',
-        'Bob Gunton, William Sadler. Two imprisoned men bond over a number',
-        'of years, finding solace and eventual redemption through acts of',
-        'common decency.'
-    ]
+    synopsys = 'Directed by Frank Darabont.  With Tim Robbins, Morgan Freeman, '
+    synopsys += 'Bob Gunton, William Sadler. Two imprisoned men bond over a number '
+    synopsys += 'of years, finding solace and eventual redemption through acts of '
+    synopsys += 'common decency.'
 
-    synopsys_parsed = run_init.synopsis()
-    synopsys_parsed = textwrap.wrap(synopsys_parsed, width=65)
-    assert synopsys == synopsys_parsed
+    assert synopsys == run_init.synopsis
 
 
 def test_init_poster_url(run_init):
@@ -85,25 +81,6 @@ def test_init_poster_url(run_init):
 def test_poster_name(run_init):
     file_name = run_init.cache_poster.rpartition('/')
     assert file_name[-1] == 'Shawshank_Redemption_1994.png'
-
-
-@patch('movie_plist.data.pimdbdata.BeautifulSoup.find')
-@patch('movie_plist.data.pimdbdata.ParseImdbData.add_synopsis')
-def test_description_content(add_synopsis, soup_find, run_init, mocker):
-    mocker.patch.object(ParseImdbData, 'synopsis_exists', return_value=False)
-    run_init.synopsis()
-    # does not check what the method does
-    assert add_synopsis.called_once_with('description_content')
-    assert soup_find.call_count == 1
-
-
-@patch('movie_plist.data.pimdbdata.BeautifulSoup')
-@patch('movie_plist.data.pimdbdata.ParseImdbData.add_synopsis')
-def test_synopsis_exists(add_synopsis, bs4, run_init, mocker):
-    # does not check what the method does
-    mocker.patch.object(ParseImdbData, 'synopsis_exists', return_value=True)
-    assert add_synopsis.call_count == 0
-    assert bs4.call_count == 0
 
 
 @patch('movie_plist.data.pimdbdata.QImage')
@@ -122,3 +99,55 @@ def test_do_not_save_poster_steps(img_mock, run_init, mocker):
     assert img_mock.call_count == 0
     img_mock.loadFromData.assert_not_called()
     img_mock.save.assert_not_called()
+
+
+@patch('movie_plist.data.pimdbdata.ParseImdbData._do_poster_png_file')
+@patch('movie_plist.data.pimdbdata.ParseImdbData.bs4_synopsis')
+def test_description_content(bs4_synopsis, do_poster_file, mocker):
+    mocker.patch.object(pimdbdata, 'BeautifulSoup', return_value=str())
+    mocker.patch.object(ParseImdbData, 'synopsis_exists', return_value=False)
+    obj = ParseImdbData('url', 'title')
+    # does not check what the method does
+    assert isinstance(obj.soup, str)
+    do_poster_file.assert_called_once()
+    bs4_synopsis.assert_called_once()
+
+
+@patch('movie_plist.data.pimdbdata.ParseImdbData._do_poster_png_file')
+@patch('movie_plist.data.pimdbdata.ParseImdbData.bs4_synopsis')
+def test_synopsis_exists(bs4_synopsis, do_poster_file, mocker):
+    # does not check what the method does
+    mocker.patch.object(ParseImdbData, 'synopsis_exists', return_value=True)
+    obj = ParseImdbData('url', 'title')
+    assert do_poster_file.call_count == 0
+    assert bs4_synopsis.call_count == 0
+    assert not hasattr(obj, 'soup')
+
+
+@patch('movie_plist.data.pimdbdata.ParseImdbData.add_synopsis')
+def test_add_synopsis_attr(add, run_init):
+    run_init.bs4_synopsis()
+    assert add.call_count == 1
+
+
+@patch('movie_plist.data.pimdbdata.ParseImdbData.dict_movie_choice')
+def test_choice_no_made(choice, run_init):
+    run_init.add_synopsis()
+    # weird but a new movie goes to json file first then it will appear
+    # in a MOVIE* dict
+    # the method works for old records
+    assert choice.call_count == 0
+    assert run_init.title not in pimdbdata.MOVIE_UNSEEN
+
+
+def test_choice_unseen_made(run_init):
+    pimdbdata.MOVIE_UNSEEN[run_init.title] = ('root/',)
+    run_init.bs4_synopsis()
+    assert 'Directed' in pimdbdata.MOVIE_UNSEEN[run_init.title][1]
+    del pimdbdata.MOVIE_UNSEEN[run_init.title]
+
+
+def test_choice_seen_made(run_init):
+    pimdbdata.MOVIE_SEEN[run_init.title] = ('root/',)
+    run_init.bs4_synopsis()
+    assert 'Directed' in pimdbdata.MOVIE_SEEN[run_init.title][1]
