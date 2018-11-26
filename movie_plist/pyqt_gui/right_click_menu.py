@@ -47,12 +47,13 @@ class RightClickMenu:
         title_year = self.qt_list.currentItem().text()
 
         # if self.current_item in self.us_dict:
-        try:
-            mark_as_seen = MOVIE_UNSEEN[title_year]
-        except KeyError:  # as e:
-            # raise Exception(e)
-            pass
-        else:
+        # try:
+        mark_as_seen = MOVIE_UNSEEN.get(title_year, 0)
+        # except KeyError:  # as e:
+        #    # raise Exception(e)
+        #    pass
+        # else:
+        if mark_as_seen:
             # title_year = self.current_item
             self.qt_list.takeItem(self.qt_list.currentRow())
             MOVIE_SEEN[title_year] = mark_as_seen
