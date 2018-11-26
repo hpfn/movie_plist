@@ -5,15 +5,17 @@ from PyQt5.QtWidgets import (  # pylint: disable-msg=E0611
     QAction, QMenu, QMessageBox
 )
 
-from movie_plist.conf.global_conf import MOVIE_PLIST_CACHE, MOVIE_UNSEEN
+from movie_plist.conf.global_conf import (
+    MOVIE_PLIST_CACHE, MOVIE_SEEN, MOVIE_UNSEEN
+)
 
 
 class RightClickMenu:
-    def __init__(self, current_dict, qt_list, m_seen):
+    def __init__(self, current_dict, qt_list):
         # self.current_item = qt_list.currentItem().text()
         self.current_dict = current_dict
         self.qt_list = qt_list
-        self.s_dict = m_seen
+        # self.s_dict = m_seen
         # self.us_dict = m_unseen
         # self.menu = QMenu()
 
@@ -47,16 +49,16 @@ class RightClickMenu:
         # if self.current_item in self.us_dict:
         try:
             mark_as_seen = MOVIE_UNSEEN[title_year]
-            print(title_year)
         except KeyError:  # as e:
             # raise Exception(e)
             pass
         else:
-            print('Remove' + title_year)
             # title_year = self.current_item
             self.qt_list.takeItem(self.qt_list.currentRow())
-            self.s_dict[title_year] = mark_as_seen
+            MOVIE_SEEN[title_year] = mark_as_seen
             del MOVIE_UNSEEN[title_year]
+            # dump_json_movie(MOVIE_SEEN, SEEN_JSON_FILE)
+            # dump_json_movie(MOVIE_UNSEEN, UNSEEN_JSON_FILE)
 
     def m_rm_from_dict(self):
         """
@@ -68,6 +70,10 @@ class RightClickMenu:
 
         self.qt_list.takeItem(self.qt_list.currentRow())
         del self.current_dict[title_year]
+        # if self.current_dict == MOVIE_SEEN:
+        # dump_json_movie(MOVIE_SEEN, SEEN_JSON_FILE)
+        # else:
+        # dump_json_movie(MOVIE_UNSEEN, UNSEEN_JSON_FILE)
 
         count_spaces = title_year.count(' ')
         name = title_year.replace(' ', '_', count_spaces)

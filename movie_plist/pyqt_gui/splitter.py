@@ -13,23 +13,24 @@ from PyQt5.QtWidgets import (  # pylint: disable-msg=E0611
     QTreeView, QVBoxLayout, QWidget
 )
 
+from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
 from movie_plist.html_file.htmltags import HtmlTags
 from movie_plist.pyqt_gui.right_click_menu import RightClickMenu
 
 
 class TwoLines(QWidget):
-    def __init__(self, m_seen, m_unseen):
+    def __init__(self):  # , m_seen, m_unseen):
         super().__init__()
         self.top = QListWidget()
-        if not m_unseen:
-            self.current_dict = m_seen
-            self.current_list = sorted(m_seen.keys())
+        if MOVIE_UNSEEN:
+            self.current_dict = MOVIE_UNSEEN
+            self.current_list = sorted(MOVIE_UNSEEN.keys())
         else:
-            self.current_dict = m_unseen
-            self.current_list = sorted(m_unseen.keys())
+            self.current_dict = MOVIE_SEEN
+            self.current_list = sorted(MOVIE_SEEN.keys())
 
-        self.us_list = m_unseen
-        self.s_list = m_seen
+        # self.us_list = m_unseen
+        # self.s_list = m_seen
         # self.current_dict = all_movies
         self.tabs = QTabWidget()
         # movie info
@@ -133,7 +134,7 @@ class TwoLines(QWidget):
         self.tree.setColumnWidth(0, 450)
 
     def right_click(self):
-        RightClickMenu(self.current_dict, self.top, self.s_list)
+        RightClickMenu(self.current_dict, self.top)
 
     def clicked_movie(self):
         item = self.tree.selectedIndexes()[0]
