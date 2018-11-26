@@ -12,6 +12,8 @@ def mock_attrs():
     global_conf.home_user = 'home'
     global_conf.MOVIE_PLIST_STUFF = os.path.join(global_conf.home_user, '.config/movie_plist')
     os.system('/bin/mkdir -p ' + global_conf.MOVIE_PLIST_STUFF)
+    global_conf.MOVIE_PLIST_CACHE = os.path.join(global_conf.home_user, '.cache/movie_plist')
+    os.system('/bin/mkdir -p ' + global_conf.MOVIE_PLIST_CACHE)
     global_conf.CFG_FILE = os.path.join(global_conf.MOVIE_PLIST_STUFF, 'movie_plist.cfg')
     global_conf.SEEN_JSON_FILE = os.path.join(global_conf.MOVIE_PLIST_STUFF, 'seen_movies.json')
     global_conf.UNSEEN_JSON_FILE = os.path.join(global_conf.MOVIE_PLIST_STUFF, 'unseen_movies.json')
@@ -39,6 +41,7 @@ def test_write_path(mock_attrs):
     call write_path to create movie_plist.cfg file
     """
     global_conf.write_path(mock_attrs)
+    assert os.path.isfile(global_conf.CFG_FILE)
     assert os.path.isfile(global_conf.CFG_FILE)
 
 

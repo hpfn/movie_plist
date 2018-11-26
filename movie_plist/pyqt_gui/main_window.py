@@ -7,15 +7,17 @@ from zetcode tutorial
 
 from PyQt5.QtWidgets import QAction, QMainWindow  # pylint: disable-msg=E0611
 
+from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
+
 from . import splitter
 
 
 class Window(QMainWindow):
-    def __init__(self, m_seen, m_unseen):  # m_seen, m_unseen):
+    def __init__(self):  # , m_seen, m_unseen):  # m_seen, m_unseen):
         super().__init__()
-        self.two_lines = splitter.TwoLines(m_seen, m_unseen)
-        self.seen_list = m_seen
-        self.unseen_list = m_unseen
+        self.two_lines = splitter.TwoLines()
+        # self.seen_list = MOVIE_SEEN
+        # self.unseen_list = MOVIE_UNSEEN
 
         self.init_ui()
 
@@ -52,21 +54,21 @@ class Window(QMainWindow):
     def unseenmovies(self):
         # botão 'unseen'
         self.two_lines.top.clear()
-        self.two_lines.current_dict = self.unseen_list
-        self.two_lines.top.addItems(sorted(self.unseen_list.keys()))
+        self.two_lines.current_dict = MOVIE_UNSEEN
+        self.two_lines.top.addItems(sorted(MOVIE_UNSEEN.keys()))
         self.two_lines.top.setCurrentRow(0)
         self.update_statusbar()
 
     def seenmovies(self):
         # botão 'seen'
-        if self.seen_list:
+        if MOVIE_SEEN:
             self.two_lines.top.clear()
-            self.two_lines.current_dict = self.seen_list
-            self.two_lines.top.addItems(sorted(self.seen_list.keys()))
+            self.two_lines.current_dict = MOVIE_SEEN
+            self.two_lines.top.addItems(sorted(MOVIE_SEEN.keys()))
             self.two_lines.top.setCurrentRow(0)
             self.update_statusbar()
 
     def update_statusbar(self):
         self.statusBar().clearMessage()
-        self.statusBar().showMessage('Unseen: ' + str(len(self.unseen_list)) +
-                                     ' | Seen: ' + str(len(self.seen_list)))
+        self.statusBar().showMessage('Unseen: ' + str(len(MOVIE_UNSEEN)) +
+                                     ' | Seen: ' + str(len(MOVIE_SEEN)))

@@ -15,9 +15,9 @@ from movie_plist.pyqt_gui.main_window import Window
 def main(d_scan):
     # c_d = create_dicts(d_scan)
     create_dicts(d_scan)
-    movie_seen, movie_unseen = MOVIE_SEEN, MOVIE_UNSEEN  # create_dicts(d_scan)
+    # movie_seen, movie_unseen = MOVIE_SEEN, MOVIE_UNSEEN  # create_dicts(d_scan)
     app = QApplication(sys.argv)
-    ex = Window(movie_seen, movie_unseen)  # noqa: F841
+    ex = Window()  # noqa: F841
 
     # def w_json_movie_file(movie_dic, json_file):
     #    with open(json_file, 'w') as outfile:
@@ -25,8 +25,8 @@ def main(d_scan):
 
     exit_task = [
         app.exec_(),
-        dump_json_movie(movie_unseen, UNSEEN_JSON_FILE),
-        dump_json_movie(movie_seen, SEEN_JSON_FILE),
+        dump_json_movie(MOVIE_UNSEEN, UNSEEN_JSON_FILE),
+        dump_json_movie(MOVIE_SEEN, SEEN_JSON_FILE),
     ]
     sys.exit(exit_task)
 

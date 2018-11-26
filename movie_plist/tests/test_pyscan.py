@@ -8,7 +8,7 @@ expected = [
     hasattr(pyscan, 'time'),
     hasattr(pyscan, 'MOVIE_SEEN'),
     hasattr(pyscan, 'MOVIE_UNSEEN'),
-    hasattr(pyscan, 'UNSEEN_JSON_FILE')
+    # hasattr(pyscan, 'UNSEEN_JSON_FILE')
 ]
 
 

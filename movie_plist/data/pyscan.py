@@ -2,9 +2,7 @@ import os
 import re
 import time
 
-from movie_plist.conf.global_conf import (
-    MOVIE_SEEN, MOVIE_UNSEEN, UNSEEN_JSON_FILE, dump_json_movie
-)
+from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
 
 # from movie_plist.data.pimdbdata import ParseImdbData
 
@@ -42,7 +40,7 @@ def create_dicts(scan_dir):
 
     movie_unseen_to_add = {dir_name: i for dir_name, i in _new_data()}
     MOVIE_UNSEEN.update(movie_unseen_to_add)
-    dump_json_movie(MOVIE_UNSEEN, UNSEEN_JSON_FILE)
+    # dump_json_movie(MOVIE_UNSEEN, UNSEEN_JSON_FILE)
 
     end = time.time()
     print(end - start)

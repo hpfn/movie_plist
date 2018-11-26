@@ -33,8 +33,9 @@ def test_init_mocked_attrs(e):
     assert e
 
 
-@pytest.fixture
+@pytest.fixture()
 def init_mocked(mocker):
+    mocker.patch.object(pimdbdata, 'MOVIE_PLIST_CACHE', return_value='home/.cache/movie_plist')
     mocker.patch.object(pimdbdata, 'BeautifulSoup', return_value=None)
     return ParseImdbData('url', 'title')
 

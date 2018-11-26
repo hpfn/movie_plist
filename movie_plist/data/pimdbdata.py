@@ -72,10 +72,10 @@ class ParseImdbData:
     def add_synopsis(self):
         if self.title in MOVIE_UNSEEN:
             self.dict_movie_choice(MOVIE_UNSEEN)
+            # dump_json_movie(MOVIE_UNSEEN, UNSEEN_JSON_FILE)
         elif self.title in MOVIE_SEEN:
             self.dict_movie_choice(MOVIE_SEEN)
-        # else:
-        #    raise self.title + ' a ser inserido '
+            # dump_json_movie(MOVIE_SEEN, SEEN_JSON_FILE)
 
     def dict_movie_choice(self, d_movie):
         movie_info = list(d_movie[self.title])
