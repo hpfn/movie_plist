@@ -42,10 +42,17 @@ class RightClickMenu:
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        if self.current_item in self.us_dict:
-            title_year = self.current_item
+        title_year = self.current_item
+
+        # if self.current_item in self.us_dict:
+        try:
+            mark_as_seen = self.us_dict[title_year]
+        except KeyError:
+            pass
+        else:
+            # title_year = self.current_item
             self.qt_list.takeItem(self.qt_list.currentRow())
-            self.s_dict[title_year] = self.us_dict[title_year]
+            self.s_dict[title_year] = mark_as_seen
             del self.us_dict[title_year]
 
     def m_rm_from_dict(self):
