@@ -1,8 +1,5 @@
 import pytest
 
-# import sys
-# import os
-# sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/.."))
 from movie_plist.data import pyscan  # noqa: E402
 
 expected = [
@@ -11,7 +8,7 @@ expected = [
     hasattr(pyscan, 'time'),
     hasattr(pyscan, 'MOVIE_SEEN'),
     hasattr(pyscan, 'MOVIE_UNSEEN'),
-    # hasattr(pyscan, 'ParseImdbData')
+    hasattr(pyscan, 'UNSEEN_JSON_FILE')
 ]
 
 
@@ -22,34 +19,18 @@ def test_attrs(e):
 
 pyscan.MOVIE_SEEN = dict()
 pyscan.MOVIE_UNSEEN = dict()
-
+pyscan.UNSEEN_JSON_FILE = 'movie_plist/tests/unseen_movies.json'
 # c_d = pyscan.create_dicts('movie_plist/tests/videos_test/')
 pyscan.create_dicts('movie_plist/tests/videos_test/')
-movie_seen, movie_unseen = pyscan.MOVIE_SEEN, pyscan.MOVIE_UNSEEN
+# movie_seen, movie_unseen = pyscan.MOVIE_SEEN, pyscan.MOVIE_UNSEEN
 # pyscan.create_dicts('movie_plist/tests/videos_test/')
 # c_d.create_dicts()
 
 # url, synopsis, path_to = list(movie_unseen.values())[0]
-url, path_to = list(movie_unseen.values())[0]
-
-instance_params = [
-    (isinstance(movie_unseen, dict), True),
-    (isinstance(movie_seen, dict), True)
-]
-
-
-@pytest.mark.parametrize("a,b", instance_params)
-def test_dict_instance(a, b):
-    assert a is b
-
-
-# synopsis_text = 'Directed by Frank Darabont.'
-# synopsis_text += '  With Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler.'
-# synopsis_text += ' Two imprisoned men bond over a number of years, finding solace'
-# synopsis_text += ' and eventual redemption through acts of common decency.'
+url, path_to = list(pyscan.MOVIE_UNSEEN.values())[0]
 
 str_params = [
-    ('Shawshank Redemption, the 1994', movie_unseen.keys()),
+    ('Shawshank Redemption, the 1994', pyscan.MOVIE_UNSEEN.keys()),
     ('https://www.imdb.com/title/tt0111161/', url),
     # (synopsis_text, synopsis),
     ('movie_plist/tests/videos_test/Shawshank Redemption, the 1994', path_to)
@@ -62,8 +43,8 @@ def test_dict(a, b):
 
 
 size_params = [
-    (len(movie_unseen), 1),
-    (len(movie_seen), 0)
+    (len(pyscan.MOVIE_UNSEEN), 1),
+    (len(pyscan.MOVIE_SEEN), 0)
 ]
 
 

@@ -5,16 +5,16 @@ from PyQt5.QtWidgets import (  # pylint: disable-msg=E0611
     QAction, QMenu, QMessageBox
 )
 
-from movie_plist.conf.global_conf import MOVIE_PLIST_CACHE
+from movie_plist.conf.global_conf import MOVIE_PLIST_CACHE, MOVIE_UNSEEN
 
 
 class RightClickMenu:
-    def __init__(self, current_dict, qt_list, m_seen, m_unseen):
-        self.current_item = qt_list.currentItem().text()
+    def __init__(self, current_dict, qt_list, m_seen):
+        # self.current_item = qt_list.currentItem().text()
         self.current_dict = current_dict
         self.qt_list = qt_list
         self.s_dict = m_seen
-        self.us_dict = m_unseen
+        # self.us_dict = m_unseen
         # self.menu = QMenu()
 
         self.right_click()
@@ -42,18 +42,21 @@ class RightClickMenu:
         check unseen list and seen list
         check on db if it is already a seen movie
         """
-        title_year = self.current_item
+        title_year = self.qt_list.currentItem().text()
 
         # if self.current_item in self.us_dict:
         try:
-            mark_as_seen = self.us_dict[title_year]
-        except KeyError:
+            mark_as_seen = MOVIE_UNSEEN[title_year]
+            print(title_year)
+        except KeyError:  # as e:
+            # raise Exception(e)
             pass
         else:
+            print('Remove' + title_year)
             # title_year = self.current_item
             self.qt_list.takeItem(self.qt_list.currentRow())
             self.s_dict[title_year] = mark_as_seen
-            del self.us_dict[title_year]
+            del MOVIE_UNSEEN[title_year]
 
     def m_rm_from_dict(self):
         """
@@ -61,7 +64,7 @@ class RightClickMenu:
         the user remove from HD
         """
 
-        title_year = self.current_item
+        title_year = self.qt_list.currentItem().text()
 
         self.qt_list.takeItem(self.qt_list.currentRow())
         del self.current_dict[title_year]
