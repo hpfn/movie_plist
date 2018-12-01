@@ -14,7 +14,7 @@ from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
 #         self._file_with_url = ''
 #
 
-_json_movies = ''
+# _json_movies = ''
 _scan_dir = ''
 
 
@@ -26,7 +26,7 @@ def create_dicts(scan_dir):
     # if no unseen movies ask if continue
     # return seen and unseen movies
     """
-    global _json_movies
+    # global _json_movies
     global _scan_dir
 
     _scan_dir = scan_dir
@@ -34,9 +34,9 @@ def create_dicts(scan_dir):
     start = time.time()
 
     # alterar para for *_,
-    movies_path = set(m_path for *_, m_path in MOVIE_SEEN.values())
-    umovies_path = set(um_path for *_, um_path in MOVIE_UNSEEN.values())
-    _json_movies = set.union(movies_path, umovies_path)
+    # movies_path = set(m_path for *_, m_path in MOVIE_SEEN.values())
+    # umovies_path = set(um_path for *_, um_path in MOVIE_UNSEEN.values())
+    # _json_movies = set.union(movies_path, umovies_path)
 
     movie_unseen_to_add = {dir_name: i for dir_name, i in _new_data()}
     MOVIE_UNSEEN.update(movie_unseen_to_add)
@@ -70,12 +70,20 @@ def _new_desktop_f():
 
 def _unknow_dirs():
     """ root (path) that are not in json files """
-    global _json_movies
+    # global _json_movies
     global _scan_dir
 
-    return ((root, filename)
-            for root, _, filename in os.walk(_scan_dir)
-            if not {root}.issubset(_json_movies))
+    _json_movies = {**MOVIE_SEEN, **MOVIE_UNSEEN}
+
+    for root, _, filename in os.walk(_scan_dir):
+        title_year = root.rpartition('/')[-1]
+        title_year = _json_movies.get(title_year, 0)
+        if not title_year:
+            yield (root, filename)
+
+    # return ((root, filename)
+    #         for root, _, filename in os.walk(_scan_dir)
+    #         if not {root}.issubset(_json_movies))
 
 
 def _open_right_file(file_with_url):
