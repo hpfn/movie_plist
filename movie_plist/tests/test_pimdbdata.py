@@ -110,8 +110,10 @@ def test_description_content(bs4_synopsis, do_poster_file, mocker):
     obj = ParseImdbData('url', 'title')
     # does not check what the method does
     assert isinstance(obj.soup, str)
-    do_poster_file.assert_called_once()
-    bs4_synopsis.assert_called_once()
+    # do_poster_file.assert_called_once()
+    # bs4_synopsis.assert_called_once()
+    assert do_poster_file.call_count == 1
+    assert bs4_synopsis.call_count == 1
 
 
 @patch('movie_plist.data.pimdbdata.ParseImdbData._do_poster_png_file')
