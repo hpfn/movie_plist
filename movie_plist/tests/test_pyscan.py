@@ -19,7 +19,7 @@ def test_attrs(e):
 
 pyscan.MOVIE_SEEN = dict()
 pyscan.MOVIE_UNSEEN = dict()
-pyscan.UNSEEN_JSON_FILE = 'movie_plist/tests/unseen_movies.json'
+# pyscan.UNSEEN_JSON_FILE = 'movie_plist/tests/unseen_movies.json'
 # c_d = pyscan.create_dicts('movie_plist/tests/videos_test/')
 pyscan.create_dicts('movie_plist/tests/videos_test/')
 # movie_seen, movie_unseen = pyscan.MOVIE_SEEN, pyscan.MOVIE_UNSEEN
@@ -51,3 +51,8 @@ size_params = [
 @pytest.mark.parametrize("a,b", size_params)
 def test_dict_size(a, b):
     assert a == b
+
+
+def test_url_raises():
+    with pytest.raises(Exception):
+        pyscan.create_dicts('movie_plist/tests/url_test/')
