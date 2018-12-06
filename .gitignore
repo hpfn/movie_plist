@@ -1,4 +1,5 @@
 .idea
 __pycache__
-.project_env
+.python-version
 .pytest_cache
+.coverage
