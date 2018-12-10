@@ -77,14 +77,17 @@ def _unknow_dirs():
 
 def _open_right_file(file_with_url):
     """ open the right file and get the url"""
-    try:
-        with open(file_with_url, 'r') as check_content:
-            file_lines = check_content.readlines()
+    # IO error out of try/except
+    with open(file_with_url, 'r') as check_content:
+        file_lines = check_content.readlines()
 
-        url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))
-        return url.group(0)[4:]
+    try:
+        line_with_url = re.search(r"(URL|url)=https?://.*", ' '.join(file_lines))
+        url = line_with_url.group(0)[4:]
     except AttributeError:
         raise Exception('There is no url in %s' % file_with_url)
+    else:
+        return url
 
 
 def mk_title_year(root_path):
