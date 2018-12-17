@@ -6,15 +6,15 @@ from PyQt5.QtWidgets import QApplication
 
 from movie_plist.conf.global_conf import (
     MOVIE_SEEN, MOVIE_UNSEEN, SEEN_JSON_FILE, UNSEEN_JSON_FILE,
-    check_movie_plist_dirs, dump_json_movie, get_dir_path, scan_dir_has_movies
+    check_movie_plist_dirs, dump_json_movie
 )
 from movie_plist.data.pyscan import create_dicts
 from movie_plist.pyqt_gui.main_window import Window
 
 
-def main(d_scan):
+def main():
     # c_d = create_dicts(d_scan)
-    create_dicts(d_scan)
+    create_dicts()
     # movie_seen, movie_unseen = MOVIE_SEEN, MOVIE_UNSEEN  # create_dicts(d_scan)
     app = QApplication(sys.argv)
     ex = Window()  # noqa: F841
@@ -34,8 +34,8 @@ def main(d_scan):
 if __name__ == '__main__':
     # if internet_on() == 200:
     check_movie_plist_dirs()
-    path_dir_scan = get_dir_path()
-    scan_dir_has_movies(path_dir_scan)
-    main(path_dir_scan)
+    # path_dir_scan = get_dir_path()
+    # scan_dir_has_movies(path_dir_scan)
+    main()
     # else:
     #     print(" Please, check your internet connection. ")
