@@ -1,8 +1,9 @@
 import os
 import re
 import time
+from sys import exit
 
-from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
+from movie_plist.conf.global_conf import CFG_FILE, MOVIE_SEEN, MOVIE_UNSEEN
 
 # from movie_plist.data.pimdbdata import ParseImdbData
 
@@ -15,10 +16,10 @@ from movie_plist.conf.global_conf import MOVIE_SEEN, MOVIE_UNSEEN
 #
 
 
-_scan_dir = ''
+# _scan_dir = ''
 
 
-def create_dicts(scan_dir):
+def create_dicts():
     """
     # get seen movies from json file
     # get unseen movies from on json file
@@ -27,9 +28,9 @@ def create_dicts(scan_dir):
     # return seen and unseen movies
     """
 
-    global _scan_dir
+    # global _scan_dir
 
-    _scan_dir = scan_dir
+    # _scan_dir = scan_dir
 
     start = time.time()
 
@@ -65,7 +66,8 @@ def _new_desktop_f():
 def _unknow_dirs():
     """ root (path) that are not in json files """
 
-    global _scan_dir
+    # global _scan_dir
+    _scan_dir = get_dir_path()
 
     _json_movies = {**MOVIE_SEEN, **MOVIE_UNSEEN}
 
@@ -92,3 +94,67 @@ def _open_right_file(file_with_url):
 
 def mk_title_year(root_path):
     return root_path.rpartition('/')[-1]
+
+
+class InvalidPath(Exception):
+    pass
+
+
+def read_path():
+    with open(CFG_FILE, 'r') as movie_plist_cfg:
+        cfg_path = movie_plist_cfg.readline()
+
+    if not os.path.isdir(cfg_path):
+        raise InvalidPath('Invalid path in movie_plist.cfg file.')
+
+    scan_dir_has_movies(cfg_path)
+    return cfg_path
+
+
+def write_path(cfg_path):
+    if not os.path.isdir(cfg_path):
+        raise InvalidPath('Invalid path. Please try again.')
+
+    with open(CFG_FILE, 'w') as cfg_write:
+        cfg_write.write(cfg_path)
+
+    scan_dir_has_movies(cfg_path)
+    return cfg_path
+
+
+def get_dir_path():
+    if os.path.isfile(CFG_FILE):
+        path_dir_scan = read_path()
+    else:
+        get_dir_scan = input(" Do the scan in which directory ? ")
+        path_dir_scan = write_path(get_dir_scan)
+
+    return path_dir_scan
+
+
+def scan_dir_has_movies(scan_dir):
+    # tem que fazer uma checagem melhor
+    for _, _, filename in os.walk(scan_dir):
+        for file in filename:
+            if file.endswith('.desktop'):
+                return True
+
+    from PyQt5.QtWidgets import QMessageBox, QApplication  # pylint: disable-msg=E0611
+    #    import sys
+
+    app = QApplication(['0'])  # noqa: F841
+
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Warning)
+    msg.setWindowTitle("Empty Directory")
+
+    text = """
+        The directory scanned seems empty.
+        Please check the directory
+         """ + scan_dir
+
+    msg.setText(text)
+    msg.setStandardButtons(QMessageBox.Ok)
+    msg.exec_()
+
+    exit('1')
