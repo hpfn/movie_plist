@@ -41,7 +41,7 @@ def init_mocked(mocker):
 
 
 def test_synopsis(init_mocked):
-    assert 'Maybe something is wrong' in init_mocked.bs4_synopsis()
+    assert 'Maybe something is wrong' in init_mocked.synopsis
 
 
 def test_poster_url(init_mocked):
