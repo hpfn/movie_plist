@@ -2,6 +2,7 @@
 __pycache__
 .python-version
 .pytest_cache
+.cache
 .coverage
 .tox/
 movie_plist.egg-info/
