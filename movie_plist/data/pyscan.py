@@ -68,6 +68,7 @@ def _unknow_dirs():
 
     # global _scan_dir
     _scan_dir = get_dir_path()
+    scan_dir_has_movies(_scan_dir)
 
     _json_movies = {**MOVIE_SEEN, **MOVIE_UNSEEN}
 
@@ -107,7 +108,6 @@ def read_path():
     if not os.path.isdir(cfg_path):
         raise InvalidPath('Invalid path in movie_plist.cfg file.')
 
-    scan_dir_has_movies(cfg_path)
     return cfg_path
 
 
@@ -118,7 +118,6 @@ def write_path(cfg_path):
     with open(CFG_FILE, 'w') as cfg_write:
         cfg_write.write(cfg_path)
 
-    scan_dir_has_movies(cfg_path)
     return cfg_path
 
 
