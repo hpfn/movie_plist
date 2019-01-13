@@ -21,12 +21,12 @@ class ParseImdbData:
         self._url = url
         self.title = title
         self.synopsis = ''
-        self.cache_poster = ''
+        self.cache_poster = self.make_poster_name()
         if not self.synopsis_exists():
+            # Maybe put these in other class
             self.soup = BeautifulSoup(self._get_html(), 'html.parser')
             self.bs4_synopsis()
             self._do_poster_png_file()
-            self.make_poster_name()
 
     def make_poster_name(self):
         """
@@ -34,7 +34,7 @@ class ParseImdbData:
         """
         count_spaces = self.title.count(' ')
         cache_name = self.title.replace(' ', '_', count_spaces)
-        self.cache_poster = MOVIE_PLIST_CACHE + '/' + cache_name + '.png'
+        return MOVIE_PLIST_CACHE + '/' + cache_name + '.png'
 
     def synopsis_exists(self):
         all_movies = {**MOVIE_UNSEEN, **MOVIE_SEEN}
