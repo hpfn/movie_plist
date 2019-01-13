@@ -90,9 +90,8 @@ def test_poster_name(run_init):
 
 
 @patch('movie_plist.data.pimdbdata.ParseImdbData._do_poster_png_file')
-@patch('movie_plist.data.pimdbdata.ParseImdbData.add_synopsis')
 @patch('movie_plist.data.pimdbdata.ParseImdbData.bs4_synopsis')
-def test_description_content(bs4_synopsis, add_synopsis, do_poster_file, mocker):
+def test_description_content(bs4_synopsis, do_poster_file, mocker):
     """
     What happens when synopsis does not exists
     """
