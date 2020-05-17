@@ -1,4 +1,4 @@
-beautifulsoup4==4.7.1
+beautifulsoup4==4.9.1
 pluggy==0.8.1
 PyQt5==5.11.3
 PyQt5-sip==4.19.13
