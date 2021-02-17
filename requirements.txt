@@ -8,5 +8,5 @@ urllib3==1.24.1
 # tox
 filelock==3.0.10
 toml==0.10.0
-tox==3.7.0
+tox==3.22.0
 virtualenv==16.2.0
